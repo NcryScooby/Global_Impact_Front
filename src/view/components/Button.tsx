@@ -18,12 +18,12 @@ export const Button = ({
       {...props}
       disabled={disabled || isloading}
       className={cn(
-        "bg-primary disabled:bg-gray-100 text-secondary px-6 h-12 rounded-lg font-medium disabled:cursor-not-allowed disabled:text-gray-400 transition-all hover:bg-[#333333] active:bg-black flex items-center justify-center",
+        "bg-primary disabled:bg-gray-100 text-secondary px-6 h-12 rounded-lg font-normal disabled:cursor-not-allowed disabled:text-gray-400 transition-all hover:bg-[#333333] active:bg-black flex items-center justify-center",
         className
       )}
     >
       {!isloading && children}
-      {isloading && <Spinner className="w-7 h-7" />}
+      {isloading && <Spinner />}
     </button>
   );
 };

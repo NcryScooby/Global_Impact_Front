@@ -6,6 +6,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { z } from "zod";
+import { useAuth } from "../../../app/hooks/useAuth";
 
 const schema = z.object({
   name: z
@@ -20,7 +21,7 @@ const schema = z.object({
     .string()
     .nonempty("Password cannot be empty")
     .min(8, "Password must be at least 8 characters"),
-  roleId: z.string().nonempty("Role cannot be empty").uuid("Invalid role"),
+  jobId: z.string().nonempty("Job cannot be empty").uuid("Invalid job"),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -40,9 +41,12 @@ export const useRegisterController = () => {
     },
   });
 
+  const { signIn } = useAuth();
+
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      await mutateAsync(data);
+      const { token } = await mutateAsync(data);
+      signIn(token);
     } catch (error) {
       toast.error((error as ResponseError).response.data.message);
     }

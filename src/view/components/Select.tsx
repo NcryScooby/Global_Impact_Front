@@ -51,8 +51,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
 
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
-          <CaretDownIcon />
+        <div className="pointer-events-none absolute top-4 right-0 flex items-center px-4 text-gray-400 ">
+          <CaretDownIcon width={20} height={20} />
         </div>
 
         <label

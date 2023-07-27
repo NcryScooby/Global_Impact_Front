@@ -6,18 +6,18 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-interface Role {
+interface Job {
   id: string;
   name: string;
 }
 
 export const Register = () => {
   const { handleSubmit, register, errors, isLoading } = useRegisterController();
-  const [roles, setRoles] = useState<Role[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
 
   const teste = async () => {
-    await axios.get("http://localhost:3001/roles").then((res) => {
-      setRoles(res.data.roles);
+    await axios.get("http://localhost:3001/jobs").then((res) => {
+      setJobs(res.data.jobs);
     });
   };
 
@@ -47,7 +47,7 @@ export const Register = () => {
 
       <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
         <Input
-          placeholder="Nome"
+          placeholder="Name"
           error={errors.name?.message}
           {...register("name")}
         />
@@ -64,10 +64,10 @@ export const Register = () => {
           {...register("password")}
         />
         <Select
-          placeholder="Role"
-          error={errors.roleId?.message}
-          options={roles}
-          {...register("roleId")}
+          placeholder="Job"
+          error={errors.jobId?.message}
+          options={jobs}
+          {...register("jobId")}
         />
         <Button type="submit" className="mt-2" isloading={isLoading}>
           Create account
