@@ -1,10 +1,10 @@
-import { useRegisterController } from "./userRegisterController";
-import { Button } from "../../components/Button";
-import { Select } from "../../components/Select";
-import { Input } from "../../components/Input";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { useRegisterController } from './userRegisterController';
+import { Button } from '../../components/Button';
+import { Select } from '../../components/Select';
+import { Input } from '../../components/Input';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 interface Job {
   id: string;
@@ -16,7 +16,7 @@ export const Register = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
 
   const teste = async () => {
-    await axios.get("http://localhost:3001/jobs").then((res) => {
+    await axios.get('http://localhost:3001/jobs').then((res) => {
       setJobs(res.data.jobs);
     });
   };
@@ -37,7 +37,7 @@ export const Register = () => {
             Already have an account?
           </span>
           <Link
-            to={"/login"}
+            to={'/login'}
             className="text-blue-500 hover:underline tracking-[-0.5px] font-medium"
           >
             Enter
@@ -49,25 +49,25 @@ export const Register = () => {
         <Input
           placeholder="Name"
           error={errors.name?.message}
-          {...register("name")}
+          {...register('name')}
         />
         <Input
           placeholder="E-mail"
           error={errors.email?.message}
-          {...register("email")}
+          {...register('email')}
         />
         <Input
           type="password"
           error={errors.password?.message}
           placeholder="Password"
           autoComplete="password"
-          {...register("password")}
+          {...register('password')}
         />
         <Select
           placeholder="Job"
           error={errors.jobId?.message}
           options={jobs}
-          {...register("jobId")}
+          {...register('jobId')}
         />
         <Button type="submit" className="mt-2" isloading={isLoading}>
           Create account

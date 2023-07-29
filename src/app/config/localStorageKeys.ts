@@ -1,3 +1,3 @@
 export const localStorageKeys = {
-  TOKEN: "@token",
+  TOKEN: '@token',
 };

@@ -1,9 +1,9 @@
-import { createContext, useCallback, useEffect, useState } from "react";
-import { LaunchScreen } from "../../view/components/LaunchScreen";
-import { localStorageKeys } from "../config/localStorageKeys";
-import { usersService } from "../services/usersService";
-import { useQuery } from "@tanstack/react-query";
-import { toast } from "react-hot-toast";
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { LaunchScreen } from '../../view/components/LaunchScreen';
+import { localStorageKeys } from '../config/localStorageKeys';
+import { usersService } from '../services/usersService';
+import { useQuery } from '@tanstack/react-query';
+import { toast } from 'react-hot-toast';
 
 interface AuthContextProps {
   signedIn: boolean;
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const { isError, isFetching, isSuccess, remove } = useQuery({
-    queryKey: ["loggedUser"],
+    queryKey: ['loggedUser'],
     queryFn: () => usersService.me(),
     enabled: signedIn,
     staleTime: Infinity,
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isError) {
-      toast.error("Session expired");
+      toast.error('Session expired');
       signOut();
     }
   }, [isError, signOut]);

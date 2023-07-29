@@ -1,8 +1,8 @@
-import { ChangeEvent, ComponentProps, forwardRef, useState } from "react";
-import { CrossCircledIcon, CaretDownIcon } from "@radix-ui/react-icons";
-import { cn } from "../../app/utils/cn";
+import { ChangeEvent, ComponentProps, forwardRef, useState } from 'react';
+import { CrossCircledIcon, CaretDownIcon } from '@radix-ui/react-icons';
+import { cn } from '../../app/utils/cn';
 
-interface SelectProps extends ComponentProps<"select"> {
+interface SelectProps extends ComponentProps<'select'> {
   name: string;
   error?: string;
   options: {
@@ -18,7 +18,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ) => {
     const selectId = id ?? name;
 
-    const [selectedOption, setSelectedOption] = useState("");
+    const [selectedOption, setSelectedOption] = useState('');
 
     const handleChangeSelectedOption = (
       event: ChangeEvent<HTMLSelectElement>
@@ -36,8 +36,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedOption}
           onChange={handleChangeSelectedOption}
           className={cn(
-            "bg-white rounded-lg border border-gray-300 bg px-3 h-[52px] text-gray-800 w-full pt-4 peer placeholder-shown:pt-0 text-sm focus:border-gray-700 transition-all outline-none appearance-none",
-            error && "!border-[#C92A2A]",
+            'bg-white rounded-lg border border-gray-300 bg px-3 h-[52px] text-gray-800 w-full pt-4 peer placeholder-shown:pt-0 text-sm focus:border-gray-700 transition-all outline-none appearance-none',
+            error && '!border-[#C92A2A]',
             className
           )}
         >
@@ -73,4 +73,4 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   }
 );
 
-Select.displayName = "Select";
+Select.displayName = 'Select';

@@ -1,6 +1,6 @@
-import logo from "../../assets/images/logo.png";
-import { Transition } from "@headlessui/react";
-import { Spinner } from "./Spinner";
+import logo from '../../assets/images/logo.png';
+import { Transition } from '@headlessui/react';
+import { Spinner } from './Spinner';
 
 interface LaunchScreenProps {
   isLoading: boolean;

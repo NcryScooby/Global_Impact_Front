@@ -1,22 +1,22 @@
-import { SignInParams } from "../../../app/services/authService/signIn";
-import { ResponseError } from "../../../app/interfaces/ResponseError";
-import { authService } from "../../../app/services/authService";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { z } from "zod";
-import { useAuth } from "../../../app/hooks/useAuth";
+import { SignInParams } from '../../../app/services/authService/signIn';
+import { ResponseError } from '../../../app/interfaces/ResponseError';
+import { authService } from '../../../app/services/authService';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { z } from 'zod';
+import { useAuth } from '../../../app/hooks/useAuth';
 
 const schema = z.object({
   email: z
     .string()
-    .nonempty("Email cannot be empty")
-    .email("Enter a valid email address"),
+    .nonempty('Email cannot be empty')
+    .email('Enter a valid email address'),
   password: z
     .string()
-    .nonempty("Password cannot be empty")
-    .min(8, "Password must be at least 8 characters"),
+    .nonempty('Password cannot be empty')
+    .min(8, 'Password must be at least 8 characters'),
 });
 
 type FormData = z.infer<typeof schema>;

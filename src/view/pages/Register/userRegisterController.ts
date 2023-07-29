@@ -1,27 +1,27 @@
-import { SignUpParams } from "../../../app/services/authService/signUp";
-import { ResponseError } from "../../../app/interfaces/ResponseError";
-import { authService } from "../../../app/services/authService";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
-import { z } from "zod";
-import { useAuth } from "../../../app/hooks/useAuth";
+import { SignUpParams } from '../../../app/services/authService/signUp';
+import { ResponseError } from '../../../app/interfaces/ResponseError';
+import { authService } from '../../../app/services/authService';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { z } from 'zod';
+import { useAuth } from '../../../app/hooks/useAuth';
 
 const schema = z.object({
   name: z
     .string()
-    .nonempty("Name cannot be empty")
-    .min(3, "Name must be at least 3 characters"),
+    .nonempty('Name cannot be empty')
+    .min(3, 'Name must be at least 3 characters'),
   email: z
     .string()
-    .nonempty("Email cannot be empty")
-    .email("Enter a valid email address"),
+    .nonempty('Email cannot be empty')
+    .email('Enter a valid email address'),
   password: z
     .string()
-    .nonempty("Password cannot be empty")
-    .min(8, "Password must be at least 8 characters"),
-  jobId: z.string().nonempty("Job cannot be empty").uuid("Invalid job"),
+    .nonempty('Password cannot be empty')
+    .min(8, 'Password must be at least 8 characters'),
+  jobId: z.string().nonempty('Job cannot be empty').uuid('Invalid job'),
 });
 
 type FormData = z.infer<typeof schema>;

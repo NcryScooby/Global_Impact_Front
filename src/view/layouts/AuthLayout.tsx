@@ -1,5 +1,5 @@
-import { Outlet } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import { Outlet } from 'react-router-dom';
+import logo from '../../assets/images/logo.png';
 
 export const AuthLayout = () => {
   return (

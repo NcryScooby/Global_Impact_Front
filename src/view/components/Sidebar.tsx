@@ -1,5 +1,5 @@
-import { ExitIcon, GearIcon, HomeIcon } from "@radix-ui/react-icons";
-import { Link } from "react-router-dom";
+import { ExitIcon, GearIcon, HomeIcon } from '@radix-ui/react-icons';
+import { Link } from 'react-router-dom';
 
 interface SidebarProps {
   signOut: () => void;
@@ -40,7 +40,7 @@ export const Sidebar = ({ signOut }: SidebarProps) => {
           <ul className="space-y-2 font-medium">
             <li>
               <Link
-                to={"/"}
+                to={'/'}
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 group"
               >
                 <HomeIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -51,7 +51,7 @@ export const Sidebar = ({ signOut }: SidebarProps) => {
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-zinc-800">
             <li>
               <Link
-                to={"/settings"}
+                to={'/settings'}
                 className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group"
               >
                 <GearIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />

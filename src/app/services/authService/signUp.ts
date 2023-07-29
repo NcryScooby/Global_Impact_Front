@@ -1,4 +1,4 @@
-import { httpClient } from "../httpClient";
+import { httpClient } from '../httpClient';
 
 export interface SignUpParams {
   name: string;
@@ -12,7 +12,7 @@ interface SignUpResponse {
 
 export const signUp = async (params: SignUpParams) => {
   const { data } = await httpClient.post<SignUpResponse>(
-    "/auth/signup",
+    '/auth/signup',
     params
   );
 

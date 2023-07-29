@@ -1,4 +1,4 @@
-import { httpClient } from "../httpClient";
+import { httpClient } from '../httpClient';
 
 interface MeResponse {
   name: string;
@@ -6,7 +6,7 @@ interface MeResponse {
 }
 
 export const me = async () => {
-  const { data } = await httpClient.get<MeResponse>("/users/me");
+  const { data } = await httpClient.get<MeResponse>('/users/me');
 
   return data;
 };
