@@ -36,7 +36,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedOption}
           onChange={handleChangeSelectedOption}
           className={cn(
-            'bg-white rounded-lg border border-gray-300 bg px-3 h-[52px] text-gray-800 w-full pt-4 peer placeholder-shown:pt-0 text-sm focus:border-gray-700 transition-all outline-none appearance-none',
+            'bg-white rounded-lg border border-gray-300 bg px-3 h-[48px] text-gray-800 w-full pt-4 peer placeholder-shown:pt-0 text-sm focus:border-gray-700 transition-all outline-none appearance-none',
             error && '!border-[#C92A2A]',
             className
           )}
@@ -57,7 +57,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
         <label
           htmlFor={selectId}
-          className="absolute text-[10px] left-[13px] top-2 pointer-events-none text-gray-500 peer-placeholder-shown:text-sm peer-placeholder-shown:top-4 transition-all"
+          className="absolute text-[10px] left-[13px] top-2 pointer-events-none text-gray-500 peer-placeholder-shown:text-sm peer-placeholder-shown:top-3.5 transition-all"
         >
           {placeholder}
         </label>

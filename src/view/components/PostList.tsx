@@ -1,4 +1,5 @@
 import { formatDate } from '../../app/utils/formatDate';
+import { Link } from 'react-router-dom';
 
 interface PostListProps {
   post: {
@@ -23,7 +24,7 @@ export const PostList = ({ post }: PostListProps) => {
     <div className="overflow-hidden bg-white rounded shadow">
       <div className="p-5">
         <div className="relative">
-          <a href="#" title="" className="block aspect-w-4 aspect-h-3">
+          <Link to={'#'} title="" className="block aspect-w-4 aspect-h-3">
             <img
               className="object-cover w-80 h-52"
               src={`${import.meta.env.VITE_API_URL}/uploads/posts/${
@@ -31,7 +32,7 @@ export const PostList = ({ post }: PostListProps) => {
               }`}
               alt={post.title}
             />
-          </a>
+          </Link>
 
           <div className="absolute top-4 left-4">
             <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
@@ -39,30 +40,29 @@ export const PostList = ({ post }: PostListProps) => {
             </span>
           </div>
         </div>
-        <div className="flex items-center mt-6">
+        <div className="mt-6">
           <span className="block text-[12px] font-semibold text-gray-500 uppercase">
             {formatDate(post.createdAt)}
           </span>
-          <span className="block mx-1 text-gray-500">•</span>
           <span className="text-gray-600 text-[12px] font-normal">
-            <b>{post.author.name}</b>, {post.author.job.name}
+            <b>{post.author.name}</b>, {post.author.job.name}.
           </span>
         </div>
         <p className="mt-5 text-[18px] leading-7 font-semibold">
-          <a href="#" title="" className="text-black">
+          <Link to={'#'} title={post.title} className="text-black">
             {post.title.length > 30
               ? post.title.substring(0, 30) + '...'
               : post.title}
-          </a>
+          </Link>
         </p>
         <p className="mt-4 text-[14px] text-gray-600">
           {post.content.length > 80
             ? post.content.substring(0, 80) + '...'
             : post.content}
         </p>
-        <a
-          href="#"
-          title=""
+        <Link
+          to={'#'}
+          title={post.title}
           className="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
         >
           Continue Reading
@@ -78,7 +78,7 @@ export const PostList = ({ post }: PostListProps) => {
               clipRule="evenodd"
             />
           </svg>
-        </a>
+        </Link>
       </div>
     </div>
   );
