@@ -1,3 +1,4 @@
+import { addThreeDots } from '../../app/utils/addThreeDots';
 import { formatDate } from '../../app/utils/formatDate';
 import { Link } from 'react-router-dom';
 
@@ -24,9 +25,13 @@ export const PostList = ({ post }: PostListProps) => {
     <div className="overflow-hidden bg-white rounded shadow">
       <div className="p-5">
         <div className="relative">
-          <Link to={'#'} title="" className="block aspect-w-4 aspect-h-3">
+          <Link
+            to={'#'}
+            title={post.title}
+            className="block aspect-w-4 aspect-h-3"
+          >
             <img
-              className="object-cover w-80 h-52"
+              className="object-cover h-52 mx-auto"
               src={`${import.meta.env.VITE_API_URL}/uploads/posts/${
                 post.image
               }`}
@@ -50,14 +55,12 @@ export const PostList = ({ post }: PostListProps) => {
         </div>
         <p className="mt-5 text-[18px] leading-7 font-semibold">
           <Link to={'#'} title={post.title} className="text-black">
-            {post.title.length > 30
-              ? post.title.substring(0, 30) + '...'
-              : post.title}
+            {post.title.length > 30 ? addThreeDots(post.title, 30) : post.title}
           </Link>
         </p>
         <p className="mt-4 text-[14px] text-gray-600">
           {post.content.length > 80
-            ? post.content.substring(0, 80) + '...'
+            ? addThreeDots(post.content, 80)
             : post.content}
         </p>
         <Link

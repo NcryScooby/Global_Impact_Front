@@ -1,8 +1,11 @@
 import { useAuth } from '../../../app/hooks/useAuth';
 import { Sidebar } from '../../components/Sidebar';
 
-export const Settings = () => {
+export const NewPost = () => {
   const { signOut } = useAuth();
-
-  return <Sidebar signOut={signOut} />;
+  return (
+    <>
+      <Sidebar signOut={signOut} />
+    </>
+  );
 };

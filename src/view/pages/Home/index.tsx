@@ -3,11 +3,11 @@ import { Sidebar } from '../../components/Sidebar';
 import { Posts } from '../../components/Posts';
 
 export const Home = () => {
-  const { signOut } = useAuth();
+  const { signOut, userName } = useAuth();
 
   return (
     <>
-      <Sidebar signOut={signOut} />
+      <Sidebar signOut={signOut} userName={userName} />
       <Posts />
     </>
   );

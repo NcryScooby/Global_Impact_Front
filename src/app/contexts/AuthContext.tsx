@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 
 interface AuthContextProps {
   signedIn: boolean;
+  userName: string;
   signIn(token: string): void;
   signOut: () => void;
 }
@@ -20,7 +21,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return !!storedToken;
   });
 
-  const { isError, isFetching, isSuccess, remove } = useQuery({
+  const [name, setName] = useState<string>('');
+
+  const { data, isError, isFetching, isSuccess, remove } = useQuery({
     queryKey: ['loggedUser'],
     queryFn: () => usersService.me(),
     enabled: signedIn,
@@ -45,9 +48,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [isError, signOut]);
 
+  useEffect(() => {
+    if (isSuccess && signedIn) {
+      setName(data.user.name);
+    }
+  }, [isSuccess, signedIn]);
+
   return (
     <AuthContext.Provider
-      value={{ signedIn: isSuccess && signedIn, signIn, signOut }}
+      value={{
+        signedIn: isSuccess && signedIn,
+        userName: name,
+        signIn,
+        signOut,
+      }}
     >
       <LaunchScreen isLoading={isFetching} />
       {!isFetching && children}

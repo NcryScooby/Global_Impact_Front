@@ -1,11 +1,16 @@
-import { ExitIcon, GearIcon, HomeIcon } from '@radix-ui/react-icons';
+import { ExitIcon, HomeIcon, Pencil2Icon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
 
 interface SidebarProps {
   signOut: () => void;
+  userName: string;
 }
 
-export const Sidebar = ({ signOut }: SidebarProps) => {
+export const Sidebar = ({ signOut, userName }: SidebarProps) => {
+  const getInitials = (name: string) => {
+    return (name.charAt(0) + name.charAt(1)).toUpperCase();
+  };
+
   return (
     <>
       <button
@@ -51,11 +56,11 @@ export const Sidebar = ({ signOut }: SidebarProps) => {
           <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-zinc-800">
             <li>
               <Link
-                to={'/settings'}
+                to={'/posts/new'}
                 className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group"
               >
-                <GearIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />
-                <span className="ml-3">Settings</span>
+                <Pencil2Icon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <span className="ml-3">New Post</span>
               </Link>
             </li>
             <li>
@@ -66,6 +71,13 @@ export const Sidebar = ({ signOut }: SidebarProps) => {
                 <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />
                 <span className="ml-3">Sign Out</span>
               </button>
+            </li>
+            <li className="flex-1 mb-4 fixed bottom-4">
+              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-white cursor-pointer">
+                <span className="font-medium text-gray-600 dark:text-primary">
+                  {getInitials(userName)}
+                </span>
+              </div>
             </li>
           </ul>
         </div>
