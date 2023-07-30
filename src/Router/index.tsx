@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { PostDetail } from '../view/pages/Posts/PostDetail';
 import { AuthLayout } from '../view/layouts/AuthLayout';
 import { NewPost } from '../view/pages/Posts/NewPost';
 import { Register } from '../view/pages/Register';
@@ -18,6 +19,7 @@ export const Router = () => {
         </Route>
         <Route element={<AuthGuard isPrivate />}>
           <Route path="/" element={<Home />} />
+          <Route path="/posts/:postId" element={<PostDetail />} />
           <Route path="/posts/new" element={<NewPost />} />
         </Route>
       </Routes>

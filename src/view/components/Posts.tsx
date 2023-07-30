@@ -61,6 +61,7 @@ export const Posts = () => {
               <PostList
                 key={post.id}
                 post={{
+                  id: post.id,
                   title: post.title,
                   content: post.content,
                   image: post.image,
