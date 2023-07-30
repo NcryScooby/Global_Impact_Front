@@ -21,7 +21,7 @@ export const Posts = () => {
   }, [data]);
 
   return isFetching ? (
-    <section className="bg-gray-50 sm:ml-64">
+    <section className="sm:ml-64">
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex items-end justify-between">
           <div className="flex-1 text-center lg:text-left">

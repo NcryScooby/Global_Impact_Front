@@ -46,8 +46,8 @@ export const PostDetail = () => {
       <Sidebar signOut={signOut} userName={userName} />
       <section className="py-10 h-full sm:py-16 lg:py-24 sm:ml-64">
         <div className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
-          <div className="mx-auto text-left md:max-w-lg lg:max-w-2xl md:text-center">
-            <h2 className="text-3xl font-bold leading-tight text-black sm:text-3xl lg:text-3xl lg:leading-tight">
+          <div className="md:max-w-lg lg:max-w-2xl md:text-center">
+            <h2 className="text-3xl text-left font-bold leading-tight text-black sm:text-3xl lg:text-3xl lg:leading-tight w-96">
               {post.post.title}
             </h2>
           </div>
