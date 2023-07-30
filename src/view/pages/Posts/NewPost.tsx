@@ -2,10 +2,10 @@ import { useAuth } from '../../../app/hooks/useAuth';
 import { Sidebar } from '../../components/Sidebar';
 
 export const NewPost = () => {
-  const { signOut } = useAuth();
+  const { signOut, userName } = useAuth();
   return (
     <>
-      <Sidebar signOut={signOut} />
+      <Sidebar signOut={signOut} userName={userName} />
     </>
   );
 };
