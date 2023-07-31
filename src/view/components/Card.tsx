@@ -1,11 +1,11 @@
 import { postsService } from '../../app/services/postsService';
-import { SkeletonPostList } from './Skeletons/SkeletonPostList';
+import { SkeletonPostList } from './skeletons/SkeletonPostList';
 import { Post } from '../../app/interfaces/Post';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PostList } from './PostList';
 
-export const Posts = () => {
+export const Card = () => {
   const [posts, setPosts] = useState<Post>();
 
   const { data, isFetching } = useQuery<Post>({
