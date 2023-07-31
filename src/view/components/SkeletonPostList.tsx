@@ -1,8 +1,8 @@
-interface SkeletonProps {
+interface SkeletonPostListProps {
   count?: number;
 }
 
-export const Skeleton = ({ count }: SkeletonProps) => {
+export const SkeletonPostList = ({ count }: SkeletonPostListProps) => {
   return Array.from({ length: count || 9 }).map((_, index) => (
     <div key={index} role="status" className="p-5 animate-pulse lg:p-0">
       <div className="flex items-center justify-center h-52 mb-4 bg-gray-300 dark:bg-gray-300"></div>

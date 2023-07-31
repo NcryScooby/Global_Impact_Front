@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { AuthProvider } from './app/contexts/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import { Router } from './Router';
@@ -20,7 +20,7 @@ export const App = () => {
         <Router />
         <Toaster />
       </AuthProvider>
-      {/* <ReactQueryDevtools /> */}
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 };

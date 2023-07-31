@@ -1,12 +1,12 @@
+import { SkeletonPostDetail } from '../../components/SkeletonPostDetail';
+import { PostProps } from '../../../app/services/postsService/getById';
 import { postsService } from '../../../app/services/postsService';
+import { formatDate } from '../../../app/utils/formatDate';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../../app/hooks/useAuth';
 import { Sidebar } from '../../components/Sidebar';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { PostProps } from '../../../app/services/postsService/getById';
-import { Spinner } from '../../components/Spinner';
-import { formatDate } from '../../../app/utils/formatDate';
 
 export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
@@ -35,8 +35,8 @@ export const PostDetail = () => {
     return (
       <>
         <Sidebar signOut={signOut} userName={userName} />
-        <div className="sm:ml-64 flex justify-center items-center h-full">
-          <Spinner />
+        <div className="sm:ml-64 h-full">
+          <SkeletonPostDetail />
         </div>
       </>
     );
@@ -44,17 +44,18 @@ export const PostDetail = () => {
   return (
     <>
       <Sidebar signOut={signOut} userName={userName} />
-      <section className="py-10 h-full sm:py-16 lg:py-24 sm:ml-64">
-        <div className="max-w-5xl px-4 mx-auto sm:px-6 lg:px-8">
-          <div className="md:max-w-lg lg:max-w-2xl md:text-center">
-            <h2 className="text-3xl text-left font-bold leading-tight text-black sm:text-3xl lg:text-3xl lg:leading-tight w-96">
+      <section className="py-10 h-full sm:py-16 lg:py-16 sm:ml-64">
+        <div className="px-4 mx-auto sm:px-6 lg:px-8">
+          <div className="md:text-center">
+            <h2 className="w-full text-3xl text-left font-bold leading-tight text-black lg:text-5xl lg:leading-tight">
               {post.post.title}
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 mt-8 md:mt-20 gap-y-6 md:grid-cols-2 gap-x-10 relative">
-            <div>
+          <div className="flex flex-col mt-8 md:mt-16 gap-y-6 md:grid-cols-2 gap-x-10 relative">
+            <div className="flex flex-col items-center">
               <img
+                className="object-cover lg:max-h-80 lg:w-full"
                 src={`${import.meta.env.VITE_API_URL}/uploads/posts/${
                   post?.post.image
                 }`}
@@ -67,7 +68,7 @@ export const PostDetail = () => {
                 </span>
               </div>
 
-              <div className="mt-2">
+              <div className="mt-2 w-full flex-col">
                 <span className="block text-[12px] font-semibold text-gray-500 uppercase">
                   {formatDate(post.post.createdAt)}
                 </span>
@@ -78,7 +79,7 @@ export const PostDetail = () => {
             </div>
 
             <div>
-              <p className="text-[14px] text-gray-600">{post.post.content}</p>
+              <p className="text-[16px]">{post.post.content}</p>
             </div>
           </div>
         </div>

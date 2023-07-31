@@ -1,8 +1,8 @@
 import { postsService } from '../../app/services/postsService';
+import { SkeletonPostList } from './SkeletonPostList';
 import { Post } from '../../app/interfaces/Post';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { Skeleton } from './Skeleton';
 import { PostList } from './PostList';
 
 export const Posts = () => {
@@ -36,7 +36,7 @@ export const Posts = () => {
           </div>
         </div>
         <div className="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
-          <Skeleton count={9} />
+          <SkeletonPostList count={9} />
         </div>
       </div>
     </section>
