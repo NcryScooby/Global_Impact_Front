@@ -1,4 +1,4 @@
-import { SkeletonPostDetail } from '../../components/SkeletonPostDetail';
+import { SkeletonPostDetail } from '../../components/Skeletons/SkeletonPostDetail';
 import { PostProps } from '../../../app/services/postsService/getById';
 import { postsService } from '../../../app/services/postsService';
 import { formatDate } from '../../../app/utils/formatDate';
@@ -44,16 +44,10 @@ export const PostDetail = () => {
   return (
     <>
       <Sidebar signOut={signOut} userName={userName} />
-      <section className="py-10 h-full sm:py-16 lg:py-16 sm:ml-64">
+      <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-auto">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
-          <div className="md:text-center">
-            <h2 className="w-full text-3xl text-left font-bold leading-tight text-black lg:text-5xl lg:leading-tight">
-              {post.post.title}
-            </h2>
-          </div>
-
-          <div className="flex flex-col mt-8 md:mt-16 gap-y-6 md:grid-cols-2 gap-x-10 relative">
-            <div className="flex flex-col items-center">
+          <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
+            <div className="flex flex-col">
               <img
                 className="object-cover lg:max-h-80 lg:w-full"
                 src={`${import.meta.env.VITE_API_URL}/uploads/posts/${
@@ -61,12 +55,6 @@ export const PostDetail = () => {
                 }`}
                 alt={post.post.title}
               />
-
-              <div className="absolute top-4 left-4">
-                <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-                  {post.post.category.name}
-                </span>
-              </div>
 
               <div className="mt-2 w-full flex-col">
                 <span className="block text-[12px] font-semibold text-gray-500 uppercase">
@@ -76,10 +64,22 @@ export const PostDetail = () => {
                   <b>{post.post.author.name}</b>, {post.post.author.job.name}.
                 </span>
               </div>
+
+              <div className="md:text-center mt-8">
+                <h2 className="w-full text-2xl text-left font-bold leading-tight text-black">
+                  {post.post.title}
+                </h2>
+              </div>
+
+              <div className="absolute top-4 left-4">
+                <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+                  {post.post.category.name}
+                </span>
+              </div>
             </div>
 
             <div>
-              <p className="text-[16px]">{post.post.content}</p>
+              <p className="text-[16px] font-serif">{post.post.content}</p>
             </div>
           </div>
         </div>

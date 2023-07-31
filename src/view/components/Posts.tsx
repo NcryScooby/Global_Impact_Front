@@ -1,5 +1,5 @@
 import { postsService } from '../../app/services/postsService';
-import { SkeletonPostList } from './SkeletonPostList';
+import { SkeletonPostList } from './Skeletons/SkeletonPostList';
 import { Post } from '../../app/interfaces/Post';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
