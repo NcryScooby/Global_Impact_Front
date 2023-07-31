@@ -1,4 +1,4 @@
-import { useRegisterController } from './userRegisterController';
+import { useRegisterController } from './useRegisterController';
 import { Button } from '../../components/Button';
 import { Select } from '../../components/Select';
 import { Input } from '../../components/Input';
@@ -64,7 +64,7 @@ export const Register = () => {
           {...register('password')}
         />
         <Select
-          placeholder="Job"
+          placeholder="Your Job"
           error={errors.jobId?.message}
           options={jobs}
           {...register('jobId')}

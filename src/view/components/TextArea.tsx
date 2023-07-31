@@ -2,25 +2,27 @@ import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { ComponentProps, forwardRef } from 'react';
 import { cn } from '../../app/utils/cn';
 
-interface InputProps extends ComponentProps<'input'> {
+interface TextAreaProps extends ComponentProps<'textarea'> {
   name: string;
   error?: string;
-  inputTitle?: string;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, name, placeholder, error, className, ...props }: InputProps, ref) => {
-    const inputId = id ?? name;
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+  (
+    { id, name, placeholder, error, className, ...props }: TextAreaProps,
+    ref
+  ) => {
+    const textAreaId = id ?? name;
 
     return (
       <div className="relative">
-        <input
+        <textarea
           ref={ref}
           name={name}
-          id={inputId}
+          id={textAreaId}
           {...props}
           className={cn(
-            'bg-white rounded-[4px] border border-gray-300 bg px-3 h-[48px] text-gray-400 w-full text-sm focus:border-gray-700 transition-all outline-none file:hidden',
+            'bg-white rounded-[4px] border border-gray-300 bg px-3 h-32 text-gray-800 w-full pt-4 text-sm focus:border-gray-700 transition-all outline-none resize-none',
             error && '!border-[#C92A2A]',
             className
           )}
@@ -38,4 +40,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-Input.displayName = 'Input';
+TextArea.displayName = 'textarea';

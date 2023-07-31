@@ -9,9 +9,9 @@ export const Home = () => {
     <>
       <Sidebar signOut={signOut} userName={userName} />
       <div className="sm:ml-64 sm:flex sm:flex-col">
-        <div className="p-8 lg:px-32 lg:py-16 lg:flex lg:items-start lg:justify-center">
+        <div className="py-16 lg:px-8 lg:flex lg:items-start lg:justify-center">
           <div>
-            <h1 className="text-3xl font-bold text-gray-700 lg:text-5xl">
+            <h1 className="text-3xl font-bold text-zinc-800 lg:text-5xl">
               Welcome to <span className="text-black">Global Impact</span>.
             </h1>
             <div className="mt-8 text-gray-600 flex flex-col gap-6">

@@ -36,7 +36,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedOption}
           onChange={handleChangeSelectedOption}
           className={cn(
-            'bg-white rounded-lg border border-gray-300 bg px-3 h-[48px] text-gray-800 w-full pt-4 peer placeholder-shown:pt-0 text-sm focus:border-gray-700 transition-all outline-none appearance-none',
+            'bg-white rounded-[4px] border border-gray-300 bg px-3 h-[48px] text-gray-400 w-full text-sm focus:border-gray-700 transition-all outline-none appearance-none',
             error && '!border-[#C92A2A]',
             className
           )}
@@ -51,16 +51,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
 
-        <div className="pointer-events-none absolute top-4 right-0 flex items-center px-4 text-gray-400 ">
+        <div className="pointer-events-none absolute top-3.5 right-0 flex items-center px-4 text-gray-400 ">
           <CaretDownIcon width={20} height={20} />
         </div>
-
-        <label
-          htmlFor={selectId}
-          className="absolute text-[10px] left-[13px] top-2 pointer-events-none text-gray-500 peer-placeholder-shown:text-sm peer-placeholder-shown:top-3.5 transition-all"
-        >
-          {placeholder}
-        </label>
 
         {error && (
           <div className="flex gap-1 items-center mt-2 text-[#C92A2A]">
