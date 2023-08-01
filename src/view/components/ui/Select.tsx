@@ -1,10 +1,11 @@
 import { ChangeEvent, ComponentProps, forwardRef, useState } from 'react';
-import { CrossCircledIcon, CaretDownIcon } from '@radix-ui/react-icons';
-import { cn } from '../../app/utils/cn';
+import { CaretDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { cn } from '../../../app/utils/cn';
 
 interface SelectProps extends ComponentProps<'select'> {
   name: string;
   error?: string;
+  label: string;
   options: {
     id: string;
     name: string;
@@ -13,7 +14,16 @@ interface SelectProps extends ComponentProps<'select'> {
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   (
-    { id, name, placeholder, error, options, className, ...props }: SelectProps,
+    {
+      id,
+      name,
+      label,
+      placeholder,
+      error,
+      options,
+      className,
+      ...props
+    }: SelectProps,
     ref
   ) => {
     const selectId = id ?? name;
@@ -28,6 +38,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div className="relative">
+        <label
+          htmlFor="first_name"
+          className="block mb-2 text-sm font-medium text-primary"
+        >
+          {label}
+        </label>
+
         <select
           ref={ref}
           name={name}
@@ -36,7 +53,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedOption}
           onChange={handleChangeSelectedOption}
           className={cn(
-            'bg-white rounded-[4px] border border-gray-300 bg px-3 h-[48px] text-gray-400 w-full text-sm focus:border-gray-700 transition-all outline-none appearance-none',
+            'bg-white border border-gray-300 text-gray-900 text-sm rounded-[4px] block w-full p-2.5 focus:border-gray-700 transition-all outline-none appearance-none',
             error && '!border-[#C92A2A]',
             className
           )}
@@ -51,7 +68,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
 
-        <div className="pointer-events-none absolute top-3.5 right-0 flex items-center px-4 text-gray-400 ">
+        <div className="pointer-events-none absolute top-[39px] right-0 flex items-center px-4 text-gray-400 ">
           <CaretDownIcon width={20} height={20} />
         </div>
 

@@ -1,9 +1,9 @@
+import { TextArea } from '../../components/ui/TextArea';
 import { useAuth } from '../../../app/hooks/useAuth';
+import { Button } from '../../components/ui/Button';
+import { Select } from '../../components/ui/Select';
 import { Sidebar } from '../../components/Sidebar';
-import { Input } from '../../components/Input';
-import { Select } from '../../components/Select';
-import { Button } from '../../components/Button';
-import { TextArea } from '../../components/TextArea';
+import { Input } from '../../components/ui/Input';
 
 export const NewPost = () => {
   const { signOut, userName } = useAuth();

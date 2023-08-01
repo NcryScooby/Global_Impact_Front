@@ -1,6 +1,6 @@
 import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { ComponentProps, forwardRef } from 'react';
-import { cn } from '../../app/utils/cn';
+import { cn } from '../../../app/utils/cn';
 
 interface TextAreaProps extends ComponentProps<'textarea'> {
   name: string;
@@ -22,7 +22,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           id={textAreaId}
           {...props}
           className={cn(
-            'bg-white rounded-[4px] border border-gray-300 bg px-3 h-32 text-gray-800 w-full pt-4 text-sm focus:border-gray-700 transition-all outline-none resize-none',
+            'bg-white border border-gray-300 text-gray-900 h-24 text-sm rounded-[4px] block w-full p-2.5 focus:border-gray-700 transition-all outline-none resize-none',
             error && '!border-[#C92A2A]',
             className
           )}
