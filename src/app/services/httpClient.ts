@@ -1,9 +1,10 @@
-import { localStorageKeys } from '../config/localStorageKeys';
+import { localStorageKeys } from '../config/keys';
+import { sleep } from '../utils/functions/sleep';
+import { env } from '../config/env';
 import axios from 'axios';
-import { sleep } from '../utils/sleep';
 
 export const httpClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: env.apiUrl,
 });
 
 httpClient.interceptors.request.use(async (config) => {
