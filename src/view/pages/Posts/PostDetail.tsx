@@ -1,4 +1,4 @@
-import { SkeletonPostDetail } from '../../components/Skeletons/SkeletonPostDetail';
+import { SkeletonPostDetail } from '../../components/skeletons/SkeletonPostDetail';
 import { PostProps } from '../../../app/services/postsService/getById';
 import { postsService } from '../../../app/services/postsService';
 import { formatDate } from '../../../app/utils/formatDate';
@@ -31,7 +31,7 @@ export const PostDetail = () => {
     }
   }, [data]);
 
-  if (!post)
+  if (!post) {
     return (
       <>
         <Sidebar signOut={signOut} userName={userName} />
@@ -40,6 +40,7 @@ export const PostDetail = () => {
         </div>
       </>
     );
+  }
 
   return (
     <>

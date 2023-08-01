@@ -1,6 +1,6 @@
 import { useLoginController } from './useLoginController';
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
+import { Button } from '../../components/ui/Button';
+import { Input } from '../../components/ui/Input';
 import { Link } from 'react-router-dom';
 
 export const Login = () => {
@@ -29,6 +29,7 @@ export const Login = () => {
       <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
         <Input
           type="email"
+          label="E-mail"
           placeholder="E-mail"
           error={errors.email?.message}
           {...register('email')}
@@ -36,6 +37,7 @@ export const Login = () => {
         <Input
           type="password"
           placeholder="Password"
+          label="Password"
           autoComplete="password"
           error={errors.password?.message}
           {...register('password')}

@@ -1,7 +1,7 @@
-import { useRegisterController } from './userRegisterController';
-import { Button } from '../../components/Button';
-import { Select } from '../../components/Select';
-import { Input } from '../../components/Input';
+import { useRegisterController } from './useRegisterController';
+import { Button } from '../../components/ui/Button';
+import { Select } from '../../components/ui/Select';
+import { Input } from '../../components/ui/Input';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -47,16 +47,19 @@ export const Register = () => {
 
       <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
         <Input
+          label="Name"
           placeholder="Name"
           error={errors.name?.message}
           {...register('name')}
         />
         <Input
+          label="E-mail"
           placeholder="E-mail"
           error={errors.email?.message}
           {...register('email')}
         />
         <Input
+          label="Password"
           type="password"
           error={errors.password?.message}
           placeholder="Password"
@@ -64,7 +67,8 @@ export const Register = () => {
           {...register('password')}
         />
         <Select
-          placeholder="Job"
+          label="Job"
+          placeholder="Your Job"
           error={errors.jobId?.message}
           options={jobs}
           {...register('jobId')}
