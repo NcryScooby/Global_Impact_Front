@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { PostDetail } from '../view/pages/Posts/PostDetail';
-import { AuthLayout } from '../view/layouts/AuthLayout';
-import { NewPost } from '../view/pages/Posts/NewPost';
-import { Posts } from '../view/pages/Posts/Posts';
-import { Register } from '../view/pages/Register';
-import { Login } from '../view/pages/Login';
-import { Home } from '../view/pages/Home';
+import { PostDetail } from '../views/pages/Posts/PostDetail';
+import { AuthLayout } from '../views/layouts/AuthLayout';
+import { NewPost } from '../views/pages/Posts/NewPost';
+import { Posts } from '../views/pages/Posts';
+import { Register } from '../views/pages/Register';
+import { Login } from '../views/pages/Login';
+import { Home } from '../views/pages/Home';
 import { AuthGuard } from './AuthGuard';
 
 export const Router = () => {
