@@ -1,6 +1,6 @@
 import { httpClient } from '../httpClient';
 
-export interface PostProps {
+export interface Post {
   post: {
     id: string;
     title: string;
@@ -25,7 +25,7 @@ export interface PostProps {
 }
 
 export const getById = async (postId: string) => {
-  const { data } = await httpClient.get<PostProps>(`/posts/${postId}`);
+  const { data } = await httpClient.get<Post>(`/posts/${postId}`);
 
   return data;
 };

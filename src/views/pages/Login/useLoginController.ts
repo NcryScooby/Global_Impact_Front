@@ -6,7 +6,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
-import { useAuth } from '../../../app/hooks/useAuth';
+import { useAuth } from '../../../app/hooks/UseAuth';
 
 const schema = z.object({
   email: z

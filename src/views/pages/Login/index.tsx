@@ -36,8 +36,8 @@ export const Login = () => {
         />
         <Input
           type="password"
-          placeholder="Password"
           label="Password"
+          placeholder="Password"
           autoComplete="password"
           error={errors.password?.message}
           {...register('password')}

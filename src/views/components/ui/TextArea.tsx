@@ -5,17 +5,25 @@ import { cn } from '../../../app/utils/functions/cn';
 interface TextAreaProps extends ComponentProps<'textarea'> {
   name: string;
   error?: string;
+  label: string;
 }
 
 export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    { id, name, placeholder, error, className, ...props }: TextAreaProps,
+    { id, name, label, placeholder, error, className, ...props }: TextAreaProps,
     ref
   ) => {
     const textAreaId = id ?? name;
 
     return (
       <div className="relative">
+        <label
+          htmlFor="first_name"
+          className="block mb-2 text-sm font-medium text-primary"
+        >
+          {label}
+        </label>
+
         <textarea
           ref={ref}
           name={name}
