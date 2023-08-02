@@ -1,10 +1,10 @@
 import { useRegisterController } from './useRegisterController';
+import { jobsService } from '../../../app/services/jobsService';
 import { Button } from '../../components/ui/Button';
 import { Select } from '../../components/ui/Select';
 import { Input } from '../../components/ui/Input';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 interface Job {
   id: string;
@@ -15,14 +15,13 @@ export const Register = () => {
   const { handleSubmit, register, errors, isLoading } = useRegisterController();
   const [jobs, setJobs] = useState<Job[]>([]);
 
-  const teste = async () => {
-    await axios.get('http://localhost:3001/jobs').then((res) => {
-      setJobs(res.data.jobs);
-    });
+  const jobsData = async () => {
+    const { jobs } = await jobsService.getAll();
+    setJobs(jobs);
   };
 
   useEffect(() => {
-    teste();
+    jobsData();
   }, []);
 
   return (

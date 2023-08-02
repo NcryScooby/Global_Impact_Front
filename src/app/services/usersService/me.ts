@@ -1,6 +1,6 @@
 import { httpClient } from '../httpClient';
 
-interface MeResponse {
+interface Me {
   user: {
     name: string;
     email: string;
@@ -8,7 +8,7 @@ interface MeResponse {
 }
 
 export const me = async () => {
-  const { data } = await httpClient.get<MeResponse>('/users/me');
+  const { data } = await httpClient.get<Me>('/users/me');
 
   return data;
 };

@@ -1,5 +1,5 @@
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
-import { PostProps } from '../../../../app/services/postsService/getById';
+import { Post } from '../../../../app/services/postsService/getById';
 import { postsService } from '../../../../app/services/postsService';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -16,9 +16,9 @@ export const PostDetail = () => {
   const { signOut, userName } = useAuth();
   const navigate = useNavigate();
 
-  const [post, setPost] = useState<PostProps>();
+  const [post, setPost] = useState<Post>();
 
-  const { data, isError } = useQuery<PostProps>({
+  const { data, isError } = useQuery<Post>({
     queryKey: ['post', postId],
     queryFn: () => postsService.getById(postId),
     staleTime: 1000 * 60 * 5,

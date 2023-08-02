@@ -4,9 +4,30 @@ import { Button } from '../../../components/ui/Button';
 import { Select } from '../../../components/ui/Select';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { Input } from '../../../components/ui/Input';
+import { useNewPostController } from './useNewPostController';
+import { useEffect, useState } from 'react';
+import { categoriesService } from '../../../../app/services/categoriesService';
+
+interface Category {
+  id: string;
+  name: string;
+}
 
 export const NewPost = () => {
+  const { handleSubmit, register, errors, isLoading } = useNewPostController();
   const { signOut, userName } = useAuth();
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  const CategoriesData = async () => {
+    const { categories } = await categoriesService.getAll();
+    setCategories(categories);
+  };
+
+  useEffect(() => {
+    CategoriesData();
+  }, []);
+
   return (
     <>
       <Sidebar signOut={signOut} userName={userName} />
@@ -26,51 +47,60 @@ export const NewPost = () => {
             <div className="max-w-5xl mx-auto mt-12 sm:mt-16">
               <div className="mt-6 overflow-hidden bg-white rounded-[4px]">
                 <div className="px-6 py-12 sm:p-12">
-                  <form action="#" method="POST" className="mt-4">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
                       <div>
                         <Input
                           type="text"
+                          label="Title"
                           placeholder="Title"
-                          // error={errors.email?.message}
-                          // {...register('email')}
+                          error={errors.title?.message}
+                          {...register('title')}
                         />
                       </div>
 
                       <div>
                         <Select
+                          label="Category"
                           placeholder="Category"
-                          // error={errors.jobId?.message}
-                          // options={jobs}
-                          // {...register('jobId')}
+                          error={errors.categoryId?.message}
+                          options={categories}
+                          {...register('categoryId')}
                         />
                       </div>
 
                       <div className="sm:col-span-2">
-                        <TextArea placeholder="Content" />
+                        <TextArea
+                          label="Content"
+                          placeholder="Content"
+                          error={errors.content?.message}
+                          {...register('content')}
+                        />
                       </div>
 
                       <div>
                         <Input
                           type="text"
+                          label="Tags"
                           placeholder="Tags"
-                          // error={errors.email?.message}
-                          // {...register('email')}
+                          {...register('tags')}
                         />
                       </div>
 
                       <div>
                         <Input
+                          id="image"
                           type="file"
-                          placeholder="Image"
-                          // error={errors.email?.message}
-                          // {...register('email')}
+                          label="Image"
+                          // required
+                          error={errors.image?.message?.toString()}
+                          {...register('image')}
                         />
                       </div>
                     </div>
-                    <div className="mt-4">
-                      <Button className="w-full">Create</Button>
-                    </div>
+                    <Button className="w-full mt-8" isloading={isLoading}>
+                      Create
+                    </Button>
                   </form>
                 </div>
               </div>

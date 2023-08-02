@@ -2,11 +2,11 @@ import { SignUpParams } from '../../../app/services/authService/signUp';
 import { ResponseError } from '../../../app/interfaces/ResponseError';
 import { authService } from '../../../app/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '../../../app/hooks/UseAuth';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
-import { useAuth } from '../../../app/hooks/useAuth';
 
 const schema = z.object({
   name: z

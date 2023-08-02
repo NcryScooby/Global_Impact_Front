@@ -14,7 +14,7 @@ export const Home = () => {
             <h1 className="text-3xl font-bold text-zinc-800 lg:text-5xl">
               Welcome to <span className="text-black">Global Impact</span>.
             </h1>
-            <div className="mt-8 text-gray-600 flex flex-col gap-6">
+            <div className="mt-16 text-gray-600 flex flex-col gap-6">
               <p>
                 In an increasingly connected world, where borders fade away, and
                 ideas travel at the speed of light, our virtual space is born to

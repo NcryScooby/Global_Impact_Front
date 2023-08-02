@@ -1,6 +1,6 @@
 import { PostListSkeleton } from '../skeletons/posts/PostListSkeleton';
 import { postsService } from '../../../app/services/postsService';
-import { Post } from '../../../app/interfaces/Post';
+import { Post } from '../../../app/services/postsService/getAll';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PostList } from './PostList';
