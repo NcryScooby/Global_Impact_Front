@@ -1,3 +1,4 @@
+import { ACCEPTED_IMAGE_TYPES } from '../../../../app/constants/posts/accepted_images_types';
 import { ResponseError } from '../../../../app/interfaces/ResponseError';
 import { postsService } from '../../../../app/services/postsService';
 import { Post } from '../../../../app/services/postsService/create';
@@ -7,13 +8,6 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
-
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-];
 
 const schema = z.object({
   title: z
