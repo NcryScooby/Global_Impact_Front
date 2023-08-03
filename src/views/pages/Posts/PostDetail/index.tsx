@@ -4,8 +4,8 @@ import { GetPostByIdResponse } from '../../../../app/services/postsService/getBy
 import { postsService } from '../../../../app/services/postsService';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Sidebar } from '../../../components/ui/Sidebar';
+import { useAuth } from '../../../../app/hooks/UseAuth';
 import { useQuery } from '@tanstack/react-query';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
