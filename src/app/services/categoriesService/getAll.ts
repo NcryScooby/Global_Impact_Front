@@ -1,6 +1,7 @@
+import { PaginationParams } from '../../interfaces/PaginationParams';
 import { httpClient } from '../httpClient';
 
-export interface Category {
+export interface GetAllCategoriesResponse {
   categories: [
     {
       id: string;
@@ -9,16 +10,15 @@ export interface Category {
   ];
 }
 
-interface CategoriesParams {
-  limit?: number;
-  page?: number;
-  orderBy?: 'asc' | 'desc';
-}
-
-export const getAll = async (params?: CategoriesParams) => {
-  const { data } = await httpClient.get<Category>('/categories', {
-    params,
-  });
+export const getAll = async (
+  params?: PaginationParams
+): Promise<GetAllCategoriesResponse> => {
+  const { data } = await httpClient.get<GetAllCategoriesResponse>(
+    '/categories',
+    {
+      params,
+    }
+  );
 
   return data;
 };

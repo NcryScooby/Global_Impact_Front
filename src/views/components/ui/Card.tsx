@@ -1,14 +1,14 @@
+import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { PostListSkeleton } from '../skeletons/posts/PostListSkeleton';
 import { postsService } from '../../../app/services/postsService';
-import { Post } from '../../../app/services/postsService/getAll';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { PostList } from './PostList';
 
 export const Card = () => {
-  const [posts, setPosts] = useState<Post>();
+  const [posts, setPosts] = useState<GetAllPostsResponse>();
 
-  const { data, isFetching } = useQuery<Post>({
+  const { data, isFetching } = useQuery<GetAllPostsResponse>({
     queryKey: ['getPosts'],
     queryFn: () => postsService.getAll({ orderBy: 'desc', limit: 9 }),
     staleTime: 1000 * 60 * 5,

@@ -1,5 +1,6 @@
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
-import { Post } from '../../../../app/services/postsService/getById';
+import { scrollToTop } from '../../../../app/utils/functions/scrollToTop';
+import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
 import { postsService } from '../../../../app/services/postsService';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,7 +9,6 @@ import { Sidebar } from '../../../components/ui/Sidebar';
 import { useQuery } from '@tanstack/react-query';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
-import { scrollToTop } from '../../../../app/utils/functions/scrollToTop';
 
 export const PostDetail = () => {
   scrollToTop();
@@ -16,9 +16,9 @@ export const PostDetail = () => {
   const { signOut, userName } = useAuth();
   const navigate = useNavigate();
 
-  const [post, setPost] = useState<Post>();
+  const [post, setPost] = useState<GetPostByIdResponse>();
 
-  const { data, isError } = useQuery<Post>({
+  const { data, isError } = useQuery<GetPostByIdResponse>({
     queryKey: ['post', postId],
     queryFn: () => postsService.getById(postId),
     staleTime: 1000 * 60 * 5,

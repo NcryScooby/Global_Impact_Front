@@ -1,6 +1,7 @@
+import { PaginationParams } from '../../interfaces/PaginationParams';
 import { httpClient } from '../httpClient';
 
-export interface Post {
+export interface GetAllPostsResponse {
   posts: [
     {
       id: string;
@@ -28,14 +29,10 @@ export interface Post {
   ];
 }
 
-interface PostsParams {
-  limit?: number;
-  page?: number;
-  orderBy?: 'asc' | 'desc';
-}
-
-export const getAll = async (params?: PostsParams) => {
-  const { data } = await httpClient.get<Post>('/posts', {
+export const getAll = async (
+  params?: PaginationParams
+): Promise<GetAllPostsResponse> => {
+  const { data } = await httpClient.get<GetAllPostsResponse>('/posts', {
     params,
   });
 

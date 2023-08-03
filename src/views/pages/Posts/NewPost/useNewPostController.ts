@@ -1,12 +1,12 @@
 import { ACCEPTED_IMAGE_TYPES } from '../../../../app/constants/posts/accepted_images_types';
+import { CreatePostData } from '../../../../app/services/postsService/create';
 import { ResponseError } from '../../../../app/interfaces/ResponseError';
 import { postsService } from '../../../../app/services/postsService';
-import { Post } from '../../../../app/services/postsService/create';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -21,10 +21,10 @@ const schema = z.object({
     .uuid('Invalid Category'),
   image: z
     .any()
-    .refine((files) => files?.length == 1, 'Image is required.')
+    .refine((files) => files?.length == 1, 'Image is required')
     .refine(
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      '.jpg, .jpeg, .png and .webp files are accepted.'
+      '.jpg, .jpeg, .png and .webp files are accepted'
     ),
   tags: z.any(),
 });
@@ -43,7 +43,7 @@ export const useNewPostController = () => {
   const navigate = useNavigate();
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: async (data: Post) => {
+    mutationFn: async (data: CreatePostData) => {
       return postsService.create(data);
     },
     onSuccess: () => {
@@ -66,7 +66,7 @@ export const useNewPostController = () => {
         formData.append(`tags[${index}]`, tag.trim());
       });
 
-      const { post } = await mutateAsync(formData as unknown as Post);
+      const { post } = await mutateAsync(formData as unknown as CreatePostData);
       navigate(`/posts/${post.id}`);
     } catch (error) {
       toast.error((error as ResponseError).response.data.message);

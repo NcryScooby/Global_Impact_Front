@@ -1,14 +1,14 @@
 import { httpClient } from '../httpClient';
 
-interface Me {
+interface MeResponse {
   user: {
     name: string;
     email: string;
   };
 }
 
-export const me = async () => {
-  const { data } = await httpClient.get<Me>('/users/me');
+export const me = async (): Promise<MeResponse> => {
+  const { data } = await httpClient.get<MeResponse>('/users/me');
 
   return data;
 };

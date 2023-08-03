@@ -1,6 +1,7 @@
+import { PaginationParams } from '../../interfaces/PaginationParams';
 import { httpClient } from '../httpClient';
 
-export interface Job {
+export interface GetAllJobsResponse {
   jobs: [
     {
       id: string;
@@ -9,14 +10,10 @@ export interface Job {
   ];
 }
 
-interface JobsParams {
-  limit?: number;
-  page?: number;
-  orderBy?: 'asc' | 'desc';
-}
-
-export const getAll = async (params?: JobsParams) => {
-  const { data } = await httpClient.get<Job>('/jobs', {
+export const getAll = async (
+  params?: PaginationParams
+): Promise<GetAllJobsResponse> => {
+  const { data } = await httpClient.get<GetAllJobsResponse>('/jobs', {
     params,
   });
 

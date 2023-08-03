@@ -1,4 +1,4 @@
-import { SignUpParams } from '../../../app/services/authService/signUp';
+import { SignUpData } from '../../../app/services/authService/signUp';
 import { ResponseError } from '../../../app/interfaces/ResponseError';
 import { authService } from '../../../app/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -36,7 +36,7 @@ export const useRegisterController = () => {
   });
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: async (data: SignUpParams) => {
+    mutationFn: async (data: SignUpData) => {
       return authService.signUp(data);
     },
   });

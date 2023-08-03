@@ -1,12 +1,12 @@
-import { SignInParams } from '../../../app/services/authService/signIn';
+import { SignInData } from '../../../app/services/authService/signIn';
 import { ResponseError } from '../../../app/interfaces/ResponseError';
 import { authService } from '../../../app/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useAuth } from '../../../app/hooks/UseAuth';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
-import { useAuth } from '../../../app/hooks/UseAuth';
 
 const schema = z.object({
   email: z
@@ -31,7 +31,7 @@ export const useLoginController = () => {
   });
 
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: async (data: SignInParams) => {
+    mutationFn: async (data: SignInData) => {
       return authService.signIn(data);
     },
   });
