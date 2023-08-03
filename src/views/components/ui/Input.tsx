@@ -5,7 +5,7 @@ import { cn } from '../../../app/utils/functions/cn';
 interface InputProps extends ComponentProps<'input'> {
   name: string;
   error?: string;
-  label: string;
+  label?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(

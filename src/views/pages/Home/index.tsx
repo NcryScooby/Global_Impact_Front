@@ -9,12 +9,12 @@ export const Home = () => {
     <>
       <Sidebar signOut={signOut} userName={userName} />
       <div className="sm:ml-64 sm:flex sm:flex-col">
-        <div className="py-16 lg:px-8 lg:flex lg:items-start lg:justify-center">
+        <div className="py-12 px-8 lg:py-32 lg:px-16 lg:flex lg:items-start lg:justify-center">
           <div>
             <h1 className="text-3xl font-bold text-zinc-800 lg:text-5xl">
               Welcome to <span className="text-black">Global Impact</span>.
             </h1>
-            <div className="mt-16 text-gray-600 flex flex-col gap-6">
+            <div className="mt-8 lg:mt-16 text-gray-600 flex flex-col gap-6">
               <p>
                 In an increasingly connected world, where borders fade away, and
                 ideas travel at the speed of light, our virtual space is born to

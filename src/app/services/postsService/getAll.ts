@@ -29,8 +29,12 @@ export interface GetAllPostsResponse {
   ];
 }
 
+interface GetAllPostsParams extends PaginationParams {
+  title?: string;
+}
+
 export const getAll = async (
-  params?: PaginationParams
+  params?: GetAllPostsParams
 ): Promise<GetAllPostsResponse> => {
   const { data } = await httpClient.get<GetAllPostsResponse>('/posts', {
     params,
