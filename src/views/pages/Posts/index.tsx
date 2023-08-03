@@ -4,7 +4,6 @@ import { postsService } from '../../../app/services/postsService';
 import { PostList } from '../../components/ui/PostList';
 import { Sidebar } from '../../components/ui/Sidebar';
 import { useAuth } from '../../../app/hooks/UseAuth';
-import { Input } from '../../components/ui/Input';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
@@ -12,7 +11,6 @@ export const Posts = () => {
   const { signOut, userName } = useAuth();
 
   const [posts, setPosts] = useState<GetAllPostsResponse>();
-  const [title, setTitle] = useState<string>('');
 
   const { data, isFetching } = useQuery<GetAllPostsResponse>({
     queryKey: ['getPosts'],
@@ -64,20 +62,6 @@ export const Posts = () => {
                 coverage. News of the day, photos and videos. Be the first to
                 know.
               </p>
-            </div>
-            <div>
-              <Input
-                className="w-60"
-                name="Title"
-                type="text"
-                placeholder="Search Post"
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
-                onClick={() => {
-                  postsService.getAll({ orderBy: 'desc', limit: 9, title });
-                }}
-              />
             </div>
           </div>
           <div className="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
