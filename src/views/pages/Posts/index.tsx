@@ -135,9 +135,7 @@ export const Posts = () => {
                 handlePageChange(page.toString());
               }}
             />
-          ) : (
-            <Pagination count={1} page={1} shape="rounded" />
-          )}
+          ) : null}
         </div>
       </section>
     </>
