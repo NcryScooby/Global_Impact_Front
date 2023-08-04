@@ -27,6 +27,11 @@ export interface GetAllPostsResponse {
       createdAt: string;
     }
   ];
+  meta: {
+    totalCount: number;
+    currentPage: number;
+    totalPages: number;
+  };
 }
 
 interface GetAllPostsParams extends PaginationParams {

@@ -27,17 +27,11 @@ export const PostList = ({ post }: PostListProps) => {
     <div className="overflow-hidden bg-white rounded shadow">
       <div className="p-5">
         <div className="relative">
-          <Link
-            to={'#'}
-            title={post.title}
-            className="block aspect-w-4 aspect-h-3"
-          >
-            <img
-              className="object-cover h-52 mx-auto"
-              src={`${env.apiUrl}/uploads/posts/${post.image}`}
-              alt={post.title}
-            />
-          </Link>
+          <img
+            className="object-cover h-52 mx-auto"
+            src={`${env.apiUrl}/uploads/posts/${post.image}`}
+            alt={post.title}
+          />
 
           <div className="absolute top-4 left-4">
             <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
@@ -54,9 +48,7 @@ export const PostList = ({ post }: PostListProps) => {
           </span>
         </div>
         <p className="mt-5 text-[18px] leading-7 font-semibold">
-          <Link to={'#'} title={post.title} className="text-black">
-            {post.title.length > 30 ? addThreeDots(post.title, 30) : post.title}
-          </Link>
+          {post.title.length > 30 ? addThreeDots(post.title, 30) : post.title}
         </p>
         <p className="mt-4 text-[14px] text-gray-600">
           {post.content.length > 80
