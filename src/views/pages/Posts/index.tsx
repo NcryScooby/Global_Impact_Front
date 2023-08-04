@@ -15,34 +15,28 @@ import { Pagination } from '@mui/material';
 
 export const Posts = () => {
   const { signOut, userName } = useAuth();
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const searchTitleParam = searchParams.get('title') || '';
-  const searchPageParam = searchParams.get('page') || 1;
+  const searchPageParam = Number(searchParams.get('page')) || 1;
 
   const [posts, setPosts] = useState<GetAllPostsResponse>();
-
   const { data, error, isFetching } = useQuery<GetAllPostsResponse>({
     queryKey: ['getPosts', searchPageParam, searchTitleParam],
     queryFn: () =>
       postsService.getAll({
         orderBy: 'desc',
         limit: 9,
-        title: searchTitleParam ? searchTitleParam : undefined,
-        page: searchPageParam ? Number(searchPageParam) : undefined,
+        title: searchTitleParam || undefined,
+        page: searchPageParam || undefined,
       }),
   });
 
-  const [localTitle, setLocalTitle] = useState<string>(searchTitleParam || '');
+  const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
 
   const handleTitleChangeDebounced = useCallback(
     debounce((title: string) => {
-      if (title) {
-        setSearchParams({ title });
-      } else {
-        setSearchParams({});
-      }
+      setSearchParams(title ? { title } : {});
     }, 1000),
     []
   );
@@ -89,6 +83,7 @@ export const Posts = () => {
               value={localTitle}
               onChange={handleTitleChange}
               className="w-full lg:w-72"
+              disabled={isFetching}
               icon={<MagnifyingGlassIcon />}
             />
           </div>
@@ -131,6 +126,7 @@ export const Posts = () => {
               count={posts?.meta.totalPages}
               page={Number(searchPageParam)}
               shape="rounded"
+              disabled={isFetching}
               onChange={(_, page) => {
                 handlePageChange(page.toString());
               }}
