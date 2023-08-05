@@ -2,6 +2,7 @@ import { addThreeDots } from '../../../app/utils/functions/addThreeDots';
 import { formatDate } from '../../../app/utils/functions/formatDate';
 import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
+import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
 
 interface PostListProps {
   post: {
@@ -39,13 +40,25 @@ export const PostList = ({ post }: PostListProps) => {
             </span>
           </div>
         </div>
-        <div className="mt-6">
-          <span className="block text-[12px] font-semibold text-gray-500 uppercase">
-            {formatDate(post.createdAt)}
-          </span>
-          <span className="text-gray-600 text-[12px] font-normal">
-            <b>{post.author.name}</b>, {post.author.job.name}.
-          </span>
+        <div className="mt-6 flex justify-between items-start">
+          <div>
+            <span className="block text-[12px] font-semibold text-gray-500 uppercase">
+              {formatDate(post.createdAt)}
+            </span>
+            <span className="text-gray-600 text-[12px] font-normal">
+              <b>{post.author.name}</b>, {post.author.job.name}.
+            </span>
+          </div>
+          <div className="flex gap-3">
+            <span className="flex items-start gap-[3px] text-[11px] text-[#4b5563]">
+              <BarChartIcon height={13.3} color="#4b5563" />
+              <p>1.4k</p>
+            </span>
+            <span className="flex items-start gap-[3px] text-[11px] text-[#4b5563]">
+              <HeartFilledIcon color="#4b5563" />
+              <p>293</p>
+            </span>
+          </div>
         </div>
         <p className="mt-5 text-[18px] leading-7 font-semibold">
           {post.title.length > 30 ? addThreeDots(post.title, 30) : post.title}

@@ -30,8 +30,6 @@ export const Posts = () => {
         title: searchTitleParam || undefined,
         page: searchPageParam || undefined,
       }),
-    keepPreviousData: true,
-    staleTime: 1000 * 60 * 5,
   });
 
   const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
