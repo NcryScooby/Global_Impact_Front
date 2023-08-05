@@ -72,21 +72,20 @@ export const PostDetail = () => {
 
   const handleLike = async () => {
     try {
+      setPulse(!pulse);
+
+      setColor(color === '#9e9e9e' ? '#f13636' : '#9e9e9e');
+
       const { message } = await postsService.like({
         postId: post.post.id,
       });
 
       if (message.includes('Post Liked')) {
         setLikesCount(likesCount + 1);
-        setColor('#f13636');
-        setPulse(true);
-        toast.success(message);
       } else {
         setLikesCount(likesCount - 1);
-        setColor('#9e9e9e');
-        setPulse(false);
-        toast.success(message);
       }
+      toast.success(message);
     } catch {
       toast.error('Oops, an error occurred');
     }
@@ -100,7 +99,7 @@ export const PostDetail = () => {
           <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
             <div className="flex flex-col">
               <img
-                className="object-cover lg:max-h-80 lg:w-full"
+                className="object-cover lg:max-h-80 lg:w-full select-none"
                 src={`${env.apiUrl}/uploads/posts/${post?.post.image}`}
                 alt={post.post.title}
               />

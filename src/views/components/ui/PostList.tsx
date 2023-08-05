@@ -31,7 +31,7 @@ export const PostList = ({ post }: PostListProps) => {
       <div className="p-5">
         <div className="relative">
           <img
-            className="object-cover h-52 mx-auto"
+            className="object-cover h-52 mx-auto select-none"
             src={`${env.apiUrl}/uploads/posts/${post.image}`}
             alt={post.title}
           />
