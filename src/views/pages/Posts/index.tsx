@@ -3,7 +3,7 @@ import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { postsService } from '../../../app/services/postsService';
 import { NotFound } from '../../components/animations/NotFound';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { debounce } from '../../../app/hooks/useDebounce';
+import { debounce } from '../../../app/hooks/UseDebounce';
 import { useCallback, useEffect, useState } from 'react';
 import { PostList } from '../../components/ui/PostList';
 import { Sidebar } from '../../components/ui/Sidebar';
@@ -26,10 +26,12 @@ export const Posts = () => {
     queryFn: () =>
       postsService.getAll({
         orderBy: 'desc',
-        limit: 9,
+        limit: 6,
         title: searchTitleParam || undefined,
         page: searchPageParam || undefined,
       }),
+    keepPreviousData: true,
+    staleTime: 1000 * 60 * 5,
   });
 
   const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
@@ -88,7 +90,7 @@ export const Posts = () => {
             />
           </div>
           <div className="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
-            {isFetching && !error && <PostListSkeleton count={9} />}
+            {isFetching && !error && <PostListSkeleton count={6} />}
             {error ? (
               <div>
                 <NotFound />
