@@ -22,6 +22,7 @@ export const PostDetail = () => {
   const [post, setPost] = useState<GetPostByIdResponse>();
   const [likesCount, setLikesCount] = useState(0);
   const [pulse, setPulse] = useState(false);
+  const [liking, setLiking] = useState(false);
 
   const { data: user } = useQuery<MeResponse>({
     queryKey: ['loggedUser'],
@@ -31,16 +32,12 @@ export const PostDetail = () => {
   const [color, setColor] = useState<'#9e9e9e' | '#f13636'>();
 
   useEffect(() => {
-    setColor(
-      post?.post.likes?.some((like) => like.authorId === user?.user.id)
-        ? '#f13636'
-        : '#9e9e9e'
+    const isLiked = post?.post.likes?.some(
+      (like) => like.authorId === user?.user.id
     );
-    setPulse(
-      post?.post.likes?.some((like) => like.authorId === user?.user.id)
-        ? true
-        : false
-    );
+
+    setColor(isLiked ? '#f13636' : '#9e9e9e');
+    setPulse(isLiked ? true : false);
   }, [post, user]);
 
   const { data, isError, isFetching } = useQuery<GetPostByIdResponse>({
@@ -71,23 +68,28 @@ export const PostDetail = () => {
   }
 
   const handleLike = async () => {
+    if (liking) return;
+
+    setLiking(true);
+
     try {
       setPulse(!pulse);
 
-      setColor(color === '#9e9e9e' ? '#f13636' : '#9e9e9e');
+      setColor((prevColor) =>
+        prevColor === '#9e9e9e' ? '#f13636' : '#9e9e9e'
+      );
 
       const { message } = await postsService.like({
         postId: post.post.id,
       });
 
-      if (message.includes('Post Liked')) {
-        setLikesCount(likesCount + 1);
-      } else {
-        setLikesCount(likesCount - 1);
-      }
-      toast.success(message);
+      message.includes('Post Liked')
+        ? setLikesCount(likesCount + 1)
+        : setLikesCount(likesCount - 1);
     } catch {
       toast.error('Oops, an error occurred');
+    } finally {
+      setLiking(false);
     }
   };
 
@@ -131,7 +133,7 @@ export const PostDetail = () => {
                           className={`${
                             pulse ? 'animate-pulselike' : 'animate-pulsedislike'
                           }`}
-                          onClick={handleLike}
+                          onClick={liking ? undefined : handleLike}
                         />
                         <p>{likesCount}</p>
                       </span>
