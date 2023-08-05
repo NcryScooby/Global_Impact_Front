@@ -1,7 +1,8 @@
 import { httpClient } from '../httpClient';
 
-interface MeResponse {
+export interface MeResponse {
   user: {
+    id: string;
     name: string;
     email: string;
   };

@@ -7,6 +7,12 @@ export interface GetPostByIdResponse {
     content: string;
     image: string;
     tags: [];
+    likes: [
+      {
+        id: string;
+        authorId: string;
+      }
+    ];
     category: {
       id: string;
       name: string;

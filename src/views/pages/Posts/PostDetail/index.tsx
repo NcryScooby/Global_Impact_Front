@@ -1,14 +1,17 @@
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
-import { scrollToTop } from '../../../../app/utils/functions/scrollToTop';
 import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
-import { postsService } from '../../../../app/services/postsService';
+import { scrollToTop } from '../../../../app/utils/functions/scrollToTop';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
+import { MeResponse } from '../../../../app/services/usersService/me';
+import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
+import { postsService } from '../../../../app/services/postsService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
 import { useQuery } from '@tanstack/react-query';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 export const PostDetail = () => {
   scrollToTop();
@@ -17,9 +20,31 @@ export const PostDetail = () => {
   const navigate = useNavigate();
 
   const [post, setPost] = useState<GetPostByIdResponse>();
+  const [likesCount, setLikesCount] = useState(0);
+  const [pulse, setPulse] = useState(false);
 
-  const { data, isError } = useQuery<GetPostByIdResponse>({
-    queryKey: ['post', postId],
+  const { data: user } = useQuery<MeResponse>({
+    queryKey: ['loggedUser'],
+    staleTime: Infinity,
+  });
+
+  const [color, setColor] = useState<'#9e9e9e' | '#f13636'>();
+
+  useEffect(() => {
+    setColor(
+      post?.post.likes?.some((like) => like.authorId === user?.user.id)
+        ? '#f13636'
+        : '#9e9e9e'
+    );
+    setPulse(
+      post?.post.likes?.some((like) => like.authorId === user?.user.id)
+        ? true
+        : false
+    );
+  }, [post, user]);
+
+  const { data, isError, isFetching } = useQuery<GetPostByIdResponse>({
+    queryKey: ['getPostById', postId],
     queryFn: () => postsService.getById(postId),
   });
 
@@ -30,6 +55,7 @@ export const PostDetail = () => {
   useEffect(() => {
     if (data) {
       setPost(data);
+      setLikesCount(data.post.likes ? data.post.likes.length : 0);
     }
   }, [data]);
 
@@ -44,6 +70,28 @@ export const PostDetail = () => {
     );
   }
 
+  const handleLike = async () => {
+    try {
+      const { message } = await postsService.like({
+        postId: post.post.id,
+      });
+
+      if (message.includes('Post Liked')) {
+        setLikesCount(likesCount + 1);
+        setColor('#f13636');
+        setPulse(true);
+        toast.success(message);
+      } else {
+        setLikesCount(likesCount - 1);
+        setColor('#9e9e9e');
+        setPulse(false);
+        toast.success(message);
+      }
+    } catch {
+      toast.error('Oops, an error occurred');
+    }
+  };
+
   return (
     <>
       <Sidebar signOut={signOut} userName={userName} />
@@ -57,13 +105,40 @@ export const PostDetail = () => {
                 alt={post.post.title}
               />
 
-              <div className="mt-2 w-full flex-col">
-                <span className="block text-[12px] font-semibold text-gray-500 uppercase">
-                  {formatDate(post.post.createdAt)}
-                </span>
-                <span className="text-gray-600 text-[12px] font-normal">
-                  <b>{post.post.author.name}</b>, {post.post.author.job.name}.
-                </span>
+              <div className="mt-2 w-full flex justify-between items-start">
+                <div>
+                  <span className="block text-[12px] font-semibold text-gray-500 uppercase">
+                    {formatDate(post.post.createdAt)}
+                  </span>
+                  <span className="text-gray-600 text-[12px] font-normal">
+                    <b>{post.post.author.name}</b>, {post.post.author.job.name}.
+                  </span>
+                </div>
+                {isFetching ? (
+                  <div className="h-3 bg-gray-200 rounded-sm dark:bg-gray-300 w-[72px] mt-1"></div>
+                ) : (
+                  <>
+                    <div className="flex gap-2">
+                      <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+                        <BarChartIcon height={12} width={12} color="#4b5563" />
+                        <p>{post.post.views}</p>
+                      </span>
+                      <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+                        <HeartFilledIcon
+                          height={16}
+                          width={16}
+                          color={color}
+                          cursor={'pointer'}
+                          className={`${
+                            pulse ? 'animate-pulselike' : 'animate-pulsedislike'
+                          }`}
+                          onClick={handleLike}
+                        />
+                        <p>{likesCount}</p>
+                      </span>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="md:text-center mt-8">

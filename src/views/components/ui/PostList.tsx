@@ -54,10 +54,14 @@ export const PostList = ({ post }: PostListProps) => {
           <div className="flex gap-2">
             <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
               <BarChartIcon height={12} width={12} color="#4b5563" />
-              <p>{post.views}</p>
+              <p>
+                {post.views > 1000
+                  ? `${Math.round(post.views / 1000)}k`
+                  : post.views}
+              </p>
             </span>
             <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
-              <HeartFilledIcon height={12} width={12} color="#f13636" />
+              <HeartFilledIcon height={12} width={12} color="#9e9e9e" />
               <p>{post.likes ? post.likes.length : 0}</p>
             </span>
           </div>
