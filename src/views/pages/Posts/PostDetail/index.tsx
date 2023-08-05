@@ -21,7 +21,6 @@ export const PostDetail = () => {
   const { data, isError } = useQuery<GetPostByIdResponse>({
     queryKey: ['post', postId],
     queryFn: () => postsService.getById(postId),
-    staleTime: 1000 * 60 * 5,
   });
 
   if (isError) {

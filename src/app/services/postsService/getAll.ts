@@ -25,6 +25,7 @@ export interface GetAllPostsResponse {
         };
       };
       createdAt: string;
+      views: number;
     }
   ];
   meta: {

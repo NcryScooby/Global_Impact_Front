@@ -10,6 +10,7 @@ interface PostListProps {
     title: string;
     content: string;
     image: string;
+    likes: [];
     category: {
       name: string;
     };
@@ -20,6 +21,7 @@ interface PostListProps {
       };
     };
     createdAt: string;
+    views: number;
   };
 }
 
@@ -49,14 +51,14 @@ export const PostList = ({ post }: PostListProps) => {
               <b>{post.author.name}</b>, {post.author.job.name}.
             </span>
           </div>
-          <div className="flex gap-3">
-            <span className="flex items-start gap-[3px] text-[11px] text-[#4b5563]">
-              <BarChartIcon height={13.3} color="#4b5563" />
-              <p>1.4k</p>
+          <div className="flex gap-2">
+            <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+              <BarChartIcon height={12} width={12} color="#4b5563" />
+              <p>{post.views}</p>
             </span>
-            <span className="flex items-start gap-[3px] text-[11px] text-[#4b5563]">
-              <HeartFilledIcon color="#4b5563" />
-              <p>293</p>
+            <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+              <HeartFilledIcon height={12} width={12} color="#f13636" />
+              <p>{post.likes ? post.likes.length : 0}</p>
             </span>
           </div>
         </div>

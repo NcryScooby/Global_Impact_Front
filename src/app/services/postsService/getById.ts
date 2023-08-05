@@ -21,6 +21,7 @@ export interface GetPostByIdResponse {
       };
     };
     createdAt: string;
+    views: number;
   };
 }
 

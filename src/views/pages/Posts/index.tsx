@@ -104,6 +104,7 @@ export const Posts = () => {
                     title: post.title,
                     content: post.content,
                     image: post.image,
+                    likes: post.likes,
                     category: {
                       name: post.category.name,
                     },
@@ -114,6 +115,7 @@ export const Posts = () => {
                       },
                     },
                     createdAt: post.createdAt,
+                    views: post.views,
                   }}
                 />
               ))
