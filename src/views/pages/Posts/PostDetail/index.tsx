@@ -119,7 +119,7 @@ export const PostDetail = () => {
                   <div className="h-3 bg-gray-200 rounded-sm dark:bg-gray-300 w-[72px] mt-1"></div>
                 ) : (
                   <>
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 select-none">
                       <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
                         <BarChartIcon height={12} width={12} color="#4b5563" />
                         <p>{post.post.views}</p>

@@ -1,10 +1,10 @@
 import { PostListSkeleton } from '../../components/skeletons/posts/PostListSkeleton';
 import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { postsService } from '../../../app/services/postsService';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { NotFound } from '../../components/animations/NotFound';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { debounce } from '../../../app/hooks/UseDebounce';
-import { useCallback, useEffect, useState } from 'react';
 import { PostList } from '../../components/ui/PostList';
 import { Sidebar } from '../../components/ui/Sidebar';
 import { useAuth } from '../../../app/hooks/UseAuth';
@@ -16,6 +16,7 @@ import { Pagination } from '@mui/material';
 export const Posts = () => {
   const { signOut, userName } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const searchTitleParam = searchParams.get('title') || '';
   const searchPageParam = Number(searchParams.get('page')) || 1;
@@ -61,6 +62,12 @@ export const Posts = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    if (!isFetching && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFetching]);
+
   return (
     <>
       <Sidebar signOut={signOut} userName={userName} />
@@ -84,6 +91,7 @@ export const Posts = () => {
               onChange={handleTitleChange}
               className="w-full lg:w-72"
               disabled={isFetching}
+              ref={inputRef}
               icon={<MagnifyingGlassIcon />}
             />
           </div>

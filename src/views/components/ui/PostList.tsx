@@ -51,7 +51,7 @@ export const PostList = ({ post }: PostListProps) => {
               <b>{post.author.name}</b>, {post.author.job.name}.
             </span>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-2 select-none">
             <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
               <BarChartIcon height={12} width={12} color="#4b5563" />
               <p>
