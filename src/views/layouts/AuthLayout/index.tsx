@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/logo.svg';
 
 export const AuthLayout = () => {
   return (
@@ -16,7 +16,7 @@ export const AuthLayout = () => {
         ></img>
         <div>
           <p className="text-white p-10 font-thin tracking-wider text-center">
-            Empowering Minds, Inspiring Change.
+            Experience a global impact.
           </p>
         </div>
       </div>

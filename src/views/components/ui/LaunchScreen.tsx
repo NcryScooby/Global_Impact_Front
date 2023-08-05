@@ -1,4 +1,4 @@
-import logo from '../../../assets/images/logo.png';
+import logo from '../../../assets/images/logo.svg';
 import { Transition } from '@headlessui/react';
 import { Spinner } from './Spinner';
 
