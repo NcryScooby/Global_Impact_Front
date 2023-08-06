@@ -40,7 +40,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       <div className="relative">
         <label
           htmlFor="first_name"
-          className="block mb-2 text-sm font-medium text-primary"
+          className="block mb-2 text-[13px] text-gray-500"
         >
           {label}
         </label>
@@ -53,7 +53,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedOption}
           onChange={handleChangeSelectedOption}
           className={cn(
-            'bg-white border border-gray-300 text-sm rounded-[4px] block w-full p-2.5 focus:border-gray-700 transition-all outline-none appearance-none',
+            'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none',
             error && '!border-[#C92A2A]',
             className
           )}

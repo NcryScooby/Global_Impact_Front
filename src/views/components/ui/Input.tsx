@@ -10,26 +10,14 @@ interface InputProps extends ComponentProps<'input'> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      id,
-      name,
-      label,
-      placeholder,
-      error,
-      icon,
-      className,
-      ...props
-    }: InputProps,
-    ref
-  ) => {
+  ({ id, name, label, error, icon, className, ...props }: InputProps, ref) => {
     const inputId = id ?? name;
 
     return (
       <div className="relative">
         <label
           htmlFor="first_name"
-          className="block mb-2 text-sm font-medium text-primary"
+          className="block mb-2 text-[13px] text-gray-500"
         >
           {label}
         </label>
@@ -40,11 +28,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           id={inputId}
           {...props}
           className={cn(
-            'bg-white border border-gray-300 text-gray-900 text-sm rounded-[4px] block w-full p-2.5 focus:border-gray-700 transition-all outline-none file:hidden',
+            'bg-white border border-gray-300 text-gray-900 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none file:hidden',
             error && '!border-[#C92A2A]',
             className
           )}
-          placeholder={placeholder}
         />
 
         {icon && (

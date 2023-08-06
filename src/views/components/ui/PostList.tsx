@@ -27,14 +27,16 @@ interface PostListProps {
 
 export const PostList = ({ post }: PostListProps) => {
   return (
-    <div className="overflow-hidden bg-white rounded shadow">
+    <div className="overflow-hidden bg-white rounded-[2px] shadow">
       <div className="p-5">
         <div className="relative">
-          <img
-            className="object-cover h-52 mx-auto select-none"
-            src={`${env.apiUrl}/uploads/posts/${post.image}`}
-            alt={post.title}
-          />
+          <Link to={`/posts/${post.id}`}>
+            <img
+              className="object-cover h-52 mx-auto select-none"
+              src={`${env.apiUrl}/uploads/posts/${post.image}`}
+              alt={post.title}
+            />
+          </Link>
 
           <div className="absolute top-4 left-4">
             <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">

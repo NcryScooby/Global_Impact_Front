@@ -30,14 +30,12 @@ export const Login = () => {
         <Input
           type="email"
           label="E-mail"
-          placeholder="E-mail"
           error={errors.email?.message}
           {...register('email')}
         />
         <Input
           type="password"
           label="Password"
-          placeholder="Password"
           autoComplete="password"
           error={errors.password?.message}
           {...register('password')}

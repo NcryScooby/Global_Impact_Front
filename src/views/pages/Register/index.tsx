@@ -47,13 +47,11 @@ export const Register = () => {
       <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
         <Input
           label="Name"
-          placeholder="Name"
           error={errors.name?.message}
           {...register('name')}
         />
         <Input
           label="E-mail"
-          placeholder="E-mail"
           error={errors.email?.message}
           {...register('email')}
         />
@@ -61,13 +59,11 @@ export const Register = () => {
           label="Password"
           type="password"
           error={errors.password?.message}
-          placeholder="Password"
           autoComplete="password"
           {...register('password')}
         />
         <Select
           label="Job"
-          placeholder="Your Job"
           error={errors.jobId?.message}
           options={jobs}
           {...register('jobId')}
