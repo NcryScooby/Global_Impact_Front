@@ -54,11 +54,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           onChange={handleChangeSelectedOption}
           className={cn(
             'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none',
+            (options.length === 0 || !selectedOption) && 'text-gray-400',
+            options.length > 0 && selectedOption && 'text-primary',
             error && '!border-[#C92A2A]',
             className
           )}
         >
-          <option value="" disabled>
+          <option value="" disabled selected>
             Select your {placeholder}
           </option>
           {options?.map((option) => (

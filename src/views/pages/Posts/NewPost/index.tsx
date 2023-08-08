@@ -1,5 +1,6 @@
 import { categoriesService } from '../../../../app/services/categoriesService';
 import { useNewPostController } from './useNewPostController';
+import { InputFile } from '../../../components/ui/InputFile';
 import { TextArea } from '../../../components/ui/TextArea';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
@@ -60,6 +61,7 @@ export const NewPost = () => {
                       <div>
                         <Select
                           label="Category"
+                          placeholder="Category"
                           error={errors.categoryId?.message}
                           options={categories}
                           {...register('categoryId')}
@@ -79,11 +81,10 @@ export const NewPost = () => {
                       </div>
 
                       <div>
-                        <Input
+                        <InputFile
                           id="image"
                           type="file"
                           label="Image"
-                          // required
                           error={errors.image?.message?.toString()}
                           {...register('image')}
                         />
