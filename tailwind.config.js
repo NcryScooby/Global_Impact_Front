@@ -24,6 +24,9 @@ export default {
         'pulselike': 'pulselike 1s ease-in-out',
         'pulsedislike': 'pulsedislike 1s ease-in-out',
       },
+      fontFamily: {
+        'inter': ['Inter', 'system-ui'],
+      }
     },
   },
   plugins: [],

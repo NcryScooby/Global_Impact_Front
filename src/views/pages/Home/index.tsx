@@ -1,6 +1,8 @@
-import { useAuth } from '../../../app/hooks/UseAuth';
 import { Sidebar } from '../../components/ui/Sidebar';
-import { Blog } from '../../components/animations/Blog';
+import { useAuth } from '../../../app/hooks/UseAuth';
+import { Link } from 'react-router-dom';
+import browser from '../../../assets/images/browserframe.svg';
+import mobile from '../../../assets/images/mobileframe.svg';
 
 export const Home = () => {
   const { signOut, userName } = useAuth();
@@ -9,40 +11,36 @@ export const Home = () => {
     <>
       <Sidebar signOut={signOut} userName={userName} />
       <div className="sm:ml-64 sm:flex sm:flex-col">
-        <div className="py-12 px-8 lg:py-32 lg:px-16 lg:flex lg:items-start lg:justify-center">
-          <div>
-            <h1 className="text-3xl font-bold text-zinc-800 lg:text-5xl">
-              Welcome to <span className="text-black">Global Impact</span>.
+        <div className="h-screen relative lg:grid lg:grid-cols-2">
+          <div className="items-center p-8 lg:p-0 lg:ml-24 lg:mt-48 flex flex-col gap-4 lg:items-start">
+            <h1 className="text-4xl text-primary lg:text-6xl font-inter font-semibold lg:leading-[72px] tracking-[-2.4px]">
+              Stay informed, Stay curious.
             </h1>
-            <div className="mt-8 lg:mt-16 text-gray-600 flex flex-col gap-6">
-              <p>
-                In an increasingly connected world, where borders fade away, and
-                ideas travel at the speed of light, our virtual space is born to
-                share, inspire, and amplify the positive impact we can make on
-                the planet.
-              </p>
-              <p>
-                At Global Impact we believe in the power of information,
-                empathy, and collective action. This blog is an open platform
-                for all those who seek to make a difference, whether they are
-                engaged individuals, visionary organizations, or simply curious
-                minds eager to learn about the challenges our world faces and
-                the innovative solutions that are transforming realities.
-              </p>
-              <p>
-                We are committed to building a global community that values
-                cooperation, diverse perspectives, and the pursuit of a brighter
-                future for generations to come. Join us on this journey, as we
-                believe that every positive action, no matter how small it may
-                seem, can trigger a transformative impact on the world. Welcome
-                to Global Impact - where knowledge turns into action, and change
-                happens. Together, let&apos;s inspire, connect, and build a
-                better world.
-              </p>
-            </div>
+            <h4 className="text-base lg:w-[500px] text-[#475569] leading-[26px] lg:pr-16">
+              Dive deep into the heart of current events with the Global Impact
+              blog, where we curate the most recent and significant world news,
+              paired with comprehensive insights and expert analyses.
+            </h4>
+            <Link
+              to={'/posts'}
+              className="px-4 py-3 bg-primary text-white rounded-lg mt-4 hover:bg-zinc-800"
+            >
+              See the posts
+            </Link>
           </div>
-          <div>
-            <Blog />
+          <div className="absolute bottom-0 right-0">
+            <img
+              src={browser}
+              alt="browser"
+              className="w-[250px] lg:w-[500px] select-none"
+            />
+          </div>
+          <div className="absolute bottom-0 right-36">
+            <img
+              src={mobile}
+              alt="mobile"
+              className="w-[250px] lg:w-[500px] select-none"
+            />
           </div>
         </div>
       </div>

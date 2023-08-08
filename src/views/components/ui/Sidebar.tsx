@@ -4,6 +4,7 @@ import {
   Pencil2Icon,
   LayoutIcon,
 } from '@radix-ui/react-icons';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 interface SidebarProps {
@@ -15,6 +16,9 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
   const getInitials = (name: string) => {
     return (name.charAt(0) + name.charAt(1)).toUpperCase();
   };
+
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   return (
     <>
@@ -51,29 +55,51 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
             <li>
               <Link
                 to={'/'}
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 group"
+                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 group ${
+                  currentPath === '/' ? 'bg-zinc-800' : ''
+                }`}
               >
-                <HomeIcon className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <HomeIcon
+                  className={`w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${
+                    currentPath === '/' ? 'bg-zinc-800 dark:text-white' : ''
+                  }`}
+                />
                 <span className="ml-3">Home</span>
               </Link>
             </li>
           </ul>
-          <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-zinc-800">
+          <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-200 dark:border-zinc-800">
             <li>
               <Link
                 to={'/posts'}
-                className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group"
+                className={`flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group ${
+                  currentPath === '/posts' ? 'bg-zinc-800' : ''
+                }`}
               >
-                <LayoutIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <LayoutIcon
+                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white ${
+                    currentPath === '/posts'
+                      ? 'bg-zinc-800 dark:text-white'
+                      : ''
+                  }`}
+                />
                 <span className="ml-3">Posts</span>
               </Link>
             </li>
             <li>
               <Link
                 to={'/posts/new'}
-                className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group"
+                className={`flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group ${
+                  currentPath === '/posts/new' ? 'bg-zinc-800' : ''
+                }`}
               >
-                <Pencil2Icon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <Pencil2Icon
+                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white ${
+                    currentPath === '/posts/new'
+                      ? 'bg-zinc-800 dark:text-white'
+                      : ''
+                  }`}
+                />
                 <span className="ml-3">New Post</span>
               </Link>
             </li>
