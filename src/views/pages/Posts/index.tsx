@@ -31,6 +31,7 @@ export const Posts = () => {
         title: searchTitleParam || undefined,
         page: searchPageParam || undefined,
       }),
+    keepPreviousData: false,
   });
 
   const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
@@ -78,7 +79,7 @@ export const Posts = () => {
               <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
                 Latest from blog
               </h2>
-              <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600 lg:mx-0">
+              <p className="max-w-xl mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0">
                 Keep up with the latest world news, all current affairs and
                 coverage. News of the day, photos and videos. Be the first to
                 know.

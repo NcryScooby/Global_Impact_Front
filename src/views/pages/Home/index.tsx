@@ -13,10 +13,10 @@ export const Home = () => {
       <div className="sm:ml-64 sm:flex sm:flex-col">
         <div className="h-screen relative lg:grid lg:grid-cols-2">
           <div className="items-center p-8 lg:p-0 lg:ml-24 lg:mt-48 flex flex-col gap-4 lg:items-start">
-            <h1 className="text-4xl text-primary lg:text-6xl font-inter font-semibold lg:leading-[72px] tracking-[-2.4px]">
+            <h1 className="text-4xl text-primary lg:text-6xl font-inter font-semibold tracking-[-2.4px]">
               Stay informed, Stay curious.
             </h1>
-            <h4 className="text-base lg:w-[500px] text-[#475569] leading-[26px] lg:pr-16">
+            <h4 className="max-w-xl mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0 lg:w-[500px] lg:pr-16">
               Dive deep into the heart of current events with the Global Impact
               blog, where we curate the most recent and significant world news,
               paired with comprehensive insights and expert analyses.

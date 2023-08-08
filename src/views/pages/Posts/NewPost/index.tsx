@@ -61,7 +61,7 @@ export const NewPost = () => {
       <Sidebar signOut={signOut} userName={userName} />
       <div className="sm:ml-64">
         <section>
-          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl overflow-hidden">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-5xl mx-auto mt-12 sm:mt-16">
               <div className="mt-6 overflow-hidden bg-white rounded-[2px]">
                 <div className="px-6 py-12 sm:p-12">
