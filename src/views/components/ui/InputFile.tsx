@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentProps, forwardRef, useState } from 'react';
+import { ChangeEvent, ComponentProps, forwardRef } from 'react';
 import { CrossCircledIcon } from '@radix-ui/react-icons';
 import { cn } from '../../../app/utils/functions/cn';
 
@@ -6,20 +6,13 @@ interface InputProps extends ComponentProps<'input'> {
   name: string;
   error?: string;
   label?: string;
+  selectedFile: string | null;
+  handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputFile = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, name, label, error, className, ...props }: InputProps, ref) => {
+  ({ id, name, label, error, selectedFile, handleFileChange, className, ...props }: InputProps, ref) => {
     const inputId = id ?? name;
-
-    const [selectedFile, setSelectedFile] = useState<string | null>(null);
-
-    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-      const file = event.target.files && event.target.files[0];
-      if (file) {
-        setSelectedFile(file.name);
-      }
-    };
 
     return (
       <div className="relative">
@@ -43,7 +36,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
           >
             <div className="flex items-center justify-center h-[40px]">
               {selectedFile && (
-                <span className="absolute left-4">{selectedFile}</span>
+                <span className="absolute left-3">{selectedFile}</span>
               )}
               <svg
                 className="w-4 h-4 text-gray-500 dark:text-gray-400"

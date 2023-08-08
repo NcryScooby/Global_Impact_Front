@@ -7,7 +7,7 @@ import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Button } from '../../../components/ui/Button';
 import { Select } from '../../../components/ui/Select';
 import { Input } from '../../../components/ui/Input';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 interface Category {
   id: string;
@@ -15,14 +15,41 @@ interface Category {
 }
 
 export const NewPost = () => {
-  const { handleSubmit, register, errors, isLoading } = useNewPostController();
+  const { handleSubmit, reset, register, errors, isLoading } = useNewPostController();
   const { signOut, userName } = useAuth();
 
   const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState('');
 
   const CategoriesData = async () => {
     const { categories } = await categoriesService.getAll();
     setCategories(categories);
+  };
+
+  const resetFormValues = () => {
+    reset({
+      title: '',
+      content: '',
+      tags: '',
+      image: '',
+    });
+
+    setSelectedFile(null);
+    setSelectedOption('');
+  };
+
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      setSelectedFile(file.name);
+    }
+  };
+
+  const handleChangeSelectedOption = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedOption(event.target.value);
   };
 
   useEffect(() => {
@@ -62,6 +89,8 @@ export const NewPost = () => {
                         <Select
                           label="Category"
                           placeholder="Category"
+                          selectedOption={selectedOption}
+                          handleChangeSelectedOption={handleChangeSelectedOption}
                           error={errors.categoryId?.message}
                           options={categories}
                           {...register('categoryId')}
@@ -85,14 +114,21 @@ export const NewPost = () => {
                           id="image"
                           type="file"
                           label="Image"
+                          selectedFile={selectedFile}
+                          handleFileChange={handleFileChange}
                           error={errors.image?.message?.toString()}
                           {...register('image')}
                         />
                       </div>
                     </div>
-                    <Button className="w-full mt-8" isloading={isLoading}>
-                      Create
-                    </Button>
+                    <div className='flex gap-4'>
+                      <Button className="w-1/3 mt-8 bg-transparent text-primary border border-gray-300 active:bg-transparent" onClick={resetFormValues} type='button'>
+                        Cancel
+                      </Button>
+                      <Button className="w-2/3 mt-8" isloading={isLoading}>
+                        Create
+                      </Button>
+                    </div>
                   </form>
                 </div>
               </div>

@@ -34,6 +34,7 @@ type FormData = z.infer<typeof schema>;
 export const useNewPostController = () => {
   const {
     register,
+    reset,
     handleSubmit: hookFormSubmit,
     formState: { errors },
   } = useForm<FormData>({
@@ -73,5 +74,5 @@ export const useNewPostController = () => {
     }
   });
 
-  return { handleSubmit, register, errors, isLoading };
+  return { handleSubmit, register, reset, errors, isLoading };
 };

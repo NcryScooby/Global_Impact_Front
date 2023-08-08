@@ -1,4 +1,4 @@
-import { ChangeEvent, ComponentProps, forwardRef, useState } from 'react';
+import { ChangeEvent, ComponentProps, forwardRef } from 'react';
 import { CaretDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
 import { cn } from '../../../app/utils/functions/cn';
 
@@ -10,6 +10,8 @@ interface SelectProps extends ComponentProps<'select'> {
     id: string;
     name: string;
   }[];
+  selectedOption: string;
+  handleChangeSelectedOption: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -20,6 +22,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       label,
       placeholder,
       error,
+      selectedOption,
+      handleChangeSelectedOption,
       options,
       className,
       ...props
@@ -27,14 +31,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     ref
   ) => {
     const selectId = id ?? name;
-
-    const [selectedOption, setSelectedOption] = useState('');
-
-    const handleChangeSelectedOption = (
-      event: ChangeEvent<HTMLSelectElement>
-    ) => {
-      setSelectedOption(event.target.value);
-    };
 
     return (
       <div className="relative">
@@ -54,13 +50,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           onChange={handleChangeSelectedOption}
           className={cn(
             'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none',
-            (options.length === 0 || !selectedOption) && 'text-gray-400',
+            options.length === 0 || !selectedOption && 'text-gray-400',
             options.length > 0 && selectedOption && 'text-primary',
             error && '!border-[#C92A2A]',
             className
           )}
         >
-          <option value="" disabled selected>
+          <option value="" disabled hidden>
             Select your {placeholder}
           </option>
           {options?.map((option) => (
