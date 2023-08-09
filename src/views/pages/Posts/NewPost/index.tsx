@@ -1,33 +1,29 @@
+import { GetAllCategoriesResponse } from '../../../../app/services/categoriesService/getAll';
 import { categoriesService } from '../../../../app/services/categoriesService';
 import { useNewPostController } from './useNewPostController';
 import { InputFile } from '../../../components/ui/InputFile';
 import { TextArea } from '../../../components/ui/TextArea';
-import { ChangeEvent, useEffect, useState } from 'react';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Button } from '../../../components/ui/Button';
 import { Select } from '../../../components/ui/Select';
 import { Input } from '../../../components/ui/Input';
-
-interface Category {
-  id: string;
-  name: string;
-}
+import { useQuery } from '@tanstack/react-query';
+import { ChangeEvent, useState } from 'react';
 
 export const NewPost = () => {
-  const { handleSubmit, reset, register, errors, isLoading } = useNewPostController();
+  const { handleSubmit, reset, register, errors, isLoading } =
+    useNewPostController();
   const { signOut, userName } = useAuth();
 
-  const [categories, setCategories] = useState<Category[]>([]);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [selectedOption, setSelectedOption] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [selectedOption, setSelectedOption] = useState<string>('');
 
-  const CategoriesData = async () => {
-    const { categories } = await categoriesService.getAll();
-    setCategories(categories);
-    setLoading(false);
-  };
+  const { data: categories, isFetching } = useQuery<GetAllCategoriesResponse>({
+    queryKey: ['getCategories'],
+    queryFn: () => categoriesService.getAll(),
+    staleTime: 1000 * 60 * 5,
+  });
 
   const resetFormValues = () => {
     reset({
@@ -36,13 +32,12 @@ export const NewPost = () => {
       tags: '',
       image: '',
     });
-
     setSelectedFile(null);
     setSelectedOption('');
   };
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
+  const handleSelectedFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const [file] = event.target.files || [];
     if (file) {
       setSelectedFile(file.name);
     }
@@ -53,10 +48,6 @@ export const NewPost = () => {
   ) => {
     setSelectedOption(event.target.value);
   };
-
-  useEffect(() => {
-    CategoriesData();
-  }, []);
 
   return (
     <>
@@ -92,10 +83,12 @@ export const NewPost = () => {
                           label="Category"
                           placeholder="Category"
                           selectedOption={selectedOption}
-                          isLoading={loading}
-                          handleChangeSelectedOption={handleChangeSelectedOption}
+                          isLoading={isFetching}
+                          handleChangeSelectedOption={
+                            handleChangeSelectedOption
+                          }
                           error={errors.categoryId?.message}
-                          options={categories}
+                          options={categories ? categories.categories : []}
                           {...register('categoryId')}
                         />
                       </div>
@@ -118,17 +111,25 @@ export const NewPost = () => {
                           type="file"
                           label="Image"
                           selectedFile={selectedFile}
-                          handleFileChange={handleFileChange}
+                          handleSelectedFileChange={handleSelectedFileChange}
                           error={errors.image?.message?.toString()}
                           {...register('image')}
                         />
                       </div>
                     </div>
-                    <div className='flex gap-4'>
-                      <Button className="w-1/3 mt-8 bg-transparent text-primary border border-gray-300 active:bg-transparent" onClick={resetFormValues} type='button'>
+                    <div className="flex gap-4">
+                      <Button
+                        className="w-1/3 mt-8 bg-transparent text-primary border border-gray-300 active:bg-transparent"
+                        onClick={resetFormValues}
+                        type="button"
+                      >
                         Cancel
                       </Button>
-                      <Button className="w-2/3 mt-8" isloading={isLoading}>
+                      <Button
+                        className="w-2/3 mt-8"
+                        disabled={isFetching}
+                        isloading={isLoading}
+                      >
                         Create
                       </Button>
                     </div>

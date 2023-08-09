@@ -1,28 +1,29 @@
+import { GetAllJobsResponse } from '../../../app/services/jobsService/getAll';
 import { useRegisterController } from './useRegisterController';
 import { jobsService } from '../../../app/services/jobsService';
 import { Button } from '../../components/ui/Button';
 import { Select } from '../../components/ui/Select';
 import { Input } from '../../components/ui/Input';
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-
-interface Job {
-  id: string;
-  name: string;
-}
 
 export const Register = () => {
   const { handleSubmit, register, errors, isLoading } = useRegisterController();
-  const [jobs, setJobs] = useState<Job[]>([]);
 
-  const jobsData = async () => {
-    const { jobs } = await jobsService.getAll();
-    setJobs(jobs);
+  const [selectedOption, setSelectedOption] = useState<string>('');
+
+  const { data: jobs, isFetching } = useQuery<GetAllJobsResponse>({
+    queryKey: ['getJobs'],
+    queryFn: () => jobsService.getAll(),
+    staleTime: 1000 * 60 * 5,
+  });
+
+  const handleChangeSelectedOption = (
+    event: ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSelectedOption(event.target.value);
   };
-
-  useEffect(() => {
-    jobsData();
-  }, []);
 
   return (
     <>
@@ -64,8 +65,12 @@ export const Register = () => {
         />
         <Select
           label="Job"
+          placeholder="Job"
+          selectedOption={selectedOption}
+          isLoading={isFetching}
+          handleChangeSelectedOption={handleChangeSelectedOption}
           error={errors.jobId?.message}
-          options={jobs}
+          options={jobs ? jobs.jobs : []}
           {...register('jobId')}
         />
         <Button type="submit" className="mt-2" isloading={isLoading}>

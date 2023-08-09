@@ -23,7 +23,7 @@ export const Home = () => {
             </h4>
             <Link
               to={'/posts'}
-              className="px-4 py-3 bg-primary text-white rounded-lg mt-4 hover:bg-gray-900"
+              className="px-4 py-3 bg-primary text-white rounded-[2px] mt-4 hover:bg-gray-900"
             >
               See the posts
             </Link>

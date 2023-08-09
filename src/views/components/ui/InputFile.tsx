@@ -7,7 +7,7 @@ interface InputProps extends ComponentProps<'input'> {
   error?: string;
   label?: string;
   selectedFile: string | null;
-  handleFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleSelectedFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const InputFile = forwardRef<HTMLInputElement, InputProps>(
@@ -18,7 +18,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
       label,
       error,
       selectedFile,
-      handleFileChange,
+      handleSelectedFileChange,
       className,
       ...props
     }: InputProps,
@@ -74,7 +74,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
               {...props}
               onChange={(e) => {
                 if (props.onChange) props.onChange(e);
-                handleFileChange(e);
+                handleSelectedFileChange(e);
               }}
               className={'hidden'}
             />
