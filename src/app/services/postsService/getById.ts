@@ -17,10 +17,24 @@ export interface GetPostByIdResponse {
       id: string;
       name: string;
     };
+    comments: [
+      {
+        author: {
+          id: string;
+          name: string;
+          avatar: string;
+          job: {
+            name: string;
+          };
+        };
+        content: string;
+      }
+    ];
     author: {
       id: string;
       name: string;
       email: string;
+      avatar: string;
       job: {
         id: string;
         name: string;

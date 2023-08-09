@@ -179,6 +179,43 @@ export const PostDetail = () => {
             </div>
           </div>
         </div>
+        {post.post.comments.length > 0 ? (
+          post.post.comments.map((comment) => (
+            <>
+              <div
+                className="py-8 mt-24 border border-gray-300 rounded-[2px]
+              "
+              >
+                <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
+                  <div className="md:flex md:items-center md:justify-center md:space-x-14">
+                    <div className="relative flex-shrink-0 w-20 h-20">
+                      <div className="absolute w-20 h-20 bg-gray-300 rounded-full -bottom-2 -right-1"></div>
+                      <img
+                        className="relative object-cover w-20 h-20 rounded-full"
+                        src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
+                        alt={comment.author.name}
+                      />
+                    </div>
+
+                    <div className="mt-10 md:mt-0">
+                      <blockquote>
+                        <p className="text-sm text-black">{comment.content}</p>
+                      </blockquote>
+                      <p className="text-sm font-semibold text-black mt-7">
+                        {comment.author.name}
+                      </p>
+                      <p className="mt-1 text-sm text-gray-600">
+                        {comment.author.job.name}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          ))
+        ) : (
+          <></>
+        )}
       </section>
     </>
   );
