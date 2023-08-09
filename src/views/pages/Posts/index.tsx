@@ -1,5 +1,6 @@
 import { PostListSkeleton } from '../../components/skeletons/posts/PostListSkeleton';
 import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
+import { scrollToTop } from '../../../app/utils/functions/scrollToTop';
 import { postsService } from '../../../app/services/postsService';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NotFound } from '../../components/animations/NotFound';
@@ -18,10 +19,18 @@ export const Posts = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const searchTitleParam = searchParams.get('title') || '';
-  const searchPageParam = Number(searchParams.get('page')) || 1;
+  const getParamOrDefault = (param: string, defaultValue: string): string => {
+    const value = searchParams.get(param);
+    return value !== null ? value : defaultValue;
+  };
+
+  const searchTitleParam = getParamOrDefault('title', '');
+  const searchPageParam = getParamOrDefault('page', '1');
+
+  const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
 
   const [posts, setPosts] = useState<GetAllPostsResponse>();
+
   const { data, error, isFetching } = useQuery<GetAllPostsResponse>({
     queryKey: ['getPosts', searchPageParam, searchTitleParam],
     queryFn: () =>
@@ -29,12 +38,10 @@ export const Posts = () => {
         orderBy: 'desc',
         limit: 6,
         title: searchTitleParam || undefined,
-        page: searchPageParam || undefined,
+        page: Number(searchPageParam) || undefined,
       }),
     keepPreviousData: false,
   });
-
-  const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
 
   const handleTitleChangeDebounced = useCallback(
     debounce((title: string) => {
@@ -50,17 +57,15 @@ export const Posts = () => {
   };
 
   const handlePageChange = (page: string) => {
-    const params: { title?: string; page: string } = { page };
-    if (searchTitleParam) {
-      params.title = searchTitleParam;
-    }
-    setSearchParams(params);
+    setSearchParams({
+      ...(searchTitleParam && { title: searchTitleParam }),
+      page,
+    });
   };
 
   useEffect(() => {
-    if (data) {
-      setPosts(data);
-    }
+    setPosts(data);
+    scrollToTop();
   }, [data]);
 
   useEffect(() => {
