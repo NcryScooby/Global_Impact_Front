@@ -45,7 +45,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </label>
 
         {isLoading && (
-          <Spinner className="absolute top-8 left-48 w-4 fill-gray-400" />
+          <Spinner className="absolute top-8 right-2.5 w-4 fill-gray-400" />
         )}
 
         <select
@@ -75,7 +75,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </select>
 
         <div className="pointer-events-none absolute top-[39px] right-0 flex items-center px-4 text-gray-400 ">
-          <CaretDownIcon width={20} height={20} />
+          {!isLoading ? <CaretDownIcon width={20} height={20} /> : null}
         </div>
 
         {error && (
