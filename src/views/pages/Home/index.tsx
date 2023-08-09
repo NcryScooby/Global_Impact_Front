@@ -5,11 +5,11 @@ import { useAuth } from '../../../app/hooks/UseAuth';
 import { Link } from 'react-router-dom';
 
 export const Home = () => {
-  const { signOut, userName } = useAuth();
+  const { signOut, userAvatar } = useAuth();
 
   return (
     <>
-      <Sidebar signOut={signOut} userName={userName} />
+      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <div className="sm:ml-64 sm:flex sm:flex-col">
         <div className="h-screen relative lg:grid lg:grid-cols-2">
           <div className="items-center p-8 lg:p-0 lg:ml-24 lg:mt-48 flex flex-col gap-4 lg:items-start">

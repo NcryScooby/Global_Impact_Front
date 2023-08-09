@@ -20,7 +20,7 @@ import { toast } from 'react-hot-toast';
 
 export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
-  const { signOut, userName } = useAuth();
+  const { signOut, userAvatar } = useAuth();
   const navigate = useNavigate();
 
   const [post, setPost] = useState<GetPostByIdResponse>();
@@ -63,7 +63,7 @@ export const PostDetail = () => {
   if (!post) {
     return (
       <>
-        <Sidebar signOut={signOut} userName={userName} />
+        <Sidebar signOut={signOut} userAvatar={userAvatar} />
         <div className="sm:ml-64 h-full">
           <PostDetailSkeleton />
         </div>
@@ -101,7 +101,7 @@ export const PostDetail = () => {
 
   return (
     <>
-      <Sidebar signOut={signOut} userName={userName} />
+      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-scroll">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <Breadcrumbs

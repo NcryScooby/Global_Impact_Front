@@ -14,7 +14,7 @@ import { ChangeEvent, useState } from 'react';
 export const NewPost = () => {
   const { handleSubmit, reset, register, errors, isLoading } =
     useNewPostController();
-  const { signOut, userName } = useAuth();
+  const { signOut, userAvatar } = useAuth();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -51,7 +51,7 @@ export const NewPost = () => {
 
   return (
     <>
-      <Sidebar signOut={signOut} userName={userName} />
+      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <div className="sm:ml-64">
         <section>
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">

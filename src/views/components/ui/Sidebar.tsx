@@ -5,18 +5,16 @@ import {
   LayoutIcon,
 } from '@radix-ui/react-icons';
 import { useLocation } from 'react-router-dom';
+import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
+import { Avatar } from '@mui/material';
 
 interface SidebarProps {
   signOut: () => void;
-  userName: string;
+  userAvatar: string;
 }
 
-export const Sidebar = ({ signOut, userName }: SidebarProps) => {
-  const getInitials = (name: string) => {
-    return (name.charAt(0) + name.charAt(1)).toUpperCase();
-  };
-
+export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -108,12 +106,14 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
                 <span className="ml-3">Sign Out</span>
               </button>
             </li>
-            <li className="flex-1 mb-4 fixed bottom-4">
-              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full bg-white cursor-pointer">
-                <span className="font-medium text-primary">
-                  {getInitials(userName)}
-                </span>
-              </div>
+            <li className="flex-1 fixed bottom-4">
+              <Avatar
+                alt="User avatar"
+                src={`${env.apiUrl}/uploads/users/${userAvatar}`}
+                sx={{
+                  border: '1px solid #fff',
+                }}
+              />
             </li>
           </ul>
         </div>

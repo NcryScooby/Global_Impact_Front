@@ -15,7 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Pagination } from '@mui/material';
 
 export const Posts = () => {
-  const { signOut, userName } = useAuth();
+  const { signOut, userAvatar } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -76,7 +76,7 @@ export const Posts = () => {
 
   return (
     <>
-      <Sidebar signOut={signOut} userName={userName} />
+      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <section className="bg-gray-50 sm:ml-64">
         <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex-row lg:flex lg:items-center lg:justify-between">

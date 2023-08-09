@@ -1,6 +1,7 @@
 import { SignUpData } from '../../../app/services/authService/signUp';
 import { ResponseError } from '../../../app/interfaces/ResponseError';
 import { authService } from '../../../app/services/authService';
+import { ACCEPTED_IMAGE_TYPES } from '../../../app/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../../../app/hooks/UseAuth';
 import { useMutation } from '@tanstack/react-query';
@@ -22,6 +23,13 @@ const schema = z.object({
     .nonempty('Password cannot be empty')
     .min(8, 'Password must be at least 8 characters'),
   jobId: z.string().nonempty('Job cannot be empty').uuid('Invalid job'),
+  avatar: z
+    .any()
+    .refine((files) => files?.length == 1, 'Avatar is required')
+    .refine(
+      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
+      '.jpg, .jpeg, .png and .webp files are accepted'
+    ),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -45,7 +53,14 @@ export const useRegisterController = () => {
 
   const handleSubmit = hookFormSubmit(async (data) => {
     try {
-      const { token } = await mutateAsync(data);
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('password', data.password);
+      formData.append('jobId', data.jobId);
+      formData.append('avatar', data.avatar?.[0]);
+
+      const { token } = await mutateAsync(formData as unknown as SignUpData);
       signIn(token);
     } catch (error) {
       toast.error((error as ResponseError).response.data.message);

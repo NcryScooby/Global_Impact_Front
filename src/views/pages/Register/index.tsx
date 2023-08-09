@@ -1,6 +1,7 @@
 import { GetAllJobsResponse } from '../../../app/services/jobsService/getAll';
 import { useRegisterController } from './useRegisterController';
 import { jobsService } from '../../../app/services/jobsService';
+import { InputFile } from '../../components/ui/InputFile';
 import { Button } from '../../components/ui/Button';
 import { Select } from '../../components/ui/Select';
 import { Input } from '../../components/ui/Input';
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom';
 export const Register = () => {
   const { handleSubmit, register, errors, isLoading } = useRegisterController();
 
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
 
   const { data: jobs, isFetching } = useQuery<GetAllJobsResponse>({
@@ -23,6 +25,13 @@ export const Register = () => {
     event: ChangeEvent<HTMLSelectElement>
   ) => {
     setSelectedOption(event.target.value);
+  };
+
+  const handleSelectedFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const [file] = event.target.files || [];
+    if (file) {
+      setSelectedFile(file.name);
+    }
   };
 
   return (
@@ -72,6 +81,15 @@ export const Register = () => {
           error={errors.jobId?.message}
           options={jobs ? jobs.jobs : []}
           {...register('jobId')}
+        />
+        <InputFile
+          id="avatar"
+          type="file"
+          label="Avatar"
+          selectedFile={selectedFile}
+          handleSelectedFileChange={handleSelectedFileChange}
+          error={errors.avatar?.message?.toString()}
+          {...register('avatar')}
         />
         <Button type="submit" className="mt-2" isloading={isLoading}>
           Create account

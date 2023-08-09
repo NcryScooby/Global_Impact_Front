@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 
 interface AuthContextProps {
   signedIn: boolean;
-  userName: string;
+  userAvatar: string;
   signIn(token: string): void;
   signOut: () => void;
 }
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return !!storedToken;
   });
 
-  const [name, setName] = useState<string>('');
+  const [userAvatar, setUserAvatar] = useState<string>('');
 
   const { data, isError, isFetching, isSuccess, remove } = useQuery({
     queryKey: ['loggedUser'],
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess && signedIn) {
-      setName(data.user.name);
+      setUserAvatar(data.user.avatar);
     }
   }, [isSuccess, signedIn]);
 
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     <AuthContext.Provider
       value={{
         signedIn: isSuccess && signedIn,
-        userName: name,
+        userAvatar: userAvatar,
         signIn,
         signOut,
       }}
