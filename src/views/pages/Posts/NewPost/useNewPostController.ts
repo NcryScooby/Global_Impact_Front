@@ -1,8 +1,8 @@
-import { ACCEPTED_IMAGE_TYPES } from '../../../../app/constants/posts/accepted_images_types';
 import { CreatePostData } from '../../../../app/services/postsService/create';
 import { ResponseError } from '../../../../app/interfaces/ResponseError';
 import { postsService } from '../../../../app/services/postsService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ACCEPTED_IMAGE_TYPES } from '../../../../app/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';

@@ -4,3 +4,8 @@ export const ACCEPTED_IMAGE_TYPES = [
   'image/png',
   'image/webp',
 ];
+
+export const POST_LIKE_COLORS = {
+  LIKED: '#f13636',
+  UNLIKED: '#9e9e9e',
+};

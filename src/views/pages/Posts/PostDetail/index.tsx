@@ -7,6 +7,7 @@ import { postsService } from '../../../../app/services/postsService';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
+import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { useQuery } from '@tanstack/react-query';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
@@ -20,21 +21,21 @@ export const PostDetail = () => {
   const [post, setPost] = useState<GetPostByIdResponse>();
   const [likesCount, setLikesCount] = useState(0);
   const [pulse, setPulse] = useState(false);
-  const [liking, setLiking] = useState(false);
+  const [like, setLike] = useState(false);
 
   const { data: user } = useQuery<MeResponse>({
     queryKey: ['loggedUser'],
     staleTime: Infinity,
   });
 
-  const [color, setColor] = useState<'#9e9e9e' | '#f13636'>();
+  const [color, setColor] = useState<string>('');
 
   useEffect(() => {
     const isLiked = post?.post.likes?.some(
       (like) => like.authorId === user?.user.id
     );
 
-    setColor(isLiked ? '#f13636' : '#9e9e9e');
+    setColor(isLiked ? POST_LIKE_COLORS.LIKED : POST_LIKE_COLORS.UNLIKED);
     setPulse(isLiked ? true : false);
   }, [post, user]);
 
@@ -66,15 +67,17 @@ export const PostDetail = () => {
   }
 
   const handleLike = async () => {
-    if (liking) return;
+    if (like) return;
 
-    setLiking(true);
+    setLike(true);
 
     try {
       setPulse(!pulse);
 
       setColor((prevColor) =>
-        prevColor === '#9e9e9e' ? '#f13636' : '#9e9e9e'
+        prevColor === POST_LIKE_COLORS.UNLIKED
+          ? POST_LIKE_COLORS.LIKED
+          : POST_LIKE_COLORS.UNLIKED
       );
 
       const { message } = await postsService.like({
@@ -87,7 +90,7 @@ export const PostDetail = () => {
     } catch {
       toast.error('Oops, an error occurred');
     } finally {
-      setLiking(false);
+      setLike(false);
     }
   };
 
@@ -131,7 +134,7 @@ export const PostDetail = () => {
                           className={`${
                             pulse ? 'animate-pulselike' : 'animate-pulsedislike'
                           }`}
-                          onClick={liking ? undefined : handleLike}
+                          onClick={like ? undefined : handleLike}
                         />
                         <p>{likesCount}</p>
                       </span>
