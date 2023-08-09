@@ -46,7 +46,7 @@ export const PostList = ({ post }: PostListProps) => {
         </div>
         <div className="mt-6 flex justify-between items-start">
           <div>
-            <span className="block text-[12px] font-semibold text-gray-500 uppercase">
+            <span className="block text-[12px] text-gray-600 uppercase">
               {formatDate(post.createdAt)}
             </span>
             <span className="text-gray-600 text-[12px] font-normal">
@@ -79,7 +79,7 @@ export const PostList = ({ post }: PostListProps) => {
         <Link
           to={`/posts/${post.id}`}
           title={post.title}
-          className="inline-flex items-center justify-center pb-0.5 mt-5 text-base font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+          className="inline-flex items-center justify-center pb-0.5 mt-5 text-[14px] font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
         >
           Continue Reading
           <svg

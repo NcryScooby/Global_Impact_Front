@@ -11,7 +11,19 @@ interface InputProps extends ComponentProps<'input'> {
 }
 
 export const InputFile = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, name, label, error, selectedFile, handleFileChange, className, ...props }: InputProps, ref) => {
+  (
+    {
+      id,
+      name,
+      label,
+      error,
+      selectedFile,
+      handleFileChange,
+      className,
+      ...props
+    }: InputProps,
+    ref
+  ) => {
     const inputId = id ?? name;
 
     return (
@@ -39,7 +51,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
                 <span className="absolute left-3">{selectedFile}</span>
               )}
               <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
+                className="w-4 h-4 text-gray-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

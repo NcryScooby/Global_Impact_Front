@@ -1,5 +1,6 @@
-import { ChangeEvent, ComponentProps, forwardRef } from 'react';
 import { CaretDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { ChangeEvent, ComponentProps, forwardRef } from 'react';
+import { Spinner } from './Spinner';
 import { cn } from '../../../app/utils/functions/cn';
 
 interface SelectProps extends ComponentProps<'select'> {
@@ -12,6 +13,7 @@ interface SelectProps extends ComponentProps<'select'> {
   }[];
   selectedOption: string;
   handleChangeSelectedOption: (event: ChangeEvent<HTMLSelectElement>) => void;
+  isLoading?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -25,6 +27,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       selectedOption,
       handleChangeSelectedOption,
       options,
+      isLoading,
       className,
       ...props
     }: SelectProps,
@@ -41,6 +44,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {label}
         </label>
 
+        {isLoading && <Spinner className='absolute top-8 left-48 w-4 fill-gray-400' />}
+
         <select
           ref={ref}
           name={name}
@@ -50,14 +55,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           onChange={handleChangeSelectedOption}
           className={cn(
             'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none',
-            options.length === 0 || !selectedOption && 'text-gray-400',
-            options.length > 0 && selectedOption && 'text-primary',
+            options.length === 0 || !selectedOption ? 'text-gray-400' : 'text-primary',
             error && '!border-[#C92A2A]',
             className
           )}
         >
           <option value="" disabled>
-            Select your {placeholder}
+            {!isLoading ? `Select your ${placeholder}` : null}
           </option>
           {options?.map((option) => (
             <option key={option.id} value={option.id}>

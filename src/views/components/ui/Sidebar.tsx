@@ -27,7 +27,7 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
         data-drawer-toggle="separator-sidebar"
         aria-controls="separator-sidebar"
         type="button"
-        className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        className="inline-flex items-center p-2 mt-2 ml-3 text-sm rounded-lg sm:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -50,37 +50,35 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
         className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-primary">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-primary">
           <ul className="space-y-2 font-medium">
             <li>
               <Link
                 to={'/'}
-                className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-zinc-800 group ${
-                  currentPath === '/' ? 'bg-zinc-800' : ''
+                className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-900 group ${
+                  currentPath === '/' ? 'bg-gray-900' : ''
                 }`}
               >
                 <HomeIcon
-                  className={`w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${
-                    currentPath === '/' ? 'bg-zinc-800 dark:text-white' : ''
+                  className={`w-5 h-5 transition duration-75 text-gray-400  group-hover:text-white ${
+                    currentPath === '/' ? 'bg-gray-900 text-white' : ''
                   }`}
                 />
                 <span className="ml-3">Home</span>
               </Link>
             </li>
           </ul>
-          <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-200 dark:border-zinc-800">
+          <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-900">
             <li>
               <Link
                 to={'/posts'}
-                className={`flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group ${
-                  currentPath === '/posts' ? 'bg-zinc-800' : ''
+                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
+                  currentPath === '/posts' ? 'bg-gray-900' : ''
                 }`}
               >
                 <LayoutIcon
-                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white ${
-                    currentPath === '/posts'
-                      ? 'bg-zinc-800 dark:text-white'
-                      : ''
+                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
+                    currentPath === '/posts' ? 'bg-gray-900 text-white' : ''
                   }`}
                 />
                 <span className="ml-3">Posts</span>
@@ -89,15 +87,13 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
             <li>
               <Link
                 to={'/posts/new'}
-                className={`flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 dark:text-white group ${
-                  currentPath === '/posts/new' ? 'bg-zinc-800' : ''
+                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
+                  currentPath === '/posts/new' ? 'bg-gray-900' : ''
                 }`}
               >
                 <Pencil2Icon
-                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white ${
-                    currentPath === '/posts/new'
-                      ? 'bg-zinc-800 dark:text-white'
-                      : ''
+                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
+                    currentPath === '/posts/new' ? 'bg-gray-900 text-white' : ''
                   }`}
                 />
                 <span className="ml-3">New Post</span>
@@ -106,15 +102,15 @@ export const Sidebar = ({ signOut, userName }: SidebarProps) => {
             <li>
               <button
                 onClick={signOut}
-                className="flex items-center p-2 text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 w-full dark:hover:bg-zinc-800 dark:text-white group"
+                className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900 text-white group"
               >
-                <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:hover:bg-zinc-800 group-hover:text-gray-900 dark:group-hover:text-white" />
+                <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white" />
                 <span className="ml-3">Sign Out</span>
               </button>
             </li>
             <li className="flex-1 mb-4 fixed bottom-4">
-              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-white cursor-pointer">
-                <span className="font-medium text-gray-600 dark:text-primary">
+              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden rounded-full bg-white cursor-pointer">
+                <span className="font-medium text-primary">
                   {getInitials(userName)}
                 </span>
               </div>

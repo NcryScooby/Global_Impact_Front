@@ -2,12 +2,12 @@ import { categoriesService } from '../../../../app/services/categoriesService';
 import { useNewPostController } from './useNewPostController';
 import { InputFile } from '../../../components/ui/InputFile';
 import { TextArea } from '../../../components/ui/TextArea';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Button } from '../../../components/ui/Button';
 import { Select } from '../../../components/ui/Select';
 import { Input } from '../../../components/ui/Input';
-import { ChangeEvent, useEffect, useState } from 'react';
 
 interface Category {
   id: string;
@@ -21,10 +21,12 @@ export const NewPost = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const CategoriesData = async () => {
     const { categories } = await categoriesService.getAll();
     setCategories(categories);
+    setLoading(false);
   };
 
   const resetFormValues = () => {
@@ -90,6 +92,7 @@ export const NewPost = () => {
                           label="Category"
                           placeholder="Category"
                           selectedOption={selectedOption}
+                          isLoading={loading}
                           handleChangeSelectedOption={handleChangeSelectedOption}
                           error={errors.categoryId?.message}
                           options={categories}

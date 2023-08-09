@@ -1,8 +1,8 @@
+import browser from '../../../assets/images/browserframe.svg';
+import mobile from '../../../assets/images/mobileframe.svg';
 import { Sidebar } from '../../components/ui/Sidebar';
 import { useAuth } from '../../../app/hooks/UseAuth';
 import { Link } from 'react-router-dom';
-import browser from '../../../assets/images/browserframe.svg';
-import mobile from '../../../assets/images/mobileframe.svg';
 
 export const Home = () => {
   const { signOut, userName } = useAuth();
@@ -23,7 +23,7 @@ export const Home = () => {
             </h4>
             <Link
               to={'/posts'}
-              className="px-4 py-3 bg-primary text-white rounded-lg mt-4 hover:bg-zinc-800"
+              className="px-4 py-3 bg-primary text-white rounded-lg mt-4 hover:bg-gray-900"
             >
               See the posts
             </Link>

@@ -1,6 +1,5 @@
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
 import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
-import { scrollToTop } from '../../../../app/utils/functions/scrollToTop';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { MeResponse } from '../../../../app/services/usersService/me';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
@@ -14,7 +13,6 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
 export const PostDetail = () => {
-  scrollToTop();
   const { postId } = useParams() as { postId: string };
   const { signOut, userName } = useAuth();
   const navigate = useNavigate();
@@ -96,7 +94,7 @@ export const PostDetail = () => {
   return (
     <>
       <Sidebar signOut={signOut} userName={userName} />
-      <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-auto">
+      <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-scroll">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
           <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
             <div className="flex flex-col">
@@ -108,7 +106,7 @@ export const PostDetail = () => {
 
               <div className="mt-2 w-full flex justify-between items-start">
                 <div>
-                  <span className="block text-[12px] font-semibold text-gray-500 uppercase">
+                  <span className="block text-[12px] text-gray-600 uppercase">
                     {formatDate(post.post.createdAt)}
                   </span>
                   <span className="text-gray-600 text-[12px] font-normal">
@@ -116,7 +114,7 @@ export const PostDetail = () => {
                   </span>
                 </div>
                 {isFetching ? (
-                  <div className="h-3 bg-gray-200 rounded-sm dark:bg-gray-300 w-[72px] mt-1"></div>
+                  <div className="h-3 rounded-sm bg-gray-300 w-[72px] mt-1"></div>
                 ) : (
                   <>
                     <div className="flex gap-2 select-none">
