@@ -1,16 +1,21 @@
+import {
+  BarChartIcon,
+  HeartFilledIcon,
+  ChevronRightIcon,
+} from '@radix-ui/react-icons';
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
 import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { MeResponse } from '../../../../app/services/usersService/me';
-import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
 import { postsService } from '../../../../app/services/postsService';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
-import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { useQuery } from '@tanstack/react-query';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
+import { Breadcrumbs } from '@mui/material';
 import { toast } from 'react-hot-toast';
 
 export const PostDetail = () => {
@@ -99,6 +104,19 @@ export const PostDetail = () => {
       <Sidebar signOut={signOut} userName={userName} />
       <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-scroll">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
+          <Breadcrumbs
+            aria-label="breadcrumb"
+            separator={<ChevronRightIcon color="#3f3f3f" width={11} />}
+            sx={{
+              fontSize: '12px',
+              color: '#3f3f3f',
+              '& li': { m: 0.25 },
+            }}
+          >
+            <Link to="/">Home</Link>
+            <Link to="/posts">Posts</Link>
+            <Link to={`/posts/${post.post.id}`}>{post.post.title}</Link>
+          </Breadcrumbs>
           <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
             <div className="flex flex-col">
               <img
