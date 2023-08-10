@@ -19,6 +19,7 @@ export interface GetPostByIdResponse {
     };
     comments: [
       {
+        id: string;
         author: {
           id: string;
           name: string;

@@ -109,7 +109,9 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             <li className="flex-1 fixed bottom-4">
               <Avatar
                 alt="User avatar"
-                src={`${env.apiUrl}/uploads/users/${userAvatar}`}
+                src={
+                  userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''
+                }
                 sx={{
                   border: '1px solid #fff',
                 }}

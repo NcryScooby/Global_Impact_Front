@@ -10,7 +10,7 @@ export default withMT({
     extend: {
       colors: {
         'primary': '#111111',
-        'secondary': '#F9FAFB',
+        'secondary': '#fafafa',
       },
       keyframes: {
         pulselike: {

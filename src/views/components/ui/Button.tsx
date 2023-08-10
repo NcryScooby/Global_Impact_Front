@@ -23,7 +23,7 @@ export const Button = ({
       )}
     >
       {!isloading && children}
-      {isloading && <Spinner className="text-primary fill-gray-300" />}
+      {isloading && <Spinner className="text-white fill-primary w-5 h-5" />}
     </button>
   );
 };

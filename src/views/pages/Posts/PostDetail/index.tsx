@@ -2,17 +2,20 @@ import {
   BarChartIcon,
   HeartFilledIcon,
   ChevronRightIcon,
+  TrashIcon,
 } from '@radix-ui/react-icons';
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
 import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { MeResponse } from '../../../../app/services/usersService/me';
 import { postsService } from '../../../../app/services/postsService';
+import { commentsService } from '../../../../app/services/comments';
+import { AlertDialog } from '../../../components/ui/AlertDialog';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
-import { useQuery } from '@tanstack/react-query';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
 import { Breadcrumbs } from '@mui/material';
@@ -22,32 +25,35 @@ export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
   const { signOut, userAvatar } = useAuth();
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const [post, setPost] = useState<GetPostByIdResponse>();
-  const [likesCount, setLikesCount] = useState(0);
-  const [pulse, setPulse] = useState(false);
-  const [like, setLike] = useState(false);
+  const [likesCount, setLikesCount] = useState<number>(0);
+  const [pulse, setPulse] = useState<boolean>(false);
+  const [like, setLike] = useState<boolean>(false);
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [commentId, setCommentId] = useState<string>('');
+  const [color, setColor] = useState<string>('');
 
   const { data: user } = useQuery<MeResponse>({
     queryKey: ['loggedUser'],
     staleTime: Infinity,
   });
 
-  const [color, setColor] = useState<string>('');
-
-  useEffect(() => {
-    const isLiked = post?.post.likes?.some(
-      (like) => like.authorId === user?.user.id
-    );
-
-    setColor(isLiked ? POST_LIKE_COLORS.LIKED : POST_LIKE_COLORS.UNLIKED);
-    setPulse(isLiked ? true : false);
-  }, [post, user]);
-
   const { data, isError, isFetching } = useQuery<GetPostByIdResponse>({
     queryKey: ['getPostById', postId],
     queryFn: () => postsService.getById(postId),
   });
+
+  const deleteCommentMutation = useMutation(commentsService.deleteComment, {
+    onSuccess: async () => {
+      await queryClient.refetchQueries(['getPostById', postId]);
+      setOpenDialog(false);
+      toast.success('Comment deleted successfully');
+    },
+  });
+
+  const { isLoading } = deleteCommentMutation;
 
   if (isError) {
     return navigate('/', { replace: true });
@@ -56,9 +62,20 @@ export const PostDetail = () => {
   useEffect(() => {
     if (data) {
       setPost(data);
-      setLikesCount(data.post.likes ? data.post.likes.length : 0);
+      setLikesCount(data.post.likes?.length || 0);
     }
   }, [data]);
+
+  useEffect(() => {
+    const isPostLikedByUser = () => {
+      return post?.post.likes?.some((like) => like.authorId === user?.user.id);
+    };
+
+    const isLiked = isPostLikedByUser();
+
+    setColor(isLiked ? POST_LIKE_COLORS.LIKED : POST_LIKE_COLORS.UNLIKED);
+    setPulse(isLiked ?? false);
+  }, [post, user]);
 
   if (!post) {
     return (
@@ -71,27 +88,35 @@ export const PostDetail = () => {
     );
   }
 
+  const togglePulse = () => setPulse((prevPulse) => !prevPulse);
+
+  const updateColor = () => {
+    setColor((prevColor) =>
+      prevColor === POST_LIKE_COLORS.UNLIKED
+        ? POST_LIKE_COLORS.LIKED
+        : POST_LIKE_COLORS.UNLIKED
+    );
+  };
+
+  const updateLikesBasedOnMessage = (message: string) => {
+    const delta = message.includes('Post Liked') ? 1 : -1;
+    setLikesCount(likesCount + delta);
+  };
+
   const handleLike = async () => {
     if (like) return;
 
     setLike(true);
 
     try {
-      setPulse(!pulse);
-
-      setColor((prevColor) =>
-        prevColor === POST_LIKE_COLORS.UNLIKED
-          ? POST_LIKE_COLORS.LIKED
-          : POST_LIKE_COLORS.UNLIKED
-      );
+      togglePulse();
+      updateColor();
 
       const { message } = await postsService.like({
         postId: post.post.id,
       });
 
-      message.includes('Post Liked')
-        ? setLikesCount(likesCount + 1)
-        : setLikesCount(likesCount - 1);
+      updateLikesBasedOnMessage(message);
     } catch {
       toast.error('Oops, an error occurred');
     } finally {
@@ -99,8 +124,24 @@ export const PostDetail = () => {
     }
   };
 
+  const handleDeleteComment = async (commentId: string) => {
+    try {
+      await deleteCommentMutation.mutateAsync(commentId);
+    } catch {
+      toast.error('Oops, an error occurred');
+    }
+  };
+
   return (
     <>
+      {openDialog ? (
+        <AlertDialog
+          isLoading={isLoading}
+          openDialog={openDialog}
+          setOpenDialog={setOpenDialog}
+          onConfirm={() => handleDeleteComment(commentId)}
+        />
+      ) : null}
       <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-scroll">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
@@ -179,39 +220,53 @@ export const PostDetail = () => {
             </div>
           </div>
         </div>
-        {post.post.comments.length > 0 ? (
-          post.post.comments.map((comment) => (
-            <>
-              <div
-                className="py-8 mt-24 border border-gray-300 rounded-[2px]
-              "
-              >
-                <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
-                  <div className="md:flex md:items-center md:justify-center md:space-x-14">
-                    <div className="relative flex-shrink-0 w-20 h-20">
-                      <div className="absolute w-20 h-20 bg-gray-300 rounded-full -bottom-2 -right-1"></div>
-                      <img
-                        className="relative object-cover w-20 h-20 rounded-full"
-                        src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
-                        alt={comment.author.name}
-                      />
-                    </div>
-
-                    <div className="mt-10 md:mt-0">
-                      <blockquote>
-                        <p className="text-sm text-black">{comment.content}</p>
-                      </blockquote>
-                      <p className="text-sm font-semibold text-black mt-7">
-                        {comment.author.name}
+        {post.post.comments.length ? (
+          post.post.comments.map((comment, index) => (
+            <div
+              key={index}
+              className={`py-4 lg:py-8 ${
+                index === 0 ? 'mt-24' : 'mt-8'
+              } border border-gray-300 rounded-[2px] bg-white relative`}
+            >
+              <span className="absolute right-4 top-4">
+                {user?.user.id === comment.author.id ? (
+                  <TrashIcon
+                    height={22}
+                    width={22}
+                    color="#a3a3a3"
+                    className="bg-white rounded-full p-1 cursor-pointer hover:bg-gray-100"
+                    onClick={() => {
+                      setCommentId(comment.id);
+                      setOpenDialog(true);
+                    }}
+                  />
+                ) : null}
+              </span>
+              <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between space-x-12 w-full">
+                  <div className="relative flex-shrink-0">
+                    <img
+                      className="relative object-cover w-12 h-12 lg:w-20 lg:h-20 rounded-full select-none shadow-2xl"
+                      src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
+                      alt={comment.author.name}
+                    />
+                  </div>
+                  <div className="mt-0 lg:mt-0 w-full">
+                    <blockquote>
+                      <p className="text-[12px] lg:text-sm text-black">
+                        {comment.content}
                       </p>
-                      <p className="mt-1 text-sm text-gray-600">
-                        {comment.author.job.name}
-                      </p>
-                    </div>
+                    </blockquote>
+                    <p className="text-[12px] lg:text-sm font-semibold text-black mt-7">
+                      {comment.author.name}
+                    </p>
+                    <p className="mt-1 text-[12px] lg:text-sm text-gray-600">
+                      {comment.author.job.name}
+                    </p>
                   </div>
                 </div>
               </div>
-            </>
+            </div>
           ))
         ) : (
           <></>
