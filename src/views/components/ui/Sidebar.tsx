@@ -17,6 +17,7 @@ interface SidebarProps {
 export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const postId = currentPath.split('/')[2];
 
   return (
     <>
@@ -71,12 +72,20 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
               <Link
                 to={'/posts'}
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
-                  currentPath === '/posts' ? 'bg-gray-900' : ''
+                  (currentPath === '/posts' ||
+                    currentPath === `/posts/${postId}`) &&
+                  currentPath !== '/posts/new'
+                    ? 'bg-gray-900'
+                    : ''
                 }`}
               >
                 <LayoutIcon
                   className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
-                    currentPath === '/posts' ? 'bg-gray-900 text-white' : ''
+                    (currentPath === '/posts' ||
+                      currentPath === `/posts/${postId}`) &&
+                    currentPath !== '/posts/new'
+                      ? 'bg-gray-900 text-white'
+                      : ''
                   }`}
                 />
                 <span className="ml-3">Posts</span>

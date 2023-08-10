@@ -38,7 +38,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
         <div
           className={cn(
             'flex items-center justify-center w-full border border-gray-300 text-gray-900 text-sm rounded-[2px]',
-            error && '!border-[#C92A2A]',
+            error ? '!border-[#C92A2A]' : '',
             className
           )}
         >
@@ -47,9 +47,9 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
             className="flex items-center justify-end h-full w-full cursor-pointer pr-4"
           >
             <div className="flex items-center justify-center h-[40px]">
-              {selectedFile && (
+              {selectedFile ? (
                 <span className="absolute left-3">{selectedFile}</span>
-              )}
+              ) : null}
               <svg
                 className="w-4 h-4 text-gray-500"
                 aria-hidden="true"
@@ -81,12 +81,12 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
           </label>
         </div>
 
-        {error && (
+        {error ? (
           <div className="flex gap-1 items-center mt-2 text-[#C92A2A]">
             <CrossCircledIcon />
             <span className="text-xs">{error}</span>
           </div>
-        )}
+        ) : null}
       </div>
     );
   }

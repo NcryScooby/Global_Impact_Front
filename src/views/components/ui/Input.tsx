@@ -29,12 +29,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {...props}
           className={cn(
             'bg-white border border-gray-300 text-gray-900 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none file:hidden',
-            error && '!border-[#C92A2A]',
+            error ? '!border-[#C92A2A]' : '',
             className
           )}
         />
 
-        {icon && (
+        {icon ? (
           <div
             className="
             absolute
@@ -49,14 +49,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           >
             {icon}
           </div>
-        )}
+        ) : null}
 
-        {error && (
+        {error ? (
           <div className="flex gap-1 items-center mt-2 text-[#C92A2A]">
             <CrossCircledIcon />
             <span className="text-xs">{error}</span>
           </div>
-        )}
+        ) : null}
       </div>
     );
   }

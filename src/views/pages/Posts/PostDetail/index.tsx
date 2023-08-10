@@ -2,7 +2,7 @@ import {
   BarChartIcon,
   HeartFilledIcon,
   ChevronRightIcon,
-  TrashIcon,
+  PlusIcon,
 } from '@radix-ui/react-icons';
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
 import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
@@ -10,9 +10,12 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { formatDate } from '../../../../app/utils/functions/formatDate';
 import { MeResponse } from '../../../../app/services/usersService/me';
 import { postsService } from '../../../../app/services/postsService';
+import { usePostDetailController } from './userPostDetailController';
 import { commentsService } from '../../../../app/services/comments';
+import { CommentList } from '../../../components/posts/CommentList';
 import { AlertDialog } from '../../../components/ui/AlertDialog';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import { TextDialog } from '../../../components/ui/TextDialog';
 import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
@@ -31,9 +34,24 @@ export const PostDetail = () => {
   const [likesCount, setLikesCount] = useState<number>(0);
   const [pulse, setPulse] = useState<boolean>(false);
   const [like, setLike] = useState<boolean>(false);
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const [openCreateCommentDialog, setOpenCreateCommentDialog] =
+    useState<boolean>(false);
   const [commentId, setCommentId] = useState<string>('');
   const [color, setColor] = useState<string>('');
+
+  type DeleteCommentFunction = (commentId: string) => Promise<void>;
+  type CreateCommentFunction = (
+    e?: React.BaseSyntheticEvent<object>
+  ) => Promise<void>;
+
+  const {
+    errors,
+    handleSubmit,
+    register,
+    reset,
+    isLoading: isLoadingCreateComment,
+  } = usePostDetailController(postId, setOpenCreateCommentDialog);
 
   const { data: user } = useQuery<MeResponse>({
     queryKey: ['loggedUser'],
@@ -48,12 +66,12 @@ export const PostDetail = () => {
   const deleteCommentMutation = useMutation(commentsService.deleteComment, {
     onSuccess: async () => {
       await queryClient.refetchQueries(['getPostById', postId]);
-      setOpenDialog(false);
+      setOpenDeleteDialog(false);
       toast.success('Comment deleted successfully');
     },
   });
 
-  const { isLoading } = deleteCommentMutation;
+  const { isLoading: isLoadingDeleteComment } = deleteCommentMutation;
 
   if (isError) {
     return navigate('/', { replace: true });
@@ -132,16 +150,43 @@ export const PostDetail = () => {
     }
   };
 
+  const renderAlertDialog = (
+    open: boolean,
+    onConfirm: DeleteCommentFunction,
+    commentId: string
+  ) =>
+    open ? (
+      <AlertDialog
+        title="Are you sure you want to delete this comment?"
+        content="Do you really want to remove this comment? Once deleted, it cannot be recovered."
+        isLoading={isLoadingDeleteComment}
+        openDialog={open}
+        setOpenDialog={setOpenDeleteDialog}
+        onConfirm={() => onConfirm(commentId)}
+      />
+    ) : null;
+
+  const renderTextDialog = (open: boolean, onConfirm: CreateCommentFunction) =>
+    open ? (
+      <TextDialog
+        userAvatar={userAvatar}
+        userName={user?.user.name || ''}
+        jobName={user?.user.job.name || ''}
+        isLoading={isLoadingCreateComment}
+        onConfirm={onConfirm}
+        openDialog={open}
+        setOpenDialog={setOpenCreateCommentDialog}
+        error={errors.content?.message || ''}
+        fieldName="content"
+        register={register}
+        reset={reset}
+      />
+    ) : null;
+
   return (
     <>
-      {openDialog ? (
-        <AlertDialog
-          isLoading={isLoading}
-          openDialog={openDialog}
-          setOpenDialog={setOpenDialog}
-          onConfirm={() => handleDeleteComment(commentId)}
-        />
-      ) : null}
+      {renderAlertDialog(openDeleteDialog, handleDeleteComment, commentId)}
+      {renderTextDialog(openCreateCommentDialog, handleSubmit)}
       <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-scroll">
         <div className="px-4 mx-auto sm:px-6 lg:px-8">
@@ -165,7 +210,6 @@ export const PostDetail = () => {
                 src={`${env.apiUrl}/uploads/posts/${post?.post.image}`}
                 alt={post.post.title}
               />
-
               <div className="mt-2 w-full flex justify-between items-start">
                 <div>
                   <span className="block text-[12px] text-gray-600 uppercase">
@@ -182,7 +226,9 @@ export const PostDetail = () => {
                     <div className="flex gap-2 select-none">
                       <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
                         <BarChartIcon height={12} width={12} color="#4b5563" />
-                        <p>{post.post.views}</p>
+                        {post.post.views > 1000
+                          ? `${(post.post.views / 1000).toFixed(1)}k`
+                          : post.post.views}
                       </span>
                       <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
                         <HeartFilledIcon
@@ -201,76 +247,49 @@ export const PostDetail = () => {
                   </>
                 )}
               </div>
-
               <div className="md:text-center mt-8">
                 <h2 className="w-full text-2xl text-left font-bold leading-tight text-black">
                   {post.post.title}
                 </h2>
               </div>
-
               <div className="absolute top-4 left-4">
                 <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
                   {post.post.category.name}
                 </span>
               </div>
             </div>
-
             <div>
               <p className="text-[16px] font-serif">{post.post.content}</p>
             </div>
           </div>
         </div>
-        {post.post.comments.length ? (
-          post.post.comments.map((comment, index) => (
+        <div className="relative">
+          <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
+            {post.post.comments.length > 0 ? 'Comments' : ''}
+          </h2>
+          {post.post.comments.length > 0 ? (
             <div
-              key={index}
-              className={`py-4 lg:py-8 ${
-                index === 0 ? 'mt-24' : 'mt-8'
-              } border border-gray-300 rounded-[2px] bg-white relative`}
+              className="absolute right-8 top-[82px] cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
+              onClick={() => {
+                setOpenCreateCommentDialog(true);
+              }}
             >
-              <span className="absolute right-4 top-4">
-                {user?.user.id === comment.author.id ? (
-                  <TrashIcon
-                    height={22}
-                    width={22}
-                    color="#a3a3a3"
-                    className="bg-white rounded-full p-1 cursor-pointer hover:bg-gray-100"
-                    onClick={() => {
-                      setCommentId(comment.id);
-                      setOpenDialog(true);
-                    }}
-                  />
-                ) : null}
-              </span>
-              <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between space-x-12 w-full">
-                  <div className="relative flex-shrink-0">
-                    <img
-                      className="relative object-cover w-12 h-12 lg:w-20 lg:h-20 rounded-full select-none shadow-2xl"
-                      src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
-                      alt={comment.author.name}
-                    />
-                  </div>
-                  <div className="mt-0 lg:mt-0 w-full">
-                    <blockquote>
-                      <p className="text-[12px] lg:text-sm text-black">
-                        {comment.content}
-                      </p>
-                    </blockquote>
-                    <p className="text-[12px] lg:text-sm font-semibold text-black mt-7">
-                      {comment.author.name}
-                    </p>
-                    <p className="mt-1 text-[12px] lg:text-sm text-gray-600">
-                      {comment.author.job.name}
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <PlusIcon />
             </div>
-          ))
-        ) : (
-          <></>
-        )}
+          ) : null}
+        </div>
+        {post.post.comments.length > 0 ? (
+          <div className="px-4 lg:px-8">
+            <CommentList
+              comments={post.post.comments}
+              userId={user ? user?.user.id : ''}
+              onDelete={(commentId) => {
+                setCommentId(commentId);
+                setOpenDeleteDialog(true);
+              }}
+            />
+          </div>
+        ) : null}
       </section>
     </>
   );

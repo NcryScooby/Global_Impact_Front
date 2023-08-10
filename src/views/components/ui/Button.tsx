@@ -4,6 +4,7 @@ import { Spinner } from '../ui/Spinner';
 
 interface ButtonProps extends ComponentProps<'button'> {
   isloading?: boolean;
+  SpinnerStyle?: string;
 }
 
 export const Button = ({
@@ -11,6 +12,7 @@ export const Button = ({
   isloading,
   disabled,
   children,
+  SpinnerStyle,
   ...props
 }: ButtonProps) => {
   return (
@@ -22,8 +24,12 @@ export const Button = ({
         className
       )}
     >
-      {!isloading && children}
-      {isloading && <Spinner className="text-white fill-primary w-5 h-5" />}
+      {!isloading ? children : null}
+      {isloading ? (
+        <Spinner
+          className={cn('text-primary fill-white w-5 h-5', SpinnerStyle)}
+        />
+      ) : null}
     </button>
   );
 };

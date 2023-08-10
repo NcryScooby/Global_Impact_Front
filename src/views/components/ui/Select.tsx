@@ -44,9 +44,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {label}
         </label>
 
-        {isLoading && (
+        {isLoading ? (
           <Spinner className="absolute top-8 right-2.5 w-4 fill-gray-400" />
-        )}
+        ) : null}
 
         <select
           ref={ref}
@@ -60,7 +60,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             options.length === 0 || !selectedOption
               ? 'text-gray-400'
               : 'text-primary',
-            error && '!border-[#C92A2A]',
+            error ? '!border-[#C92A2A]' : '',
             className
           )}
         >
@@ -78,12 +78,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {!isLoading ? <CaretDownIcon width={20} height={20} /> : null}
         </div>
 
-        {error && (
+        {error ? (
           <div className="flex gap-1 items-center mt-2 text-[#C92A2A]">
             <CrossCircledIcon />
             <span className="text-xs">{error}</span>
           </div>
-        )}
+        ) : null}
       </div>
     );
   }

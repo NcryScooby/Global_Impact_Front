@@ -58,7 +58,7 @@ export const PostList = ({ post }: PostListProps) => {
               <BarChartIcon height={12} width={12} color="#4b5563" />
               <p>
                 {post.views > 1000
-                  ? `${Math.round(post.views / 1000)}k`
+                  ? `${(post.views / 1000).toFixed(1)}k`
                   : post.views}
               </p>
             </span>

@@ -10,6 +10,8 @@ interface AlertDialogProps {
   setOpenDialog: (open: boolean) => void;
   onConfirm: () => void;
   isLoading: boolean;
+  title: string;
+  content: string;
 }
 
 export const AlertDialog = ({
@@ -17,6 +19,8 @@ export const AlertDialog = ({
   setOpenDialog,
   onConfirm,
   isLoading,
+  title,
+  content,
 }: AlertDialogProps) => {
   const handleClose = () => {
     setOpenDialog(false);
@@ -39,7 +43,7 @@ export const AlertDialog = ({
             fontSize: '18px',
           }}
         >
-          Are you sure you want to delete this comment?
+          {title}
         </DialogTitle>
         <DialogContent>
           <DialogContentText
@@ -47,8 +51,7 @@ export const AlertDialog = ({
               fontSize: '14px',
             }}
           >
-            Do you really want to remove this comment? Once deleted, it cannot
-            be recovered.
+            {content}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -60,10 +63,9 @@ export const AlertDialog = ({
           </Button>
           <Button
             isloading={isLoading}
-            onClick={() => {
-              onConfirm();
-            }}
-            className="h-[42px] bg-transparent text-sm text-primary border border-gray-300 active:bg-transparent fill-gray-300"
+            onClick={onConfirm}
+            className="h-[42px] bg-transparent text-sm text-primary border border-gray-300 active:bg-transparent"
+            SpinnerStyle="text-white fill-primary"
           >
             Confirm
           </Button>
