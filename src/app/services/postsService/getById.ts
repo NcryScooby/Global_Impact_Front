@@ -29,6 +29,7 @@ export interface GetPostByIdResponse {
           };
         };
         content: string;
+        createdAt: string;
       }
     ];
     author: {

@@ -3,31 +3,31 @@ import { ComponentProps } from 'react';
 import { Spinner } from '../ui/Spinner';
 
 interface ButtonProps extends ComponentProps<'button'> {
-  isloading?: boolean;
-  SpinnerStyle?: string;
+  isLoading?: boolean;
+  spinnerStyle?: string;
 }
 
 export const Button = ({
   className,
-  isloading,
+  isLoading,
   disabled,
   children,
-  SpinnerStyle,
+  spinnerStyle,
   ...props
 }: ButtonProps) => {
   return (
     <button
       {...props}
-      disabled={disabled || isloading}
+      disabled={disabled || isLoading}
       className={cn(
         'bg-primary text-secondary px-6 h-[48px] rounded-[2px] font-normal disabled:cursor-not-allowed transition-all active:bg-black flex items-center justify-center',
         className
       )}
     >
-      {!isloading ? children : null}
-      {isloading ? (
+      {!isLoading ? children : null}
+      {isLoading ? (
         <Spinner
-          className={cn('text-primary fill-white w-5 h-5', SpinnerStyle)}
+          className={cn('text-primary fill-white w-5 h-5', spinnerStyle)}
         />
       ) : null}
     </button>

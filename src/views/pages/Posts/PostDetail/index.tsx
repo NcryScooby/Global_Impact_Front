@@ -19,9 +19,9 @@ import { TextDialog } from '../../../components/ui/TextDialog';
 import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
+import { Avatar, Breadcrumbs } from '@mui/material';
 import { env } from '../../../../app/config/env';
 import { useEffect, useState } from 'react';
-import { Breadcrumbs } from '@mui/material';
 import { toast } from 'react-hot-toast';
 
 export const PostDetail = () => {
@@ -211,13 +211,29 @@ export const PostDetail = () => {
                 alt={post.post.title}
               />
               <div className="mt-2 w-full flex justify-between items-start">
-                <div>
-                  <span className="block text-[12px] text-gray-600 uppercase">
-                    {formatDate(post.post.createdAt)}
-                  </span>
-                  <span className="text-gray-600 text-[12px] font-normal">
-                    <b>{post.post.author.name}</b>, {post.post.author.job.name}.
-                  </span>
+                <div className="flex items-center gap-2 mt-4">
+                  <Avatar
+                    alt="User avatar"
+                    src={
+                      post.post.author.avatar
+                        ? `${env.apiUrl}/uploads/users/${post.post.author.avatar}`
+                        : ''
+                    }
+                    sx={{
+                      border: '1px solid #fff',
+                      width: 48,
+                      height: 48,
+                    }}
+                  />
+                  <div>
+                    <span className="block text-[12px] text-gray-600 uppercase">
+                      {formatDate(post.post.createdAt)}
+                    </span>
+                    <span className="text-gray-600 text-[12px] font-normal">
+                      <b>{post.post.author.name}</b>,{' '}
+                      {post.post.author.job.name}.
+                    </span>
+                  </div>
                 </div>
                 {isFetching ? (
                   <div className="h-3 rounded-sm bg-gray-300 w-[72px] mt-1"></div>
@@ -264,19 +280,23 @@ export const PostDetail = () => {
           </div>
         </div>
         <div className="relative">
-          <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
-            {post.post.comments.length > 0 ? 'Comments' : ''}
-          </h2>
           {post.post.comments.length > 0 ? (
-            <div
-              className="absolute right-8 top-[82px] cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
-              onClick={() => {
-                setOpenCreateCommentDialog(true);
-              }}
-            >
-              <PlusIcon />
-            </div>
-          ) : null}
+            <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
+              Comments
+            </h2>
+          ) : (
+            <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
+              No comments yet
+            </h2>
+          )}
+          <div
+            className="absolute right-8 top-[82px] cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
+            onClick={() => {
+              setOpenCreateCommentDialog(true);
+            }}
+          >
+            <PlusIcon />
+          </div>
         </div>
         {post.post.comments.length > 0 ? (
           <div className="px-4 lg:px-8">

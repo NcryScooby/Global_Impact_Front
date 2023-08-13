@@ -128,7 +128,7 @@ export const NewPost = () => {
                       <Button
                         className="w-2/3 mt-8"
                         disabled={isFetching}
-                        isloading={isLoading}
+                        isLoading={isLoading}
                       >
                         Create
                       </Button>

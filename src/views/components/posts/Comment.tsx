@@ -1,5 +1,7 @@
+import { formatDate } from '../../../app/utils/functions/formatDate';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { env } from '../../../app/config/env';
+import { Avatar } from '@mui/material';
 
 interface CommentProps {
   comment: {
@@ -13,6 +15,7 @@ interface CommentProps {
       };
     };
     content: string;
+    createdAt: string;
   };
   userId: string;
   onDelete: (id: string) => void;
@@ -35,24 +38,35 @@ export const Comment = ({ comment, userId, onDelete }: CommentProps) => {
       <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between space-x-12 w-full">
           <div className="relative flex-shrink-0">
-            <img
-              className="relative object-cover w-12 h-12 lg:w-20 lg:h-20 rounded-full select-none shadow-2xl"
-              src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
+            <Avatar
+              className="select-none"
               alt={comment.author.name}
+              src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
+              sx={{
+                width: 80,
+                height: 80,
+              }}
             />
           </div>
-          <div className="mt-0 lg:mt-0 w-full">
+          <div className="mt-0 lg:mt-0 w-full flex flex-col gap-4">
+            <div className="flex flex-col gap-1">
+              <div>
+                <p className="text-[14px] font-semibold text-black">
+                  {comment.author.name}
+                  <span className="text-[12px] font-normal text-gray-600">
+                    , {comment.author.job.name}.
+                  </span>
+                </p>
+              </div>
+              <p className="text-[10px] text-gray-500">
+                {formatDate(comment.createdAt)}
+              </p>
+            </div>
             <blockquote>
               <p className="text-[12px] lg:text-sm text-black">
                 {comment.content}
               </p>
             </blockquote>
-            <p className="text-[12px] lg:text-sm font-semibold text-black mt-7">
-              {comment.author.name}
-            </p>
-            <p className="mt-1 text-[12px] lg:text-sm text-gray-600">
-              {comment.author.job.name}
-            </p>
           </div>
         </div>
       </div>

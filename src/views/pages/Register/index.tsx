@@ -91,7 +91,7 @@ export const Register = () => {
           error={errors.avatar?.message?.toString()}
           {...register('avatar')}
         />
-        <Button type="submit" className="mt-2" isloading={isLoading}>
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
           Create account
         </Button>
       </form>

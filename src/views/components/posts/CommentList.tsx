@@ -12,6 +12,7 @@ interface CommentProps {
       };
     };
     content: string;
+    createdAt: string;
   }[];
   userId: string;
   onDelete: (id: string) => void;

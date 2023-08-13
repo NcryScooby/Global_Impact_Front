@@ -59,13 +59,13 @@ export const AlertDialog = ({
             onClick={isLoading ? undefined : handleClose}
             className="text-sm h-[42px]"
           >
-            Close
+            Cancel
           </Button>
           <Button
-            isloading={isLoading}
+            isLoading={isLoading}
             onClick={onConfirm}
             className="h-[42px] bg-transparent text-sm text-primary border border-gray-300 active:bg-transparent"
-            SpinnerStyle="text-white fill-primary"
+            spinnerStyle="text-white fill-primary"
           >
             Confirm
           </Button>

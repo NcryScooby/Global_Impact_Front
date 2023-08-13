@@ -1,10 +1,10 @@
+import { UseFormRegister, UseFormReset } from 'react-hook-form';
 import DialogActions from '@mui/material/DialogActions';
 import { Button } from '../../components/ui/Button';
 import { env } from '../../../app/config/env';
 import Dialog from '@mui/material/Dialog';
 import { Avatar } from '@mui/material';
 import { TextArea } from './TextArea';
-import { UseFormRegister, UseFormReset } from 'react-hook-form';
 
 interface TextDialogProps {
   openDialog: boolean;
@@ -44,8 +44,7 @@ export const TextDialog = ({
       sx={{
         '& .MuiDialog-paper': {
           borderRadius: '2px',
-          paddingY: '32px',
-          paddingX: '48px',
+          padding: '32px',
           width: '100%',
         },
       }}
@@ -80,6 +79,7 @@ export const TextDialog = ({
       <DialogActions
         sx={{
           marginTop: '32px',
+          padding: '0',
         }}
       >
         <Button
@@ -94,18 +94,18 @@ export const TextDialog = ({
           }
           className="text-sm h-[42px]"
         >
-          Close
+          Cancel
         </Button>
         <Button
-          isloading={isLoading}
+          isLoading={isLoading}
           type="submit"
           className="h-[42px] bg-transparent text-sm text-primary border border-gray-300 active:bg-transparent"
-          SpinnerStyle="text-white fill-primary"
+          spinnerStyle="text-white fill-primary"
           onClick={() => {
             onConfirm();
           }}
         >
-          Confirm
+          Comment
         </Button>
       </DialogActions>
     </Dialog>

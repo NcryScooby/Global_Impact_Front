@@ -40,7 +40,7 @@ export const Login = () => {
           error={errors.password?.message}
           {...register('password')}
         />
-        <Button type="submit" className="mt-2" isloading={isLoading}>
+        <Button type="submit" className="mt-2" isLoading={isLoading}>
           Login
         </Button>
       </form>
