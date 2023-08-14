@@ -50,21 +50,19 @@ export interface GetPostByIdResponse {
     title: string;
     content: string;
     image: string;
-    tags: [];
+    likes: [];
     category: {
-      id: string;
       name: string;
     };
     author: {
-      id: string;
       name: string;
-      email: string;
       job: {
-        id: string;
         name: string;
       };
+      avatar: string;
     };
     createdAt: string;
+    views: number;
   }[];
 }
 

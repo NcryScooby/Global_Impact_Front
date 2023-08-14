@@ -21,6 +21,7 @@ import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Avatar, Breadcrumbs } from '@mui/material';
 import { env } from '../../../../app/config/env';
+import Card from '../../../components/ui/Card';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
@@ -188,128 +189,156 @@ export const PostDetail = () => {
       {renderAlertDialog(openDeleteDialog, handleDeleteComment, commentId)}
       {renderTextDialog(openCreateCommentDialog, handleSubmit)}
       <Sidebar signOut={signOut} userAvatar={userAvatar} />
-      <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64 overflow-scroll">
-        <div className="px-4 mx-auto sm:px-6 lg:px-8">
-          <Breadcrumbs
-            aria-label="breadcrumb"
-            separator={<ChevronRightIcon color="#3f3f3f" width={11} />}
-            sx={{
-              fontSize: '12px',
-              color: '#3f3f3f',
-              '& li': { m: 0.25 },
-            }}
-          >
-            <Link to="/">Home</Link>
-            <Link to="/posts">Posts</Link>
-            <Link to={`/posts/${post.post.id}`}>{post.post.title}</Link>
-          </Breadcrumbs>
-          <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
-            <div className="flex flex-col">
-              <img
-                className="object-cover lg:max-h-80 lg:w-full select-none"
-                src={`${env.apiUrl}/uploads/posts/${post?.post.image}`}
-                alt={post.post.title}
-              />
-              <div className="mt-2 w-full flex justify-between items-start">
-                <div className="flex items-center gap-2 mt-4">
-                  <Avatar
-                    alt="User avatar"
-                    src={
-                      post.post.author.avatar
-                        ? `${env.apiUrl}/uploads/users/${post.post.author.avatar}`
-                        : ''
-                    }
-                    sx={{
-                      width: 48,
-                      height: 48,
-                    }}
-                  />
-                  <div>
-                    <span className="block text-[12px] text-gray-600 uppercase">
-                      {formatDate(post.post.createdAt)}
-                    </span>
-                    <span className="text-gray-600 text-[12px] font-normal">
-                      <b>{post.post.author.name}</b>,{' '}
-                      {post.post.author.job.name}.
-                    </span>
-                  </div>
-                </div>
-                {isFetching ? (
-                  <div className="h-3 rounded-sm bg-gray-300 w-[72px] mt-1"></div>
-                ) : (
-                  <>
-                    <div className="flex gap-2 select-none">
-                      <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
-                        <BarChartIcon height={12} width={12} color="#4b5563" />
-                        {post.post.views > 1000
-                          ? `${(post.post.views / 1000).toFixed(1)}k`
-                          : post.post.views}
+      <div className="overflow-scroll">
+        <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64">
+          <div className="px-4 mx-auto sm:px-6 lg:px-8">
+            <Breadcrumbs
+              aria-label="breadcrumb"
+              separator={<ChevronRightIcon color="#3f3f3f" width={11} />}
+              sx={{
+                fontSize: '12px',
+                color: '#3f3f3f',
+                '& li': { m: 0.25 },
+              }}
+            >
+              <Link to="/">Home</Link>
+              <Link to="/posts">Posts</Link>
+              <Link to={`/posts/${post.post.id}`}>{post.post.title}</Link>
+            </Breadcrumbs>
+            <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
+              <div className="flex flex-col">
+                <img
+                  className="object-cover lg:max-h-80 lg:w-full select-none"
+                  src={`${env.apiUrl}/uploads/posts/${post?.post.image}`}
+                  alt={post.post.title}
+                />
+                <div className="mt-2 w-full flex justify-between items-start">
+                  <div className="flex items-center gap-2 mt-4">
+                    <Avatar
+                      alt="User avatar"
+                      src={
+                        post.post.author.avatar
+                          ? `${env.apiUrl}/uploads/users/${post.post.author.avatar}`
+                          : ''
+                      }
+                      sx={{
+                        width: 48,
+                        height: 48,
+                      }}
+                    />
+                    <div>
+                      <span className="block text-[12px] text-gray-600 uppercase">
+                        {formatDate(post.post.createdAt)}
                       </span>
-                      <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
-                        <HeartFilledIcon
-                          height={16}
-                          width={16}
-                          color={color}
-                          cursor={'pointer'}
-                          className={`${
-                            pulse ? 'animate-pulselike' : 'animate-pulsedislike'
-                          }`}
-                          onClick={like ? undefined : handleLike}
-                        />
-                        <p>{likesCount}</p>
+                      <span className="text-gray-600 text-[12px] font-normal">
+                        <b>{post.post.author.name}</b>,{' '}
+                        {post.post.author.job.name}.
                       </span>
                     </div>
-                  </>
-                )}
+                  </div>
+                  {isFetching ? (
+                    <div className="h-3 rounded-sm bg-gray-300 w-[72px] mt-1"></div>
+                  ) : (
+                    <>
+                      <div className="flex gap-2 select-none">
+                        <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+                          <BarChartIcon
+                            height={12}
+                            width={12}
+                            color="#4b5563"
+                          />
+                          {post.post.views > 1000
+                            ? `${(post.post.views / 1000).toFixed(1)}k`
+                            : post.post.views}
+                        </span>
+                        <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+                          <HeartFilledIcon
+                            height={16}
+                            width={16}
+                            color={color}
+                            cursor={'pointer'}
+                            className={`${
+                              pulse
+                                ? 'animate-pulselike'
+                                : 'animate-pulsedislike'
+                            }`}
+                            onClick={like ? undefined : handleLike}
+                          />
+                          <p>{likesCount}</p>
+                        </span>
+                      </div>
+                    </>
+                  )}
+                </div>
+                <div className="md:text-center mt-8">
+                  <h2 className="w-full text-2xl text-left font-bold leading-tight text-black">
+                    {post.post.title}
+                  </h2>
+                </div>
+                <div className="absolute top-4 left-4">
+                  <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+                    {post.post.category.name}
+                  </span>
+                </div>
               </div>
-              <div className="md:text-center mt-8">
-                <h2 className="w-full text-2xl text-left font-bold leading-tight text-black">
-                  {post.post.title}
-                </h2>
-              </div>
-              <div className="absolute top-4 left-4">
-                <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-                  {post.post.category.name}
-                </span>
+              <div>
+                <p className="text-[16px] font-serif">{post.post.content}</p>
               </div>
             </div>
-            <div>
-              <p className="text-[16px] font-serif">{post.post.content}</p>
-            </div>
           </div>
-        </div>
-        <div className="relative">
-          {post.post.comments.length > 0 ? (
-            <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
-              Comments
-            </h2>
-          ) : (
-            <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
-              No comments yet
-            </h2>
-          )}
-          <div
-            className="absolute right-8 top-[82px] cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
-            onClick={() => {
-              setOpenCreateCommentDialog(true);
-            }}
-          >
-            <PlusIcon />
-          </div>
-        </div>
-        {post.post.comments.length > 0 ? (
-          <div className="px-4 lg:px-8">
-            <CommentList
-              comments={post.post.comments}
-              userId={user ? user?.user.id : ''}
-              onDelete={(commentId) => {
-                setCommentId(commentId);
-                setOpenDeleteDialog(true);
+          <div className="relative">
+            {post.post.comments.length > 0 ? (
+              <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
+                Comments
+              </h2>
+            ) : (
+              <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
+                Be the first to comment
+              </h2>
+            )}
+            <div
+              className="absolute right-8 top-[82px] cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
+              onClick={() => {
+                setOpenCreateCommentDialog(true);
               }}
-            />
+            >
+              <PlusIcon />
+            </div>
           </div>
+          {post.post.comments.length > 0 ? (
+            <div className="px-4 lg:px-8">
+              <CommentList
+                comments={post.post.comments}
+                userId={user ? user?.user.id : ''}
+                onDelete={(commentId) => {
+                  setCommentId(commentId);
+                  setOpenDeleteDialog(true);
+                }}
+              />
+            </div>
+          ) : null}
+        </section>
+        {post.relatedPosts && post.relatedPosts.length > 0 ? (
+          <>
+            {post.relatedPosts.length > 0 ? (
+              <>
+                <h2
+                  className={`flex justify-center ml-0 lg:ml-64 font-semibold text-xl font-inter ${
+                    post.post.comments.length > 0 ? 'mt-8' : 'mt-40'
+                  }`}
+                >
+                  Related posts
+                </h2>
+              </>
+            ) : null}
+            <div className="sm:ml-64 px-8 grid grid-cols-1 lg:grid-cols-3 my-8 gap-8">
+              {post.relatedPosts.map((post, index) => (
+                <Card post={post} key={index} />
+              ))}
+            </div>
+          </>
         ) : null}
-      </section>
+      </div>
     </>
   );
 };
