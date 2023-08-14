@@ -34,6 +34,7 @@ export const PostDetail = () => {
   const [post, setPost] = useState<GetPostByIdResponse>();
   const [likesCount, setLikesCount] = useState<number>(0);
   const [pulse, setPulse] = useState<boolean>(false);
+  const [clicked, setClicked] = useState(false);
   const [like, setLike] = useState<boolean>(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
   const [openCreateCommentDialog, setOpenCreateCommentDialog] =
@@ -125,6 +126,7 @@ export const PostDetail = () => {
   const handleLike = async () => {
     if (like) return;
 
+    setClicked(true);
     setLike(true);
 
     try {
@@ -189,7 +191,7 @@ export const PostDetail = () => {
       {renderAlertDialog(openDeleteDialog, handleDeleteComment, commentId)}
       {renderTextDialog(openCreateCommentDialog, handleSubmit)}
       <Sidebar signOut={signOut} userAvatar={userAvatar} />
-      <div className="overflow-scroll">
+      <div className="overflow-x-hidden">
         <section
           className={`${
             post.relatedPosts.length > 0 ? 'pt-10' : 'py-10'
@@ -261,11 +263,13 @@ export const PostDetail = () => {
                             width={16}
                             color={color}
                             cursor={'pointer'}
-                            className={`${
-                              pulse
-                                ? 'animate-pulselike'
-                                : 'animate-pulsedislike'
-                            }`}
+                            className={
+                              clicked
+                                ? pulse
+                                  ? 'animate-pulselike'
+                                  : 'animate-pulsedislike'
+                                : ''
+                            }
                             onClick={like ? undefined : handleLike}
                           />
                           <p>{likesCount}</p>

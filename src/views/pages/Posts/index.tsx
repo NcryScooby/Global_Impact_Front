@@ -1,6 +1,5 @@
 import { PostListSkeleton } from '../../components/skeletons/posts/PostListSkeleton';
 import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
-import { scrollToTop } from '../../../app/utils/functions/scrollToTop';
 import { postsService } from '../../../app/services/postsService';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NotFound } from '../../components/animations/NotFound';
@@ -65,7 +64,6 @@ export const Posts = () => {
 
   useEffect(() => {
     setPosts(data);
-    scrollToTop();
   }, [data]);
 
   useEffect(() => {
