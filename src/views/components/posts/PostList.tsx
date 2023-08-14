@@ -3,6 +3,7 @@ import { formatDate } from '../../../app/utils/functions/formatDate';
 import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
+import { Avatar } from '@mui/material';
 
 interface PostListProps {
   post: {
@@ -19,6 +20,7 @@ interface PostListProps {
       job: {
         name: string;
       };
+      avatar: string;
     };
     createdAt: string;
     views: number;
@@ -37,7 +39,6 @@ export const PostList = ({ post }: PostListProps) => {
               alt={post.title}
             />
           </Link>
-
           <div className="absolute top-4 left-4">
             <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
               {post.category.name}
@@ -45,13 +46,27 @@ export const PostList = ({ post }: PostListProps) => {
           </div>
         </div>
         <div className="mt-6 flex justify-between items-start">
-          <div>
-            <span className="block text-[12px] text-gray-600 uppercase">
-              {formatDate(post.createdAt)}
-            </span>
-            <span className="text-gray-600 text-[12px] font-normal">
-              <b>{post.author.name}</b>, {post.author.job.name}.
-            </span>
+          <div className="flex items-center gap-2">
+            <Avatar
+              alt="User avatar"
+              src={
+                post.author.avatar
+                  ? `${env.apiUrl}/uploads/users/${post.author.avatar}`
+                  : ''
+              }
+              sx={{
+                width: 42,
+                height: 42,
+              }}
+            />
+            <div>
+              <span className="block text-[12px] text-gray-600 uppercase">
+                {formatDate(post.createdAt)}
+              </span>
+              <span className="text-gray-600 text-[12px] font-normal">
+                <b>{post.author.name}</b>, {post.author.job.name}.
+              </span>
+            </div>
           </div>
           <div className="flex gap-2 select-none">
             <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">

@@ -127,6 +127,7 @@ export const Posts = () => {
                       job: {
                         name: post.author.job.name,
                       },
+                      avatar: post.author.avatar,
                     },
                     createdAt: post.createdAt,
                     views: post.views,

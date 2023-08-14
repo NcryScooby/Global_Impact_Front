@@ -220,7 +220,6 @@ export const PostDetail = () => {
                         : ''
                     }
                     sx={{
-                      border: '1px solid #fff',
                       width: 48,
                       height: 48,
                     }}

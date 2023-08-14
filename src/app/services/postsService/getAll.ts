@@ -23,6 +23,7 @@ export interface GetAllPostsResponse {
           id: string;
           name: string;
         };
+        avatar: string;
       };
       createdAt: string;
       views: number;
