@@ -190,7 +190,11 @@ export const PostDetail = () => {
       {renderTextDialog(openCreateCommentDialog, handleSubmit)}
       <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <div className="overflow-scroll">
-        <section className="py-10 h-full sm:py-16 lg:py-16 lg:px-56 sm:ml-64">
+        <section
+          className={`${
+            post.relatedPosts.length > 0 ? 'pt-10' : 'py-10'
+          } h-full lg:px-56 sm:ml-64`}
+        >
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
             <Breadcrumbs
               aria-label="breadcrumb"
@@ -208,7 +212,7 @@ export const PostDetail = () => {
             <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
               <div className="flex flex-col">
                 <img
-                  className="object-cover lg:max-h-80 lg:w-full select-none"
+                  className="object-cover object-top lg:max-h-80 lg:w-full select-none"
                   src={`${env.apiUrl}/uploads/posts/${post?.post.image}`}
                   alt={post.post.title}
                 />
@@ -286,18 +290,27 @@ export const PostDetail = () => {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <span
+            className="border-b-[1px] border-gray-300 block w-[675px] mx-auto
+           mt-28"
+          />
+          <div className="flex justify-between mt-28 px-4 lg:px-8">
             {post.post.comments.length > 0 ? (
-              <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
-                Comments
+              <h2 className="font-semibold text-lg font-inter">
+                Comments ({post.post.comments.length})
               </h2>
             ) : (
-              <h2 className="absolute top-20 left-8 font-semibold text-xl font-inter">
-                Be the first to comment
-              </h2>
+              <div>
+                <h2 className="font-semibold text-lg font-inter">
+                  No comments yet
+                </h2>
+                <span className="text-[12px] text-gray-500">
+                  Be the first to comment
+                </span>
+              </div>
             )}
             <div
-              className="absolute right-8 top-[82px] cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
+              className="cursor-pointer hover:bg-gray-800 bg-primary text-white w-6 h-6 flex items-center justify-center rounded-full"
               onClick={() => {
                 setOpenCreateCommentDialog(true);
               }}
@@ -319,24 +332,27 @@ export const PostDetail = () => {
           ) : null}
         </section>
         {post.relatedPosts && post.relatedPosts.length > 0 ? (
-          <>
+          <div className="sm:ml-64">
             {post.relatedPosts.length > 0 ? (
               <>
+                <span className="border-b-[1px] mx-auto border-gray-300 block w-[675px] mt-28" />
                 <h2
-                  className={`flex justify-center ml-0 lg:ml-64 font-semibold text-xl font-inter ${
-                    post.post.comments.length > 0 ? 'mt-8' : 'mt-40'
-                  }`}
+                  className={
+                    'flex justify-center font-semibold text-lg font-inter mt-28'
+                  }
                 >
                   Related posts
                 </h2>
               </>
             ) : null}
-            <div className="sm:ml-64 px-8 grid grid-cols-1 lg:grid-cols-3 my-8 gap-8">
+            <div
+              className={`px-4 lg:px-8 grid grid-cols-1 lg:grid-cols-${post.relatedPosts.length} my-8 gap-8`}
+            >
               {post.relatedPosts.map((post, index) => (
                 <Card post={post} key={index} />
               ))}
             </div>
-          </>
+          </div>
         ) : null}
       </div>
     </>

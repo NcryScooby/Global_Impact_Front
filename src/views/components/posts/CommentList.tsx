@@ -28,7 +28,7 @@ export const CommentList = ({ comments, userId, onDelete }: CommentProps) => {
             <div
               key={index}
               className={`py-4 lg:py-8 ${
-                index === 0 ? 'mt-32' : 'mt-3 lg:mt-6'
+                index === 0 ? 'mt-8' : 'mt-3 lg:mt-6'
               } rounded-[2px] bg-white relative border border-gray-300`}
             >
               <Comment
