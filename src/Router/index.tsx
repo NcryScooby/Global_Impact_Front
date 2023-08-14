@@ -1,3 +1,4 @@
+import { PostsCategory } from '../views/pages/Posts/PostsCategory';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PostDetail } from '../views/pages/Posts/PostDetail';
 import { AuthLayout } from '../views/layouts/AuthLayout';
@@ -23,6 +24,10 @@ export const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:postId" element={<PostDetail />} />
+          <Route
+            path="/posts/categories/:categoryId"
+            element={<PostsCategory />}
+          />
           <Route path="/posts/new" element={<NewPost />} />
           <Route path="*" element={<NotFound />} />
         </Route>
