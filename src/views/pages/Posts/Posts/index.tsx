@@ -1,15 +1,15 @@
-import { PostListSkeleton } from '../../components/skeletons/posts/PostListSkeleton';
-import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
-import { postsService } from '../../../app/services/postsService';
+import { PostListSkeleton } from '../../../components/skeletons/posts/PostListSkeleton';
+import { GetAllPostsResponse } from '../../../../app/services/postsService/getAll';
+import { postsService } from '../../../../app/services/postsService';
+import { NotFound } from '../../../components/animations/NotFound';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { NotFound } from '../../components/animations/NotFound';
+import { PostList } from '../../../components/posts/PostList';
+import { debounce } from '../../../../app/hooks/UseDebounce';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { PostList } from '../../components/posts/PostList';
-import { debounce } from '../../../app/hooks/UseDebounce';
-import { Sidebar } from '../../components/ui/Sidebar';
-import { useAuth } from '../../../app/hooks/UseAuth';
+import { Sidebar } from '../../../components/ui/Sidebar';
+import { useAuth } from '../../../../app/hooks/UseAuth';
+import { Input } from '../../../components/ui/Input';
 import { useSearchParams } from 'react-router-dom';
-import { Input } from '../../components/ui/Input';
 import { useQuery } from '@tanstack/react-query';
 import { Pagination } from '@mui/material';
 

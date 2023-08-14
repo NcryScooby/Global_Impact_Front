@@ -1,10 +1,10 @@
-import { GetAllJobsResponse } from '../../../app/services/jobsService/getAll';
+import { GetAllJobsResponse } from '../../../../app/services/jobsService/getAll';
 import { useRegisterController } from './useRegisterController';
-import { jobsService } from '../../../app/services/jobsService';
-import { InputFile } from '../../components/ui/InputFile';
-import { Button } from '../../components/ui/Button';
-import { Select } from '../../components/ui/Select';
-import { Input } from '../../components/ui/Input';
+import { jobsService } from '../../../../app/services/jobsService';
+import { InputFile } from '../../../components/ui/InputFile';
+import { Button } from '../../../components/ui/Button';
+import { Select } from '../../../components/ui/Select';
+import { Input } from '../../../components/ui/Input';
 import { useQuery } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
