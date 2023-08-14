@@ -106,15 +106,17 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 <span className="ml-3">New Post</span>
               </Link>
             </li>
-            <li>
-              <button
-                onClick={signOut}
-                className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900 text-white group"
-              >
-                <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white" />
-                <span className="ml-3">Sign Out</span>
-              </button>
-            </li>
+            <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-900">
+              <li>
+                <button
+                  onClick={signOut}
+                  className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900 text-white group"
+                >
+                  <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white" />
+                  <span className="ml-3">Sign Out</span>
+                </button>
+              </li>
+            </ul>
             <li className="flex-1 fixed bottom-4">
               <Avatar
                 alt="User avatar"
@@ -122,7 +124,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                   userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''
                 }
                 sx={{
-                  border: '1px solid #fff',
+                  border: '0.5px solid #fff',
                 }}
               />
             </li>
