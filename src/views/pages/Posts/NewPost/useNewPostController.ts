@@ -1,5 +1,5 @@
 import { CreatePostData } from '../../../../app/services/postsService/create';
-import { ResponseError } from '../../../../app/interfaces/ResponseError';
+import { ErrorResponse } from '../../../../app/interfaces/ErrorResponse';
 import { postsService } from '../../../../app/services/postsService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { ACCEPTED_IMAGE_TYPES } from '../../../../app/constants';
@@ -70,7 +70,7 @@ export const useNewPostController = () => {
       const { post } = await mutateAsync(formData as unknown as CreatePostData);
       navigate(`/posts/${post.id}`);
     } catch (error) {
-      toast.error((error as ResponseError).response.data.message);
+      toast.error((error as ErrorResponse).response.data.message);
     }
   });
 

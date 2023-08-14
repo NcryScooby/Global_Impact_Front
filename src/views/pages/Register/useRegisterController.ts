@@ -1,5 +1,5 @@
 import { SignUpData } from '../../../app/services/authService/signUp';
-import { ResponseError } from '../../../app/interfaces/ResponseError';
+import { ErrorResponse } from '../../../app/interfaces/ErrorResponse';
 import { authService } from '../../../app/services/authService';
 import { ACCEPTED_IMAGE_TYPES } from '../../../app/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -63,7 +63,7 @@ export const useRegisterController = () => {
       const { token } = await mutateAsync(formData as unknown as SignUpData);
       signIn(token);
     } catch (error) {
-      toast.error((error as ResponseError).response.data.message);
+      toast.error((error as ErrorResponse).response.data.message);
     }
   });
 

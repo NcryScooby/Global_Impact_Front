@@ -1,4 +1,4 @@
-export interface ResponseError {
+export interface ErrorResponse {
   response: {
     data: {
       error: string;

@@ -1,5 +1,5 @@
 import { SignInData } from '../../../app/services/authService/signIn';
-import { ResponseError } from '../../../app/interfaces/ResponseError';
+import { ErrorResponse } from '../../../app/interfaces/ErrorResponse';
 import { authService } from '../../../app/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useAuth } from '../../../app/hooks/UseAuth';
@@ -43,7 +43,7 @@ export const useLoginController = () => {
       const { token } = await mutateAsync(data);
       signIn(token);
     } catch (error) {
-      toast.error((error as ResponseError).response.data.message);
+      toast.error((error as ErrorResponse).response.data.message);
     }
   });
 

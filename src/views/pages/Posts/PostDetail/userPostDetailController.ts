@@ -1,5 +1,5 @@
 import { CreateCommentData } from '../../../../app/services/comments/create';
-import { ResponseError } from '../../../../app/interfaces/ResponseError';
+import { ErrorResponse } from '../../../../app/interfaces/ErrorResponse';
 import { commentsService } from '../../../../app/services/comments';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -50,7 +50,7 @@ export const usePostDetailController = (
       toast.success('Comment created successfully');
       setOpenDialog(false);
     } catch (error) {
-      toast.error((error as ResponseError).response.data.message);
+      toast.error((error as ErrorResponse).response.data.message);
     }
   });
 
