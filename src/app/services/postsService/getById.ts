@@ -56,8 +56,11 @@ export interface GetPostByIdResponse {
       name: string;
     };
     author: {
+      id: string;
       name: string;
+      email: string;
       job: {
+        id: string;
         name: string;
       };
       avatar: string;

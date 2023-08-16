@@ -76,7 +76,8 @@ export const PostDetail = () => {
   const { isLoading: isLoadingDeleteComment } = deleteCommentMutation;
 
   if (isError) {
-    return navigate('/', { replace: true });
+    navigate('/', { replace: true });
+    return null;
   }
 
   useEffect(() => {
@@ -220,18 +221,20 @@ export const PostDetail = () => {
                 />
                 <div className="mt-2 w-full flex justify-between items-start">
                   <div className="flex items-center gap-2 mt-4">
-                    <Avatar
-                      alt="User avatar"
-                      src={
-                        post.post.author.avatar
-                          ? `${env.apiUrl}/uploads/users/${post.post.author.avatar}`
-                          : ''
-                      }
-                      sx={{
-                        width: 48,
-                        height: 48,
-                      }}
-                    />
+                    <Link to={`/posts/authors/${post.post.author.id}`}>
+                      <Avatar
+                        alt="User avatar"
+                        src={
+                          post.post.author.avatar
+                            ? `${env.apiUrl}/uploads/users/${post.post.author.avatar}`
+                            : ''
+                        }
+                        sx={{
+                          width: 48,
+                          height: 48,
+                        }}
+                      />
+                    </Link>
                     <div>
                       <span className="block text-[12px] text-gray-600 uppercase">
                         {formatDate(post.post.createdAt)}

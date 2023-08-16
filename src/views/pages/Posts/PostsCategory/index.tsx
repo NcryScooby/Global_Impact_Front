@@ -42,7 +42,7 @@ export const PostsCategory = () => {
       queryFn: () =>
         postsService.getAllByCategoryId(categoryId, {
           orderBy: 'desc',
-          limit: 3,
+          limit: 6,
           title: searchTitleParam || undefined,
           page: Number(searchPageParam) || undefined,
         }),
@@ -141,8 +141,11 @@ export const PostsCategory = () => {
                       name: post.category.name,
                     },
                     author: {
+                      id: post.author.id,
                       name: post.author.name,
+                      email: post.author.email,
                       job: {
+                        id: post.author.job.id,
                         name: post.author.job.name,
                       },
                       avatar: post.author.avatar,

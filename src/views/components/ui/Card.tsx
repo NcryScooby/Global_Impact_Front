@@ -17,8 +17,11 @@ interface CardProps {
       name: string;
     };
     author: {
+      id: string;
       name: string;
+      email: string;
       job: {
+        id: string;
         name: string;
       };
       avatar: string;
@@ -50,18 +53,20 @@ const Card = ({ post }: CardProps) => {
         </div>
         <div className="mt-6 flex justify-between items-start">
           <div className="flex items-center gap-2">
-            <Avatar
-              alt="User avatar"
-              src={
-                post.author.avatar
-                  ? `${env.apiUrl}/uploads/users/${post.author.avatar}`
-                  : ''
-              }
-              sx={{
-                width: 42,
-                height: 42,
-              }}
-            />
+            <Link to={`/posts/authors/${post.author.id}`}>
+              <Avatar
+                alt="User avatar"
+                src={
+                  post.author.avatar
+                    ? `${env.apiUrl}/uploads/users/${post.author.avatar}`
+                    : ''
+                }
+                sx={{
+                  width: 42,
+                  height: 42,
+                }}
+              />
+            </Link>
             <div>
               <span className="block text-[12px] text-gray-600 uppercase">
                 {formatDate(post.createdAt)}
