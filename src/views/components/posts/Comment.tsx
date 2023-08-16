@@ -2,6 +2,7 @@ import { formatDate } from '../../../app/utils/functions/formatDate';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
 import { env } from '../../../app/config/env';
+import { Link } from 'react-router-dom';
 
 interface CommentProps {
   comment: {
@@ -38,15 +39,17 @@ export const Comment = ({ comment, userId, onDelete }: CommentProps) => {
       <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between space-x-8 w-full">
           <div className="relative flex-shrink-0">
-            <Avatar
-              className="select-none"
-              alt={comment.author.name}
-              src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
-              sx={{
-                width: 80,
-                height: 80,
-              }}
-            />
+            <Link to={`/posts/authors/${comment.author.id}`}>
+              <Avatar
+                className="select-none"
+                alt={comment.author.name}
+                src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
+                sx={{
+                  width: 80,
+                  height: 80,
+                }}
+              />
+            </Link>
           </div>
           <Divider orientation="vertical" flexItem />
           <div className="mt-0 lg:mt-0 w-full flex flex-col gap-4">
