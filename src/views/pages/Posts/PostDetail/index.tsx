@@ -194,7 +194,7 @@ export const PostDetail = () => {
       <div className="overflow-x-hidden">
         <section
           className={`${
-            post.relatedPosts.length > 0 ? 'pt-10' : 'py-10'
+            post.relatedPosts.length > 0 ? 'pt-16' : 'py-10'
           } h-full lg:px-56 sm:ml-64`}
         >
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
@@ -284,9 +284,11 @@ export const PostDetail = () => {
                   </h2>
                 </div>
                 <div className="absolute top-4 left-4">
-                  <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
-                    {post.post.category.name}
-                  </span>
+                  <Link to={`/posts/categories/${post.post.category.id}`}>
+                    <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+                      {post.post.category.name}
+                    </span>
+                  </Link>
                 </div>
               </div>
               <div>
@@ -340,13 +342,12 @@ export const PostDetail = () => {
             {post.relatedPosts.length > 0 ? (
               <>
                 <span className="border-b-[1px] mx-auto border-gray-300 block w-[675px] mt-28" />
-                <h2
-                  className={
-                    'flex justify-center font-semibold text-lg font-inter mt-28'
-                  }
-                >
+                <h2 className="flex justify-center mr-1 font-semibold text-lg font-inter mt-28">
                   Related posts
                 </h2>
+                <span className="flex justify-center text-[12px] text-gray-500">
+                  See some similar posts
+                </span>
               </>
             ) : null}
             <div

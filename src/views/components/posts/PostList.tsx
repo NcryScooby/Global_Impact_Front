@@ -8,6 +8,7 @@ interface PostListProps {
     image: string;
     likes: [];
     category: {
+      id: string;
       name: string;
     };
     author: {

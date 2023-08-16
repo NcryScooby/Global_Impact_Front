@@ -14,12 +14,14 @@ export default withMT({
       },
       keyframes: {
         pulselike: {
-          '0%, 100%': { transform: 'scale(1)', opacity: 1 },
-          '50%': { transform: 'scale(1.50)', opacity: 0.7 },
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.5)' },
+          '100%': { transform: 'scale(1)' },
         },
         pulsedislike: {
-          '0%, 100%': { transform: 'scale(1)', opacity: 1 },
-          '50%': { transform: 'scale(0.50)', opacity: 0.7 },
+          '0%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(0.85)' },
+          '100%': { transform: 'scale(1)' },
         },
       },
       animation: {

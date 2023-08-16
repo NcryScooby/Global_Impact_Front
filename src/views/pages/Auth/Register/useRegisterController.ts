@@ -1,9 +1,9 @@
-import { SignUpData } from '../../../app/services/authService/signUp';
-import { ErrorResponse } from '../../../app/interfaces/ErrorResponse';
-import { authService } from '../../../app/services/authService';
-import { ACCEPTED_IMAGE_TYPES } from '../../../app/constants';
+import { SignUpData } from '../../../../app/services/authService/signUp';
+import { ErrorResponse } from '../../../../app/interfaces/ErrorResponse';
+import { authService } from '../../../../app/services/authService';
+import { ACCEPTED_IMAGE_TYPES } from '../../../../app/constants';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from '../../../app/hooks/UseAuth';
+import { useAuth } from '../../../../app/hooks/UseAuth';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';

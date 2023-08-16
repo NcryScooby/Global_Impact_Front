@@ -1,6 +1,6 @@
 import { useLoginController } from './useLoginController';
-import { Button } from '../../components/ui/Button';
-import { Input } from '../../components/ui/Input';
+import { Button } from '../../../components/ui/Button';
+import { Input } from '../../../components/ui/Input';
 import { Link } from 'react-router-dom';
 
 export const Login = () => {

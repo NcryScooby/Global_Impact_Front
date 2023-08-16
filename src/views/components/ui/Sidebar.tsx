@@ -18,6 +18,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
   const location = useLocation();
   const currentPath = location.pathname;
   const postId = currentPath.split('/')[2];
+  const categoryId = currentPath.split('/')[3];
 
   return (
     <>
@@ -73,7 +74,8 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 to={'/posts'}
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
                   (currentPath === '/posts' ||
-                    currentPath === `/posts/${postId}`) &&
+                    currentPath === `/posts/${postId}` ||
+                    currentPath === `/posts/categories/${categoryId}`) &&
                   currentPath !== '/posts/new'
                     ? 'bg-gray-900'
                     : ''
@@ -82,7 +84,8 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 <LayoutIcon
                   className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
                     (currentPath === '/posts' ||
-                      currentPath === `/posts/${postId}`) &&
+                      currentPath === `/posts/${postId}` ||
+                      currentPath === `/posts/categories/${categoryId}`) &&
                     currentPath !== '/posts/new'
                       ? 'bg-gray-900 text-white'
                       : ''
