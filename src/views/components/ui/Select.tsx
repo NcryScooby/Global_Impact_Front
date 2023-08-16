@@ -14,6 +14,7 @@ interface SelectProps extends ComponentProps<'select'> {
   selectedOption: string;
   handleChangeSelectedOption: (event: ChangeEvent<HTMLSelectElement>) => void;
   isLoading?: boolean;
+  isSuccess?: boolean;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -28,6 +29,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       handleChangeSelectedOption,
       options,
       isLoading,
+      isSuccess,
       className,
       ...props
     }: SelectProps,
@@ -65,7 +67,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           )}
         >
           <option value="" disabled>
-            {!isLoading ? `Select your ${placeholder}` : null}
+            {isSuccess && !isLoading ? `Select your ${placeholder}` : null}
           </option>
           {options?.map((option) => (
             <option key={option.id} value={option.id}>
@@ -75,7 +77,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </select>
 
         <div className="pointer-events-none absolute top-[39px] right-0 flex items-center px-4 text-gray-400 ">
-          {!isLoading ? <CaretDownIcon width={20} height={20} /> : null}
+          {isSuccess && !isLoading ? (
+            <CaretDownIcon width={20} height={20} />
+          ) : null}
         </div>
 
         {error ? (

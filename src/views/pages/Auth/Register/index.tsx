@@ -15,7 +15,11 @@ export const Register = () => {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
 
-  const { data: jobs, isFetching } = useQuery<GetAllJobsResponse>({
+  const {
+    data: jobs,
+    isFetching,
+    isSuccess,
+  } = useQuery<GetAllJobsResponse>({
     queryKey: ['getJobs'],
     queryFn: () => jobsService.getAll(),
     staleTime: 1000 * 60 * 5,
@@ -77,6 +81,7 @@ export const Register = () => {
           placeholder="Job"
           selectedOption={selectedOption}
           isLoading={isFetching}
+          isSuccess={isSuccess}
           handleChangeSelectedOption={handleChangeSelectedOption}
           error={errors.jobId?.message}
           options={jobs ? jobs.jobs : []}

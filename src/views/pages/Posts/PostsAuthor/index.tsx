@@ -23,22 +23,23 @@ export const PostsAuthor = () => {
 
   const [posts, setPosts] = useState<getAllByAuthorIdPostsResponse>();
 
-  const { data, error, isFetching } = useQuery<getAllByAuthorIdPostsResponse>({
-    queryKey: [
-      'getPostsByAuthorId',
-      searchPageParam,
-      searchTitleParam,
-      authorId,
-    ],
-    queryFn: () =>
-      postsService.getAllByAuthorId(authorId, {
-        orderBy: 'desc',
-        limit: 6,
-        title: searchTitleParam || undefined,
-        page: Number(searchPageParam) || undefined,
-      }),
-    keepPreviousData: true,
-  });
+  const { data, error, isFetching, isSuccess } =
+    useQuery<getAllByAuthorIdPostsResponse>({
+      queryKey: [
+        'getPostsByAuthorId',
+        searchPageParam,
+        searchTitleParam,
+        authorId,
+      ],
+      queryFn: () =>
+        postsService.getAllByAuthorId(authorId, {
+          orderBy: 'desc',
+          limit: 6,
+          title: searchTitleParam || undefined,
+          page: Number(searchPageParam) || undefined,
+        }),
+      keepPreviousData: true,
+    });
 
   const handleTitleChangeDebounced = useCallback(
     debounce((title: string) => {
@@ -75,6 +76,7 @@ export const PostsAuthor = () => {
       posts={posts}
       error={error}
       isFetching={isFetching}
+      isSuccess={isSuccess}
       inputRef={inputRef}
       localTitle={localTitle}
       searchPageParam={searchPageParam}

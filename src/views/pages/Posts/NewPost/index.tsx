@@ -16,7 +16,11 @@ export const NewPost = () => {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
 
-  const { data: categories, isFetching } = useQuery<GetAllCategoriesResponse>({
+  const {
+    data: categories,
+    isFetching,
+    isSuccess,
+  } = useQuery<GetAllCategoriesResponse>({
     queryKey: ['getCategories'],
     queryFn: () => categoriesService.getAll(),
     staleTime: 1000 * 60 * 5,
@@ -80,6 +84,7 @@ export const NewPost = () => {
                           placeholder="Category"
                           selectedOption={selectedOption}
                           isLoading={isFetching}
+                          isSuccess={isSuccess}
                           handleChangeSelectedOption={
                             handleChangeSelectedOption
                           }

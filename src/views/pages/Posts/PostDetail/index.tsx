@@ -3,6 +3,7 @@ import {
   HeartFilledIcon,
   ChevronRightIcon,
   PlusIcon,
+  TrashIcon,
 } from '@radix-ui/react-icons';
 import { PostDetailSkeleton } from '../../../components/skeletons/posts/PostDetailSkeleton';
 import { GetPostByIdResponse } from '../../../../app/services/postsService/getById';
@@ -35,13 +36,18 @@ export const PostDetail = () => {
   const [pulse, setPulse] = useState<boolean>(false);
   const [clicked, setClicked] = useState(false);
   const [like, setLike] = useState<boolean>(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState<boolean>(false);
+  const [openDeleteCommentDialog, setOpenDeleteCommentDialog] =
+    useState<boolean>(false);
   const [openCreateCommentDialog, setOpenCreateCommentDialog] =
+    useState<boolean>(false);
+  const [openDeletePostDialog, setOpenDeletePostDialog] =
     useState<boolean>(false);
   const [commentId, setCommentId] = useState<string>('');
   const [color, setColor] = useState<string>('');
 
-  type DeleteCommentFunction = (commentId: string) => Promise<void>;
+  type MutateFunction<T> = {
+    mutateAsync: (data: T) => Promise<void>;
+  };
   type CreateCommentFunction = (
     e?: React.BaseSyntheticEvent<object>
   ) => Promise<void>;
@@ -64,20 +70,30 @@ export const PostDetail = () => {
     queryFn: () => postsService.getById(postId),
   });
 
+  if (isError) {
+    navigate('/', { replace: true });
+    return null;
+  }
+
+  const deletePostMutation = useMutation(postsService.deletePost, {
+    onSuccess: () => {
+      setOpenDeletePostDialog(false);
+      toast.success('Post deleted successfully');
+      navigate('/posts', { replace: true });
+    },
+  });
+
+  const { isLoading: isLoadingDeletePost } = deletePostMutation;
+
   const deleteCommentMutation = useMutation(commentsService.deleteComment, {
     onSuccess: async () => {
       await queryClient.refetchQueries(['getPostById', postId]);
-      setOpenDeleteDialog(false);
+      setOpenDeleteCommentDialog(false);
       toast.success('Comment deleted successfully');
     },
   });
 
   const { isLoading: isLoadingDeleteComment } = deleteCommentMutation;
-
-  if (isError) {
-    navigate('/', { replace: true });
-    return null;
-  }
 
   useEffect(() => {
     if (data) {
@@ -144,27 +160,31 @@ export const PostDetail = () => {
     }
   };
 
-  const handleDeleteComment = async (commentId: string) => {
+  async function handleDelete<T>(featureId: T, mutation: MutateFunction<T>) {
     try {
-      await deleteCommentMutation.mutateAsync(commentId);
+      await mutation.mutateAsync(featureId);
     } catch {
       toast.error('Oops, an error occurred');
     }
-  };
+  }
 
-  const renderAlertDialog = (
+  const renderDeleteAlertDialog = (
+    title: string,
+    content: string,
+    isLoading: boolean,
     open: boolean,
-    onConfirm: DeleteCommentFunction,
-    commentId: string
+    onConfirm: (featureId: string) => Promise<void>,
+    featureId: string,
+    setOpenDialog: (open: boolean) => void
   ) =>
     open ? (
       <AlertDialog
-        title="Are you sure you want to delete this comment?"
-        content="Do you really want to remove this comment? Once deleted, it cannot be recovered."
-        isLoading={isLoadingDeleteComment}
+        title={title}
+        content={content}
+        isLoading={isLoading}
         openDialog={open}
-        setOpenDialog={setOpenDeleteDialog}
-        onConfirm={() => onConfirm(commentId)}
+        setOpenDialog={setOpenDialog}
+        onConfirm={() => onConfirm(featureId)}
       />
     ) : null;
 
@@ -187,7 +207,24 @@ export const PostDetail = () => {
 
   return (
     <>
-      {renderAlertDialog(openDeleteDialog, handleDeleteComment, commentId)}
+      {renderDeleteAlertDialog(
+        'Are you sure you want to delete this post?',
+        'Do you really want to remove this post? Once deleted, it cannot be recovered.',
+        isLoadingDeletePost,
+        openDeletePostDialog,
+        () => handleDelete<string>(postId, deletePostMutation),
+        postId,
+        setOpenDeletePostDialog
+      )}
+      {renderDeleteAlertDialog(
+        'Are you sure you want to delete this comment?',
+        'Do you really want to remove this comment? Once deleted, it cannot be recovered.',
+        isLoadingDeleteComment,
+        openDeleteCommentDialog,
+        () => handleDelete<string>(commentId, deleteCommentMutation),
+        commentId,
+        setOpenDeleteCommentDialog
+      )}
       {renderTextDialog(openCreateCommentDialog, handleSubmit)}
       <div className="overflow-x-hidden">
         <section
@@ -293,6 +330,19 @@ export const PostDetail = () => {
                     </span>
                   </Link>
                 </div>
+                {post.post.author.id === user?.user.id ? (
+                  <div className="absolute top-4 right-4">
+                    <TrashIcon
+                      height={22}
+                      width={22}
+                      color="#111111"
+                      className="bg-white rounded-full p-1 cursor-pointer hover:bg-gray-300"
+                      onClick={() => {
+                        setOpenDeletePostDialog(true);
+                      }}
+                    />
+                  </div>
+                ) : null}
               </div>
               <div>
                 <p className="text-[16px] font-serif">{post.post.content}</p>
@@ -334,7 +384,7 @@ export const PostDetail = () => {
                 userId={user ? user?.user.id : ''}
                 onDelete={(commentId) => {
                   setCommentId(commentId);
-                  setOpenDeleteDialog(true);
+                  setOpenDeleteCommentDialog(true);
                 }}
               />
             </div>

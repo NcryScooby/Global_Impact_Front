@@ -22,7 +22,7 @@ export const Posts = () => {
 
   const [posts, setPosts] = useState<GetAllPostsResponse>();
 
-  const { data, error, isFetching } = useQuery<GetAllPostsResponse>({
+  const { data, error, isFetching, isSuccess } = useQuery<GetAllPostsResponse>({
     queryKey: ['getPosts', searchPageParam, searchTitleParam],
     queryFn: () =>
       postsService.getAll({
@@ -70,6 +70,7 @@ export const Posts = () => {
         posts={posts}
         error={error}
         isFetching={isFetching}
+        isSuccess={isSuccess}
         inputRef={inputRef}
         localTitle={localTitle}
         searchPageParam={searchPageParam}

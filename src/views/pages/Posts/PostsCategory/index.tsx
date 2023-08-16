@@ -23,8 +23,8 @@ export const PostsCategory = () => {
 
   const [posts, setPosts] = useState<GetAllByCategoryIdPostsResponse>();
 
-  const { data, error, isFetching } = useQuery<GetAllByCategoryIdPostsResponse>(
-    {
+  const { data, error, isFetching, isSuccess } =
+    useQuery<GetAllByCategoryIdPostsResponse>({
       queryKey: [
         'getPostsByCategoryId',
         searchPageParam,
@@ -39,8 +39,7 @@ export const PostsCategory = () => {
           page: Number(searchPageParam) || undefined,
         }),
       keepPreviousData: true,
-    }
-  );
+    });
 
   const handleTitleChangeDebounced = useCallback(
     debounce((title: string) => {
@@ -77,6 +76,7 @@ export const PostsCategory = () => {
       posts={posts}
       error={error}
       isFetching={isFetching}
+      isSuccess={isSuccess}
       inputRef={inputRef}
       localTitle={localTitle}
       searchPageParam={searchPageParam}

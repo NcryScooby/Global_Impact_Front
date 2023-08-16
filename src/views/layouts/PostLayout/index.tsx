@@ -19,6 +19,7 @@ interface PostLayoutProps<
   posts: T | undefined;
   error: unknown;
   isFetching: boolean;
+  isSuccess: boolean;
   inputRef: React.RefObject<HTMLInputElement>;
   localTitle: string;
   searchPageParam: string;
@@ -37,6 +38,7 @@ export const PostLayout = <
     posts,
     error,
     isFetching,
+    isSuccess,
     inputRef,
     localTitle,
     searchPageParam,
@@ -69,10 +71,10 @@ export const PostLayout = <
           <div className="flex-row lg:flex lg:items-center lg:justify-between">
             <div className="flex-1 text-center lg:text-left">
               <h2 className="text-3xl text-start font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-                {!isFetching ? (
-                  posts && setHeaderTitle()
+                {isSuccess && !isFetching  ? (
+                  setHeaderTitle()
                 ) : (
-                  !isFetching && !posts ? 'Post not found' : <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm"></div>
+                  !isSuccess && !isFetching ? 'Post not found' : <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm" />
                 )}
               </h2>
               <p className="max-w-xl text-start mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0">
@@ -99,6 +101,7 @@ export const PostLayout = <
                 <NotFound />
               </div>
             ) : (
+              isSuccess &&
               !isFetching &&
               posts &&
               posts.posts.map((post) => (
