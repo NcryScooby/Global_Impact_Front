@@ -38,7 +38,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           <div
             className="
             absolute
-            top-[21px]
+            top-[13px]
+            lg:top-[21px]
             right-0
             flex
             items-center
