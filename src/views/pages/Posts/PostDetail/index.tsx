@@ -210,6 +210,9 @@ export const PostDetail = () => {
             >
               <Link to="/">Home</Link>
               <Link to="/posts">Posts</Link>
+              <Link to={`/posts/categories/${post.post.category.id}`}>
+                {post.post.category.name}
+              </Link>
               <Link to={`/posts/${post.post.id}`}>{post.post.title}</Link>
             </Breadcrumbs>
             <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
