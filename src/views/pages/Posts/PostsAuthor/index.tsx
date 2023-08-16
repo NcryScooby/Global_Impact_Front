@@ -37,7 +37,7 @@ export const PostsAuthor = () => {
         title: searchTitleParam || undefined,
         page: Number(searchPageParam) || undefined,
       }),
-    keepPreviousData: false,
+    keepPreviousData: true,
   });
 
   const handleTitleChangeDebounced = useCallback(

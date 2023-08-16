@@ -17,7 +17,6 @@ import { AlertDialog } from '../../../components/ui/AlertDialog';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { TextDialog } from '../../../components/ui/TextDialog';
 import { POST_LIKE_COLORS } from '../../../../app/constants';
-import { Sidebar } from '../../../components/ui/Sidebar';
 import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Avatar, Breadcrumbs } from '@mui/material';
 import { env } from '../../../../app/config/env';
@@ -27,7 +26,7 @@ import { toast } from 'react-hot-toast';
 
 export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
-  const { signOut, userAvatar } = useAuth();
+  const { userAvatar } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
@@ -101,7 +100,6 @@ export const PostDetail = () => {
   if (!post) {
     return (
       <>
-        <Sidebar signOut={signOut} userAvatar={userAvatar} />
         <div className="sm:ml-64 h-full">
           <PostDetailSkeleton />
         </div>
@@ -191,7 +189,6 @@ export const PostDetail = () => {
     <>
       {renderAlertDialog(openDeleteDialog, handleDeleteComment, commentId)}
       {renderTextDialog(openCreateCommentDialog, handleSubmit)}
-      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <div className="overflow-x-hidden">
         <section
           className={`${

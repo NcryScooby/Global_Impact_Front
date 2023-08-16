@@ -5,8 +5,6 @@ import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { ArrowLeftIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { NotFound } from '../../components/animations/NotFound';
 import { PostList } from '../../components/posts/PostList';
-import { Sidebar } from '../../components/ui/Sidebar';
-import { useAuth } from '../../../app/hooks/UseAuth';
 import { Input } from '../../components/ui/Input';
 import { SCREEN } from '../../../app/constants';
 import { Pagination } from '@mui/material';
@@ -46,7 +44,6 @@ export const PostLayout = <
     handlePageChange,
     screen,
   }: PostLayoutProps<T>) => {
-  const { signOut, userAvatar } = useAuth();
 
   const isPostsScreen = (screen === SCREEN.POSTS);
   const isCategoryScreen = (screen === SCREEN.CATEGORIES);
@@ -60,7 +57,6 @@ export const PostLayout = <
 
   return (
     <>
-      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <section className="bg-gray-50 sm:ml-64">
         {!isPostsScreen ? <Link
           to={'/posts'}
@@ -76,7 +72,7 @@ export const PostLayout = <
                 {!isFetching ? (
                   posts && setHeaderTitle()
                 ) : (
-                  !isFetching && !posts ? 'Post not found' : <div className="h-10 w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm"></div>
+                  !isFetching && !posts ? 'Post not found' : <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm"></div>
                 )}
               </h2>
               <p className="max-w-xl text-start mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0">

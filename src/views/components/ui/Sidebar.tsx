@@ -4,8 +4,10 @@ import {
   Pencil2Icon,
   LayoutIcon,
 } from '@radix-ui/react-icons';
+import { useSideBar } from '../../../app/hooks/UseSideBar';
 import { useLocation } from 'react-router-dom';
 import { env } from '../../../app/config/env';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 
@@ -15,21 +17,48 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
+  const { isOpen, setIsOpen } = useSideBar();
   const location = useLocation();
   const currentPath = location.pathname;
   const postId = currentPath.split('/')[2];
   const categoryId = currentPath.split('/')[3];
+  const sidebarRef = useRef<HTMLElement | null>(null);
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      sidebarRef.current &&
+      !sidebarRef.current.contains(event.target as Node) &&
+      !buttonRef.current?.contains(event.target as Node)
+    ) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleSignOut = () => {
+    setIsOpen(false);
+    signOut();
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
       <button
+        ref={buttonRef}
+        onClick={() => setIsOpen(!isOpen)}
         data-drawer-target="separator-sidebar"
         data-drawer-toggle="separator-sidebar"
         aria-controls="separator-sidebar"
         type="button"
-        className="inline-flex items-center p-2 mt-2 ml-3 text-sm rounded-lg sm:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600"
+        className="inline-flex items-center p-2 mt-2 ml-3 text-sm rounded-lg sm:hidden focus:outline-none text-gray-400"
       >
-        <span className="sr-only">Open sidebar</span>
         <svg
           className="w-6 h-6"
           aria-hidden="true"
@@ -46,8 +75,11 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
       </button>
 
       <aside
+        ref={sidebarRef}
         id="separator-sidebar"
-        className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform ease-in-out duration-300 ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        } sm:translate-x-0`}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-primary">
@@ -55,6 +87,9 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             <li>
               <Link
                 to={'/'}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
                 className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-900 group ${
                   currentPath === '/' ? 'bg-gray-900' : ''
                 }`}
@@ -72,6 +107,9 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             <li>
               <Link
                 to={'/posts'}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
                   (currentPath === '/posts' ||
                     currentPath === `/posts/${postId}` ||
@@ -97,6 +135,9 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             <li>
               <Link
                 to={'/posts/new'}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
                   currentPath === '/posts/new' ? 'bg-gray-900' : ''
                 }`}
@@ -112,7 +153,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-900">
               <li>
                 <button
-                  onClick={signOut}
+                  onClick={handleSignOut}
                   className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900 text-white group"
                 >
                   <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white" />

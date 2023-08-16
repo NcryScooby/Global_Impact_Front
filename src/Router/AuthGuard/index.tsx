@@ -16,5 +16,9 @@ export const AuthGuard = ({ isPrivate }: AuthGuardProps) => {
     return <Navigate to={'/'} replace />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+    </>
+  );
 };

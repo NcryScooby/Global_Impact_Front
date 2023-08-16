@@ -10,8 +10,11 @@ import { Posts } from '../views/pages/Posts/Posts';
 import { Login } from '../views/pages/Auth/Login';
 import { Home } from '../views/pages/Home';
 import { AuthGuard } from './AuthGuard';
+import { useAuth } from '../app/hooks/UseAuth';
+import { Sidebar } from '../views/components/ui/Sidebar';
 
 export const Router = () => {
+  const { signOut, userAvatar } = useAuth();
   return (
     <BrowserRouter>
       <Routes>
@@ -21,7 +24,15 @@ export const Router = () => {
             <Route path="/register" element={<Register />} />
           </Route>
         </Route>
-        <Route element={<AuthGuard isPrivate />}>
+
+        <Route
+          element={
+            <>
+              <Sidebar signOut={signOut} userAvatar={userAvatar} />
+              <AuthGuard isPrivate />
+            </>
+          }
+        >
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:postId" element={<PostDetail />} />
@@ -31,8 +42,8 @@ export const Router = () => {
           />
           <Route path="/posts/authors/:authorId" element={<PostsAuthor />} />
           <Route path="/posts/new" element={<NewPost />} />
-          <Route path="*" element={<NotFound />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -3,8 +3,6 @@ import { categoriesService } from '../../../../app/services/categoriesService';
 import { useNewPostController } from './useNewPostController';
 import { InputFile } from '../../../components/ui/InputFile';
 import { TextArea } from '../../../components/ui/TextArea';
-import { Sidebar } from '../../../components/ui/Sidebar';
-import { useAuth } from '../../../../app/hooks/UseAuth';
 import { Button } from '../../../components/ui/Button';
 import { Select } from '../../../components/ui/Select';
 import { Input } from '../../../components/ui/Input';
@@ -14,7 +12,6 @@ import { ChangeEvent, useState } from 'react';
 export const NewPost = () => {
   const { handleSubmit, reset, register, errors, isLoading } =
     useNewPostController();
-  const { signOut, userAvatar } = useAuth();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -51,7 +48,6 @@ export const NewPost = () => {
 
   return (
     <>
-      <Sidebar signOut={signOut} userAvatar={userAvatar} />
       <div className="sm:ml-64">
         <section>
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
