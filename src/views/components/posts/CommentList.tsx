@@ -8,6 +8,7 @@ interface CommentProps {
       name: string;
       avatar: string;
       job: {
+        id: string;
         name: string;
       };
     };
@@ -21,26 +22,28 @@ interface CommentProps {
 export const CommentList = ({ comments, userId, onDelete }: CommentProps) => {
   return (
     <>
-      {
-        // prettier-ignore
-        comments.length
-          ? comments.map((comment, index) => (
-            <div
-              key={index}
-              className={`py-4 lg:py-8 ${
-                index === 0 ? 'mt-8' : 'mt-3 lg:mt-6'
-              } rounded-[2px] bg-white relative border border-gray-300`}
-            >
-              <Comment
+      <div className="px-4 lg:px-8">
+        {
+          // prettier-ignore
+          comments.length > 0
+            ? comments.map((comment, index) => (
+              <div
                 key={index}
-                comment={comment}
-                userId={userId}
-                onDelete={onDelete}
-              />
-            </div>
-          ))
-          : null
-      }
+                className={`py-4 lg:py-8 ${
+                  index === 0 ? 'mt-8' : 'mt-3 lg:mt-6'
+                } rounded-[2px] bg-white relative border border-gray-300`}
+              >
+                <Comment
+                  key={index}
+                  comment={comment}
+                  userId={userId}
+                  onDelete={onDelete}
+                />
+              </div>
+            ))
+            : null
+        }
+      </div>
     </>
   );
 };

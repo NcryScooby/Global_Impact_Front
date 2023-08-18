@@ -12,6 +12,7 @@ interface CommentProps {
       name: string;
       avatar: string;
       job: {
+        id: string;
         name: string;
       };
     };

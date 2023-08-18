@@ -1,4 +1,4 @@
-import { PaginationParams } from '../../interfaces/PaginationParams';
+import { IPaginationParams } from '../../interfaces/pagination/IPaginationParams';
 import { httpClient } from '../httpClient';
 
 export interface GetAllJobsResponse {
@@ -11,7 +11,7 @@ export interface GetAllJobsResponse {
 }
 
 export const getAll = async (
-  params?: PaginationParams
+  params?: IPaginationParams
 ): Promise<GetAllJobsResponse> => {
   const { data } = await httpClient.get<GetAllJobsResponse>('/jobs', {
     params,

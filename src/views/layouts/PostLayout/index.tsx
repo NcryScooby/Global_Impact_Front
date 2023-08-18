@@ -1,10 +1,9 @@
 import { getAllByAuthorIdPostsResponse } from '../../../app/services/postsService/getAllPostByAuthorId';
 import { GetAllByCategoryIdPostsResponse } from '../../../app/services/postsService/getAllByCategoryId';
-import { PostListSkeleton } from '../../components/skeletons/posts/PostListSkeleton';
 import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { ArrowLeftIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
-import { NotFound } from '../../components/animations/NotFound';
-import { PostList } from '../../components/posts/PostList';
+import { PostsHeader } from '../../components/posts/PostLayoutHeader';
+import { PostsGrid } from '../../components/posts/PostsLayoutGrid';
 import { Input } from '../../components/ui/Input';
 import { SCREEN } from '../../../app/constants';
 import { Pagination } from '@mui/material';
@@ -19,7 +18,7 @@ interface PostLayoutProps<
 > {
   posts: T | undefined;
   error: unknown;
-  isFetching: boolean;
+  isLoading: boolean;
   isSuccess: boolean;
   inputRef: React.RefObject<HTMLInputElement>;
   localTitle: string;
@@ -38,7 +37,7 @@ export const PostLayout = <
 >({
     posts,
     error,
-    isFetching,
+    isLoading,
     isSuccess,
     inputRef,
     localTitle,
@@ -59,78 +58,53 @@ export const PostLayout = <
   };
 
   useEffect(() => {
-    if (!isFetching && inputRef.current) {
+    if (!isLoading && inputRef.current) {
       inputRef.current.focus();
     }
-  }, [isFetching]);
+  }, [isLoading]);
 
   return (
     <>
       <section className="bg-gray-50 sm:ml-64">
-        {!isPostsScreen ? <Link
-          to={'/posts'}
-          className="absolute top-[55px] left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5"
-        >
-          <ArrowLeftIcon color="#757575" />
-          <p className="text-xs text-gray-600">Back to all posts</p>
-        </Link> : null }
+        {!isPostsScreen && (
+          <Link
+            to="/posts"
+            className="absolute top-[55px] left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5"
+          >
+            <ArrowLeftIcon color="#757575" />
+            <p className="text-xs text-gray-600">Back to all posts</p>
+          </Link>
+        )}
         <div className="px-4 py-8 lg:py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex-row lg:flex lg:items-center lg:justify-between">
-            <div className="flex-1 text-center lg:text-left">
-              <h2 className="text-3xl text-start font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-                {!isFetching && isSuccess  ? (
-                  setHeaderTitle()
-                ) : (
-                  !isFetching && !isSuccess ? 'Post not found' : <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm" />
-                )}
-              </h2>
-              <p className="max-w-xl text-start mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0">
-                Keep up with the latest world news, all current affairs and
-                coverage. News of the day, photos and videos. Be the first to
-                know.
-              </p>
-            </div>
+            <PostsHeader isLoading={isLoading} isSuccess={isSuccess} setHeaderTitle={setHeaderTitle} />
             <Input
               name="title"
               placeholder="Search Post..."
               value={localTitle}
               onChange={handleTitleChange}
               className="w-full lg:w-72 mt-6 lg:mt-0"
-              disabled={isFetching}
+              disabled={isLoading}
               ref={inputRef}
               icon={<MagnifyingGlassIcon />}
             />
           </div>
           <div className="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
-            {isFetching && !error && <PostListSkeleton count={6} />}
-            {error ? (
-              <div>
-                <NotFound />
-              </div>
-            ) : (
-              !isFetching &&
-              isSuccess &&
-              posts?.posts.map((post) => (
-                <PostList
-                  key={post.id}
-                  post={post}
-                />
-              ))
-            )}
+            <PostsGrid isLoading={isLoading} error={error} posts={posts} />
           </div>
         </div>
         <div className="flex items-center justify-center py-16">
-          {!error ? (
+          {!error && (
             <Pagination
               count={posts?.meta.totalPages}
               page={Number(searchPageParam)}
               shape="rounded"
-              disabled={isFetching}
+              disabled={isLoading}
               onChange={(_, page) => {
                 handlePageChange(page.toString());
               }}
             />
-          ) : null}
+          )}
         </div>
       </section>
     </>
