@@ -40,7 +40,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="relative">
         <label
-          htmlFor="first_name"
+          htmlFor={selectId}
           className="block mb-2 text-[13px] text-gray-500"
         >
           {label}

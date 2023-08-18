@@ -1,4 +1,5 @@
 import { addThreeDots } from '../../../app/utils/functions/addThreeDots';
+import { formatViews } from '../../../app/utils/functions/formatViews';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
 import { formatDate } from '../../../app/utils/functions/formatDate';
 import { env } from '../../../app/config/env';
@@ -79,11 +80,7 @@ const Card = ({ post }: CardProps) => {
           <div className="flex gap-2 select-none">
             <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
               <BarChartIcon height={12} width={12} color="#4b5563" />
-              <p>
-                {post.views > 1000
-                  ? `${(post.views / 1000).toFixed(1)}k`
-                  : post.views}
-              </p>
+              <p>{formatViews(post.views)}</p>
             </span>
             <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
               <HeartFilledIcon height={12} width={12} color="#9e9e9e" />
@@ -92,12 +89,10 @@ const Card = ({ post }: CardProps) => {
           </div>
         </div>
         <p className="mt-5 text-[18px] leading-7 font-semibold">
-          {post.title.length > 30 ? addThreeDots(post.title, 30) : post.title}
+          {addThreeDots(post.title, 30)}
         </p>
         <p className="mt-4 text-[14px] text-gray-600">
-          {post.content.length > 80
-            ? addThreeDots(post.content, 80)
-            : post.content}
+          {addThreeDots(post.content, 80)}
         </p>
         <Link
           to={`/posts/${post.id}`}

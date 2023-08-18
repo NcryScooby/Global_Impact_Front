@@ -1,4 +1,4 @@
-export interface ErrorResponse {
+export interface IErrorResponse {
   response: {
     data: {
       error: string;

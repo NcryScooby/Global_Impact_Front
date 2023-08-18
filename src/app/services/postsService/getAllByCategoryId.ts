@@ -1,4 +1,5 @@
-import { PaginationParams } from '../../interfaces/PaginationParams';
+import { IPaginationParams } from '../../interfaces/pagination/IPaginationParams';
+import { IMeta } from '../../interfaces/pagination/IMeta';
 import { httpClient } from '../httpClient';
 
 export interface GetAllByCategoryIdPostsResponse {
@@ -29,14 +30,10 @@ export interface GetAllByCategoryIdPostsResponse {
       views: number;
     }
   ];
-  meta: {
-    totalCount: number;
-    currentPage: number;
-    totalPages: number;
-  };
+  meta: IMeta;
 }
 
-interface GetAllByCategoryIdPostsParams extends PaginationParams {
+interface GetAllByCategoryIdPostsParams extends IPaginationParams {
   title?: string;
 }
 

@@ -7,6 +7,7 @@ export interface MeResponse {
     email: string;
     avatar: string;
     job: {
+      id: string;
       name: string;
     };
   };

@@ -29,7 +29,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="relative">
         <label
-          htmlFor="first_name"
+          htmlFor={inputId}
           className="block mb-2 text-[13px] text-gray-500"
         >
           {label}

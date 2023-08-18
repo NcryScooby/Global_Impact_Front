@@ -25,6 +25,7 @@ export interface GetPostByIdResponse {
           name: string;
           avatar: string;
           job: {
+            id: string;
             name: string;
           };
         };
