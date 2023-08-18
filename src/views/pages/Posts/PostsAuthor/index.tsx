@@ -1,9 +1,9 @@
 import { getAllByAuthorIdPostsResponse } from '../../../../app/services/postsService/getAllPostByAuthorId';
 import { postsService } from '../../../../app/services/postsService';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { debounce } from '../../../../app/hooks/UseDebounce';
 import { PostLayout } from '../../../layouts/PostLayout';
+import { useCallback, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 export const PostsAuthor = () => {
@@ -21,25 +21,27 @@ export const PostsAuthor = () => {
 
   const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
 
-  const [posts, setPosts] = useState<getAllByAuthorIdPostsResponse>();
-
-  const { data, error, isFetching, isSuccess } =
-    useQuery<getAllByAuthorIdPostsResponse>({
-      queryKey: [
-        'getPostsByAuthorId',
-        searchPageParam,
-        searchTitleParam,
-        authorId,
-      ],
-      queryFn: () =>
-        postsService.getAllByAuthorId(authorId, {
-          orderBy: 'desc',
-          limit: 6,
-          title: searchTitleParam || undefined,
-          page: Number(searchPageParam) || undefined,
-        }),
-      keepPreviousData: true,
-    });
+  const {
+    data: posts,
+    error,
+    isFetching,
+    isSuccess,
+  } = useQuery<getAllByAuthorIdPostsResponse>({
+    queryKey: [
+      'getPostsByAuthorId',
+      searchPageParam,
+      searchTitleParam,
+      authorId,
+    ],
+    queryFn: () =>
+      postsService.getAllByAuthorId(authorId, {
+        orderBy: 'desc',
+        limit: 6,
+        title: searchTitleParam || undefined,
+        page: Number(searchPageParam) || undefined,
+      }),
+    keepPreviousData: true,
+  });
 
   const handleTitleChangeDebounced = useCallback(
     debounce((title: string) => {
@@ -60,16 +62,6 @@ export const PostsAuthor = () => {
       page,
     });
   };
-
-  useEffect(() => {
-    setPosts(data);
-  }, [data]);
-
-  useEffect(() => {
-    if (!isFetching && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFetching]);
 
   return (
     <PostLayout

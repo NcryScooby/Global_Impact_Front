@@ -1,6 +1,6 @@
 import { GetAllByCategoryIdPostsResponse } from '../../../../app/services/postsService/getAllByCategoryId';
 import { postsService } from '../../../../app/services/postsService';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { debounce } from '../../../../app/hooks/UseDebounce';
 import { PostLayout } from '../../../layouts/PostLayout';
@@ -21,25 +21,27 @@ export const PostsCategory = () => {
 
   const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
 
-  const [posts, setPosts] = useState<GetAllByCategoryIdPostsResponse>();
-
-  const { data, error, isFetching, isSuccess } =
-    useQuery<GetAllByCategoryIdPostsResponse>({
-      queryKey: [
-        'getPostsByCategoryId',
-        searchPageParam,
-        searchTitleParam,
-        categoryId,
-      ],
-      queryFn: () =>
-        postsService.getAllByCategoryId(categoryId, {
-          orderBy: 'desc',
-          limit: 6,
-          title: searchTitleParam || undefined,
-          page: Number(searchPageParam) || undefined,
-        }),
-      keepPreviousData: true,
-    });
+  const {
+    data: posts,
+    error,
+    isFetching,
+    isSuccess,
+  } = useQuery<GetAllByCategoryIdPostsResponse>({
+    queryKey: [
+      'getPostsByCategoryId',
+      searchPageParam,
+      searchTitleParam,
+      categoryId,
+    ],
+    queryFn: () =>
+      postsService.getAllByCategoryId(categoryId, {
+        orderBy: 'desc',
+        limit: 6,
+        title: searchTitleParam || undefined,
+        page: Number(searchPageParam) || undefined,
+      }),
+    keepPreviousData: true,
+  });
 
   const handleTitleChangeDebounced = useCallback(
     debounce((title: string) => {
@@ -60,16 +62,6 @@ export const PostsCategory = () => {
       page,
     });
   };
-
-  useEffect(() => {
-    setPosts(data);
-  }, [data]);
-
-  useEffect(() => {
-    if (!isFetching && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFetching]);
 
   return (
     <PostLayout

@@ -9,6 +9,7 @@ import { Input } from '../../components/ui/Input';
 import { SCREEN } from '../../../app/constants';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface PostLayoutProps<
   T extends
@@ -57,24 +58,30 @@ export const PostLayout = <
     if (isAuthorScreen && posts?.posts[0]?.author?.name) return `${posts.posts[0].author.name}'s Posts`;
   };
 
+  useEffect(() => {
+    if (!isFetching && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isFetching]);
+
   return (
     <>
       <section className="bg-gray-50 sm:ml-64">
         {!isPostsScreen ? <Link
           to={'/posts'}
-          className="absolute top-20 left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5"
+          className="absolute top-[55px] left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5"
         >
           <ArrowLeftIcon color="#757575" />
           <p className="text-xs text-gray-600">Back to all posts</p>
         </Link> : null }
-        <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl">
+        <div className="px-4 py-8 lg:py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl">
           <div className="flex-row lg:flex lg:items-center lg:justify-between">
             <div className="flex-1 text-center lg:text-left">
               <h2 className="text-3xl text-start font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
-                {isSuccess && !isFetching  ? (
+                {!isFetching && isSuccess  ? (
                   setHeaderTitle()
                 ) : (
-                  !isSuccess && !isFetching ? 'Post not found' : <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm" />
+                  !isFetching && !isSuccess ? 'Post not found' : <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm" />
                 )}
               </h2>
               <p className="max-w-xl text-start mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0">
@@ -101,10 +108,9 @@ export const PostLayout = <
                 <NotFound />
               </div>
             ) : (
-              isSuccess &&
               !isFetching &&
-              posts &&
-              posts.posts.map((post) => (
+              isSuccess &&
+              posts?.posts.map((post) => (
                 <PostList
                   key={post.id}
                   post={post}

@@ -31,7 +31,6 @@ export const PostDetail = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [post, setPost] = useState<GetPostByIdResponse>();
   const [likesCount, setLikesCount] = useState<number>(0);
   const [pulse, setPulse] = useState<boolean>(false);
   const [clicked, setClicked] = useState(false);
@@ -65,7 +64,11 @@ export const PostDetail = () => {
     staleTime: Infinity,
   });
 
-  const { data, isError, isFetching } = useQuery<GetPostByIdResponse>({
+  const {
+    data: post,
+    isError,
+    isFetching,
+  } = useQuery<GetPostByIdResponse>({
     queryKey: ['getPostById', postId],
     queryFn: () => postsService.getById(postId),
   });
@@ -96,11 +99,10 @@ export const PostDetail = () => {
   const { isLoading: isLoadingDeleteComment } = deleteCommentMutation;
 
   useEffect(() => {
-    if (data) {
-      setPost(data);
-      setLikesCount(data.post.likes?.length || 0);
+    if (post) {
+      setLikesCount(post.post.likes?.length || 0);
     }
-  }, [data]);
+  }, [post]);
 
   useEffect(() => {
     const isPostLikedByUser = () => {

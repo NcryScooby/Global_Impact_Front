@@ -67,7 +67,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           )}
         >
           <option value="" disabled>
-            {isSuccess && !isLoading ? `Select your ${placeholder}` : null}
+            {!isLoading && isSuccess ? `Select your ${placeholder}` : null}
           </option>
           {options?.map((option) => (
             <option key={option.id} value={option.id}>
@@ -76,8 +76,8 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
 
-        <div className="pointer-events-none absolute top-[39px] right-0 flex items-center px-4 text-gray-400 ">
-          {isSuccess && !isLoading ? (
+        <div className="pointer-events-none absolute top-[39px] right-[-5px] flex items-center px-4 text-gray-400 ">
+          {!isLoading && isSuccess ? (
             <CaretDownIcon width={20} height={20} />
           ) : null}
         </div>

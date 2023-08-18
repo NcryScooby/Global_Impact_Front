@@ -1,8 +1,8 @@
 import { GetAllPostsResponse } from '../../../../app/services/postsService/getAll';
 import { postsService } from '../../../../app/services/postsService';
-import { useCallback, useEffect, useRef, useState } from 'react';
 import { debounce } from '../../../../app/hooks/UseDebounce';
 import { PostLayout } from '../../../layouts/PostLayout';
+import { useCallback, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
@@ -20,9 +20,12 @@ export const Posts = () => {
 
   const [localTitle, setLocalTitle] = useState<string>(searchTitleParam);
 
-  const [posts, setPosts] = useState<GetAllPostsResponse>();
-
-  const { data, error, isFetching, isSuccess } = useQuery<GetAllPostsResponse>({
+  const {
+    data: posts,
+    error,
+    isFetching,
+    isSuccess,
+  } = useQuery<GetAllPostsResponse>({
     queryKey: ['getPosts', searchPageParam, searchTitleParam],
     queryFn: () =>
       postsService.getAll({
@@ -53,16 +56,6 @@ export const Posts = () => {
       page,
     });
   };
-
-  useEffect(() => {
-    setPosts(data);
-  }, [data]);
-
-  useEffect(() => {
-    if (!isFetching && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isFetching]);
 
   return (
     <>
