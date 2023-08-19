@@ -1,13 +1,17 @@
 import { createContext, useCallback, useState } from 'react';
 
-interface SideBarContextProps {
+interface SidebarContextProps {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
 }
 
-export const SideBarContext = createContext({} as SideBarContextProps);
+export const SidebarContext = createContext({} as SidebarContextProps);
 
-export const SideBarProvider = ({ children }: { children: React.ReactNode }) => {
+export const SidebarProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const setIsOpen = useCallback((isOpen: boolean) => {
@@ -15,13 +19,13 @@ export const SideBarProvider = ({ children }: { children: React.ReactNode }) => 
   }, []);
 
   return (
-    <SideBarContext.Provider
+    <SidebarContext.Provider
       value={{
         isOpen: open,
         setIsOpen,
       }}
     >
       {children}
-    </SideBarContext.Provider>
+    </SidebarContext.Provider>
   );
 };

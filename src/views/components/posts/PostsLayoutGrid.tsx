@@ -2,7 +2,7 @@ import { GetAllByCategoryIdPostsResponse } from '../../../app/services/postsServ
 import { getAllByAuthorIdPostsResponse } from '../../../app/services/postsService/getAllPostByAuthorId';
 import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { PostListSkeleton } from '../skeletons/posts/PostListSkeleton';
-import { NotFound } from '../animations/NotFound';
+import { PostNotFound } from '../animations/PostNotFound';
 import { PostList } from './PostList';
 
 interface PostsGridProps<
@@ -34,7 +34,7 @@ export const PostsGrid = <
   if (error) {
     return (
       <div>
-        <NotFound />
+        <PostNotFound />
       </div>
     );
   }

@@ -3,7 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './app/contexts/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import { Router } from './router';
-import { SideBarProvider } from './app/contexts/SidebarContext';
+import { SidebarProvider } from './app/contexts/SidebarContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,10 +18,10 @@ export const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <SideBarProvider>
+        <SidebarProvider>
           <Router />
           <Toaster />
-        </SideBarProvider>
+        </SidebarProvider>
       </AuthProvider>
       {/* <ReactQueryDevtools /> */}
     </QueryClientProvider>

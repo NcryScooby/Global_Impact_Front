@@ -1,12 +1,12 @@
-import { getAllByAuthorIdPostsResponse } from '../../../../app/services/postsService/getAllPostByAuthorId';
+import { GetAllByCategoryIdPostsResponse } from '../../../../app/services/postsService/getAllByCategoryId';
 import { postsService } from '../../../../app/services/postsService';
-import { usePostsLogic } from '../../../../app/hooks/UsePostsLogic';
+import { usePostsLogic } from '../../../../app/hooks/usePostsLogic';
 import { PostLayout } from '../../../layouts/PostLayout';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 
-export const PostsAuthor = () => {
-  const { authorId } = useParams() as { authorId: string };
+export const PostsCategory = () => {
+  const { categoryId } = useParams() as { categoryId: string };
 
   const {
     inputRef,
@@ -22,15 +22,15 @@ export const PostsAuthor = () => {
     error,
     isFetching,
     isSuccess,
-  } = useQuery<getAllByAuthorIdPostsResponse>({
+  } = useQuery<GetAllByCategoryIdPostsResponse>({
     queryKey: [
-      'getPostsByAuthorId',
+      'getPostsByCategoryId',
       searchPageParam,
       searchTitleParam,
-      authorId,
+      categoryId,
     ],
     queryFn: () =>
-      postsService.getAllByAuthorId(authorId, {
+      postsService.getAllByCategoryId(categoryId, {
         orderBy: 'desc',
         limit: 6,
         title: searchTitleParam || undefined,
@@ -51,7 +51,7 @@ export const PostsAuthor = () => {
       handleTitleChange={handleTitleChange}
       handlePageChange={handlePageChange}
       key={searchPageParam}
-      screen="authors"
+      screen="categories"
     />
   );
 };

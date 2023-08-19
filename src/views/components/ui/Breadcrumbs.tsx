@@ -1,4 +1,4 @@
-import { addThreeDots } from '../../../app/utils/functions/addThreeDots';
+import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
 import { Breadcrumbs as MuiBreadcrumbs } from '@mui/material';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';

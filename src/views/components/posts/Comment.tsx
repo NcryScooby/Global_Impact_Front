@@ -1,4 +1,4 @@
-import { formatDate } from '../../../app/utils/functions/formatDate';
+import { formatDate } from '../../../app/utils/helpers/formatDate';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
 import { env } from '../../../app/config/env';

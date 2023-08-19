@@ -1,6 +1,6 @@
 import { GetAllPostsResponse } from '../../../../app/services/postsService/getAll';
 import { postsService } from '../../../../app/services/postsService';
-import { usePostsLogic } from '../../../../app/hooks/UsePostsLogic';
+import { usePostsLogic } from '../../../../app/hooks/usePostsLogic';
 import { PostLayout } from '../../../layouts/PostLayout';
 import { useQuery } from '@tanstack/react-query';
 

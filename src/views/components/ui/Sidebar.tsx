@@ -4,7 +4,7 @@ import {
   Pencil2Icon,
   LayoutIcon,
 } from '@radix-ui/react-icons';
-import { useSideBar } from '../../../app/hooks/UseSideBar';
+import { useSidebar } from '../../../app/hooks/useSidebar';
 import { useLocation } from 'react-router-dom';
 import { env } from '../../../app/config/env';
 import { useEffect, useRef } from 'react';
@@ -17,7 +17,7 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
-  const { isOpen, setIsOpen } = useSideBar();
+  const { isOpen, setIsOpen } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
   const postId = currentPath.split('/')[2];

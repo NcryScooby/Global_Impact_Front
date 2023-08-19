@@ -1,5 +1,5 @@
 import { localStorageKeys } from '../config/keys';
-import { sleep } from '../utils/functions/sleep';
+import { sleep } from '../utils/helpers/sleep';
 import { env } from '../config/env';
 import axios from 'axios';
 

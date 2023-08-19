@@ -14,7 +14,7 @@ import { DetailCard } from '../../../components/posts/DetailCard';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
 import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAuth } from '../../../../app/hooks/UseAuth';
+import { useAuth } from '../../../../app/hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 

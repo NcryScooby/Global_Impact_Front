@@ -1,0 +1,1 @@
+export { PostDetailSkeleton } from './PostDetailSkeleton';

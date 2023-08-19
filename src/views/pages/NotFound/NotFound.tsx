@@ -1,4 +1,4 @@
-import { NotFound404 } from '../../components/animations/NotFound404';
+import { PageNotFound } from '../../components/animations/PageNotFound';
 import { Link } from 'react-router-dom';
 
 export const NotFound = () => {
@@ -16,7 +16,7 @@ export const NotFound = () => {
           to come back to home page.
         </p>
       </div>
-      <NotFound404 />
+      <PageNotFound />
       <footer className="flex items-end">
         <p className="text-center text-gray-500 text-[12px] font-light">
           © 2023 Global Impact.

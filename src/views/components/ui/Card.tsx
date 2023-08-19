@@ -1,7 +1,7 @@
-import { addThreeDots } from '../../../app/utils/functions/addThreeDots';
-import { formatViews } from '../../../app/utils/functions/formatViews';
+import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
+import { formatViews } from '../../../app/utils/helpers/formatViews';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
-import { formatDate } from '../../../app/utils/functions/formatDate';
+import { formatDate } from '../../../app/utils/helpers/formatDate';
 import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';

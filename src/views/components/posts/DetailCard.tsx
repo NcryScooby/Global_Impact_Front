@@ -1,6 +1,6 @@
 import { GetPostByIdResponse } from '../../../app/services/postsService/getById';
-import { formatViews } from '../../../app/utils/functions/formatViews';
-import { formatDate } from '../../../app/utils/functions/formatDate';
+import { formatViews } from '../../../app/utils/helpers/formatViews';
+import { formatDate } from '../../../app/utils/helpers/formatDate';
 import { MeResponse } from '../../../app/services/usersService/me';
 import { BarChartIcon, TrashIcon } from '@radix-ui/react-icons';
 import { LikeComponent } from './LikeComponent';
