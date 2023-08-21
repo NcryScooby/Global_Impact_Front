@@ -1,4 +1,4 @@
-import { createContext, useCallback, useState } from 'react';
+import { ReactNode, createContext, useCallback, useState } from 'react';
 
 interface SidebarContextProps {
   isOpen: boolean;
@@ -7,11 +7,7 @@ interface SidebarContextProps {
 
 export const SidebarContext = createContext({} as SidebarContextProps);
 
-export const SidebarProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const SidebarProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   const setIsOpen = useCallback((isOpen: boolean) => {

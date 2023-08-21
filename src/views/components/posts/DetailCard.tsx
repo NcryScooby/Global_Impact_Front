@@ -41,6 +41,7 @@ export const DetailCard = ({
     <div className="flex flex-col mt-8 md:mt-10 gap-y-6 md:grid-cols-2 gap-x-10 relative">
       <div className="flex flex-col">
         <img
+          loading="lazy"
           className="object-cover object-top lg:max-h-80 lg:w-full select-none"
           src={`${env.apiUrl}/uploads/posts/${post.image}`}
           alt={post.title}

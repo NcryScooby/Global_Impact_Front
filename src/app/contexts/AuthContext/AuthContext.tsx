@@ -1,7 +1,13 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
+import {
+  ReactNode,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { LaunchScreen } from '../../../views/components/ui/LaunchScreen';
-import { localStorageKeys } from '../../config/keys';
 import { usersService } from '../../services/usersService';
+import { localStorageKeys } from '../../config/keys';
 import { useQuery } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 
@@ -14,7 +20,7 @@ interface AuthContextProps {
 
 export const AuthContext = createContext({} as AuthContextProps);
 
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [signedIn, setSignedIn] = useState<boolean>(() => {
     const storedToken = localStorage.getItem(localStorageKeys.TOKEN);
 

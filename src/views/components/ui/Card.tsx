@@ -39,6 +39,7 @@ const Card = ({ post }: CardProps) => {
         <div className="relative">
           <Link to={`/posts/${post.id}`}>
             <img
+              loading="lazy"
               className="object-cover object-top h-52 mx-auto w-full select-none"
               src={`${env.apiUrl}/uploads/posts/${post.image}`}
               alt={post.title}

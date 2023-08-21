@@ -3,33 +3,31 @@ import { IMeta } from '../../interfaces/pagination/IMeta';
 import { httpClient } from '../httpClient';
 
 export interface GetAllPostsResponse {
-  posts: [
-    {
+  posts: {
+    id: string;
+    title: string;
+    content: string;
+    image: string;
+    tags: [];
+    likes: [];
+    comments: [];
+    category: {
       id: string;
-      title: string;
-      content: string;
-      image: string;
-      tags: [];
-      likes: [];
-      comments: [];
-      category: {
+      name: string;
+    };
+    author: {
+      id: string;
+      name: string;
+      email: string;
+      job: {
         id: string;
         name: string;
       };
-      author: {
-        id: string;
-        name: string;
-        email: string;
-        job: {
-          id: string;
-          name: string;
-        };
-        avatar: string;
-      };
-      createdAt: string;
-      views: number;
-    }
-  ];
+      avatar: string;
+    };
+    createdAt: string;
+    views: number;
+  }[];
   meta: IMeta;
 }
 

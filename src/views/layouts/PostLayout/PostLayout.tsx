@@ -4,11 +4,11 @@ import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
 import { ArrowLeftIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { PostsHeader } from '../../components/posts/PostLayoutHeader';
 import { PostsGrid } from '../../components/posts/PostsLayoutGrid';
+import { ChangeEvent, RefObject, useEffect } from 'react';
 import { Input } from '../../components/ui/Input';
 import { SCREEN } from '../../../app/constants';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 interface PostLayoutProps<
   T extends
@@ -20,10 +20,10 @@ interface PostLayoutProps<
   error: unknown;
   isLoading: boolean;
   isSuccess: boolean;
-  inputRef: React.RefObject<HTMLInputElement>;
+  inputRef: RefObject<HTMLInputElement>;
   localTitle: string;
   searchPageParam: string;
-  handleTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handlePageChange: (page: string) => void;
   screen: string;
 }

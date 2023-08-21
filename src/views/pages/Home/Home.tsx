@@ -25,6 +25,7 @@ export const Home = () => {
           </div>
           <div className="absolute bottom-0 right-0">
             <img
+              loading="lazy"
               src={browser}
               alt="browser"
               className="w-[250px] lg:w-[500px] select-none"
@@ -32,6 +33,7 @@ export const Home = () => {
           </div>
           <div className="absolute bottom-0 right-36">
             <img
+              loading="lazy"
               src={mobile}
               alt="mobile"
               className="w-[250px] lg:w-[500px] select-none"

@@ -12,11 +12,11 @@ import { commentsService } from '../../../../app/services/comments';
 import { CommentList } from '../../../components/posts/CommentList';
 import { DetailCard } from '../../../components/posts/DetailCard';
 import { Breadcrumbs } from '../../../components/ui/Breadcrumbs';
-import { POST_LIKE_COLORS } from '../../../../app/constants';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../../../app/hooks/useAuth';
-import { useEffect, useState } from 'react';
+import { useLike } from '../../../../app/hooks/useLike';
 import { toast } from 'react-hot-toast';
+import { useState } from 'react';
 
 export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
@@ -24,10 +24,6 @@ export const PostDetail = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  const [likesCount, setLikesCount] = useState<number>(0);
-  const [pulse, setPulse] = useState<boolean>(false);
-  const [clicked, setClicked] = useState(false);
-  const [like, setLike] = useState<boolean>(false);
   const [openDeleteCommentDialog, setOpenDeleteCommentDialog] =
     useState<boolean>(false);
   const [openCreateCommentDialog, setOpenCreateCommentDialog] =
@@ -35,7 +31,6 @@ export const PostDetail = () => {
   const [openDeletePostDialog, setOpenDeletePostDialog] =
     useState<boolean>(false);
   const [commentId, setCommentId] = useState<string>('');
-  const [color, setColor] = useState<string>('');
 
   type MutateFunction<T> = {
     mutateAsync: (data: T) => Promise<void>;
@@ -72,6 +67,13 @@ export const PostDetail = () => {
   const post = postData?.post;
   const relatedPosts = postData?.relatedPosts || [];
 
+  const { likesCount, pulse, clicked, like, color, handleLike } = useLike({
+    postId: postId,
+    user: user,
+    initialLikesCount: post?.likes.length || 0,
+    postLikes: post?.likes || [],
+  });
+
   if (isError) {
     navigate('/', { replace: true });
     return null;
@@ -97,20 +99,13 @@ export const PostDetail = () => {
 
   const { isLoading: isLoadingDeleteComment } = deleteCommentMutation;
 
-  useEffect(() => {
-    setLikesCount(post?.likes.length || 0);
-  }, [post]);
-
-  useEffect(() => {
-    const isPostLikedByUser = () => {
-      return post?.likes?.some((like) => like.authorId === user.id);
-    };
-
-    const isLiked = isPostLikedByUser();
-
-    setColor(isLiked ? POST_LIKE_COLORS.LIKED : POST_LIKE_COLORS.UNLIKED);
-    setPulse(isLiked ?? false);
-  }, [post, user]);
+  async function handleDelete<T>(featureId: T, mutation: MutateFunction<T>) {
+    try {
+      await mutation.mutateAsync(featureId);
+    } catch {
+      toast.error('Oops, an error occurred');
+    }
+  }
 
   if (!post) {
     return (
@@ -120,51 +115,6 @@ export const PostDetail = () => {
         </div>
       </>
     );
-  }
-
-  const togglePulse = () => setPulse((prevPulse) => !prevPulse);
-
-  const updateColor = () => {
-    setColor((prevColor) =>
-      prevColor === POST_LIKE_COLORS.UNLIKED
-        ? POST_LIKE_COLORS.LIKED
-        : POST_LIKE_COLORS.UNLIKED
-    );
-  };
-
-  const updateLikesBasedOnMessage = (message: string) => {
-    const delta = message.includes('Post Liked') ? 1 : -1;
-    setLikesCount(likesCount + delta);
-  };
-
-  const handleLike = async () => {
-    if (like) return;
-
-    setClicked(true);
-    setLike(true);
-
-    try {
-      togglePulse();
-      updateColor();
-
-      const { message } = await postsService.like({
-        postId: post.id,
-      });
-
-      updateLikesBasedOnMessage(message);
-    } catch {
-      toast.error('Oops, an error occurred');
-    } finally {
-      setLike(false);
-    }
-  };
-
-  async function handleDelete<T>(featureId: T, mutation: MutateFunction<T>) {
-    try {
-      await mutation.mutateAsync(featureId);
-    } catch {
-      toast.error('Oops, an error occurred');
-    }
   }
 
   return (

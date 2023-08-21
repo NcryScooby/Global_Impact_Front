@@ -1,6 +1,6 @@
-import { useState, useRef, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useState, useRef, useCallback, ChangeEvent } from 'react';
 import { debounce } from '../../utils/helpers/debounce';
+import { useSearchParams } from 'react-router-dom';
 
 export const usePostsLogic = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,7 +23,7 @@ export const usePostsLogic = () => {
     []
   );
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const title = event.target.value;
     setLocalTitle(title);
     handleTitleChangeDebounced(title);

@@ -19,7 +19,7 @@ export const LaunchScreen = ({ isLoading }: LaunchScreenProps) => {
     >
       <div className="bg-primary fixed top-0 left-0 h-full w-full grid place-items-center">
         <div className="flex flex-col items-center">
-          <img src={logo} alt="Logo" className="h-52" />
+          <img loading="lazy" src={logo} alt="Logo" className="h-52" />
           <Spinner className="text-primary fill-white" />
         </div>
       </div>

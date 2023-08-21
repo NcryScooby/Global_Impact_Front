@@ -1,9 +1,10 @@
 import { GetPostByIdResponse } from '../../../app/services/postsService/getById';
 import { PlusIcon } from '@radix-ui/react-icons';
+import { SetStateAction } from 'react';
 
 interface CommentLabelProps {
   postData: GetPostByIdResponse;
-  setOpenCreateCommentDialog: (value: React.SetStateAction<boolean>) => void;
+  setOpenCreateCommentDialog: (value: SetStateAction<boolean>) => void;
 }
 
 export const CommentLabel = ({
