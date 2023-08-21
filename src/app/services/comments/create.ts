@@ -22,13 +22,8 @@ export interface CreateCommentResponse {
   };
 }
 
-export const create = async (
-  body: CreateCommentData
-): Promise<CreateCommentResponse> => {
-  const { data } = await httpClient.post<CreateCommentResponse>(
-    '/posts/comments',
-    body
-  );
+export const create = async (body: CreateCommentData): Promise<CreateCommentResponse> => {
+  const { data } = await httpClient.post<CreateCommentResponse>('/posts/comments', body);
 
   return data;
 };

@@ -2,17 +2,14 @@ import { SignInData } from '../../../../app/services/authService/signIn';
 import { IErrorResponse } from '../../../../app/interfaces/errors/IErrorResponse';
 import { authService } from '../../../../app/services/authService';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from '../../../../app/hooks/UseAuth';
+import { useAuth } from '../../../../app/hooks/useAuth';
 import { useMutation } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
 const schema = z.object({
-  email: z
-    .string()
-    .nonempty('Email cannot be empty')
-    .email('Enter a valid email address'),
+  email: z.string().nonempty('Email cannot be empty').email('Enter a valid email address'),
   password: z
     .string()
     .nonempty('Password cannot be empty')

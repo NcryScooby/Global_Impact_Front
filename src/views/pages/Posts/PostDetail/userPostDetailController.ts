@@ -16,10 +16,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export const usePostDetailController = (
-  postId: string,
-  setOpenDialog: (open: boolean) => void
-) => {
+export const usePostDetailController = (postId: string, setOpenDialog: (open: boolean) => void) => {
   const queryClient = useQueryClient();
 
   const {

@@ -1,7 +1,7 @@
-import { addThreeDots } from '../../../app/utils/functions/addThreeDots';
-import { formatViews } from '../../../app/utils/functions/formatViews';
+import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
+import { formatViews } from '../../../app/utils/helpers/formatViews';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
-import { formatDate } from '../../../app/utils/functions/formatDate';
+import { formatDate } from '../../../app/utils/helpers/formatDate';
 import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
@@ -39,6 +39,7 @@ const Card = ({ post }: CardProps) => {
         <div className="relative">
           <Link to={`/posts/${post.id}`}>
             <img
+              loading="lazy"
               className="object-cover object-top h-52 mx-auto w-full select-none"
               src={`${env.apiUrl}/uploads/posts/${post.image}`}
               alt={post.title}
@@ -57,11 +58,7 @@ const Card = ({ post }: CardProps) => {
             <Link to={`/posts/authors/${post.author.id}`}>
               <Avatar
                 alt="User avatar"
-                src={
-                  post.author.avatar
-                    ? `${env.apiUrl}/uploads/users/${post.author.avatar}`
-                    : ''
-                }
+                src={post.author.avatar ? `${env.apiUrl}/uploads/users/${post.author.avatar}` : ''}
                 sx={{
                   width: 42,
                   height: 42,
@@ -88,12 +85,8 @@ const Card = ({ post }: CardProps) => {
             </span>
           </div>
         </div>
-        <p className="mt-5 text-[18px] leading-7 font-semibold">
-          {addThreeDots(post.title, 30)}
-        </p>
-        <p className="mt-4 text-[14px] text-gray-600">
-          {addThreeDots(post.content, 80)}
-        </p>
+        <p className="mt-5 text-[18px] leading-7 font-semibold">{addThreeDots(post.title, 30)}</p>
+        <p className="mt-4 text-[14px] text-gray-600">{addThreeDots(post.content, 80)}</p>
         <Link
           to={`/posts/${post.id}`}
           title={post.title}

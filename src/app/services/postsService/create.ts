@@ -21,9 +21,7 @@ export interface CreatePostResponse {
   };
 }
 
-export const create = async (
-  body: CreatePostData
-): Promise<CreatePostResponse> => {
+export const create = async (body: CreatePostData): Promise<CreatePostResponse> => {
   const { data } = await httpClient.post<CreatePostResponse>('/posts', body, {
     headers: {
       'Content-Type': 'multipart/form-data',

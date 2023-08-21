@@ -7,32 +7,28 @@ export interface GetPostByIdResponse {
     content: string;
     image: string;
     tags: [];
-    likes: [
-      {
-        id: string;
-        authorId: string;
-      }
-    ];
+    likes: {
+      id: string;
+      authorId: string;
+    }[];
     category: {
       id: string;
       name: string;
     };
-    comments: [
-      {
+    comments: {
+      id: string;
+      author: {
         id: string;
-        author: {
+        name: string;
+        avatar: string;
+        job: {
           id: string;
           name: string;
-          avatar: string;
-          job: {
-            id: string;
-            name: string;
-          };
         };
-        content: string;
-        createdAt: string;
-      }
-    ];
+      };
+      content: string;
+      createdAt: string;
+    }[];
     author: {
       id: string;
       name: string;
@@ -72,9 +68,7 @@ export interface GetPostByIdResponse {
 }
 
 export const getById = async (postId: string): Promise<GetPostByIdResponse> => {
-  const { data } = await httpClient.get<GetPostByIdResponse>(
-    `/posts/${postId}`
-  );
+  const { data } = await httpClient.get<GetPostByIdResponse>(`/posts/${postId}`);
 
   return data;
 };

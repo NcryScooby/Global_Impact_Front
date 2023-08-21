@@ -1,0 +1,1 @@
+export { PostsAuthor } from './PostsAuthor';

@@ -55,10 +55,7 @@ export const AlertDialog = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={isLoading ? undefined : handleClose}
-            className="text-sm h-[42px]"
-          >
+          <Button onClick={isLoading ? undefined : handleClose} className="text-sm h-[42px]">
             Cancel
           </Button>
           <Button
