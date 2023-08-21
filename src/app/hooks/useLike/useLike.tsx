@@ -10,12 +10,7 @@ type UseLikeProps = {
   postLikes: Array<{ authorId: string }>;
 };
 
-export const useLike = ({
-  postId,
-  user,
-  initialLikesCount,
-  postLikes,
-}: UseLikeProps) => {
+export const useLike = ({ postId, user, initialLikesCount, postLikes }: UseLikeProps) => {
   const [likesCount, setLikesCount] = useState<number>(initialLikesCount);
   const [pulse, setPulse] = useState<boolean>(false);
   const [clicked, setClicked] = useState(false);
@@ -34,9 +29,7 @@ export const useLike = ({
 
   useEffect(() => {
     const isLiked = isPostLikedByUser();
-    const newColor = isLiked
-      ? POST_LIKE_COLORS.LIKED
-      : POST_LIKE_COLORS.UNLIKED;
+    const newColor = isLiked ? POST_LIKE_COLORS.LIKED : POST_LIKE_COLORS.UNLIKED;
 
     if (lastColorRef.current !== newColor) {
       setColor(newColor);
@@ -53,9 +46,7 @@ export const useLike = ({
 
   const updateColor = () => {
     setColor((prevColor) =>
-      prevColor === POST_LIKE_COLORS.UNLIKED
-        ? POST_LIKE_COLORS.LIKED
-        : POST_LIKE_COLORS.UNLIKED
+      prevColor === POST_LIKE_COLORS.UNLIKED ? POST_LIKE_COLORS.LIKED : POST_LIKE_COLORS.UNLIKED
     );
   };
 

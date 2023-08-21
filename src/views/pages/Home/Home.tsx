@@ -12,9 +12,9 @@ export const Home = () => {
               Stay informed, Stay curious.
             </h1>
             <h4 className="max-w-xl mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0 lg:w-[500px] lg:pr-16">
-              Dive deep into the heart of current events with the Global Impact
-              blog, where we curate the most recent and significant world news,
-              paired with comprehensive insights and expert analyses.
+              Dive deep into the heart of current events with the Global Impact blog, where we
+              curate the most recent and significant world news, paired with comprehensive insights
+              and expert analyses.
             </h4>
             <Link
               to={'/posts'}

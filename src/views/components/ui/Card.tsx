@@ -58,11 +58,7 @@ const Card = ({ post }: CardProps) => {
             <Link to={`/posts/authors/${post.author.id}`}>
               <Avatar
                 alt="User avatar"
-                src={
-                  post.author.avatar
-                    ? `${env.apiUrl}/uploads/users/${post.author.avatar}`
-                    : ''
-                }
+                src={post.author.avatar ? `${env.apiUrl}/uploads/users/${post.author.avatar}` : ''}
                 sx={{
                   width: 42,
                   height: 42,
@@ -89,12 +85,8 @@ const Card = ({ post }: CardProps) => {
             </span>
           </div>
         </div>
-        <p className="mt-5 text-[18px] leading-7 font-semibold">
-          {addThreeDots(post.title, 30)}
-        </p>
-        <p className="mt-4 text-[14px] text-gray-600">
-          {addThreeDots(post.content, 80)}
-        </p>
+        <p className="mt-5 text-[18px] leading-7 font-semibold">{addThreeDots(post.title, 30)}</p>
+        <p className="mt-4 text-[14px] text-gray-600">{addThreeDots(post.content, 80)}</p>
         <Link
           to={`/posts/${post.id}`}
           title={post.title}

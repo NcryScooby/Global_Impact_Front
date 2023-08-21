@@ -8,15 +8,10 @@ export interface GetAllCategoriesResponse {
   }[];
 }
 
-export const getAll = async (
-  params?: IPaginationParams
-): Promise<GetAllCategoriesResponse> => {
-  const { data } = await httpClient.get<GetAllCategoriesResponse>(
-    '/categories',
-    {
-      params,
-    }
-  );
+export const getAll = async (params?: IPaginationParams): Promise<GetAllCategoriesResponse> => {
+  const { data } = await httpClient.get<GetAllCategoriesResponse>('/categories', {
+    params,
+  });
 
   return data;
 };

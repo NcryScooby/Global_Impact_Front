@@ -63,14 +63,10 @@ export const Comment = ({ comment, userId, onDelete }: CommentProps) => {
                   </span>
                 </p>
               </div>
-              <p className="text-[10px] text-gray-500">
-                {formatDate(comment.createdAt)}
-              </p>
+              <p className="text-[10px] text-gray-500">{formatDate(comment.createdAt)}</p>
             </div>
             <blockquote>
-              <p className="text-[12px] lg:text-sm text-black">
-                {comment.content}
-              </p>
+              <p className="text-[12px] lg:text-sm text-black">{comment.content}</p>
             </blockquote>
           </div>
         </div>

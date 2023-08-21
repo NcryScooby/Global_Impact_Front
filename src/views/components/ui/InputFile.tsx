@@ -28,10 +28,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="relative">
-        <label
-          htmlFor={inputId}
-          className="block mb-2 text-[13px] text-gray-500"
-        >
+        <label htmlFor={inputId} className="block mb-2 text-[13px] text-gray-500">
           {label}
         </label>
 
@@ -47,9 +44,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
             className="flex items-center justify-end h-full w-full cursor-pointer pr-4"
           >
             <div className="flex items-center justify-center h-[40px]">
-              {selectedFile ? (
-                <span className="absolute left-3">{selectedFile}</span>
-              ) : null}
+              {selectedFile ? <span className="absolute left-3">{selectedFile}</span> : null}
               <svg
                 className="w-4 h-4 text-gray-500"
                 aria-hidden="true"

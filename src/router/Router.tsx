@@ -36,10 +36,7 @@ export const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:postId" element={<PostDetail />} />
-          <Route
-            path="/posts/categories/:categoryId"
-            element={<PostsCategory />}
-          />
+          <Route path="/posts/categories/:categoryId" element={<PostsCategory />} />
           <Route path="/posts/authors/:authorId" element={<PostsAuthor />} />
           <Route path="/posts/new" element={<NewPost />} />
         </Route>

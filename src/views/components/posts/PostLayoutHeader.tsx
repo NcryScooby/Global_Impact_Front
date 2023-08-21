@@ -4,11 +4,7 @@ interface PostsHeaderProps {
   setHeaderTitle: () => string | undefined;
 }
 
-export const PostsHeader = ({
-  isLoading,
-  isSuccess,
-  setHeaderTitle,
-}: PostsHeaderProps) => {
+export const PostsHeader = ({ isLoading, isSuccess, setHeaderTitle }: PostsHeaderProps) => {
   let headerContent;
 
   if (!isLoading && isSuccess) {
@@ -16,9 +12,7 @@ export const PostsHeader = ({
   } else if (!isLoading && !isSuccess) {
     headerContent = 'Post not found';
   } else {
-    headerContent = (
-      <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm" />
-    );
+    headerContent = <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 rounded-sm" />;
   }
 
   return (
@@ -27,8 +21,8 @@ export const PostsHeader = ({
         {headerContent}
       </h2>
       <p className="max-w-xl text-start mx-auto mt-4 text-[14px] leading-relaxed text-gray-500 lg:mx-0">
-        Keep up with the latest world news, all current affairs and coverage.
-        News of the day, photos, and videos. Be the first to know.
+        Keep up with the latest world news, all current affairs and coverage. News of the day,
+        photos, and videos. Be the first to know.
       </p>
     </div>
   );

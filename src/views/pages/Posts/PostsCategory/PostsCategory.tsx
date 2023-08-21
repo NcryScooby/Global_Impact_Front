@@ -23,12 +23,7 @@ export const PostsCategory = () => {
     isFetching,
     isSuccess,
   } = useQuery<GetAllByCategoryIdPostsResponse>({
-    queryKey: [
-      'getPostsByCategoryId',
-      searchPageParam,
-      searchTitleParam,
-      categoryId,
-    ],
+    queryKey: ['getPostsByCategoryId', searchPageParam, searchTitleParam, categoryId],
     queryFn: () =>
       postsService.getAllByCategoryId(categoryId, {
         orderBy: 'desc',

@@ -1,10 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { ReactNode, createContext, useCallback, useEffect, useState } from 'react';
 import { LaunchScreen } from '../../../views/components/ui/LaunchScreen';
 import { usersService } from '../../services/usersService';
 import { localStorageKeys } from '../../config/keys';

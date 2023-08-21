@@ -15,10 +15,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="relative">
-        <label
-          htmlFor={inputId}
-          className="block mb-2 text-[13px] text-gray-500"
-        >
+        <label htmlFor={inputId} className="block mb-2 text-[13px] text-gray-500">
           {label}
         </label>
 

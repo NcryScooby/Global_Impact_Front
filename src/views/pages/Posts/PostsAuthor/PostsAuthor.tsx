@@ -23,12 +23,7 @@ export const PostsAuthor = () => {
     isFetching,
     isSuccess,
   } = useQuery<getAllByAuthorIdPostsResponse>({
-    queryKey: [
-      'getPostsByAuthorId',
-      searchPageParam,
-      searchTitleParam,
-      authorId,
-    ],
+    queryKey: ['getPostsByAuthorId', searchPageParam, searchTitleParam, authorId],
     queryFn: () =>
       postsService.getAllByAuthorId(authorId, {
         orderBy: 'desc',

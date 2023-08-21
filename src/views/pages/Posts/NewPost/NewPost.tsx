@@ -10,8 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 
 export const NewPost = () => {
-  const { handleSubmit, reset, register, errors, isLoading } =
-    useNewPostController();
+  const { handleSubmit, reset, register, errors, isLoading } = useNewPostController();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -44,9 +43,7 @@ export const NewPost = () => {
     }
   };
 
-  const handleChangeSelectedOption = (
-    event: ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleChangeSelectedOption = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
 
@@ -85,9 +82,7 @@ export const NewPost = () => {
                           selectedOption={selectedOption}
                           isLoading={isFetching}
                           isSuccess={isSuccess}
-                          handleChangeSelectedOption={
-                            handleChangeSelectedOption
-                          }
+                          handleChangeSelectedOption={handleChangeSelectedOption}
                           error={errors.categoryId?.message}
                           options={categories ? categories.categories : []}
                           {...register('categoryId')}
@@ -126,11 +121,7 @@ export const NewPost = () => {
                       >
                         Cancel
                       </Button>
-                      <Button
-                        className="w-2/3 mt-8"
-                        disabled={isFetching}
-                        isLoading={isLoading}
-                      >
+                      <Button className="w-2/3 mt-8" disabled={isFetching} isLoading={isLoading}>
                         Create
                       </Button>
                     </div>

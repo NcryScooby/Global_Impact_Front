@@ -35,9 +35,7 @@ interface GetAllPostsParams extends IPaginationParams {
   title?: string;
 }
 
-export const getAll = async (
-  params?: GetAllPostsParams
-): Promise<GetAllPostsResponse> => {
+export const getAll = async (params?: GetAllPostsParams): Promise<GetAllPostsResponse> => {
   const { data } = await httpClient.get<GetAllPostsResponse>('/posts', {
     params,
   });

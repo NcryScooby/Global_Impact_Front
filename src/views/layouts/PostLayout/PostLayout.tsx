@@ -11,10 +11,7 @@ import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 interface PostLayoutProps<
-  T extends
-    | getAllByAuthorIdPostsResponse
-    | GetAllByCategoryIdPostsResponse
-    | GetAllPostsResponse
+  T extends getAllByAuthorIdPostsResponse | GetAllByCategoryIdPostsResponse | GetAllPostsResponse
 > {
   posts: T | undefined;
   error: unknown;

@@ -8,9 +8,7 @@ export interface GetAllJobsResponse {
   }[];
 }
 
-export const getAll = async (
-  params?: IPaginationParams
-): Promise<GetAllJobsResponse> => {
+export const getAll = async (params?: IPaginationParams): Promise<GetAllJobsResponse> => {
   const { data } = await httpClient.get<GetAllJobsResponse>('/jobs', {
     params,
   });

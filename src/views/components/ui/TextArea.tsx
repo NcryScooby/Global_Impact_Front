@@ -15,10 +15,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     return (
       <div className="relative">
         {label ? (
-          <label
-            htmlFor={textAreaId}
-            className="block mb-2 text-[13px] text-gray-500"
-          >
+          <label htmlFor={textAreaId} className="block mb-2 text-[13px] text-gray-500">
             {label}
           </label>
         ) : null}

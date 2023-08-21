@@ -24,9 +24,7 @@ export const LikeComponent = ({
         width={16}
         color={color}
         cursor={'pointer'}
-        className={
-          clicked ? (pulse ? 'animate-pulselike' : 'animate-pulsedislike') : ''
-        }
+        className={clicked ? (pulse ? 'animate-pulselike' : 'animate-pulsedislike') : ''}
         onClick={like ? undefined : handleLike}
       />
       <p>{likesCount}</p>

@@ -9,10 +9,7 @@ import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
 const schema = z.object({
-  email: z
-    .string()
-    .nonempty('Email cannot be empty')
-    .email('Enter a valid email address'),
+  email: z.string().nonempty('Email cannot be empty').email('Enter a valid email address'),
   password: z
     .string()
     .nonempty('Password cannot be empty')

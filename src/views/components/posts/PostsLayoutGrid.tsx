@@ -6,10 +6,7 @@ import { PostNotFound } from '../animations/PostNotFound';
 import { PostList } from './PostList';
 
 interface PostsGridProps<
-  T extends
-    | getAllByAuthorIdPostsResponse
-    | GetAllByCategoryIdPostsResponse
-    | GetAllPostsResponse
+  T extends getAllByAuthorIdPostsResponse | GetAllByCategoryIdPostsResponse | GetAllPostsResponse
 > {
   isLoading: boolean;
   error: unknown;

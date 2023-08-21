@@ -10,15 +10,9 @@ import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
 const schema = z.object({
-  title: z
-    .string()
-    .nonempty('Name cannot be empty')
-    .min(3, 'Name must be at least 3 characters'),
+  title: z.string().nonempty('Name cannot be empty').min(3, 'Name must be at least 3 characters'),
   content: z.string().nonempty('Content cannot be empty').min(3),
-  categoryId: z
-    .string()
-    .nonempty('Category cannot be empty')
-    .uuid('Invalid Category'),
+  categoryId: z.string().nonempty('Category cannot be empty').uuid('Invalid Category'),
   image: z
     .any()
     .refine((files) => files?.length == 1, 'Image is required')

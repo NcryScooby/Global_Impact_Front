@@ -26,9 +26,7 @@ export const Button = ({
     >
       {!isLoading ? children : null}
       {isLoading ? (
-        <Spinner
-          className={cn('text-primary fill-white w-5 h-5', spinnerStyle)}
-        />
+        <Spinner className={cn('text-primary fill-white w-5 h-5', spinnerStyle)} />
       ) : null}
     </button>
   );

@@ -20,16 +20,13 @@ import { useState } from 'react';
 
 export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
+
   const { userAvatar } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-
-  const [openDeleteCommentDialog, setOpenDeleteCommentDialog] =
-    useState<boolean>(false);
-  const [openCreateCommentDialog, setOpenCreateCommentDialog] =
-    useState<boolean>(false);
-  const [openDeletePostDialog, setOpenDeletePostDialog] =
-    useState<boolean>(false);
+  const [openDeleteCommentDialog, setOpenDeleteCommentDialog] = useState<boolean>(false);
+  const [openCreateCommentDialog, setOpenCreateCommentDialog] = useState<boolean>(false);
+  const [openDeletePostDialog, setOpenDeletePostDialog] = useState<boolean>(false);
   const [commentId, setCommentId] = useState<string>('');
 
   type MutateFunction<T> = {
@@ -50,6 +47,7 @@ export const PostDetail = () => {
   });
 
   if (!userData) {
+    navigate('/', { replace: true });
     return null;
   }
 
@@ -64,6 +62,11 @@ export const PostDetail = () => {
     queryFn: () => postsService.getById(postId),
   });
 
+  if (isError) {
+    navigate('/', { replace: true });
+    return null;
+  }
+
   const post = postData?.post;
   const relatedPosts = postData?.relatedPosts || [];
 
@@ -73,11 +76,6 @@ export const PostDetail = () => {
     initialLikesCount: post?.likes.length || 0,
     postLikes: post?.likes || [],
   });
-
-  if (isError) {
-    navigate('/', { replace: true });
-    return null;
-  }
 
   const deletePostMutation = useMutation(postsService.deletePost, {
     onSuccess: () => {
@@ -153,9 +151,7 @@ export const PostDetail = () => {
       />
       <div className="overflow-x-hidden">
         <section
-          className={`${
-            relatedPosts.length > 0 ? 'pt-16' : 'py-10'
-          } h-full lg:px-56 sm:ml-64`}
+          className={`${relatedPosts.length > 0 ? 'pt-16' : 'py-10'} h-full lg:px-56 sm:ml-64`}
         >
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
             <Breadcrumbs

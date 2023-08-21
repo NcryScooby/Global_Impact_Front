@@ -18,9 +18,7 @@ export const NotFound = () => {
       </div>
       <PageNotFound />
       <footer className="flex items-end">
-        <p className="text-center text-gray-500 text-[12px] font-light">
-          © 2023 Global Impact.
-        </p>
+        <p className="text-center text-gray-500 text-[12px] font-light">© 2023 Global Impact.</p>
       </footer>
     </div>
   );

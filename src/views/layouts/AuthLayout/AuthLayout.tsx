@@ -10,11 +10,7 @@ export const AuthLayout = () => {
         </div>
       </div>
       <div className="w-1/2 h-full justify-center items-center p-24 flex-col bg-primary hidden lg:flex">
-        <img
-          loading="lazy"
-          src={logo}
-          className="object-cover w-full h-full select-none"
-        />
+        <img loading="lazy" src={logo} className="object-cover w-full h-full select-none" />
         <div>
           <p className="text-white p-10 font-thin tracking-wider text-center">
             Experience a global impact.

@@ -62,9 +62,7 @@ export const TextDialog = ({
         <div>
           <h2 className="font-semibold text-sm">
             {userName}
-            <span className="text-sm font-normal text-gray-600 text-[16px]">
-              , {jobName}.
-            </span>
+            <span className="text-sm font-normal text-gray-600 text-[16px]">, {jobName}.</span>
           </h2>
         </div>
       </div>

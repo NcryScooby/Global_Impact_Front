@@ -1,9 +1,4 @@
-import {
-  ExitIcon,
-  HomeIcon,
-  Pencil2Icon,
-  LayoutIcon,
-} from '@radix-ui/react-icons';
+import { ExitIcon, HomeIcon, Pencil2Icon, LayoutIcon } from '@radix-ui/react-icons';
 import { useSidebar } from '../../../app/hooks/useSidebar';
 import { useLocation } from 'react-router-dom';
 import { env } from '../../../app/config/env';
@@ -164,9 +159,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             <li className="flex-1 fixed bottom-4">
               <Avatar
                 alt="User avatar"
-                src={
-                  userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''
-                }
+                src={userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''}
                 sx={{
                   border: '0.5px solid #fff',
                 }}
