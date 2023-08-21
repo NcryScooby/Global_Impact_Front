@@ -46,7 +46,7 @@ export const PostsAuthor = () => {
       handleTitleChange={handleTitleChange}
       handlePageChange={handlePageChange}
       key={searchPageParam}
-      screen="authors"
+      page="authors"
     />
   );
 };

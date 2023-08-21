@@ -5,7 +5,7 @@ export const POST_LIKE_COLORS = {
   UNLIKED: '#9e9e9e',
 };
 
-export const SCREEN = {
+export const PAGE = {
   POSTS: 'posts',
   CATEGORIES: 'categories',
   AUTHORS: 'authors',

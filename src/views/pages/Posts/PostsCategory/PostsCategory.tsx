@@ -46,7 +46,7 @@ export const PostsCategory = () => {
       handleTitleChange={handleTitleChange}
       handlePageChange={handlePageChange}
       key={searchPageParam}
-      screen="categories"
+      page="categories"
     />
   );
 };

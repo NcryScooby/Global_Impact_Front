@@ -6,7 +6,7 @@ import { PostsHeader } from '../../components/posts/PostLayoutHeader';
 import { PostsGrid } from '../../components/posts/PostsLayoutGrid';
 import { ChangeEvent, RefObject, useEffect } from 'react';
 import { Input } from '../../components/ui/Input';
-import { SCREEN } from '../../../app/constants';
+import { PAGE } from '../../../app/constants';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ interface PostLayoutProps<
   searchPageParam: string;
   handleTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handlePageChange: (page: string) => void;
-  screen: string;
+  page: 'posts' | 'categories' | 'authors';
 }
 
 // prettier-ignore
@@ -41,17 +41,17 @@ export const PostLayout = <
     searchPageParam,
     handleTitleChange,
     handlePageChange,
-    screen,
+    page,
   }: PostLayoutProps<T>) => {
 
-  const isPostsScreen = (screen === SCREEN.POSTS);
-  const isCategoryScreen = (screen === SCREEN.CATEGORIES);
-  const isAuthorScreen = (screen === SCREEN.AUTHORS);
+  const isPostsPage = (page === PAGE.POSTS);
+  const isCategoryPage = (page === PAGE.CATEGORIES);
+  const isAuthorPage = (page === PAGE.AUTHORS);
 
   const setHeaderTitle = () => {
-    if (isPostsScreen) return 'Latest from blog';
-    if (isCategoryScreen && posts?.posts[0]?.category?.name) return posts.posts[0].category.name;
-    if (isAuthorScreen && posts?.posts[0]?.author?.name) return `${posts.posts[0].author.name}'s Posts`;
+    if (isPostsPage) return 'Latest from blog';
+    if (isCategoryPage && posts?.posts[0]?.category?.name) return posts.posts[0].category.name;
+    if (isAuthorPage && posts?.posts[0]?.author?.name) return `${posts.posts[0].author.name}'s Posts`;
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export const PostLayout = <
   return (
     <>
       <section className="bg-gray-50 sm:ml-64">
-        {!isPostsScreen && (
+        {!isPostsPage && (
           <Link
             to="/posts"
             className="absolute top-[55px] left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5"

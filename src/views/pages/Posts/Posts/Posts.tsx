@@ -44,7 +44,7 @@ export const Posts = () => {
         handleTitleChange={handleTitleChange}
         handlePageChange={handlePageChange}
         key={searchPageParam}
-        screen="posts"
+        page="posts"
       />
     </>
   );
