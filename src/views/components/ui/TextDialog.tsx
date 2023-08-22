@@ -3,12 +3,13 @@ import DialogActions from '@mui/material/DialogActions';
 import { Button } from '../../components/ui/Button';
 import { env } from '../../../app/config/env';
 import Dialog from '@mui/material/Dialog';
+import { SetStateAction } from 'react';
 import { Avatar } from '@mui/material';
 import { TextArea } from './TextArea';
 
 interface TextDialogProps {
   openDialog: boolean;
-  setOpenDialog: (open: boolean) => void;
+  setOpenDialog: (open: SetStateAction<boolean>) => void;
   onConfirm: () => void;
   isLoading: boolean;
   userAvatar: string;

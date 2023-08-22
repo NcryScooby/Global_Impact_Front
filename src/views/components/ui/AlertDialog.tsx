@@ -1,13 +1,14 @@
-import { Button } from '../../components/ui/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import { Button } from '../../components/ui/Button';
 import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import { SetStateAction } from 'react';
 
 interface AlertDialogProps {
   openDialog: boolean;
-  setOpenDialog: (open: boolean) => void;
+  setOpenDialog: (open: SetStateAction<boolean>) => void;
   onConfirm: () => void;
   isLoading: boolean;
   title: string;

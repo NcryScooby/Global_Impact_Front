@@ -1,5 +1,5 @@
 import { UseFormRegister, UseFormReset } from 'react-hook-form';
-import { BaseSyntheticEvent } from 'react';
+import { BaseSyntheticEvent, SetStateAction } from 'react';
 import { TextDialog } from './TextDialog';
 
 type CreateCommentFunction = (e?: BaseSyntheticEvent<object>) => Promise<void>;
@@ -12,7 +12,7 @@ interface TextAlertDialogProps {
   isLoading: boolean;
   openDialog: boolean;
   onConfirm: CreateCommentFunction;
-  setOpenDialog: (open: boolean) => void;
+  setOpenDialog: (open: SetStateAction<boolean>) => void;
   fieldName: string;
   error: string;
   register: UseFormRegister<{ content: string }>;

@@ -1,4 +1,5 @@
 import { AlertDialog } from './AlertDialog';
+import { SetStateAction } from 'react';
 
 interface DeleteAlertDialogProps {
   title: string;
@@ -7,7 +8,7 @@ interface DeleteAlertDialogProps {
   open: boolean;
   onConfirm: (featureId: string) => Promise<void>;
   featureId: string;
-  setOpenDialog: (open: boolean) => void;
+  setOpenDialog: (open: SetStateAction<boolean>) => void;
 }
 
 export const DeleteAlertDialog = ({

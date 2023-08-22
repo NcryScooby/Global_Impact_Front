@@ -1,10 +1,11 @@
-import { CreateCommentData } from '../../../../app/services/comments/create';
 import { IErrorResponse } from '../../../../app/interfaces/errors/IErrorResponse';
+import { CreateCommentData } from '../../../../app/services/comments/create';
 import { commentsService } from '../../../../app/services/comments';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
+import { SetStateAction } from 'react';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -16,7 +17,10 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export const usePostDetailController = (postId: string, setOpenDialog: (open: boolean) => void) => {
+export const usePostDetailController = (
+  postId: string,
+  setOpenDialog: (open: SetStateAction<boolean>) => void
+) => {
   const queryClient = useQueryClient();
 
   const {
