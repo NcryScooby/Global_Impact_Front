@@ -10,6 +10,9 @@ export interface MeResponse {
       id: string;
       name: string;
     };
+    role: {
+      name: string;
+    };
   };
 }
 

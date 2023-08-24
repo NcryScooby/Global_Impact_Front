@@ -16,10 +16,11 @@ interface CommentProps {
     createdAt: string;
   }[];
   userId: string;
+  userRole: string;
   onDelete: (id: string) => void;
 }
 
-export const CommentList = ({ comments, userId, onDelete }: CommentProps) => {
+export const CommentList = ({ comments, userId, userRole, onDelete }: CommentProps) => {
   return (
     <>
       <div className="px-4 lg:px-8">
@@ -37,6 +38,7 @@ export const CommentList = ({ comments, userId, onDelete }: CommentProps) => {
                   key={index}
                   comment={comment}
                   userId={userId}
+                  userRole={userRole}
                   onDelete={onDelete}
                 />
               </div>

@@ -3,6 +3,7 @@ import { formatViews } from '../../../app/utils/helpers/formatViews';
 import { formatDate } from '../../../app/utils/helpers/formatDate';
 import { MeResponse } from '../../../app/services/usersService/me';
 import { BarChartIcon, TrashIcon } from '@radix-ui/react-icons';
+import { USER_ROLES } from '../../../app/constants';
 import { LikeComponent } from './LikeComponent';
 import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
@@ -102,7 +103,7 @@ export const DetailCard = ({
             </span>
           </Link>
         </div>
-        {post.author.id === user.id ? (
+        {post.author.id === user.id || user.role.name === USER_ROLES.ADMIN ? (
           <div className="absolute top-4 right-4">
             <TrashIcon
               height={22}

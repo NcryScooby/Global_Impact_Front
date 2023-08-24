@@ -10,3 +10,7 @@ export const PAGE = {
   CATEGORIES: 'categories',
   AUTHORS: 'authors',
 };
+
+export const USER_ROLES = {
+  ADMIN: 'ADMIN',
+};

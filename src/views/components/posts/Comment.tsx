@@ -1,4 +1,5 @@
 import { formatDate } from '../../../app/utils/helpers/formatDate';
+import { USER_ROLES } from '../../../app/constants';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
 import { env } from '../../../app/config/env';
@@ -20,14 +21,15 @@ interface CommentProps {
     createdAt: string;
   };
   userId: string;
+  userRole: string;
   onDelete: (id: string) => void;
 }
 
-export const Comment = ({ comment, userId, onDelete }: CommentProps) => {
+export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) => {
   return (
     <>
       <span className="absolute right-4 top-4">
-        {userId === comment.author.id ? (
+        {userId === comment.author.id || userRole === USER_ROLES.ADMIN ? (
           <TrashIcon
             height={22}
             width={22}

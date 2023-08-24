@@ -189,6 +189,7 @@ export const PostDetail = () => {
           <CommentList
             comments={post.comments}
             userId={user.id}
+            userRole={user.role.name}
             onDelete={(commentId) => {
               setCommentId(commentId);
               setOpenDeleteCommentDialog(true);
