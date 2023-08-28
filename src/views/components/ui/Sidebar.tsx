@@ -109,7 +109,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                   (currentPath === '/posts' ||
                     currentPath === `/posts/${postId}` ||
                     currentPath === `/posts/categories/${categoryId}`) &&
-                  currentPath !== '/posts/new'
+                  currentPath !== '/posts/create'
                     ? 'bg-gray-900'
                     : ''
                 }`}
@@ -119,7 +119,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                     (currentPath === '/posts' ||
                       currentPath === `/posts/${postId}` ||
                       currentPath === `/posts/categories/${categoryId}`) &&
-                    currentPath !== '/posts/new'
+                    currentPath !== '/posts/create'
                       ? 'bg-gray-900 text-white'
                       : ''
                   }`}
@@ -129,20 +129,20 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             </li>
             <li>
               <Link
-                to={'/posts/new'}
+                to={'/posts/create'}
                 onClick={() => {
                   setIsOpen(false);
                 }}
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
-                  currentPath === '/posts/new' ? 'bg-gray-900' : ''
+                  currentPath === '/posts/create' ? 'bg-gray-900' : ''
                 }`}
               >
                 <Pencil2Icon
                   className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
-                    currentPath === '/posts/new' ? 'bg-gray-900 text-white' : ''
+                    currentPath === '/posts/create' ? 'bg-gray-900 text-white' : ''
                   }`}
                 />
-                <span className="ml-3">New Post</span>
+                <span className="ml-3">Create Post</span>
               </Link>
             </li>
             <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-900">

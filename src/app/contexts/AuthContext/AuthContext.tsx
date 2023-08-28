@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 interface AuthContextProps {
   signedIn: boolean;
   userAvatar: string;
-  signIn(token: string): void;
+  signIn: (token: string) => void;
   signOut: () => void;
 }
 

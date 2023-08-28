@@ -1,1 +1,0 @@
-export { NewPost } from './NewPost';

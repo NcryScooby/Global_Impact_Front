@@ -1,10 +1,13 @@
+import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { useLoginController } from './useLoginController';
 import { Button } from '../../../components/ui/Button';
 import { Input } from '../../../components/ui/Input';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export const Login = () => {
   const { handleSubmit, register, errors, isLoading } = useLoginController();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   return (
     <>
@@ -25,10 +28,18 @@ export const Login = () => {
       <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
         <Input type="email" label="E-mail" error={errors.email?.message} {...register('email')} />
         <Input
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           label="Password"
           autoComplete="password"
           error={errors.password?.message}
+          iconStyle="top-[41px] right-0.5 cursor-pointer"
+          icon={
+            showPassword ? (
+              <EyeOpenIcon width={14} onClick={() => setShowPassword(false)} />
+            ) : (
+              <EyeClosedIcon width={14} onClick={() => setShowPassword(true)} />
+            )
+          }
           {...register('password')}
         />
         <Button type="submit" className="mt-2" isLoading={isLoading}>

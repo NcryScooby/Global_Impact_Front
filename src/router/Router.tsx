@@ -5,7 +5,7 @@ import { PostDetail } from '../views/pages/Posts/PostDetail';
 import { AuthLayout } from '../views/layouts/AuthLayout';
 import { Sidebar } from '../views/components/ui/Sidebar';
 import { Register } from '../views/pages/Auth/Register';
-import { NewPost } from '../views/pages/Posts/NewPost';
+import { CreatePost } from '../views/pages/Posts/CreatePost';
 import { NotFound } from '../views/pages/NotFound';
 import { Posts } from '../views/pages/Posts/Posts';
 import { Login } from '../views/pages/Auth/Login';
@@ -38,7 +38,7 @@ export const Router = () => {
           <Route path="/posts/:postId" element={<PostDetail />} />
           <Route path="/posts/categories/:categoryId" element={<PostsCategory />} />
           <Route path="/posts/authors/:authorId" element={<PostsAuthor />} />
-          <Route path="/posts/new" element={<NewPost />} />
+          <Route path="/posts/create" element={<CreatePost />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

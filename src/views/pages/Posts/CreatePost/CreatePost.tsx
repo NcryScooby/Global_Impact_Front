@@ -1,6 +1,6 @@
 import { GetAllCategoriesResponse } from '../../../../app/services/categoriesService/getAll';
 import { categoriesService } from '../../../../app/services/categoriesService';
-import { useNewPostController } from './useNewPostController';
+import { useCreatePostController } from './useCreatePostController';
 import { InputFile } from '../../../components/ui/InputFile';
 import { TextArea } from '../../../components/ui/TextArea';
 import { Button } from '../../../components/ui/Button';
@@ -9,8 +9,8 @@ import { Input } from '../../../components/ui/Input';
 import { useQuery } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 
-export const NewPost = () => {
-  const { handleSubmit, reset, register, errors, isLoading } = useNewPostController();
+export const CreatePost = () => {
+  const { handleSubmit, reset, register, errors, isLoading } = useCreatePostController();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');

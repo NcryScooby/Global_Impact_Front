@@ -1,6 +1,7 @@
 import { GetAllJobsResponse } from '../../../../app/services/jobsService/getAll';
-import { useRegisterController } from './useRegisterController';
+import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { jobsService } from '../../../../app/services/jobsService';
+import { useRegisterController } from './useRegisterController';
 import { InputFile } from '../../../components/ui/InputFile';
 import { Button } from '../../../components/ui/Button';
 import { Select } from '../../../components/ui/Select';
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom';
 
 export const Register = () => {
   const { handleSubmit, register, errors, isLoading } = useRegisterController();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -56,10 +58,18 @@ export const Register = () => {
         <Input label="Name" error={errors.name?.message} {...register('name')} />
         <Input label="E-mail" error={errors.email?.message} {...register('email')} />
         <Input
+          type={showPassword ? 'text' : 'password'}
           label="Password"
-          type="password"
-          error={errors.password?.message}
           autoComplete="password"
+          error={errors.password?.message}
+          iconStyle="top-[41px] right-0.5 cursor-pointer"
+          icon={
+            showPassword ? (
+              <EyeOpenIcon width={14} onClick={() => setShowPassword(false)} />
+            ) : (
+              <EyeClosedIcon width={14} onClick={() => setShowPassword(true)} />
+            )
+          }
           {...register('password')}
         />
         <Select

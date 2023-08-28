@@ -7,10 +7,11 @@ interface InputProps extends ComponentProps<'input'> {
   error?: string;
   label?: string;
   icon?: ReactNode;
+  iconStyle?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, name, label, error, icon, className, ...props }: InputProps, ref) => {
+  ({ id, name, label, error, icon, className, iconStyle, ...props }: InputProps, ref) => {
     const inputId = id ?? name;
 
     return (
@@ -33,17 +34,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 
         {icon ? (
           <div
-            className="
-            absolute
-            top-[13px]
-            lg:top-[21px]
-            right-0
-            flex
-            items-center
-            pr-2.5
-            pointer-events-none
-            text-gray-400
-          "
+            className={cn(
+              'absolute top-[21px] right-0 flex items-center pr-2.5 text-gray-400',
+              iconStyle
+            )}
           >
             {icon}
           </div>

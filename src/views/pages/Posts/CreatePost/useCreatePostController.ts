@@ -25,7 +25,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export const useNewPostController = () => {
+export const useCreatePostController = () => {
   const {
     register,
     reset,
