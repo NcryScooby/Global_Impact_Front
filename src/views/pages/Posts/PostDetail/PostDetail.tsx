@@ -41,17 +41,9 @@ export const PostDetail = () => {
     isLoading: isLoadingCreateComment,
   } = usePostDetailController(postId, setOpenCreateCommentDialog);
 
-  const { data: userData } = useQuery<MeResponse>({
-    queryKey: ['loggedUser'],
-    staleTime: Infinity,
-  });
+  const userData = queryClient.getQueryData<MeResponse>(['loggedUser']);
 
-  if (!userData) {
-    navigate('/', { replace: true });
-    return null;
-  }
-
-  const user = userData.user;
+  const user = userData?.user;
 
   const {
     data: postData,
@@ -62,7 +54,7 @@ export const PostDetail = () => {
     queryFn: () => postsService.getById(postId),
   });
 
-  if (isError) {
+  if (isError || !user) {
     navigate('/', { replace: true });
     return null;
   }
