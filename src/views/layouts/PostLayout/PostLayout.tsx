@@ -153,7 +153,7 @@ export const PostLayout = <
               </div>
             </div>
           </div>
-          <div className={`grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:${grid === '2' ? 'grid-cols-2' : 'grid-cols-3'} lg:max-w-full`}>
+          <div className={`flex flex-col max-w-md gap-6 mx-auto mt-8 lg:grid ${grid !== '2' ? 'lg:grid-cols-3' : 'lg:grid-cols-2'} lg:max-w-full`}>
             <PostsGrid isLoading={isLoading} error={error} posts={posts} />
           </div>
         </div>
