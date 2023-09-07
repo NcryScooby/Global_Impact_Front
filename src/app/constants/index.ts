@@ -14,3 +14,10 @@ export const PAGE = {
 export const USER_ROLES = {
   ADMIN: 'ADMIN',
 };
+
+export const FILTER_OPTIONS = [
+  { id: 'desc', name: 'Newest First' },
+  { id: 'asc', name: 'Oldest First' },
+  { id: 'popularity', name: 'Most Popular' },
+  { id: 'views', name: 'Most Viewed' },
+];
