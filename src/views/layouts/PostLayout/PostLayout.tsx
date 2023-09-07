@@ -1,13 +1,16 @@
 import { getAllByAuthorIdPostsResponse } from '../../../app/services/postsService/getAllPostByAuthorId';
 import { GetAllByCategoryIdPostsResponse } from '../../../app/services/postsService/getAllByCategoryId';
+import { ArrowLeftIcon, MagnifyingGlassIcon, GridIcon, TableIcon } from '@radix-ui/react-icons';
 import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
-import { ArrowLeftIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons';
+import { FILTER_OPTIONS, PAGE, POSTS_TITLE_MAP } from '../../../app/constants';
+import { IGridOptions } from '../../../app/interfaces/pagination/IGridOptions';
+import { IPostsPages } from '../../../app/interfaces/posts/IPostsPages';
 import { PostsHeader } from '../../components/posts/PostLayoutHeader';
 import { PostsGrid } from '../../components/posts/PostsLayoutGrid';
 import { ChangeEvent, RefObject, useEffect } from 'react';
 import { Button } from '../../components/ui/Button';
+import { Select } from '../../components/ui/Select';
 import { Input } from '../../components/ui/Input';
-import { PAGE } from '../../../app/constants';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -21,9 +24,13 @@ interface PostLayoutProps<
   inputRef: RefObject<HTMLInputElement>;
   localTitle: string;
   searchPageParam: string;
+  page: IPostsPages['page'];
+  selectedOption: string;
+  grid?: IGridOptions['value'];
   handleTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handlePageChange: (page: string) => void;
-  page: 'posts' | 'categories' | 'authors';
+  handleChangeSelectedOption: (event: ChangeEvent<HTMLSelectElement>) => void;
+  handleGridChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
 }
 
 // prettier-ignore
@@ -40,19 +47,45 @@ export const PostLayout = <
     inputRef,
     localTitle,
     searchPageParam,
+    page,
+    selectedOption,
+    grid,
     handleTitleChange,
     handlePageChange,
-    page,
+    handleChangeSelectedOption,
+    handleGridChange
   }: PostLayoutProps<T>) => {
 
   const isPostsPage = (page === PAGE.POSTS);
   const isCategoryPage = (page === PAGE.CATEGORIES);
   const isAuthorPage = (page === PAGE.AUTHORS);
 
+  const generateGridChangeHandler = (value: IGridOptions['value']) => {
+    return () => {
+      if (handleGridChange) {
+        handleGridChange({ target: { value } } as ChangeEvent<HTMLSelectElement>);
+      }
+    };
+  };
+
   const setHeaderTitle = () => {
-    if (isPostsPage) return 'Latest from blog';
-    if (isCategoryPage && posts?.posts[0]?.category?.name) return posts.posts[0].category.name;
-    if (isAuthorPage && posts?.posts[0]?.author?.name) return `${posts.posts[0].author.name}'s Posts`;
+    if (isPostsPage) {
+      for (const optionId in POSTS_TITLE_MAP) {
+        if (selectedOption.includes(optionId)) {
+          return POSTS_TITLE_MAP[optionId];
+        }
+      }
+    } else if (isCategoryPage) {
+      const { category } = posts?.posts[0] || {};
+      if (category?.name) {
+        return category.name;
+      }
+    } else if (isAuthorPage) {
+      const { author } = posts?.posts[0] || {};
+      if (author?.name) {
+        return `${author.name}'s Posts`;
+      }
+    }
   };
 
   useEffect(() => {
@@ -63,47 +96,73 @@ export const PostLayout = <
 
   return (
     <>
-      <section className="bg-gray-50 sm:ml-64">
+      <section className='bg-gray-50 sm:ml-64'>
         {!isPostsPage && (
           <Link
-            to="/posts"
-            className="absolute top-[55px] left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5"
+            to='/posts'
+            className='absolute top-[55px] left-4 lg:top-8 lg:left-[289px] flex items-center gap-1.5'
           >
-            <ArrowLeftIcon color="#757575" />
-            <p className="text-xs text-gray-600">Back to all posts</p>
+            <ArrowLeftIcon color='#757575' />
+            <p className='text-xs text-gray-600'>Back to all posts</p>
           </Link>
         )}
-        <div className="px-4 py-8 lg:py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex-row lg:flex lg:items-center lg:justify-between">
+        <div className='px-4 py-8 lg:py-16 mx-auto sm:px-6 lg:px-8 max-w-7xl'>
+          <div className='flex items-start'>
             <PostsHeader isLoading={isLoading} isSuccess={isSuccess} setHeaderTitle={setHeaderTitle} />
             <div className='flex flex-col lg:items-end gap-4'>
-              <Input
-                name="title"
-                placeholder="Search Post..."
-                value={localTitle}
-                onChange={handleTitleChange}
-                className="w-full lg:w-72"
-                disabled={isLoading}
-                ref={inputRef}
-                icon={<MagnifyingGlassIcon />}
-              />
-              <Link to="/posts/create">
-                <Button className='h-[42px] w-full'>
+              <Link to='/posts/create'>
+                <Button className='hidden lg:block lg:h-[42px] lg:w-full'>
                   Create Post
                 </Button>
               </Link>
             </div>
           </div>
-          <div className="grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:mt-16 lg:grid-cols-3 lg:max-w-full">
+          <div className='grid grid-cols-2 gap-2 lg:flex mt-12 justify-between items-center lg:mt-20'>
+            <div>
+              <Input
+                name='title'
+                placeholder='Search Post...'
+                value={localTitle}
+                onChange={handleTitleChange}
+                className='w-full lg:w-72'
+                iconStyle='top-[13px]'
+                disabled={isLoading}
+                ref={inputRef}
+                icon={<MagnifyingGlassIcon />}
+              />
+            </div>
+            <div className='lg:flex lg:gap-2'>
+              <Select
+                name='filters'
+                placeholder='Filters'
+                className={`w-full lg:w-36 ${isLoading ? 'text-gray-500' : 'text-black'}`}
+                selectedOption={selectedOption}
+                isSuccess={isSuccess}
+                iconStyle='top-[11px] right-[-10px]'
+                handleChangeSelectedOption={handleChangeSelectedOption}
+                options={FILTER_OPTIONS}
+                disabled={isLoading}
+              />
+              <div className='hidden lg:flex justify-between gap-1'>
+                <div className={`p-3 bg-white rounded-[2px] border ${grid === '2' ? 'border-gray-700' : 'border-gray-300'} cursor-pointer`} onClick={generateGridChangeHandler('2')}>
+                  <GridIcon />
+                </div>
+                <div className={`p-3 bg-white rounded-[2px] border ${grid !== '2' ? 'border-gray-700' : 'border-gray-300'} border-gray-300 cursor-pointer`} onClick={generateGridChangeHandler('3')}>
+                  <TableIcon />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={`grid max-w-md grid-cols-1 gap-6 mx-auto mt-8 lg:${grid === '2' ? 'grid-cols-2' : 'grid-cols-3'} lg:max-w-full`}>
             <PostsGrid isLoading={isLoading} error={error} posts={posts} />
           </div>
         </div>
-        <div className="flex items-center justify-center py-16">
+        <div className='flex items-center justify-center py-16'>
           {!error && (
             <Pagination
               count={posts?.meta.totalPages}
               page={Number(searchPageParam)}
-              shape="rounded"
+              shape='rounded'
               disabled={isLoading}
               onChange={(_, page) => {
                 handlePageChange(page.toString());
