@@ -17,6 +17,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
   const currentPath = location.pathname;
   const postId = currentPath.split('/')[2];
   const categoryId = currentPath.split('/')[3];
+  const authorId = currentPath.split('/')[3];
   const sidebarRef = useRef<HTMLElement | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -108,7 +109,8 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
                   (currentPath === '/posts' ||
                     currentPath === `/posts/${postId}` ||
-                    currentPath === `/posts/categories/${categoryId}`) &&
+                    currentPath === `/posts/categories/${categoryId}` ||
+                    currentPath === `/posts/authors/${authorId}`) &&
                   currentPath !== '/posts/create'
                     ? 'bg-gray-900'
                     : ''
@@ -118,7 +120,8 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                   className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
                     (currentPath === '/posts' ||
                       currentPath === `/posts/${postId}` ||
-                      currentPath === `/posts/categories/${categoryId}`) &&
+                      currentPath === `/posts/categories/${categoryId}` ||
+                      currentPath === `/posts/authors/${authorId}`) &&
                     currentPath !== '/posts/create'
                       ? 'bg-gray-900 text-white'
                       : ''
