@@ -7,7 +7,7 @@ export const PostListSkeleton = ({ count }: PostListSkeletonProps) => {
     <div
       key={index}
       role="status"
-      className="max-w-sm p-5 rounded-[2px] shadow animate-pulse bg-white"
+      className="p-5 rounded-[2px] shadow animate-pulse bg-white w-full"
     >
       <div className="flex items-center justify-center h-52 mb-4 bg-gray-300"></div>
       <div className="flex items-center space-x-3">
