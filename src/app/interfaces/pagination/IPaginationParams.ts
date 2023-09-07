@@ -1,5 +1,5 @@
 export interface IPaginationParams {
   limit?: number;
   page?: number;
-  orderBy?: 'asc' | 'desc' | 'popularity' | 'views';
+  orderBy?: 'desc' | 'asc' | 'popularity' | 'views';
 }
