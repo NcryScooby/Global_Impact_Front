@@ -8,10 +8,14 @@ export const Posts = () => {
   const {
     inputRef,
     localTitle,
+    grid,
     searchPageParam,
     searchTitleParam,
+    searchOrderByParam,
     handleTitleChange,
     handlePageChange,
+    handleChangeSelectedOption,
+    handleGridChange,
   } = usePostsLogic();
 
   const {
@@ -20,10 +24,10 @@ export const Posts = () => {
     isFetching,
     isSuccess,
   } = useQuery<GetAllPostsResponse>({
-    queryKey: ['getPosts', searchPageParam, searchTitleParam],
+    queryKey: ['getPosts', searchPageParam, searchTitleParam, searchOrderByParam],
     queryFn: () =>
       postsService.getAll({
-        orderBy: 'desc',
+        orderBy: searchOrderByParam,
         limit: 6,
         title: searchTitleParam || undefined,
         page: Number(searchPageParam) || undefined,
@@ -45,6 +49,10 @@ export const Posts = () => {
         handlePageChange={handlePageChange}
         key={searchPageParam}
         page="posts"
+        selectedOption={searchOrderByParam}
+        handleChangeSelectedOption={handleChangeSelectedOption}
+        grid={grid}
+        handleGridChange={handleGridChange}
       />
     </>
   );

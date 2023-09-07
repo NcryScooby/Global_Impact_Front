@@ -11,10 +11,14 @@ export const PostsCategory = () => {
   const {
     inputRef,
     localTitle,
+    grid,
     searchPageParam,
     searchTitleParam,
+    searchOrderByParam,
     handleTitleChange,
     handlePageChange,
+    handleChangeSelectedOption,
+    handleGridChange,
   } = usePostsLogic();
 
   const {
@@ -23,10 +27,16 @@ export const PostsCategory = () => {
     isFetching,
     isSuccess,
   } = useQuery<GetAllByCategoryIdPostsResponse>({
-    queryKey: ['getPostsByCategoryId', searchPageParam, searchTitleParam, categoryId],
+    queryKey: [
+      'getPostsByCategoryId',
+      categoryId,
+      searchPageParam,
+      searchTitleParam,
+      searchOrderByParam,
+    ],
     queryFn: () =>
       postsService.getAllByCategoryId(categoryId, {
-        orderBy: 'desc',
+        orderBy: searchOrderByParam,
         limit: 6,
         title: searchTitleParam || undefined,
         page: Number(searchPageParam) || undefined,
@@ -47,6 +57,10 @@ export const PostsCategory = () => {
       handlePageChange={handlePageChange}
       key={searchPageParam}
       page="categories"
+      selectedOption={searchOrderByParam}
+      handleChangeSelectedOption={handleChangeSelectedOption}
+      grid={grid}
+      handleGridChange={handleGridChange}
     />
   );
 };

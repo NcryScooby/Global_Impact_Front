@@ -11,10 +11,14 @@ export const PostsAuthor = () => {
   const {
     inputRef,
     localTitle,
+    grid,
     searchPageParam,
     searchTitleParam,
+    searchOrderByParam,
     handleTitleChange,
     handlePageChange,
+    handleChangeSelectedOption,
+    handleGridChange,
   } = usePostsLogic();
 
   const {
@@ -23,10 +27,16 @@ export const PostsAuthor = () => {
     isFetching,
     isSuccess,
   } = useQuery<getAllByAuthorIdPostsResponse>({
-    queryKey: ['getPostsByAuthorId', searchPageParam, searchTitleParam, authorId],
+    queryKey: [
+      'getPostsByAuthorId',
+      authorId,
+      searchPageParam,
+      searchTitleParam,
+      searchOrderByParam,
+    ],
     queryFn: () =>
       postsService.getAllByAuthorId(authorId, {
-        orderBy: 'desc',
+        orderBy: searchOrderByParam,
         limit: 6,
         title: searchTitleParam || undefined,
         page: Number(searchPageParam) || undefined,
@@ -47,6 +57,10 @@ export const PostsAuthor = () => {
       handlePageChange={handlePageChange}
       key={searchPageParam}
       page="authors"
+      selectedOption={searchOrderByParam}
+      handleChangeSelectedOption={handleChangeSelectedOption}
+      grid={grid}
+      handleGridChange={handleGridChange}
     />
   );
 };
