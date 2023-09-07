@@ -6,7 +6,7 @@ import { cn } from '../../../app/utils/helpers/cn';
 interface SelectProps extends ComponentProps<'select'> {
   name: string;
   error?: string;
-  label: string;
+  label?: string;
   options: {
     id: string;
     name: string;
@@ -15,6 +15,7 @@ interface SelectProps extends ComponentProps<'select'> {
   handleChangeSelectedOption: (event: ChangeEvent<HTMLSelectElement>) => void;
   isLoading?: boolean;
   isSuccess?: boolean;
+  iconStyle?: string;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -31,6 +32,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       isLoading,
       isSuccess,
       className,
+      iconStyle,
       ...props
     }: SelectProps,
     ref
@@ -39,7 +41,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     return (
       <div className="relative">
-        <label htmlFor={selectId} className="block mb-2 text-[13px] text-gray-500">
+        <label
+          htmlFor={selectId}
+          className={`block ${label ? 'mb-2' : null} text-[13px] text-gray-500`}
+        >
           {label}
         </label>
 
@@ -69,8 +74,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ))}
         </select>
 
-        <div className="pointer-events-none absolute top-[39px] right-[-5px] flex items-center px-4 text-gray-400 ">
-          {!isLoading && isSuccess ? <CaretDownIcon width={20} height={20} /> : null}
+        <div
+          className={cn(
+            'pointer-events-none absolute top-[39px] right-[-5px] flex items-center px-4 text-gray-400',
+            iconStyle
+          )}
+        >
+          {!isLoading ? <CaretDownIcon width={20} height={20} /> : null}
         </div>
 
         {error ? (
