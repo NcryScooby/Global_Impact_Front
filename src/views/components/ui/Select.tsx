@@ -48,7 +48,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           {label}
         </label>
 
-        {isLoading ? <Spinner className="absolute top-8 right-2.5 w-4 fill-gray-400" /> : null}
+        {isLoading ? (
+          <Spinner className="absolute top-8 right-2.5 w-4 fill-gray-400 dark:text-gray-600 dark:fill-white" />
+        ) : null}
 
         <select
           ref={ref}
@@ -58,7 +60,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           value={selectedOption}
           onChange={handleChangeSelectedOption}
           className={cn(
-            'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none cursor-pointer',
+            'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none cursor-pointer dark:bg-black-600 dark:text-gray-400 dark:border-black-600 dark:focus:border-black-500',
             options.length === 0 || !selectedOption ? 'text-gray-400' : 'text-primary',
             error ? '!border-[#C92A2A]' : '',
             className

@@ -1,10 +1,12 @@
 import { ExitIcon, HomeIcon, Pencil2Icon, LayoutIcon } from '@radix-ui/react-icons';
 import { useSidebar } from '../../../app/hooks/useSidebar';
+import { Avatar, FormControlLabel } from '@mui/material';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { useLocation } from 'react-router-dom';
 import { env } from '../../../app/config/env';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Avatar } from '@mui/material';
+import { Switch } from './Switch';
 
 interface SidebarProps {
   signOut: () => void;
@@ -13,6 +15,7 @@ interface SidebarProps {
 
 export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
   const { isOpen, setIsOpen } = useSidebar();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const currentPath = location.pathname;
   const postId = currentPath.split('/')[2];
@@ -78,7 +81,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
         } sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-primary">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-primary dark:bg-black-600">
           <ul className="space-y-2 font-medium">
             <li>
               <Link
@@ -159,13 +162,17 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 </button>
               </li>
             </ul>
-            <li className="flex-1 fixed bottom-4">
+            <li className="flex-1 fixed bottom-4 flex w-full gap-6">
               <Avatar
                 alt="User avatar"
                 src={userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''}
                 sx={{
                   border: '0.5px solid #fff',
                 }}
+              />
+              <FormControlLabel
+                control={<Switch checked={theme === 'dark'} onChange={toggleTheme} name="theme" />}
+                label=""
               />
             </li>
           </ul>

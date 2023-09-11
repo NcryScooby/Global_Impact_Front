@@ -1,4 +1,5 @@
 import { formatDate } from '../../../app/utils/helpers/formatDate';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { USER_ROLES } from '../../../app/constants';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
@@ -26,6 +27,7 @@ interface CommentProps {
 }
 
 export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) => {
+  const { theme } = useTheme();
   return (
     <>
       <span className="absolute right-4 top-4">
@@ -33,8 +35,8 @@ export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) =
           <TrashIcon
             height={22}
             width={22}
-            color="#a3a3a3"
-            className="bg-white rounded-full p-1 cursor-pointer hover:bg-gray-100"
+            color={theme === 'light' ? '#9e9e9e' : '#bdbdbd'}
+            className="bg-white rounded-full p-1 cursor-pointer hover:bg-gray-100 dark:bg-black-600 dark:hover:bg-black-400"
             onClick={() => onDelete(comment.id)}
           />
         ) : null}
@@ -54,13 +56,17 @@ export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) =
               />
             </Link>
           </div>
-          <Divider orientation="vertical" flexItem />
+          <Divider
+            orientation="vertical"
+            flexItem
+            sx={theme === 'light' ? null : { backgroundColor: '#222222' }}
+          />
           <div className="mt-0 lg:mt-0 w-full flex flex-col gap-4">
             <div className="flex flex-col gap-1">
               <div>
-                <p className="text-[14px] font-semibold text-black">
+                <p className="text-[14px] font-semibold text-black dark:text-white">
                   {comment.author.name}
-                  <span className="text-[12px] font-normal text-gray-600">
+                  <span className="text-[12px] font-normal text-gray-600 dark:text-gray-300">
                     , {comment.author.job.name}.
                   </span>
                 </p>
@@ -68,7 +74,9 @@ export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) =
               <p className="text-[10px] text-gray-500">{formatDate(comment.createdAt)}</p>
             </div>
             <blockquote>
-              <p className="text-[12px] lg:text-sm text-black">{comment.content}</p>
+              <p className="text-[12px] lg:text-sm text-black dark:text-gray-300">
+                {comment.content}
+              </p>
             </blockquote>
           </div>
         </div>

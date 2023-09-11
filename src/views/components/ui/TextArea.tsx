@@ -26,7 +26,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           id={textAreaId}
           {...props}
           className={cn(
-            'bg-white border border-gray-300 text-gray-900 h-24 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none resize-none mt-4',
+            'bg-white border border-gray-300 text-gray-900 h-24 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none resize-none mt-4 dark:bg-black-600 dark:text-gray-400 dark:border-black-600 dark:focus:border-black-500',
             error ? '!border-[#C92A2A]' : '',
             className
           )}

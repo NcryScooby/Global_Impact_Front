@@ -32,7 +32,7 @@ export const CommentList = ({ comments, userId, userRole, onDelete }: CommentPro
                 key={index}
                 className={`py-4 lg:py-8 ${
                   index === 0 ? 'mt-8' : 'mt-3 lg:mt-6'
-                } rounded-[2px] bg-white relative border border-gray-300`}
+                } rounded-[2px] bg-white dark:bg-black-600 relative border border-gray-300 dark:border-black-500`}
               >
                 <Comment
                   key={index}

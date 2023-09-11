@@ -1,6 +1,7 @@
 import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
 import { Breadcrumbs as MuiBreadcrumbs } from '@mui/material';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { Link } from 'react-router-dom';
 
 interface BreadcrumbsProps {
@@ -11,13 +12,15 @@ interface BreadcrumbsProps {
 }
 
 export const Breadcrumbs = ({ links }: BreadcrumbsProps) => {
+  const { theme } = useTheme();
+
   return (
     <MuiBreadcrumbs
       aria-label="breadcrumb"
-      separator={<ChevronRightIcon color="#3f3f3f" width={11} />}
+      separator={<ChevronRightIcon color={theme === 'light' ? '#3f3f3f' : '#bdbdbd'} width={11} />}
       sx={{
         fontSize: '12px',
-        color: '#3f3f3f',
+        color: theme === 'light' ? '#3f3f3f' : '#bdbdbd',
         '& li': { m: 0.25 },
       }}
     >

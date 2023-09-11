@@ -1,7 +1,8 @@
 import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
-import { formatViews } from '../../../app/utils/helpers/formatViews';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
+import { formatViews } from '../../../app/utils/helpers/formatViews';
 import { formatDate } from '../../../app/utils/helpers/formatDate';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { env } from '../../../app/config/env';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
@@ -33,8 +34,9 @@ interface CardProps {
 }
 
 const Card = ({ post }: CardProps) => {
+  const { theme } = useTheme();
   return (
-    <div className="overflow-hidden bg-white rounded-[2px] shadow">
+    <div className="overflow-hidden bg-white dark:bg-black-600 rounded-[2px] shadow">
       <div className="p-5">
         <div className="relative">
           <Link to={`/posts/${post.id}`}>
@@ -47,7 +49,7 @@ const Card = ({ post }: CardProps) => {
           </Link>
           <div className="absolute top-4 left-4">
             <Link to={`/posts/categories/${post.category.id}`}>
-              <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+              <span className="px-4 py-2 dark:bg-black-500 dark:text-white text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
                 {post.category.name}
               </span>
             </Link>
@@ -66,31 +68,43 @@ const Card = ({ post }: CardProps) => {
               />
             </Link>
             <div>
-              <span className="block text-[12px] text-gray-600 uppercase">
+              <span className="block text-[12px] text-gray-600 uppercase dark:text-gray-400">
                 {formatDate(post.createdAt)}
               </span>
-              <span className="text-gray-600 text-[12px] font-normal">
+              <span className="text-gray-600 text-[12px] font-normal dark:text-gray-400">
                 <b>{post.author.name}</b>, {post.author.job.name}.
               </span>
             </div>
           </div>
           <div className="flex gap-2 select-none">
-            <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
-              <BarChartIcon height={12} width={12} color="#4b5563" />
+            <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563] dark:text-gray-400">
+              <BarChartIcon
+                height={12}
+                width={12}
+                color={theme === 'light' ? '#4b5563' : '#bdbdbd'}
+              />
               <p>{formatViews(post.views)}</p>
             </span>
-            <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
-              <HeartFilledIcon height={12} width={12} color="#9e9e9e" />
+            <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563] dark:text-gray-400">
+              <HeartFilledIcon
+                height={12}
+                width={12}
+                color={theme === 'light' ? '#9e9e9e' : '#bdbdbd'}
+              />
               <p>{post.likes ? post.likes.length : 0}</p>
             </span>
           </div>
         </div>
-        <p className="mt-5 text-[18px] leading-7 font-semibold">{addThreeDots(post.title, 30)}</p>
-        <p className="mt-4 text-[14px] text-gray-600">{addThreeDots(post.content, 80)}</p>
+        <p className="mt-5 text-[18px] leading-7 font-semibold dark:text-white">
+          {addThreeDots(post.title, 30)}
+        </p>
+        <p className="mt-4 text-[14px] text-gray-600 dark:text-gray-400">
+          {addThreeDots(post.content, 80)}
+        </p>
         <Link
           to={`/posts/${post.id}`}
           title={post.title}
-          className="inline-flex items-center justify-center pb-0.5 mt-5 text-[14px] font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600"
+          className="inline-flex items-center justify-center pb-0.5 mt-5 text-[14px] font-semibold text-blue-600 transition-all duration-200 border-b-2 border-transparent hover:border-blue-600 focus:border-blue-600 dark:text-gray-400 dark:focus:border-gray-400 dark:hover:border-gray-400"
         >
           Continue Reading
           <svg
