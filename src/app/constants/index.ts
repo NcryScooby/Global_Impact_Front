@@ -26,5 +26,13 @@ export const POSTS_TITLE_MAP = {
   [FILTER_OPTIONS[0].id]: 'Latest from blog',
   [FILTER_OPTIONS[1].id]: 'Oldest from blog',
   [FILTER_OPTIONS[2].id]: 'Most popular posts',
-  [FILTER_OPTIONS[3].id]: 'Most viewed posts'
+  [FILTER_OPTIONS[3].id]: 'Most viewed posts',
+};
+
+export const CACHE_TIME = {
+  FIVE_MINUTES: 1000 * 60 * 5,
+  FIFTEEN_MINUTES: 1000 * 60 * 13,
+  THIRTY_MINUTES: 1000 * 60 * 30,
+  ONE_HOUR: 1000 * 60 * 60,
+  ONE_DAY: 1000 * 60 * 60 * 24,
 };

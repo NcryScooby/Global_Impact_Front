@@ -71,6 +71,9 @@ export const PostDetail = () => {
 
   const deletePostMutation = useMutation(postsService.deletePost, {
     onSuccess: () => {
+      queryClient.invalidateQueries({
+        predicate: (query) => query.queryKey[0] === 'getPosts',
+      });
       setOpenDeletePostDialog(false);
       toast.success('Post deleted successfully');
       navigate('/posts', { replace: true });
