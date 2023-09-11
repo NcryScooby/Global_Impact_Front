@@ -1,11 +1,11 @@
 import { ExitIcon, HomeIcon, Pencil2Icon, LayoutIcon } from '@radix-ui/react-icons';
-import { useSidebar } from '../../../app/hooks/useSidebar';
 import { Avatar, FormControlLabel } from '@mui/material';
-import { useTheme } from '../../../app/hooks/useTheme';
 import { useLocation } from 'react-router-dom';
-import { env } from '../../../app/config/env';
+import { useSidebar } from '@hooks/useSidebar';
+import { useTheme } from '@hooks/useTheme';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { env } from '@config/env';
 import { Switch } from './Switch';
 
 interface SidebarProps {

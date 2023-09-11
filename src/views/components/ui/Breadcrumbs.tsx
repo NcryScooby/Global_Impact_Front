@@ -1,7 +1,7 @@
-import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
 import { Breadcrumbs as MuiBreadcrumbs } from '@mui/material';
+import { addThreeDots } from '@utils/helpers/addThreeDots';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { useTheme } from '../../../app/hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
 
 interface BreadcrumbsProps {

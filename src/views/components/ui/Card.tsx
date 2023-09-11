@@ -1,11 +1,11 @@
-import { addThreeDots } from '../../../app/utils/helpers/addThreeDots';
 import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
-import { formatViews } from '../../../app/utils/helpers/formatViews';
-import { formatDate } from '../../../app/utils/helpers/formatDate';
-import { useTheme } from '../../../app/hooks/useTheme';
-import { env } from '../../../app/config/env';
+import { addThreeDots } from '@utils/helpers/addThreeDots';
+import { formatViews } from '@utils/helpers/formatViews';
+import { formatDate } from '@utils/helpers/formatDate';
+import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
+import { env } from '@config/env';
 
 interface CardProps {
   post: {

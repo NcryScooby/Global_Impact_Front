@@ -1,12 +1,12 @@
 import { UseFormRegister, UseFormReset } from 'react-hook-form';
 import DialogActions from '@mui/material/DialogActions';
-import { useTheme } from '../../../app/hooks/useTheme';
-import { Button } from '../../components/ui/Button';
-import { env } from '../../../app/config/env';
+import { Button } from '@components/ui/Button';
+import { useTheme } from '@hooks/useTheme';
 import Dialog from '@mui/material/Dialog';
 import { SetStateAction } from 'react';
 import { Avatar } from '@mui/material';
 import { TextArea } from './TextArea';
+import { env } from '@config/env';
 
 interface TextDialogProps {
   openDialog: boolean;

@@ -1,10 +1,10 @@
-import { formatDate } from '../../../app/utils/helpers/formatDate';
-import { useTheme } from '../../../app/hooks/useTheme';
-import { USER_ROLES } from '../../../app/constants';
+import { formatDate } from '@utils/helpers/formatDate';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
-import { env } from '../../../app/config/env';
+import { useTheme } from '@hooks/useTheme';
+import { USER_ROLES } from '@constants';
 import { Link } from 'react-router-dom';
+import { env } from '@config/env';
 
 interface CommentProps {
   comment: {

@@ -1,7 +1,7 @@
 import { ChangeEvent, ComponentProps, forwardRef } from 'react';
 import { CrossCircledIcon } from '@radix-ui/react-icons';
-import { cn } from '../../../app/utils/helpers/cn';
 import { UploadIcon } from '@radix-ui/react-icons';
+import { cn } from '@utils/helpers/cn';
 
 interface InputProps extends ComponentProps<'input'> {
   name: string;

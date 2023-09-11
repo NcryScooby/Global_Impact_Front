@@ -1,8 +1,8 @@
-import browserDark from '../../../assets/images/browserframedark.svg';
-import mobileDark from '../../../assets/images/mobileframedark.svg';
-import browser from '../../../assets/images/browserframe.svg';
-import mobile from '../../../assets/images/mobileframe.svg';
-import { useTheme } from '../../../app/hooks/useTheme';
+import browserDark from '@assets/images/browserframedark.svg';
+import mobileDark from '@assets/images/mobileframedark.svg';
+import browser from '@assets/images/browserframe.svg';
+import mobile from '@assets/images/mobileframe.svg';
+import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
 
 export const Home = () => {

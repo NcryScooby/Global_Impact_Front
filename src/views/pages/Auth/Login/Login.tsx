@@ -1,7 +1,7 @@
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { useLoginController } from './useLoginController';
-import { Button } from '../../../components/ui/Button';
-import { Input } from '../../../components/ui/Input';
+import { Button } from '@components/ui/Button';
+import { Input } from '@components/ui/Input';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 

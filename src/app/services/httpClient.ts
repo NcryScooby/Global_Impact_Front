@@ -1,6 +1,6 @@
-import { localStorageKeys } from '../config/keys';
-import { sleep } from '../utils/helpers/sleep';
-import { env } from '../config/env';
+import { localStorageKeys } from '@config/keys';
+import { sleep } from '@utils/helpers/sleep';
+import { env } from '@config/env';
 import axios from 'axios';
 
 export const httpClient = axios.create({

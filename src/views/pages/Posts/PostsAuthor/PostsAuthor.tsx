@@ -1,8 +1,8 @@
-import { getAllByAuthorIdPostsResponse } from '../../../../app/services/postsService/getAllPostByAuthorId';
-import { postsService } from '../../../../app/services/postsService';
-import { usePostsLogic } from '../../../../app/hooks/usePostsLogic';
-import { PostLayout } from '../../../layouts/PostLayout';
+import { getAllByAuthorIdPostsResponse } from '@services/postsService/getAllPostByAuthorId';
+import { postsService } from '@services/postsService';
+import { usePostsLogic } from '@hooks/usePostsLogic';
 import { useQuery } from '@tanstack/react-query';
+import { PostLayout } from '@layouts/PostLayout';
 import { useParams } from 'react-router-dom';
 
 export const PostsAuthor = () => {

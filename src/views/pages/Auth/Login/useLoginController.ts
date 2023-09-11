@@ -1,10 +1,10 @@
-import { SignInData } from '../../../../app/services/authService/signIn';
-import { IErrorResponse } from '../../../../app/interfaces/errors/IErrorResponse';
-import { authService } from '../../../../app/services/authService';
+import { IErrorResponse } from '@interfaces/errors/IErrorResponse';
+import { SignInData } from '@services/authService/signIn';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useAuth } from '../../../../app/hooks/useAuth';
 import { useMutation } from '@tanstack/react-query';
+import { authService } from '@services/authService';
 import { useForm } from 'react-hook-form';
+import { useAuth } from '@hooks/useAuth';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 
