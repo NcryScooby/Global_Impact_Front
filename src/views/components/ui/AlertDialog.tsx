@@ -1,6 +1,7 @@
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { Button } from '../../components/ui/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
@@ -27,6 +28,8 @@ export const AlertDialog = ({
     setOpenDialog(false);
   };
 
+  const { theme } = useTheme();
+
   return (
     <div>
       <Dialog
@@ -36,12 +39,14 @@ export const AlertDialog = ({
           '& .MuiDialog-paper': {
             borderRadius: '2px',
             padding: '16px',
+            backgroundColor: theme === 'light' ? '#ffffff' : '#151515',
           },
         }}
       >
         <DialogTitle
           sx={{
             fontSize: '18px',
+            color: theme === 'light' ? '#151515' : '#ffffff',
           }}
         >
           {title}
@@ -50,20 +55,24 @@ export const AlertDialog = ({
           <DialogContentText
             sx={{
               fontSize: '14px',
+              color: theme === 'light' ? '#151515' : '#dbdbdb',
             }}
           >
             {content}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={isLoading ? undefined : handleClose} className="text-sm h-[42px]">
+          <Button
+            onClick={isLoading ? undefined : handleClose}
+            className="text-sm h-[42px] dark:bg-white dark:text-primary"
+          >
             Cancel
           </Button>
           <Button
             isLoading={isLoading}
             onClick={onConfirm}
-            className="h-[42px] bg-transparent text-sm text-primary border border-gray-300 active:bg-transparent"
-            spinnerStyle="text-white fill-primary"
+            className="h-[42px] bg-transparent text-sm text-primary border border-gray-300 active:bg-transparent dark:text-white dark:bg-black-700 dark:border-black-400"
+            spinnerStyle="text-white fill-primary dark:text-primary dark:fill-white"
           >
             Confirm
           </Button>

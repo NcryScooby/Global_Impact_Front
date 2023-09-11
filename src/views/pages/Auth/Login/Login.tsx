@@ -12,7 +12,9 @@ export const Login = () => {
   return (
     <>
       <header className="flex flex-col items-center gap-4 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px]">Login to your account</h1>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px] dark:text-white">
+          Login to your account
+        </h1>
 
         <p className="space-x-2">
           <span className="text-gray-600 tracking-[-0.5px]">New around here?</span>
@@ -42,7 +44,12 @@ export const Login = () => {
           }
           {...register('password')}
         />
-        <Button type="submit" className="mt-2" isLoading={isLoading}>
+        <Button
+          type="submit"
+          className="mt-2 dark:bg-white dark:text-primary"
+          spinnerStyle="dark:text-white dark:fill-primary"
+          isLoading={isLoading}
+        >
           Login
         </Button>
       </form>

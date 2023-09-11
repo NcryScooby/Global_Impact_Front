@@ -3,6 +3,7 @@ import { BarChartIcon, Share1Icon, TrashIcon } from '@radix-ui/react-icons';
 import { formatViews } from '../../../app/utils/helpers/formatViews';
 import { MeResponse } from '../../../app/services/usersService/me';
 import { formatDate } from '../../../app/utils/helpers/formatDate';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { USER_ROLES } from '../../../app/constants';
 import { SetStateAction, useState } from 'react';
 import { LikeComponent } from './LikeComponent';
@@ -39,6 +40,8 @@ export const DetailCard = ({
   const { post } = postData;
   const { user } = userData;
 
+  const { theme } = useTheme();
+
   const [openShareDialog, setOpenShareDialog] = useState<boolean>(false);
 
   const handleOpenShareDialog = () => setOpenShareDialog(true);
@@ -73,25 +76,29 @@ export const DetailCard = ({
                 />
               </Link>
               <div>
-                <span className="block text-[12px] text-gray-600 uppercase">
+                <span className="block text-[12px] text-gray-600 dark:text-gray-400 uppercase">
                   {formatDate(post.createdAt)}
                 </span>
-                <span className="text-gray-600 text-[12px] font-normal">
+                <span className="text-gray-600 dark:text-gray-400 text-[12px] font-normal">
                   <b>{post.author.name}</b>, {post.author.job.name}.
                 </span>
               </div>
             </div>
             {isFetching ? (
-              <div className="h-3 rounded-sm bg-gray-300 w-[72px] mt-1"></div>
+              <div className="h-3 rounded-sm bg-gray-300 dark:bg-black-500 w-[72px] mt-1"></div>
             ) : (
               <>
                 <div className="flex flex-col items-end gap-2 select-none lg:flex-row lg:items-center">
                   <div className="flex gap-2">
-                    <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
-                      <BarChartIcon height={12} width={12} color="#4b5563" />
+                    <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563] dark:text-gray-400">
+                      <BarChartIcon
+                        height={12}
+                        width={12}
+                        color={theme === 'light' ? '#4b5563' : '#bdbdbd'}
+                      />
                       {formatViews(post.views)}
                     </span>
-                    <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563]">
+                    <span className="flex items-center gap-1 text-[12px] font-light text-[#4b5563] dark:text-gray-400">
                       <LikeComponent
                         likesCount={likesCount}
                         color={color}
@@ -103,23 +110,27 @@ export const DetailCard = ({
                     </span>
                   </div>
                   <span
-                    className="flex items-center justify-center bg-gray-200 w-6 p-1.5 rounded-full hover:bg-gray-300 cursor-pointer"
+                    className="flex items-center justify-center bg-gray-200 dark:bg-black-500 w-6 p-1.5 rounded-full hover:bg-gray-300 dark:hover:bg-black-400 cursor-pointer"
                     onClick={handleOpenShareDialog}
                   >
-                    <Share1Icon height={12} width={12} color="#4b5563" />
+                    <Share1Icon
+                      height={12}
+                      width={12}
+                      color={theme === 'light' ? '#9e9e9e' : '#bdbdbd'}
+                    />
                   </span>
                 </div>
               </>
             )}
           </div>
           <div className="md:text-center mt-8">
-            <h2 className="w-full text-2xl text-left font-bold leading-tight text-black">
+            <h2 className="w-full text-2xl text-left font-bold leading-tight text-black dark:text-white">
               {post.title}
             </h2>
           </div>
           <div className="absolute top-4 left-4">
             <Link to={`/posts/categories/${post.category.id}`}>
-              <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
+              <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white dark:bg-black-500 dark:text-white rounded-full">
                 {post.category.name}
               </span>
             </Link>
@@ -129,8 +140,8 @@ export const DetailCard = ({
               <TrashIcon
                 height={22}
                 width={22}
-                color="#111111"
-                className="bg-white rounded-full p-1 cursor-pointer hover:bg-gray-300"
+                color={theme === 'light' ? '#111111' : '#9e9e9e'}
+                className="bg-white dark:bg-black-500 rounded-full p-1 cursor-pointer hover:bg-gray-200 dark:hover:bg-black-400"
                 onClick={() => {
                   setOpenDeletePostDialog(true);
                 }}
@@ -139,7 +150,7 @@ export const DetailCard = ({
           ) : null}
         </div>
         <div>
-          <p className="text-[16px] font-serif">{post.content}</p>
+          <p className="text-[16px] font-serif dark:text-gray-400">{post.content}</p>
         </div>
       </div>
     </>

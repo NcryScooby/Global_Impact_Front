@@ -8,6 +8,7 @@ import { IPostsPages } from '../../../app/interfaces/posts/IPostsPages';
 import { PostsHeader } from '../../components/posts/PostLayoutHeader';
 import { PostsGrid } from '../../components/posts/PostsLayoutGrid';
 import { ChangeEvent, RefObject, useEffect } from 'react';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { Button } from '../../components/ui/Button';
 import { Select } from '../../components/ui/Select';
 import { Input } from '../../components/ui/Input';
@@ -56,6 +57,8 @@ export const PostLayout = <
     handleGridChange
   }: PostLayoutProps<T>) => {
 
+  const { theme } = useTheme();
+
   const isPostsPage = (page === PAGE.POSTS);
   const isCategoryPage = (page === PAGE.CATEGORIES);
   const isAuthorPage = (page === PAGE.AUTHORS);
@@ -96,7 +99,7 @@ export const PostLayout = <
 
   return (
     <>
-      <section className='bg-gray-50 sm:ml-64'>
+      <section className='sm:ml-64'>
         {!isPostsPage && (
           <Link
             to='/posts'
@@ -111,7 +114,7 @@ export const PostLayout = <
             <PostsHeader isLoading={isLoading} isSuccess={isSuccess} setHeaderTitle={setHeaderTitle} />
             <div className='flex flex-col lg:items-end gap-4'>
               <Link to='/posts/create'>
-                <Button className='hidden lg:block lg:h-[42px] lg:w-full'>
+                <Button className='hidden lg:block lg:h-[42px] lg:w-full dark:bg-black-500 hover:bg-gray-800 dark:hover:bg-black-400'>
                   Create Post
                 </Button>
               </Link>
@@ -144,10 +147,10 @@ export const PostLayout = <
                 disabled={isLoading}
               />
               <div className='hidden lg:flex justify-between gap-1'>
-                <div className={`p-3 bg-white rounded-[2px] border ${grid === '2' ? 'border-gray-700' : 'border-gray-300'} cursor-pointer`} onClick={generateGridChangeHandler('2')}>
+                <div className={`p-3 bg-white dark:bg-black-600 dark:text-gray-400 rounded-[2px] border ${grid === '2' ? 'border-gray-400 dark:border-black-500' : 'border-gray-300 dark:border-transparent'} cursor-pointer`} onClick={generateGridChangeHandler('2')}>
                   <GridIcon />
                 </div>
-                <div className={`p-3 bg-white rounded-[2px] border ${grid !== '2' ? 'border-gray-700' : 'border-gray-300'} border-gray-300 cursor-pointer`} onClick={generateGridChangeHandler('3')}>
+                <div className={`p-3 bg-white dark:bg-black-600 dark:text-gray-400 rounded-[2px] border ${grid !== '2' ? 'border-gray-400 dark:border-black-500' : 'border-gray-300 dark:border-transparent'} border-gray-300 cursor-pointer`} onClick={generateGridChangeHandler('3')}>
                   <TableIcon />
                 </div>
               </div>
@@ -163,6 +166,16 @@ export const PostLayout = <
               count={posts?.meta.totalPages}
               page={Number(searchPageParam)}
               shape='rounded'
+              sx={theme === 'light' ? null : {
+                '& .MuiPaginationItem-root': {
+                  color: 'white',
+                  backgroundColor: '#111111',
+                  '&.Mui-selected': {
+                    backgroundColor: '#dbdbdb !important',
+                    color: '#111111 !important',
+                  }
+                }
+              }}
               disabled={isLoading}
               onChange={(_, page) => {
                 handlePageChange(page.toString());

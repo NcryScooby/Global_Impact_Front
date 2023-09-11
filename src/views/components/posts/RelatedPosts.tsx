@@ -33,11 +33,11 @@ export const RelatedPosts = ({ relatedPosts }: RelatedPostsProps) => {
         <div className="sm:ml-64">
           {relatedPosts.length > 0 ? (
             <>
-              <span className="border-b-[1px] mx-auto border-gray-300 block w-[675px] mt-28" />
-              <h2 className="flex justify-center mr-1 font-semibold text-lg font-inter mt-28">
+              <span className="border-b-[1px] mx-auto border-gray-300 dark:border-black-500 block w-[675px] mt-28" />
+              <h2 className="flex justify-center mr-1 font-semibold text-lg font-inter mt-28 dark:text-gray-400">
                 Related posts
               </h2>
-              <span className="flex justify-center text-[12px] text-gray-500">
+              <span className="flex justify-center text-[12px] text-gray-500 dark:text-gray-400">
                 See some similar posts
               </span>
             </>

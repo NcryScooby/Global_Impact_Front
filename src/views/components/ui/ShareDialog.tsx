@@ -23,9 +23,9 @@ export const ShareDialog = ({ openShareDialog, handleCloseShareDialog }: ShareDi
         aria-labelledby="share-modal-title"
         aria-describedby="share-modal-description"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] lg:w-[450px] bg-white shadow-2xl rounded-2xl p-10 outline-none flex flex-col gap-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] lg:w-[450px] bg-white dark:bg-black-600 shadow-2xl rounded-2xl p-10 outline-none flex flex-col gap-10">
           <div>
-            <h1 className="text-2xl text-gray-800">Share</h1>
+            <h1 className="text-2xl text-gray-800 dark:text-white">Share</h1>
           </div>
           <div className="flex justify-between text-xs">
             <SocialIcon IconComponent={FaTwitter} label="Twitter" />
@@ -37,9 +37,18 @@ export const ShareDialog = ({ openShareDialog, handleCloseShareDialog }: ShareDi
             <h2 className="text-gray-700 text-sm">Page Link</h2>
             <div className="flex justify-between gap-2 mt-2">
               <div className="flex-grow">
-                <Input name="copy" type="text" value={currentUrl} readOnly />
+                <Input
+                  name="copy"
+                  className="border dark:border-black-500 dark:active:bg-transparent"
+                  type="text"
+                  value={currentUrl}
+                  readOnly
+                />
               </div>
-              <Button className="h-[42px] cursor-copy" onClick={copyUrlToClipboard}>
+              <Button
+                className="h-[42px] cursor-copy dark:bg-black-900"
+                onClick={copyUrlToClipboard}
+              >
                 Copy
               </Button>
             </div>

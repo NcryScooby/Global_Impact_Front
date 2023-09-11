@@ -1,5 +1,6 @@
-import { ComponentType } from 'react';
 import { ISocialMedias } from '../../../app/interfaces/posts/ISocialMedias';
+import { useTheme } from '../../../app/hooks/useTheme';
+import { ComponentType } from 'react';
 
 interface SocialIconProps {
   IconComponent: ComponentType<{ color: string; size: number }>;
@@ -7,6 +8,8 @@ interface SocialIconProps {
 }
 
 export const SocialIcon = ({ IconComponent, label }: SocialIconProps) => {
+  const { theme } = useTheme();
+
   const shareToSocialMedia = () => {
     const currentUrl = window.location.href;
     const encodedCurrentURL = encodeURIComponent(currentUrl);
@@ -32,10 +35,10 @@ export const SocialIcon = ({ IconComponent, label }: SocialIconProps) => {
   return (
     <span>
       <div
-        className="cursor-pointer bg-[#f8f9fa] rounded-full p-5 hover:bg-[#e6e6e6]  transition-all duration-200 ease-in-out"
+        className="cursor-pointer bg-[#f8f9fa] dark:bg-black-500 rounded-full p-5 hover:bg-[#e6e6e6] dark:hover:bg-black-400 transition-all duration-200 ease-in-out"
         onClick={shareToSocialMedia}
       >
-        <IconComponent color={'#393f48'} size={24} />
+        <IconComponent color={theme === 'light' ? '#393f48' : '#ffffff'} size={24} />
       </div>
       <p className="text-center mt-1 text-gray-600">{label}</p>
     </span>

@@ -170,10 +170,7 @@ export const PostDetail = () => {
               setOpenDeletePostDialog={setOpenDeletePostDialog}
             />
           </div>
-          <span
-            className="border-b-[1px] border-gray-300 block w-[675px] mx-auto
-           mt-28"
-          />
+          <span className="border-b-[1px] border-gray-300 dark:border-black-500 block w-[675px] mx-auto mt-28" />
           <CommentLabel
             postData={postData}
             setOpenCreateCommentDialog={setOpenCreateCommentDialog}

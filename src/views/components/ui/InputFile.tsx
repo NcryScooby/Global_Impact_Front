@@ -35,7 +35,7 @@ export const InputFile = forwardRef<HTMLInputElement, InputProps>(
 
         <div
           className={cn(
-            'flex items-center justify-center w-full border bg-white border-gray-300 text-gray-900 text-sm rounded-[2px]',
+            'flex items-center justify-center w-full border bg-white border-gray-300 text-gray-900 text-sm rounded-[2px] dark:bg-black-600 dark:text-gray-400 dark:border-black-600 dark:focus:border-black-500',
             error ? '!border-[#C92A2A]' : '',
             className
           )}

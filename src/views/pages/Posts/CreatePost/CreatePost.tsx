@@ -53,16 +53,16 @@ export const CreatePost = () => {
         <section>
           <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-5xl mx-auto mt-12 sm:mt-16">
-              <div className="mt-6 overflow-hidden bg-white rounded-[2px]">
+              <div className="mt-6 overflow-hidden rounded-[2px]">
                 <div className="px-6 py-12 sm:p-12">
                   <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                     <div className="max-w-2xl mx-auto text-center mb-12">
-                      <h2 className="text-3xl font-bold leading-tight text-gray-900 sm:text-3xl lg:text-4xl">
+                      <h2 className="text-3xl font-bold leading-tight text-gray-900 sm:text-3xl lg:text-4xl dark:text-white">
                         Create your new post
                       </h2>
                       <p className="max-w-xl mx-auto mt-4 text-[14px] leading-relaxed text-gray-500">
                         Choose information to build your post on{' '}
-                        <span className="text-primary">Global Impact</span>
+                        <span className="text-primary dark:text-white">Global Impact</span>
                       </p>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
@@ -115,13 +115,18 @@ export const CreatePost = () => {
                     </div>
                     <div className="flex gap-4">
                       <Button
-                        className="w-1/3 mt-8 bg-transparent text-primary border border-gray-300 active:bg-transparent"
+                        className="w-1/3 mt-8 bg-transparent text-primary border border-gray-300 active:bg-transparent dark:text-white dark:border-black-500"
                         onClick={resetFormValues}
                         type="button"
                       >
                         Cancel
                       </Button>
-                      <Button className="w-2/3 mt-8" disabled={isFetching} isLoading={isLoading}>
+                      <Button
+                        className="w-2/3 mt-8 dark:text-primary dark:bg-white"
+                        disabled={isFetching}
+                        isLoading={isLoading}
+                        spinnerStyle="text-primary fill-white dark:text-white dark:fill-primary"
+                      >
                         Create
                       </Button>
                     </div>

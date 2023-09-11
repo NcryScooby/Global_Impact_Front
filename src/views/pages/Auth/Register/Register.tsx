@@ -41,7 +41,9 @@ export const Register = () => {
   return (
     <>
       <header className="flex flex-col items-center gap-4 text-center">
-        <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px]">Create your account</h1>
+        <h1 className="text-2xl font-bold text-gray-900 tracking-[-1px] dark:text-white">
+          Create your account
+        </h1>
 
         <p className="space-x-2">
           <span className="text-gray-600 tracking-[-0.5px]">Already have an account?</span>
@@ -92,7 +94,12 @@ export const Register = () => {
           error={errors.avatar?.message?.toString()}
           {...register('avatar')}
         />
-        <Button type="submit" className="mt-2" isLoading={isLoading}>
+        <Button
+          type="submit"
+          className="mt-2 dark:bg-white dark:text-primary"
+          spinnerStyle="dark:text-white dark:fill-primary"
+          isLoading={isLoading}
+        >
           Create account
         </Button>
       </form>
