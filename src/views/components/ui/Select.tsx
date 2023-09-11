@@ -61,7 +61,9 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
           onChange={handleChangeSelectedOption}
           className={cn(
             'bg-white border border-gray-300 text-sm rounded-[2px] block w-full p-2.5 focus:border-gray-400 transition-all outline-none appearance-none cursor-pointer dark:bg-black-600 dark:text-gray-400 dark:border-black-600 dark:focus:border-black-500',
-            options.length === 0 || !selectedOption ? 'text-gray-400' : 'text-primary',
+            options.length === 0 || !selectedOption
+              ? 'text-gray-400 dark:text-black-200'
+              : 'text-primary',
             error ? '!border-[#C92A2A]' : '',
             className
           )}
