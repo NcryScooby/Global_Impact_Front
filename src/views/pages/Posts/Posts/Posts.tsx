@@ -3,6 +3,7 @@ import { postsService } from '@services/postsService';
 import { usePostsLogic } from '@hooks/usePostsLogic';
 import { useQuery } from '@tanstack/react-query';
 import { PostLayout } from '@layouts/PostLayout';
+import { CACHE_TIME } from '@constants';
 
 export const Posts = () => {
   const {
@@ -33,6 +34,7 @@ export const Posts = () => {
         page: Number(searchPageParam) || undefined,
       }),
     keepPreviousData: true,
+    staleTime: CACHE_TIME.FIFTEEN_MINUTES,
   });
 
   return (

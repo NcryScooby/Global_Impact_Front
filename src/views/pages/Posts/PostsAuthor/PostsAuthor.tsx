@@ -4,6 +4,7 @@ import { usePostsLogic } from '@hooks/usePostsLogic';
 import { useQuery } from '@tanstack/react-query';
 import { PostLayout } from '@layouts/PostLayout';
 import { useParams } from 'react-router-dom';
+import { CACHE_TIME } from '@constants';
 
 export const PostsAuthor = () => {
   const { authorId } = useParams() as { authorId: string };
@@ -42,6 +43,7 @@ export const PostsAuthor = () => {
         page: Number(searchPageParam) || undefined,
       }),
     keepPreviousData: true,
+    staleTime: CACHE_TIME.FIFTEEN_MINUTES,
   });
 
   return (

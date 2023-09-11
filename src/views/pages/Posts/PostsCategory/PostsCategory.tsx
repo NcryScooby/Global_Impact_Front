@@ -4,6 +4,7 @@ import { usePostsLogic } from '@hooks/usePostsLogic';
 import { useQuery } from '@tanstack/react-query';
 import { PostLayout } from '@layouts/PostLayout';
 import { useParams } from 'react-router-dom';
+import { CACHE_TIME } from '@constants';
 
 export const PostsCategory = () => {
   const { categoryId } = useParams() as { categoryId: string };
@@ -42,6 +43,7 @@ export const PostsCategory = () => {
         page: Number(searchPageParam) || undefined,
       }),
     keepPreviousData: true,
+    staleTime: CACHE_TIME.FIFTEEN_MINUTES,
   });
 
   return (
