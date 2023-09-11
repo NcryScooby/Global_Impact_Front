@@ -1,8 +1,8 @@
-import { GetAllByCategoryIdPostsResponse } from '../../../app/services/postsService/getAllByCategoryId';
-import { getAllByAuthorIdPostsResponse } from '../../../app/services/postsService/getAllPostByAuthorId';
-import { GetAllPostsResponse } from '../../../app/services/postsService/getAll';
-import { PostListSkeleton } from '../skeletons/posts/PostListSkeleton';
-import { PostNotFound } from '../animations/PostNotFound';
+import { GetAllByCategoryIdPostsResponse } from '@services/postsService/getAllByCategoryId';
+import { getAllByAuthorIdPostsResponse } from '@services/postsService/getAllPostByAuthorId';
+import { PostListSkeleton } from '@components/skeletons/posts/PostListSkeleton';
+import { GetAllPostsResponse } from '@services/postsService/getAll';
+import { PostNotFound } from '@components/animations/PostNotFound';
 import { PostList } from './PostList';
 
 interface PostsGridProps<

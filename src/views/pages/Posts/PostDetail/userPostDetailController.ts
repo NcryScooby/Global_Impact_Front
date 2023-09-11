@@ -1,8 +1,8 @@
-import { IErrorResponse } from '../../../../app/interfaces/errors/IErrorResponse';
-import { CreateCommentData } from '../../../../app/services/comments/create';
-import { commentsService } from '../../../../app/services/comments';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
+import { IErrorResponse } from '@interfaces/errors/IErrorResponse';
+import { CreateCommentData } from '@services/comments/create';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { commentsService } from '@services/comments';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { SetStateAction } from 'react';

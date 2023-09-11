@@ -1,4 +1,4 @@
-import { PageNotFound } from '../../components/animations/PageNotFound';
+import { PageNotFound } from '@components/animations/PageNotFound';
 import { Link } from 'react-router-dom';
 
 export const NotFound = () => {

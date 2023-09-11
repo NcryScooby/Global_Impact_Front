@@ -1,4 +1,4 @@
-import { GetPostByIdResponse } from '../../../app/services/postsService/getById';
+import { GetPostByIdResponse } from '@services/postsService/getById';
 import { PlusIcon } from '@radix-ui/react-icons';
 import { SetStateAction } from 'react';
 

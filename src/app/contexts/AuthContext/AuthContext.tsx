@@ -1,8 +1,8 @@
 import { ReactNode, createContext, useCallback, useEffect, useState } from 'react';
-import { LaunchScreen } from '../../../views/components/ui/LaunchScreen';
-import { usersService } from '../../services/usersService';
-import { localStorageKeys } from '../../config/keys';
+import { LaunchScreen } from '@components/ui/LaunchScreen';
+import { usersService } from '@services/usersService';
 import { useQuery } from '@tanstack/react-query';
+import { localStorageKeys } from '@config/keys';
 import { toast } from 'react-hot-toast';
 
 interface AuthContextProps {

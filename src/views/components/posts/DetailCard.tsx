@@ -1,16 +1,16 @@
-import { GetPostByIdResponse } from '../../../app/services/postsService/getById';
 import { BarChartIcon, Share1Icon, TrashIcon } from '@radix-ui/react-icons';
-import { formatViews } from '../../../app/utils/helpers/formatViews';
-import { MeResponse } from '../../../app/services/usersService/me';
-import { formatDate } from '../../../app/utils/helpers/formatDate';
-import { useTheme } from '../../../app/hooks/useTheme';
-import { USER_ROLES } from '../../../app/constants';
+import { GetPostByIdResponse } from '@services/postsService/getById';
+import { formatViews } from '@utils/helpers/formatViews';
+import { ShareDialog } from '@components/ui/ShareDialog';
+import { MeResponse } from '@services/usersService/me';
+import { formatDate } from '@utils/helpers/formatDate';
 import { SetStateAction, useState } from 'react';
 import { LikeComponent } from './LikeComponent';
-import { ShareDialog } from '../ui/ShareDialog';
-import { env } from '../../../app/config/env';
+import { useTheme } from '@hooks/useTheme';
+import { USER_ROLES } from '@constants';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
+import { env } from '@config/env';
 
 interface DetailCardProps {
   postData: GetPostByIdResponse;

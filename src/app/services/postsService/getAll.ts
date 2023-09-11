@@ -1,5 +1,5 @@
-import { IPaginationParams } from '../../interfaces/pagination/IPaginationParams';
-import { IMeta } from '../../interfaces/pagination/IMeta';
+import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import { IMeta } from '@interfaces/pagination/IMeta';
 import { httpClient } from '../httpClient';
 
 export interface GetAllPostsResponse {

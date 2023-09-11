@@ -1,6 +1,6 @@
-import { postsService } from '../../services/postsService';
+import { postsService } from '@services/postsService';
 import { useState, useEffect, useRef } from 'react';
-import { POST_LIKE_COLORS } from '../../constants';
+import { POST_LIKE_COLORS } from '@constants';
 import { toast } from 'react-hot-toast';
 
 type UseLikeProps = {

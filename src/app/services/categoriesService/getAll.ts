@@ -1,4 +1,4 @@
-import { IPaginationParams } from '../../interfaces/pagination/IPaginationParams';
+import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
 import { httpClient } from '../httpClient';
 
 export interface GetAllCategoriesResponse {

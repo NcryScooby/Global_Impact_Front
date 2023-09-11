@@ -1,7 +1,7 @@
 import { CaretDownIcon, CrossCircledIcon } from '@radix-ui/react-icons';
 import { ChangeEvent, ComponentProps, forwardRef } from 'react';
+import { cn } from '@utils/helpers/cn';
 import { Spinner } from './Spinner';
-import { cn } from '../../../app/utils/helpers/cn';
 
 interface SelectProps extends ComponentProps<'select'> {
   name: string;

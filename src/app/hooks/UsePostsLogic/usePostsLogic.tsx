@@ -1,8 +1,8 @@
-import { IPaginationParams } from '../../interfaces/pagination/IPaginationParams';
-import { IGridOptions } from '../../interfaces/pagination/IGridOptions';
+import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
 import { useState, useRef, useCallback, ChangeEvent } from 'react';
-import { debounce } from '../../utils/helpers/debounce';
+import { IGridOptions } from '@interfaces/pagination/IGridOptions';
 import { useSearchParams } from 'react-router-dom';
+import { debounce } from '@utils/helpers/debounce';
 
 export const usePostsLogic = () => {
   const [searchParams, setSearchParams] = useSearchParams();

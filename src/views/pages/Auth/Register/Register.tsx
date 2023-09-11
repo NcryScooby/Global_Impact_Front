@@ -1,13 +1,13 @@
-import { GetAllJobsResponse } from '../../../../app/services/jobsService/getAll';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
-import { jobsService } from '../../../../app/services/jobsService';
+import { GetAllJobsResponse } from '@services/jobsService/getAll';
 import { useRegisterController } from './useRegisterController';
-import { InputFile } from '../../../components/ui/InputFile';
-import { Button } from '../../../components/ui/Button';
-import { Select } from '../../../components/ui/Select';
-import { Input } from '../../../components/ui/Input';
+import { InputFile } from '@components/ui/InputFile';
+import { jobsService } from '@services/jobsService';
 import { useQuery } from '@tanstack/react-query';
+import { Button } from '@components/ui/Button';
+import { Select } from '@components/ui/Select';
 import { ChangeEvent, useState } from 'react';
+import { Input } from '@components/ui/Input';
 import { Link } from 'react-router-dom';
 
 export const Register = () => {

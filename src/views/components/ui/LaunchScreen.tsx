@@ -1,5 +1,5 @@
-import logo from '../../../assets/images/logo.svg';
 import { Transition } from '@headlessui/react';
+import logo from '@assets/images/logo.svg';
 import { Spinner } from './Spinner';
 
 interface LaunchScreenProps {

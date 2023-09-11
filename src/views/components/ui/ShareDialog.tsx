@@ -1,4 +1,4 @@
-import { copyUrlToClipboard } from '../../../app/utils/helpers/copyUrlToClipboard';
+import { copyUrlToClipboard } from '@utils/helpers/copyUrlToClipboard';
 import { FaTwitter, FaFacebook } from 'react-icons/fa';
 import { AiFillInstagram } from 'react-icons/ai';
 import { IoLogoWhatsapp } from 'react-icons/io';

@@ -1,13 +1,13 @@
-import { GetAllCategoriesResponse } from '../../../../app/services/categoriesService/getAll';
-import { categoriesService } from '../../../../app/services/categoriesService';
+import { GetAllCategoriesResponse } from '@services/categoriesService/getAll';
 import { useCreatePostController } from './useCreatePostController';
-import { InputFile } from '../../../components/ui/InputFile';
-import { TextArea } from '../../../components/ui/TextArea';
-import { Button } from '../../../components/ui/Button';
-import { Select } from '../../../components/ui/Select';
-import { Input } from '../../../components/ui/Input';
+import { categoriesService } from '@services/categoriesService';
+import { InputFile } from '@components/ui/InputFile';
+import { TextArea } from '@components/ui/TextArea';
 import { useQuery } from '@tanstack/react-query';
+import { Button } from '@components/ui/Button';
+import { Select } from '@components/ui/Select';
 import { ChangeEvent, useState } from 'react';
+import { Input } from '@components/ui/Input';
 
 export const CreatePost = () => {
   const { handleSubmit, reset, register, errors, isLoading } = useCreatePostController();
