@@ -8,10 +8,14 @@ interface InputProps extends ComponentProps<'input'> {
   label?: string;
   icon?: ReactNode;
   iconStyle?: string;
+  prependComponent?: ReactNode;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ id, name, label, error, icon, className, iconStyle, ...props }: InputProps, ref) => {
+  (
+    { id, name, label, error, icon, className, iconStyle, prependComponent, ...props }: InputProps,
+    ref
+  ) => {
     const inputId = id ?? name;
 
     return (
@@ -34,6 +38,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className
           )}
         />
+
+        {prependComponent ? (
+          <div className="relative min-h-[40px]">
+            <div className="text-sm mt-1 flex-shrink-0 text-gray-400 flex flex-wrap items-center gap-1">
+              {prependComponent}
+            </div>
+          </div>
+        ) : null}
 
         {icon ? (
           <div

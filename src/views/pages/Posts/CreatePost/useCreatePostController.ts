@@ -30,6 +30,7 @@ export const useCreatePostController = () => {
     register,
     reset,
     handleSubmit: hookFormSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -56,10 +57,11 @@ export const useCreatePostController = () => {
       formData.append('categoryId', data.categoryId);
       formData.append('image', data.image?.[0]);
 
-      const tagsArray = data.tags ? data.tags.split(',') : [];
-      tagsArray.forEach((tag: string, index: number) => {
-        formData.append(`tags[${index}]`, tag.trim());
-      });
+      if (data.tags) {
+        data.tags.forEach((tag: string) => {
+          formData.append('tags[]', tag);
+        });
+      }
 
       const { post } = await mutateAsync(formData as unknown as CreatePostData);
       navigate(`/posts/${post.id}`);
@@ -68,5 +70,5 @@ export const useCreatePostController = () => {
     }
   });
 
-  return { handleSubmit, register, reset, errors, isLoading };
+  return { handleSubmit, register, setValue, reset, errors, isLoading };
 };
