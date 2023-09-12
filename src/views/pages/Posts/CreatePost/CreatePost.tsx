@@ -1,7 +1,9 @@
 import { GetAllCategoriesResponse } from '@services/categoriesService/getAll';
+import { disableEnterKeySubmit } from '@utils/helpers/disableEnterKeySubmit';
 import { useCreatePostController } from './useCreatePostController';
 import { categoriesService } from '@services/categoriesService';
 import { InputFile } from '@components/ui/InputFile';
+import { InputTag } from '@components/ui/InputTag';
 import { TextArea } from '@components/ui/TextArea';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@components/ui/Button';
@@ -10,10 +12,11 @@ import { ChangeEvent, useState } from 'react';
 import { Input } from '@components/ui/Input';
 
 export const CreatePost = () => {
-  const { handleSubmit, reset, register, errors, isLoading } = useCreatePostController();
+  const { handleSubmit, reset, register, setValue, errors, isLoading } = useCreatePostController();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
+  const [tags, setTags] = useState<string[]>([]);
 
   const {
     data: categories,
@@ -34,6 +37,7 @@ export const CreatePost = () => {
     });
     setSelectedFile(null);
     setSelectedOption('');
+    setTags([]);
   };
 
   const handleSelectedFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +59,11 @@ export const CreatePost = () => {
             <div className="max-w-5xl mx-auto mt-12 sm:mt-16">
               <div className="mt-6 overflow-hidden rounded-[2px]">
                 <div className="px-6 py-12 sm:p-12">
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  <form
+                    onSubmit={handleSubmit}
+                    onKeyDown={disableEnterKeySubmit}
+                    className="flex flex-col gap-4"
+                  >
                     <div className="max-w-2xl mx-auto text-center mb-12">
                       <h2 className="text-3xl font-bold leading-tight text-gray-900 sm:text-3xl lg:text-4xl dark:text-white">
                         Create your new post
@@ -98,7 +106,13 @@ export const CreatePost = () => {
                       </div>
 
                       <div>
-                        <Input type="text" label="Tags" {...register('tags')} />
+                        <InputTag
+                          label="Tags"
+                          tags={tags}
+                          setTags={setTags}
+                          setValue={setValue as (name: string, value: string[]) => void}
+                          {...register('tags')}
+                        />
                       </div>
 
                       <div>
