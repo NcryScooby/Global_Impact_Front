@@ -7,10 +7,12 @@ interface PostsHeaderProps {
 export const PostsHeader = ({ isLoading, isSuccess, setHeaderTitle }: PostsHeaderProps) => {
   let headerContent;
 
-  if (!isLoading && isSuccess) {
-    headerContent = setHeaderTitle();
-  } else if (!isLoading && !isSuccess) {
-    headerContent = 'Post not found';
+  if (!isLoading) {
+    if (isSuccess) {
+      headerContent = setHeaderTitle();
+    } else {
+      headerContent = 'Post not found';
+    }
   } else {
     headerContent = (
       <div className="h-[38px] w-64 lg:h-12 lg:w-96 bg-gray-300 dark:bg-black-600 rounded-sm" />
