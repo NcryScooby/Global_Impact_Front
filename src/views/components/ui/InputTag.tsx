@@ -54,7 +54,7 @@ export const InputTag = forwardRef<HTMLInputElement, InputTagProps>(
       return tags.map((tag) => (
         <span
           key={tag}
-          className="border bg-gray-100 dark:border-hidden dark:text-gray-400 text-black-400 dark:bg-black-500 rounded-[2px] px-2 py-1 inline-flex items-center"
+          className="border bg-gray-200 dark:border-hidden dark:text-gray-400 text-black-400 dark:bg-black-500 rounded-[2px] px-2 py-1 inline-flex items-center"
         >
           {tag}
           <AiOutlineClose

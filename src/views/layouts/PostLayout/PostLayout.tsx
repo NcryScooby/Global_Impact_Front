@@ -1,13 +1,13 @@
 import { ArrowLeftIcon, MagnifyingGlassIcon, GridIcon, TableIcon } from '@radix-ui/react-icons';
 import { getAllByAuthorIdPostsResponse } from '@services/postsService/getAllPostByAuthorId';
 import { GetAllByCategoryIdPostsResponse } from '@services/postsService/getAllByCategoryId';
+import { ChangeEvent, RefObject, useCallback, useEffect } from 'react';
 import { GetAllPostsResponse } from '@services/postsService/getAll';
 import { FILTER_OPTIONS, PAGE, POSTS_TITLE_MAP } from '@constants';
 import { IGridOptions } from '@interfaces/pagination/IGridOptions';
 import { PostsHeader } from '@components/posts/PostLayoutHeader';
 import { PostsGrid } from '@components/posts/PostsLayoutGrid';
 import { IPostsPages } from '@interfaces/posts/IPostsPages';
-import { ChangeEvent, RefObject, useEffect } from 'react';
 import { Button } from '@components/ui/Button';
 import { Select } from '@components/ui/Select';
 import { Input } from '@components/ui/Input';
@@ -63,15 +63,15 @@ export const PostLayout = <
   const isCategoryPage = (page === PAGE.CATEGORIES);
   const isAuthorPage = (page === PAGE.AUTHORS);
 
-  const generateGridChangeHandler = (value: IGridOptions['value']) => {
+  const generateGridChangeHandler = useCallback((value: IGridOptions['value']) => {
     return () => {
       if (handleGridChange) {
         handleGridChange({ target: { value } } as ChangeEvent<HTMLSelectElement>);
       }
     };
-  };
+  }, [handleGridChange]);
 
-  const setHeaderTitle = () => {
+  const setHeaderTitle = useCallback(() => {
     if (isPostsPage) {
       for (const optionId in POSTS_TITLE_MAP) {
         if (selectedOption.includes(optionId)) {
@@ -89,7 +89,7 @@ export const PostLayout = <
         return `${author.name}'s Posts`;
       }
     }
-  };
+  }, [isPostsPage, isCategoryPage, isAuthorPage, selectedOption, posts]);
 
   useEffect(() => {
     if (!isLoading && inputRef.current) {
