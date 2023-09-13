@@ -1,7 +1,9 @@
-import { ExitIcon, HomeIcon, Pencil2Icon, LayoutIcon } from '@radix-ui/react-icons';
 import { Avatar, FormControlLabel } from '@mui/material';
+import { IoCreate, IoExit } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
 import { useSidebar } from '@hooks/useSidebar';
+import { HiNewspaper } from 'react-icons/hi2';
+import { AiFillHome } from 'react-icons/ai';
 import { useTheme } from '@hooks/useTheme';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
@@ -81,52 +83,52 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
         } sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-primary dark:bg-black-600">
-          <ul className="space-y-2 font-medium">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-primary dark:bg-black-600 font-system-ui text-[15px] text-gray-400">
+          <ul className="space-y-2">
             <li>
               <Link
                 to={'/'}
                 onClick={() => {
                   setIsOpen(false);
                 }}
-                className={`flex items-center p-2 rounded-lg text-white hover:bg-gray-900 group ${
-                  currentPath === '/' ? 'bg-gray-900' : ''
+                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 ${
+                  currentPath === '/' ? 'bg-gray-900 text-white' : ''
                 }`}
               >
-                <HomeIcon
-                  className={`w-5 h-5 transition duration-75 text-gray-400  group-hover:text-white ${
-                    currentPath === '/' ? 'bg-gray-900 text-white' : ''
+                <AiFillHome
+                  className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 hover:text-white ${
+                    currentPath === '/' ? 'text-white' : ''
                   }`}
                 />
                 <span className="ml-3">Home</span>
               </Link>
             </li>
           </ul>
-          <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-900">
+          <ul className="pt-4 mt-4 space-y-2 border-gray-900">
             <li>
               <Link
                 to={'/posts'}
                 onClick={() => {
                   setIsOpen(false);
                 }}
-                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
+                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 ${
                   (currentPath === '/posts' ||
                     currentPath === `/posts/${postId}` ||
                     currentPath === `/posts/categories/${categoryId}` ||
                     currentPath === `/posts/authors/${authorId}`) &&
                   currentPath !== '/posts/create'
-                    ? 'bg-gray-900'
+                    ? 'bg-gray-900 text-white'
                     : ''
                 }`}
               >
-                <LayoutIcon
-                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
+                <HiNewspaper
+                  className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 ${
                     (currentPath === '/posts' ||
                       currentPath === `/posts/${postId}` ||
                       currentPath === `/posts/categories/${categoryId}` ||
                       currentPath === `/posts/authors/${authorId}`) &&
                     currentPath !== '/posts/create'
-                      ? 'bg-gray-900 text-white'
+                      ? 'text-white'
                       : ''
                   }`}
                 />
@@ -139,25 +141,25 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 onClick={() => {
                   setIsOpen(false);
                 }}
-                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 text-white group ${
-                  currentPath === '/posts/create' ? 'bg-gray-900' : ''
+                className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 ${
+                  currentPath === '/posts/create' ? 'bg-gray-900 text-white' : ''
                 }`}
               >
-                <Pencil2Icon
-                  className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white ${
-                    currentPath === '/posts/create' ? 'bg-gray-900 text-white' : ''
+                <IoCreate
+                  className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 ${
+                    currentPath === '/posts/create' ? 'text-white' : ''
                   }`}
                 />
                 <span className="ml-3">Create Post</span>
               </Link>
             </li>
-            <ul className="pt-4 mt-4 space-y-2 font-medium border-gray-900">
+            <ul className="pt-4 mt-4 space-y-2 border-gray-900">
               <li>
                 <button
                   onClick={handleSignOut}
-                  className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900 text-white group"
+                  className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900"
                 >
-                  <ExitIcon className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 hover:bg-gray-900 group-hover:text-white" />
+                  <IoExit className="flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900" />
                   <span className="ml-3">Sign Out</span>
                 </button>
               </li>
