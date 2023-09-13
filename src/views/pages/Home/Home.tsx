@@ -4,6 +4,7 @@ import browser from '@assets/images/browserframe.svg';
 import mobile from '@assets/images/mobileframe.svg';
 import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
+import { Button } from '@components/ui/Button';
 
 export const Home = () => {
   const { theme } = useTheme();
@@ -20,11 +21,13 @@ export const Home = () => {
               curate the most recent and significant world news, paired with comprehensive insights
               and expert analyses.
             </h4>
-            <Link
-              to={'/posts'}
-              className="px-4 py-3 bg-primary dark:bg-black-500 text-white rounded-[2px] mt-4 hover:bg-gray-800 dark:hover:bg-black-400"
-            >
-              See the posts
+            <Link to={'/posts'} className="mt-4">
+              <Button
+                type="button"
+                className="h-[42px] dark:bg-black-500 hover:bg-gray-800 dark:hover:bg-black-400 text-sm text-normal items-center text-white"
+              >
+                See all posts
+              </Button>
             </Link>
           </div>
           <div className="absolute bottom-0 right-0">

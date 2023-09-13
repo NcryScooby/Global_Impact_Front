@@ -20,7 +20,7 @@ export const Button = ({
       {...props}
       disabled={disabled || isLoading}
       className={cn(
-        'bg-primary text-secondary px-6 h-[48px] rounded-[2px] font-normal disabled:cursor-not-allowed transition-all active:bg-black flex items-center justify-center',
+        'bg-primary text-secondary px-6 h-[42px] rounded-[2px] text-sm disabled:cursor-not-allowed transition-all active:bg-black flex items-center justify-center',
         className
       )}
     >

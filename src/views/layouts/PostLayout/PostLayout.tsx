@@ -114,7 +114,7 @@ export const PostLayout = <
             <PostsHeader isLoading={isLoading} isSuccess={isSuccess} setHeaderTitle={setHeaderTitle} />
             <div className='flex flex-col lg:items-end gap-4'>
               <Link to='/posts/create'>
-                <Button className='hidden lg:block lg:h-[42px] lg:w-full dark:bg-black-500 hover:bg-gray-800 dark:hover:bg-black-400'>
+                <Button type='button' className='hidden lg:block lg:h-[42px] lg:w-full dark:bg-black-500 hover:bg-gray-800 dark:hover:bg-black-400 h-[42px] text-sm text-normal items-center text-white'>
                   Create Post
                 </Button>
               </Link>
