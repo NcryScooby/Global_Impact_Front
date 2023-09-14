@@ -13,7 +13,6 @@ import { Breadcrumbs } from '@components/ui/Breadcrumbs';
 import { MeResponse } from '@services/usersService/me';
 import { postsService } from '@services/postsService';
 import { commentsService } from '@services/comments';
-import { useAuth } from '@hooks/useAuth';
 import { useLike } from '@hooks/useLike';
 import { toast } from 'react-hot-toast';
 import { useState } from 'react';
@@ -21,7 +20,6 @@ import { useState } from 'react';
 export const PostDetail = () => {
   const { postId } = useParams() as { postId: string };
 
-  const { userAvatar } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [openDeleteCommentDialog, setOpenDeleteCommentDialog] = useState<boolean>(false);
@@ -135,7 +133,7 @@ export const PostDetail = () => {
         setOpenDialog={setOpenCreateCommentDialog}
         open={openCreateCommentDialog}
         onConfirm={handleSubmit}
-        userAvatar={userAvatar}
+        userAvatar={user.avatar}
         userName={user.name}
         jobName={user.job.name}
         isLoading={isLoadingCreateComment}
