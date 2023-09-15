@@ -7,8 +7,8 @@ export const POST_LIKE_COLORS = {
 
 export const PAGE = {
   POSTS: 'posts',
-  CATEGORIES: 'categories',
-  AUTHORS: 'authors',
+  CATEGORY: 'category',
+  AUTHOR: 'author',
 };
 
 export const USER_ROLES = {

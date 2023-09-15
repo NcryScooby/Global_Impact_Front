@@ -1,19 +1,8 @@
+import { IUser } from '@interfaces/posts/IUser';
 import { httpClient } from '../httpClient';
 
 export interface MeResponse {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-    job: {
-      id: string;
-      name: string;
-    };
-    role: {
-      name: string;
-    };
-  };
+  user: IUser;
 }
 
 export const me = async (): Promise<MeResponse> => {

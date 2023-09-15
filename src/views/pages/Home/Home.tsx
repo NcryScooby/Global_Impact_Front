@@ -2,9 +2,9 @@ import browserDark from '@assets/images/browserframedark.svg';
 import mobileDark from '@assets/images/mobileframedark.svg';
 import browser from '@assets/images/browserframe.svg';
 import mobile from '@assets/images/mobileframe.svg';
+import { Button } from '@components/ui/Button';
 import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
-import { Button } from '@components/ui/Button';
 
 export const Home = () => {
   const { theme } = useTheme();

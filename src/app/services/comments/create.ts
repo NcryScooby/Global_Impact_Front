@@ -1,3 +1,4 @@
+import { IComment } from '@interfaces/posts/IComment';
 import { httpClient } from '../httpClient';
 
 export interface CreateCommentData {
@@ -6,15 +7,7 @@ export interface CreateCommentData {
 }
 
 export interface CreateCommentResponse {
-  comment: {
-    id: string;
-    content: string;
-    author: {
-      id: string;
-      name: string;
-      email: string;
-      avatar: string;
-    };
+  comment: IComment & {
     post: {
       id: string;
       title: string;

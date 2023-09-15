@@ -58,7 +58,7 @@ export const PostsCategory = () => {
       handleTitleChange={handleTitleChange}
       handlePageChange={handlePageChange}
       key={searchPageParam}
-      page="categories"
+      page="category"
       selectedOption={searchOrderByParam}
       handleChangeSelectedOption={handleChangeSelectedOption}
       grid={grid}

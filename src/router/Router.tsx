@@ -8,13 +8,13 @@ import { Sidebar } from '@components/ui/Sidebar';
 import { Register } from '@pages/Auth/Register';
 import { NotFound } from '@pages/NotFound';
 import { Posts } from '@pages/Posts/Posts';
+import { Settings } from '@pages/Settings';
 import { Login } from '@pages/Auth/Login';
-import { useAuth } from '@hooks/useAuth';
+import { Profile } from '@pages/Profile';
 import { AuthGuard } from './AuthGuard';
 import { Home } from '@pages/Home';
 
 export const Router = () => {
-  const { signOut, userAvatar } = useAuth();
   return (
     <BrowserRouter>
       <Routes>
@@ -28,7 +28,7 @@ export const Router = () => {
         <Route
           element={
             <>
-              <Sidebar signOut={signOut} userAvatar={userAvatar} />
+              <Sidebar />
               <AuthGuard isPrivate />
             </>
           }
@@ -36,11 +36,16 @@ export const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/posts/:postId" element={<PostDetail />} />
-          <Route path="/posts/categories/:categoryId" element={<PostsCategory />} />
-          <Route path="/posts/authors/:authorId" element={<PostsAuthor />} />
+          <Route path="/posts/category/:categoryId" element={<PostsCategory />} />
+          <Route path="/posts/author/:authorId" element={<PostsAuthor />} />
           <Route path="/posts/create" element={<CreatePost />} />
+          <Route path="/profile/:username" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="*"
+          element={<NotFound status={404} title={'Page not found'} model={'page'} />}
+        />
       </Routes>
     </BrowserRouter>
   );

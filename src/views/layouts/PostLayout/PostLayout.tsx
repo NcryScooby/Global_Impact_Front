@@ -7,7 +7,7 @@ import { FILTER_OPTIONS, PAGE, POSTS_TITLE_MAP } from '@constants';
 import { IGridOptions } from '@interfaces/pagination/IGridOptions';
 import { PostsHeader } from '@components/posts/PostLayoutHeader';
 import { PostsGrid } from '@components/posts/PostsLayoutGrid';
-import { IPostsPages } from '@interfaces/posts/IPostsPages';
+import { IPostPage } from '@interfaces/posts/IPostPage';
 import { Button } from '@components/ui/Button';
 import { Select } from '@components/ui/Select';
 import { Input } from '@components/ui/Input';
@@ -25,7 +25,7 @@ interface PostLayoutProps<
   inputRef: RefObject<HTMLInputElement>;
   localTitle: string;
   searchPageParam: string;
-  page: IPostsPages['page'];
+  page: IPostPage['page'];
   selectedOption: string;
   grid?: IGridOptions['value'];
   handleTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -60,8 +60,8 @@ export const PostLayout = <
   const { theme } = useTheme();
 
   const isPostsPage = (page === PAGE.POSTS);
-  const isCategoryPage = (page === PAGE.CATEGORIES);
-  const isAuthorPage = (page === PAGE.AUTHORS);
+  const isCategoryPage = (page === PAGE.CATEGORY);
+  const isAuthorPage = (page === PAGE.AUTHOR);
 
   const generateGridChangeHandler = useCallback((value: IGridOptions['value']) => {
     return () => {

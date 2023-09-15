@@ -58,7 +58,7 @@ export const PostsAuthor = () => {
       handleTitleChange={handleTitleChange}
       handlePageChange={handlePageChange}
       key={searchPageParam}
-      page="authors"
+      page="author"
       selectedOption={searchOrderByParam}
       handleChangeSelectedOption={handleChangeSelectedOption}
       grid={grid}

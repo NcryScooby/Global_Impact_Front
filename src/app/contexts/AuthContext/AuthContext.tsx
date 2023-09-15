@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const [userLogged, serUserLogged] = useState<MeResponse['user']>({
     id: '',
+    username: '',
     name: '',
     avatar: '',
     email: '',
@@ -34,6 +35,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     role: {
       name: '',
     },
+    countryOfBirth: '',
+    joinedAt: '',
+    bio: '',
   });
 
   const { data, isError, isFetching, isSuccess, remove } = useQuery({

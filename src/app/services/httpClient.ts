@@ -8,7 +8,7 @@ export const httpClient = axios.create({
 });
 
 httpClient.interceptors.request.use(async (config) => {
-  await sleep(500);
+  await sleep(300);
 
   const token = localStorage.getItem(localStorageKeys.TOKEN);
 
@@ -19,7 +19,7 @@ httpClient.interceptors.request.use(async (config) => {
 });
 
 httpClient.interceptors.response.use(async (data) => {
-  await sleep(500);
+  await sleep(300);
 
   return data;
 });

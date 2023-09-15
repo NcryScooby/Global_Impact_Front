@@ -43,9 +43,8 @@ export const useCreatePostController = () => {
       return postsService.create(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'getPosts',
-      });
+      queryClient.invalidateQueries(['getPosts']);
+      queryClient.invalidateQueries(['getUserByUsername']);
     },
   });
 

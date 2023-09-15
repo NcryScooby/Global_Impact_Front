@@ -10,6 +10,7 @@ import { Button } from '@components/ui/Button';
 import { Select } from '@components/ui/Select';
 import { ChangeEvent, useState } from 'react';
 import { Input } from '@components/ui/Input';
+import { CACHE_TIME } from '@constants';
 
 export const CreatePost = () => {
   const { handleSubmit, reset, register, setValue, errors, isLoading } = useCreatePostController();
@@ -25,7 +26,7 @@ export const CreatePost = () => {
   } = useQuery<GetAllCategoriesResponse>({
     queryKey: ['getCategories'],
     queryFn: () => categoriesService.getAll(),
-    staleTime: 1000 * 60 * 5,
+    staleTime: CACHE_TIME.FIFTEEN_MINUTES,
   });
 
   const resetFormValues = () => {

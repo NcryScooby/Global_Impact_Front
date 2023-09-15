@@ -1,29 +1,8 @@
+import { IPost } from '@interfaces/posts/IPost';
 import Card from '@components/ui/Card';
 
 interface PostListProps {
-  post: {
-    id: string;
-    title: string;
-    content: string;
-    image: string;
-    likes: [];
-    category: {
-      id: string;
-      name: string;
-    };
-    author: {
-      id: string;
-      name: string;
-      email: string;
-      job: {
-        id: string;
-        name: string;
-      };
-      avatar: string;
-    };
-    createdAt: string;
-    views: number;
-  };
+  post: IPost;
 }
 
 export const PostList = ({ post }: PostListProps) => {

@@ -1,3 +1,4 @@
+import { IPost } from '@interfaces/posts/IPost';
 import { httpClient } from '../httpClient';
 
 export interface CreatePostData {
@@ -9,13 +10,7 @@ export interface CreatePostData {
 }
 
 export interface CreatePostResponse {
-  post: {
-    id: string;
-    title: string;
-    content: string;
-    image: string;
-    tags: string[];
-    createdAt: string;
+  post: IPost & {
     authorId: string;
     categoryId: string;
   };
