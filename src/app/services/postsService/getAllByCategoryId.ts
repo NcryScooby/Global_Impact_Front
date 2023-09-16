@@ -17,7 +17,7 @@ export const getAllByCategoryId = async (
   params?: GetAllByCategoryIdPostsParams
 ): Promise<GetAllByCategoryIdPostsResponse> => {
   const { data } = await httpClient.get<GetAllByCategoryIdPostsResponse>(
-    `/posts/category/${categoryId}`,
+    `/posts/categories/${categoryId}`,
     {
       params,
     }

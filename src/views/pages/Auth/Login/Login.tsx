@@ -1,3 +1,4 @@
+import { disableEnterKeySubmit } from '@utils/helpers/disableEnterKeySubmit';
 import { EyeClosedIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import { useLoginController } from './useLoginController';
 import { Button } from '@components/ui/Button';
@@ -27,12 +28,21 @@ export const Login = () => {
         </p>
       </header>
 
-      <form onSubmit={handleSubmit} className="mt-[60px] flex flex-col gap-4">
-        <Input type="email" label="E-mail" error={errors.email?.message} {...register('email')} />
+      <form
+        onSubmit={handleSubmit}
+        onKeyDown={disableEnterKeySubmit}
+        className="mt-[60px] flex flex-col gap-4"
+      >
+        <Input
+          type="email"
+          label="E-mail"
+          error={errors.email?.message}
+          autoComplete="on"
+          {...register('email')}
+        />
         <Input
           type={showPassword ? 'text' : 'password'}
           label="Password"
-          autoComplete="password"
           error={errors.password?.message}
           iconStyle="top-[41px] right-0.5 cursor-pointer"
           icon={
@@ -42,6 +52,7 @@ export const Login = () => {
               <EyeClosedIcon width={14} onClick={() => setShowPassword(true)} />
             )
           }
+          autoComplete="on"
           {...register('password')}
         />
         <Button

@@ -107,13 +107,15 @@ export const Profile = () => {
         description="Check out this user's latest posts"
         posts={latestPosts}
       />
-      <div className="sm:ml-64 flex justify-center mb-16 mt-20">
-        <Link to={`/posts/author/${user.id}`}>
-          <Button type="button" className="bg-primary text-white dark:bg-white dark:text-primary">
-            View all posts
-          </Button>
-        </Link>
-      </div>
+      {user.statistics.posts > 0 && (
+        <div className="sm:ml-64 flex justify-center mb-16 mt-20">
+          <Link to={`/posts/author/${user.id}`}>
+            <Button type="button" className="bg-primary text-white dark:bg-white dark:text-primary">
+              View all posts
+            </Button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

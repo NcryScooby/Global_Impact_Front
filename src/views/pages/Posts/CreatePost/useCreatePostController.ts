@@ -32,6 +32,7 @@ export const useCreatePostController = () => {
     handleSubmit: hookFormSubmit,
     setValue,
     formState: { errors },
+    clearErrors,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -69,5 +70,5 @@ export const useCreatePostController = () => {
     }
   });
 
-  return { handleSubmit, register, setValue, reset, errors, isLoading };
+  return { handleSubmit, register, setValue, reset, errors, isLoading, clearErrors };
 };

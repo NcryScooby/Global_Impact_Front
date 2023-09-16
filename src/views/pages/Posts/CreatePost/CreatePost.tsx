@@ -13,7 +13,8 @@ import { Input } from '@components/ui/Input';
 import { CACHE_TIME } from '@constants';
 
 export const CreatePost = () => {
-  const { handleSubmit, reset, register, setValue, errors, isLoading } = useCreatePostController();
+  const { handleSubmit, reset, register, setValue, errors, isLoading, clearErrors } =
+    useCreatePostController();
 
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -50,6 +51,7 @@ export const CreatePost = () => {
 
   const handleChangeSelectedOption = (event: ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
+    clearErrors('categoryId');
   };
 
   return (
@@ -122,6 +124,7 @@ export const CreatePost = () => {
                           type="file"
                           label="Image"
                           selectedFile={selectedFile}
+                          setSelectedFile={setSelectedFile}
                           handleSelectedFileChange={handleSelectedFileChange}
                           error={errors.image?.message?.toString()}
                           {...register('image')}
