@@ -5,6 +5,7 @@ import { localStorageKeys } from '@config/keys';
 const defaultContextData: ITheme = {
   theme: 'dark',
   toggleTheme: () => {},
+  singleTheme: () => {},
 };
 
 export const ThemeContext = createContext<ITheme>(defaultContextData);
@@ -34,5 +35,13 @@ export const ThemeProvider = ({ children }: { children: ReactNode }) => {
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
   }, []);
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
+  const singleTheme = useCallback((theme: ITheme['theme']) => {
+    setTheme(theme);
+  }, []);
+
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme, singleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 };
