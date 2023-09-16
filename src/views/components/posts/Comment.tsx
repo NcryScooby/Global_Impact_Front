@@ -1,4 +1,5 @@
 import { formatDate } from '@utils/helpers/formatDate';
+import { IComment } from '@interfaces/posts/IComment';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
 import { useTheme } from '@hooks/useTheme';
@@ -7,20 +8,7 @@ import { Link } from 'react-router-dom';
 import { env } from '@config/env';
 
 interface CommentProps {
-  comment: {
-    id: string;
-    author: {
-      id: string;
-      name: string;
-      avatar: string;
-      job: {
-        id: string;
-        name: string;
-      };
-    };
-    content: string;
-    createdAt: string;
-  };
+  comment: IComment;
   userId: string;
   userRole: string;
   onDelete: (id: string) => void;
@@ -44,7 +32,7 @@ export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) =
       <div className="max-w-4xl px-4 mx-auto sm:px-6 lg:px-8">
         <div className="flex items-center justify-between space-x-8 w-full">
           <div className="relative flex-shrink-0">
-            <Link to={`/posts/authors/${comment.author.id}`}>
+            <Link to={`/profile/${comment.author.username}`}>
               <Avatar
                 className="select-none"
                 alt={comment.author.name}

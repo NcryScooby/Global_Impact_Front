@@ -32,6 +32,7 @@ export const useCreatePostController = () => {
     handleSubmit: hookFormSubmit,
     setValue,
     formState: { errors },
+    clearErrors,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
@@ -43,9 +44,8 @@ export const useCreatePostController = () => {
       return postsService.create(data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        predicate: (query) => query.queryKey[0] === 'getPosts',
-      });
+      queryClient.invalidateQueries(['getPosts']);
+      queryClient.invalidateQueries(['getUserByUsername']);
     },
   });
 
@@ -70,5 +70,5 @@ export const useCreatePostController = () => {
     }
   });
 
-  return { handleSubmit, register, setValue, reset, errors, isLoading };
+  return { handleSubmit, register, setValue, reset, errors, isLoading, clearErrors };
 };

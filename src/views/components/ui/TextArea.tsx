@@ -1,5 +1,5 @@
 import { CrossCircledIcon } from '@radix-ui/react-icons';
-import { ComponentProps, forwardRef } from 'react';
+import { ComponentProps, KeyboardEvent, forwardRef } from 'react';
 import { cn } from '@utils/helpers/cn';
 
 interface TextAreaProps extends ComponentProps<'textarea'> {
@@ -12,6 +12,12 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
   ({ id, name, label, error, className, ...props }: TextAreaProps, ref) => {
     const textAreaId = id ?? name;
 
+    const handleTextareaKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    };
+
     return (
       <div className="relative">
         {label ? (
@@ -21,6 +27,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         ) : null}
 
         <textarea
+          onKeyDown={handleTextareaKeyDown}
           ref={ref}
           name={name}
           id={textAreaId}

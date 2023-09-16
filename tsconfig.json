@@ -17,7 +17,8 @@
       "@hooks/*": ["src/app/hooks/*"],
       "@interfaces/*": ["src/app/interfaces/*"],
       "@services/*": ["src/app/services/*"],
-      "@utils/*": ["src/app/utils/*"]
+      "@utils/*": ["src/app/utils/*"],
+      "@mocks": ["src/app/mocks"]
     },
 
     /* Bundler mode */

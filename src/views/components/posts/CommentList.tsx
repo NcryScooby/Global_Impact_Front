@@ -1,20 +1,8 @@
+import { IComment } from '@interfaces/posts/IComment';
 import { Comment } from './Comment';
 
 interface CommentProps {
-  comments: {
-    id: string;
-    author: {
-      id: string;
-      name: string;
-      avatar: string;
-      job: {
-        id: string;
-        name: string;
-      };
-    };
-    content: string;
-    createdAt: string;
-  }[];
+  comments: IComment[];
   userId: string;
   userRole: string;
   onDelete: (id: string) => void;

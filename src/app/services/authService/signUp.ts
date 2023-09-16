@@ -1,10 +1,13 @@
 import { httpClient } from '../httpClient';
 
 export interface SignUpData {
+  username: string;
   name: string;
   email: string;
   password: string;
   avatar: FileList;
+  countryOfBirth: string;
+  bio: string;
 }
 
 interface SignUpResponse {

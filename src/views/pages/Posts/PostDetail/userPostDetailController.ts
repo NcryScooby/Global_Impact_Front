@@ -39,6 +39,7 @@ export const usePostDetailController = (
 
     onSuccess: async () => {
       await queryClient.refetchQueries(['getPostById', postId]);
+      queryClient.invalidateQueries(['getUserByUsername']);
       reset({
         content: '',
       });

@@ -3,13 +3,11 @@ import { PlusIcon } from '@radix-ui/react-icons';
 import { SetStateAction } from 'react';
 
 interface CommentLabelProps {
-  postData: GetPostByIdResponse;
+  post: GetPostByIdResponse['post'];
   setOpenCreateCommentDialog: (value: SetStateAction<boolean>) => void;
 }
 
-export const CommentLabel = ({ postData, setOpenCreateCommentDialog }: CommentLabelProps) => {
-  const { post } = postData;
-
+export const CommentLabel = ({ post, setOpenCreateCommentDialog }: CommentLabelProps) => {
   return (
     <div className="flex justify-between mt-28 px-4 lg:px-8">
       {post.comments.length > 0 ? (

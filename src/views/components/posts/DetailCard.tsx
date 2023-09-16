@@ -13,7 +13,7 @@ import { Avatar } from '@mui/material';
 import { env } from '@config/env';
 
 interface DetailCardProps {
-  postData: GetPostByIdResponse;
+  post: GetPostByIdResponse['post'];
   isFetching: boolean;
   likesCount: number;
   color: string;
@@ -21,12 +21,12 @@ interface DetailCardProps {
   clicked: boolean;
   like: boolean;
   handleLike: () => void;
-  userData: MeResponse;
+  user: MeResponse['user'];
   setOpenDeletePostDialog: (value: SetStateAction<boolean>) => void;
 }
 
 export const DetailCard = ({
-  postData,
+  post,
   isFetching,
   likesCount,
   color,
@@ -34,12 +34,9 @@ export const DetailCard = ({
   clicked,
   like,
   handleLike,
-  userData,
+  user,
   setOpenDeletePostDialog,
 }: DetailCardProps) => {
-  const { post } = postData;
-  const { user } = userData;
-
   const { theme } = useTheme();
 
   const [openShareDialog, setOpenShareDialog] = useState<boolean>(false);
@@ -65,7 +62,7 @@ export const DetailCard = ({
           />
           <div className="mt-2 w-full flex justify-between items-start">
             <div className="flex items-center gap-2 mt-4">
-              <Link to={`/posts/authors/${post.author.id}`}>
+              <Link to={`/profile/${post.author.username}`}>
                 <Avatar
                   alt="User avatar"
                   src={`${env.apiUrl}/uploads/users/${post.author.avatar}`}
@@ -129,7 +126,7 @@ export const DetailCard = ({
             </h2>
           </div>
           <div className="absolute top-4 left-4">
-            <Link to={`/posts/categories/${post.category.id}`}>
+            <Link to={`/posts/category/${post.category.id}`}>
               <span className="px-4 py-2 text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white dark:bg-black-500 dark:text-white rounded-full">
                 {post.category.name}
               </span>

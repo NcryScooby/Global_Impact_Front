@@ -2,35 +2,14 @@ import { BarChartIcon, HeartFilledIcon } from '@radix-ui/react-icons';
 import { addThreeDots } from '@utils/helpers/addThreeDots';
 import { formatViews } from '@utils/helpers/formatViews';
 import { formatDate } from '@utils/helpers/formatDate';
+import { IPost } from '@interfaces/posts/IPost';
 import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 import { env } from '@config/env';
 
 interface CardProps {
-  post: {
-    id: string;
-    title: string;
-    content: string;
-    image: string;
-    likes: [];
-    category: {
-      id: string;
-      name: string;
-    };
-    author: {
-      id: string;
-      name: string;
-      email: string;
-      job: {
-        id: string;
-        name: string;
-      };
-      avatar: string;
-    };
-    createdAt: string;
-    views: number;
-  };
+  post: IPost;
 }
 
 const Card = ({ post }: CardProps) => {
@@ -48,7 +27,7 @@ const Card = ({ post }: CardProps) => {
             />
           </Link>
           <div className="absolute top-4 left-4">
-            <Link to={`/posts/categories/${post.category.id}`}>
+            <Link to={`/posts/category/${post.category.id}`}>
               <span className="px-4 py-2 dark:bg-black-500 dark:text-white text-xs font-semibold tracking-widest text-gray-900 uppercase bg-white rounded-full">
                 {post.category.name}
               </span>
@@ -57,7 +36,7 @@ const Card = ({ post }: CardProps) => {
         </div>
         <div className="mt-6 flex justify-between items-start">
           <div className="flex items-center gap-2">
-            <Link to={`/posts/authors/${post.author.id}`}>
+            <Link to={`/profile/${post.author.username}`}>
               <Avatar
                 alt="User avatar"
                 src={post.author.avatar ? `${env.apiUrl}/uploads/users/${post.author.avatar}` : ''}

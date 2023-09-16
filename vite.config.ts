@@ -17,6 +17,7 @@ export default defineConfig({
       '@interfaces': '/src/app/interfaces',
       '@services': '/src/app/services',
       '@utils': '/src/app/utils',
+      '@mocks': '/src/app/mocks',
     },
   },
 });

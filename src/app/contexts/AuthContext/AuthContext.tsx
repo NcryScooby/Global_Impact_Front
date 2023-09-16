@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useCallback, useEffect, useState } from 'react';
 import { LaunchScreen } from '@components/ui/LaunchScreen';
+import { MeResponse } from '@services/usersService/me';
 import { usersService } from '@services/usersService';
 import { useQuery } from '@tanstack/react-query';
 import { localStorageKeys } from '@config/keys';
@@ -7,7 +8,7 @@ import { toast } from 'react-hot-toast';
 
 interface AuthContextProps {
   signedIn: boolean;
-  userAvatar: string;
+  userLogged: MeResponse['user'];
   signIn: (token: string) => void;
   signOut: () => void;
 }
@@ -21,7 +22,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return !!storedToken;
   });
 
-  const [userAvatar, setUserAvatar] = useState<string>('');
+  const [userLogged, serUserLogged] = useState<MeResponse['user']>({
+    id: '',
+    username: '',
+    name: '',
+    avatar: '',
+    email: '',
+    job: {
+      id: '',
+      name: '',
+    },
+    role: {
+      name: '',
+    },
+    countryOfBirth: '',
+    joinedAt: '',
+    bio: '',
+  });
 
   const { data, isError, isFetching, isSuccess, remove } = useQuery({
     queryKey: ['loggedUser'],
@@ -50,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess && signedIn) {
-      setUserAvatar(data.user.avatar);
+      serUserLogged(data.user);
     }
   }, [isSuccess, signedIn]);
 
@@ -58,7 +75,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     <AuthContext.Provider
       value={{
         signedIn: isSuccess && signedIn,
-        userAvatar: userAvatar,
+        userLogged,
         signIn,
         signOut,
       }}

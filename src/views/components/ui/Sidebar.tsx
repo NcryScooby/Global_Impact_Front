@@ -1,23 +1,17 @@
-import { Avatar, FormControlLabel } from '@mui/material';
-import { IoCreate, IoExit } from 'react-icons/io5';
 import { useLocation } from 'react-router-dom';
 import { useSidebar } from '@hooks/useSidebar';
+import { IoIosSettings } from 'react-icons/io';
+import { AiOutlineUser } from 'react-icons/ai';
 import { HiNewspaper } from 'react-icons/hi2';
 import { AiFillHome } from 'react-icons/ai';
-import { useTheme } from '@hooks/useTheme';
+import { IoCreate } from 'react-icons/io5';
 import { useEffect, useRef } from 'react';
+import { useAuth } from '@hooks/useAuth';
 import { Link } from 'react-router-dom';
-import { env } from '@config/env';
-import { Switch } from './Switch';
 
-interface SidebarProps {
-  signOut: () => void;
-  userAvatar: string;
-}
-
-export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
+export const Sidebar = () => {
   const { isOpen, setIsOpen } = useSidebar();
-  const { theme, toggleTheme } = useTheme();
+  const { userLogged } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
   const postId = currentPath.split('/')[2];
@@ -34,11 +28,6 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
     ) {
       setIsOpen(false);
     }
-  };
-
-  const handleSignOut = () => {
-    setIsOpen(false);
-    signOut();
   };
 
   useEffect(() => {
@@ -71,7 +60,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
             clipRule="evenodd"
             fillRule="evenodd"
             d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-          ></path>
+          />
         </svg>
       </button>
 
@@ -83,7 +72,7 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
         } sm:translate-x-0`}
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-primary dark:bg-black-600 font-system-ui text-[15px] text-gray-400">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-primary dark:bg-black-600 font-system-ui text-gray-400">
           <ul className="space-y-2">
             <li>
               <Link
@@ -114,8 +103,8 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 className={`flex items-center p-2 transition duration-75 rounded-lg hover:bg-gray-900 ${
                   (currentPath === '/posts' ||
                     currentPath === `/posts/${postId}` ||
-                    currentPath === `/posts/categories/${categoryId}` ||
-                    currentPath === `/posts/authors/${authorId}`) &&
+                    currentPath === `/posts/category/${categoryId}` ||
+                    currentPath === `/posts/author/${authorId}`) &&
                   currentPath !== '/posts/create'
                     ? 'bg-gray-900 text-white'
                     : ''
@@ -125,8 +114,8 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                   className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 ${
                     (currentPath === '/posts' ||
                       currentPath === `/posts/${postId}` ||
-                      currentPath === `/posts/categories/${categoryId}` ||
-                      currentPath === `/posts/authors/${authorId}`) &&
+                      currentPath === `/posts/category/${categoryId}` ||
+                      currentPath === `/posts/author/${authorId}`) &&
                     currentPath !== '/posts/create'
                       ? 'text-white'
                       : ''
@@ -153,29 +142,41 @@ export const Sidebar = ({ signOut, userAvatar }: SidebarProps) => {
                 <span className="ml-3">Create Post</span>
               </Link>
             </li>
-            <ul className="pt-4 mt-4 space-y-2 border-gray-900">
-              <li>
-                <button
-                  onClick={handleSignOut}
-                  className="flex items-center p-2 transition duration-75 rounded-lg w-full hover:bg-gray-900"
-                >
-                  <IoExit className="flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900" />
-                  <span className="ml-3">Sign Out</span>
-                </button>
-              </li>
-            </ul>
-            <li className="flex-1 fixed bottom-4 flex w-full gap-6">
-              <Avatar
-                alt="User avatar"
-                src={userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''}
-                sx={{
-                  border: '0.5px solid #fff',
+            <li className="flex-1 fixed bottom-16 flex w-[232px]">
+              <Link
+                to={`/profile/${userLogged.username}`}
+                onClick={() => {
+                  setIsOpen(false);
                 }}
-              />
-              <FormControlLabel
-                control={<Switch checked={theme === 'dark'} onChange={toggleTheme} name="theme" />}
-                label=""
-              />
+                className={`flex items-center p-2 w-full transition duration-75 rounded-lg hover:bg-gray-900 ${
+                  currentPath === `/profile/${userLogged.username}` ? 'bg-gray-900 text-white' : ''
+                }`}
+              >
+                <AiOutlineUser
+                  className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 ${
+                    currentPath === `/settings/${userLogged.username}` ? 'text-white' : ''
+                  }`}
+                />
+                <span className="ml-3">Profile</span>
+              </Link>
+            </li>
+            <li className="flex-1 fixed bottom-4 flex w-[232px]">
+              <Link
+                to={'/settings'}
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+                className={`flex items-center p-2 w-full transition duration-75 rounded-lg hover:bg-gray-900 ${
+                  currentPath === '/settings' ? 'bg-gray-900 text-white' : ''
+                }`}
+              >
+                <IoIosSettings
+                  className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 ${
+                    currentPath === '/settings' ? 'text-white' : ''
+                  }`}
+                />
+                <span className="ml-3">Settings</span>
+              </Link>
             </li>
           </ul>
         </div>

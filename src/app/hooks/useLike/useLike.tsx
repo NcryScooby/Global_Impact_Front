@@ -1,3 +1,4 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { postsService } from '@services/postsService';
 import { useState, useEffect, useRef } from 'react';
 import { POST_LIKE_COLORS } from '@constants';
@@ -18,6 +19,8 @@ export const useLike = ({ postId, user, initialLikesCount, postLikes }: UseLikeP
   const [color, setColor] = useState<string>(POST_LIKE_COLORS.UNLIKED);
   const lastColorRef = useRef(color);
   const lastPulseRef = useRef(pulse);
+
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     setLikesCount(initialLikesCount);
@@ -69,6 +72,8 @@ export const useLike = ({ postId, user, initialLikesCount, postLikes }: UseLikeP
         postId: postId,
       });
 
+      queryClient.invalidateQueries(['getPosts']);
+      queryClient.invalidateQueries(['getUserByUsername']);
       updateLikesBasedOnMessage(message);
     } catch {
       toast.error('Oops, an error occurred');

@@ -1,10 +1,10 @@
-import { ISocialMedias } from '@interfaces/posts/ISocialMedias';
+import { ISocialMedia } from '@interfaces/posts/ISocialMedia';
 import { useTheme } from '@hooks/useTheme';
 import { ComponentType } from 'react';
 
 interface SocialIconProps {
   IconComponent: ComponentType<{ color: string; size: number }>;
-  label: ISocialMedias['name'];
+  label: ISocialMedia['name'];
 }
 
 export const SocialIcon = ({ IconComponent, label }: SocialIconProps) => {
