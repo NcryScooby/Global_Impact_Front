@@ -113,7 +113,7 @@ export const DetailCard = ({
                     <Share1Icon
                       height={12}
                       width={12}
-                      color={theme === 'light' ? '#9e9e9e' : '#bdbdbd'}
+                      color={theme === 'light' ? '#737373' : '#bdbdbd'}
                     />
                   </span>
                 </div>
