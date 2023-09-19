@@ -1,7 +1,7 @@
-import { ICategory } from './ICategory';
-import { IComment } from './IComment';
-import { ILikes } from './ILikes';
-import { IUser } from './IUser';
+import type { ICategory } from './ICategory';
+import type { IComment } from './IComment';
+import type { ILikes } from './ILikes';
+import type { IUser } from './IUser';
 
 export interface IPost {
   id: string;

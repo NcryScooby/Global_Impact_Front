@@ -1,4 +1,4 @@
-import { IPost } from '@interfaces/posts/IPost';
+import type { IPost } from '@interfaces/posts/IPost';
 import Card from '@components/ui/Card';
 
 interface PostShowcaseProps {

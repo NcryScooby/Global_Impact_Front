@@ -1,5 +1,5 @@
+import type { IErrorResponse } from '@interfaces/errors/IErrorResponse';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { IErrorResponse } from '@interfaces/errors/IErrorResponse';
 import { CreatePostData } from '@services/postsService/create';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { postsService } from '@services/postsService';

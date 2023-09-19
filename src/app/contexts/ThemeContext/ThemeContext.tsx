@@ -1,5 +1,5 @@
 import { createContext, useState, ReactNode, useEffect, useCallback } from 'react';
-import { ITheme } from '@interfaces/theme/ITheme';
+import type { ITheme } from '@interfaces/theme/ITheme';
 import { localStorageKeys } from '@config/keys';
 
 const defaultContextData: ITheme = {

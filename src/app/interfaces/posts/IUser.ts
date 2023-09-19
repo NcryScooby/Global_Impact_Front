@@ -1,5 +1,5 @@
-import { IRole } from './IRole';
-import { IJob } from './IJob';
+import type { IRole } from './IRole';
+import type { IJob } from './IJob';
 
 export interface IUser {
   id: string;

@@ -1,6 +1,6 @@
-import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import type { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import type { IGridOptions } from '@interfaces/pagination/IGridOptions';
 import { useState, useRef, useCallback, ChangeEvent } from 'react';
-import { IGridOptions } from '@interfaces/pagination/IGridOptions';
 import { useSearchParams } from 'react-router-dom';
 import { debounce } from '@utils/helpers/debounce';
 

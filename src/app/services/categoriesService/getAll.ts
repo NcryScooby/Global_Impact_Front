@@ -1,5 +1,5 @@
-import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
-import { ICategory } from '@interfaces/posts/ICategory';
+import type { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import type { ICategory } from '@interfaces/posts/ICategory';
 import { httpClient } from '../httpClient';
 
 export interface GetAllCategoriesResponse {

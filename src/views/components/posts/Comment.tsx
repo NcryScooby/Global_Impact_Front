@@ -1,5 +1,5 @@
+import type { IComment } from '@interfaces/posts/IComment';
 import { formatDate } from '@utils/helpers/formatDate';
-import { IComment } from '@interfaces/posts/IComment';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
 import { useTheme } from '@hooks/useTheme';

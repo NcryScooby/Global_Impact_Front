@@ -1,4 +1,4 @@
-import { ISocialMedia } from '@interfaces/posts/ISocialMedia';
+import type { ISocialMedia } from '@interfaces/posts/ISocialMedia';
 import { useTheme } from '@hooks/useTheme';
 import { ComponentType } from 'react';
 

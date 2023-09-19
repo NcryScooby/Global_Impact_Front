@@ -1,4 +1,4 @@
-import { IComment } from '@interfaces/posts/IComment';
+import type { IComment } from '@interfaces/posts/IComment';
 import { Comment } from './Comment';
 
 interface CommentProps {

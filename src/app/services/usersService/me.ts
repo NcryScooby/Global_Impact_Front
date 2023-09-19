@@ -1,4 +1,4 @@
-import { IUser } from '@interfaces/posts/IUser';
+import type { IUser } from '@interfaces/posts/IUser';
 import { httpClient } from '../httpClient';
 
 export interface MeResponse {

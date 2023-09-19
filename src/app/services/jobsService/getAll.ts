@@ -1,6 +1,6 @@
-import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import type { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import type { IJob } from '@interfaces/posts/IJob';
 import { httpClient } from '../httpClient';
-import { IJob } from '@interfaces/posts/IJob';
 
 export interface GetAllJobsResponse {
   jobs: IJob[];

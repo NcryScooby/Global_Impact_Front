@@ -1,4 +1,4 @@
-import { IPost } from '@interfaces/posts/IPost';
+import type { IPost } from '@interfaces/posts/IPost';
 import { httpClient } from '../httpClient';
 
 export interface GetPostByIdResponse {

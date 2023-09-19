@@ -1,6 +1,6 @@
-import { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
-import { IMeta } from '@interfaces/pagination/IMeta';
-import { IPost } from '@interfaces/posts/IPost';
+import type { IPaginationParams } from '@interfaces/pagination/IPaginationParams';
+import type { IMeta } from '@interfaces/pagination/IMeta';
+import type { IPost } from '@interfaces/posts/IPost';
 import { httpClient } from '../httpClient';
 
 export interface getAllByAuthorIdPostsResponse {

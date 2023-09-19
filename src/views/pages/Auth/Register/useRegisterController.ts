@@ -1,6 +1,6 @@
 import { ValidateUsernameData } from '@services/usersService/validateUsername';
 import { ValidateEmailData } from '@services/usersService/validateEmail';
-import { IErrorResponse } from '@interfaces/errors/IErrorResponse';
+import type { IErrorResponse } from '@interfaces/errors/IErrorResponse';
 import { SignUpData } from '@services/authService/signUp';
 import { usersService } from '@services/usersService';
 import { zodResolver } from '@hookform/resolvers/zod';

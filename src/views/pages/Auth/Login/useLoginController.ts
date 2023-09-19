@@ -1,4 +1,4 @@
-import { IErrorResponse } from '@interfaces/errors/IErrorResponse';
+import type { IErrorResponse } from '@interfaces/errors/IErrorResponse';
 import { SignInData } from '@services/authService/signIn';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';

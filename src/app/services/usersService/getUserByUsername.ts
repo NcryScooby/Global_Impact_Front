@@ -1,6 +1,6 @@
-import { IStatistic } from './../../interfaces/posts/IStatistic';
-import { IUser } from '@interfaces/posts/IUser';
-import { IPost } from '@interfaces/posts/IPost';
+import type { IStatistic } from '@interfaces/posts/IStatistic';
+import type { IUser } from '@interfaces/posts/IUser';
+import type { IPost } from '@interfaces/posts/IPost';
 import { httpClient } from '../httpClient';
 
 export interface GetUserByUsernameResponse {
