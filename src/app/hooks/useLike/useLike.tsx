@@ -8,7 +8,7 @@ type UseLikeProps = {
   postId: string;
   user: { id: string };
   initialLikesCount: number;
-  postLikes: Array<{ authorId: string }>;
+  postLikes: { authorId: string }[];
 };
 
 export const useLike = ({ postId, user, initialLikesCount, postLikes }: UseLikeProps) => {

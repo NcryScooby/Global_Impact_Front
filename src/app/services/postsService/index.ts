@@ -1,10 +1,12 @@
-import { getAllByAuthorId } from './getAllPostByAuthorId';
 import { getAllByCategoryId } from './getAllByCategoryId';
+import { getAllByAuthorId } from './getAllPostByAuthorId';
+import { mySavedPost } from './mySavedPost';
+import { deletePost } from './deletePost';
+import { savedPost } from './savedPost';
 import { getById } from './getById';
 import { create } from './create';
 import { getAll } from './getAll';
 import { like } from './like';
-import { deletePost } from './deletePost';
 
 export const postsService = {
   getAll,
@@ -14,4 +16,6 @@ export const postsService = {
   create,
   like,
   deletePost,
+  savedPost,
+  mySavedPost,
 };

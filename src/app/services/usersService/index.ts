@@ -1,7 +1,7 @@
-import { validateUsername } from './validateUsername';
 import { getUserByUsername } from './getUserByUsername';
-import { me } from './me';
+import { validateUsername } from './validateUsername';
 import { validateEmail } from './validateEmail';
+import { me } from './me';
 
 export const usersService = {
   me,

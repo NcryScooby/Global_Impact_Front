@@ -1,10 +1,14 @@
 import { BarChartIcon, Share1Icon, TrashIcon } from '@radix-ui/react-icons';
 import { GetPostByIdResponse } from '@services/postsService/getById';
+import { BsBookmark, BsBookmarkFill } from 'react-icons/bs';
 import { formatViews } from '@utils/helpers/formatViews';
 import { ShareDialog } from '@components/ui/ShareDialog';
+import { MenuButton } from '@components/ui/MenuButton';
 import { MeResponse } from '@services/usersService/me';
 import { formatDate } from '@utils/helpers/formatDate';
+import { useSavePost } from '@hooks/useSavePost';
 import { SetStateAction, useState } from 'react';
+import { Spinner } from '@components/ui/Spinner';
 import { LikeComponent } from './LikeComponent';
 import { useTheme } from '@hooks/useTheme';
 import { USER_ROLES } from '@constants';
@@ -38,7 +42,7 @@ export const DetailCard = ({
   setOpenDeletePostDialog,
 }: DetailCardProps) => {
   const { theme } = useTheme();
-
+  const { savedPostIcon, savePost, savedPostMessage, isFetchingMySavedPosts } = useSavePost(post);
   const [openShareDialog, setOpenShareDialog] = useState<boolean>(false);
 
   const handleOpenShareDialog = () => setOpenShareDialog(true);
@@ -106,16 +110,28 @@ export const DetailCard = ({
                       />
                     </span>
                   </div>
-                  <span
-                    className="flex items-center justify-center bg-gray-200 dark:bg-black-500 w-6 p-1.5 rounded-full hover:bg-gray-300 dark:hover:bg-black-400 cursor-pointer"
-                    onClick={handleOpenShareDialog}
-                  >
-                    <Share1Icon
-                      height={12}
-                      width={12}
-                      color={theme === 'light' ? '#737373' : '#bdbdbd'}
-                    />
-                  </span>
+                  <MenuButton
+                    disabled={isFetchingMySavedPosts}
+                    className="flex items-center justify-center p-1 rounded-full hover:bg-gray-100 dark:hover:bg-black-400 cursor-pointer"
+                    options={[
+                      {
+                        name: 'Share',
+                        onClick: handleOpenShareDialog,
+                        icon: <Share1Icon width={14} height={14} />,
+                      },
+                      {
+                        name: isFetchingMySavedPosts ? 'Loading' : savedPostMessage,
+                        onClick: () => savePost({ postId: post.id }),
+                        icon: isFetchingMySavedPosts ? (
+                          <Spinner className="text-transparent fill-primary dark:fill-white w-4 h-4" />
+                        ) : savedPostIcon === 'BsBookmark' ? (
+                          <BsBookmark />
+                        ) : (
+                          <BsBookmarkFill color={'#2E77F4'} />
+                        ),
+                      },
+                    ]}
+                  />
                 </div>
               </>
             )}
