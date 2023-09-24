@@ -70,7 +70,7 @@ export const useSavePost = (post: IPost) => {
   const updateSavedPostStatus = () => {
     const postSaved = isPostSaved();
     setSavedPostIcon(postSaved ? 'BsBookmarkFill' : 'BsBookmark');
-    setSavedPostMessage(postSaved ? 'Delete from saved' : 'Save');
+    setSavedPostMessage(postSaved ? 'Saved' : 'Save');
   };
 
   const savePost = async (postData: CreateSavedPostData) => {

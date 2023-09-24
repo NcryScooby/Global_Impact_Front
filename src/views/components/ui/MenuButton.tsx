@@ -62,7 +62,7 @@ export const MenuButton = ({ className, options, disabled }: MenuButtonProps) =>
       >
         {options.map(({ name, icon, onClick }) => (
           <MenuItem
-            disabled={name === 'Save' || name === 'Delete from saved' ? disabled : false}
+            disabled={name === 'Save' || name === 'Saved' ? disabled : false}
             key={name}
             disableRipple
             sx={{
