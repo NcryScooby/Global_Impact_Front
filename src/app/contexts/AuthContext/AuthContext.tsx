@@ -38,6 +38,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     countryOfBirth: '',
     joinedAt: '',
     bio: '',
+    savedPosts: [],
   });
 
   const { data, isError, isFetching, isSuccess, remove } = useQuery({
