@@ -8,7 +8,7 @@ import { toast } from 'react-hot-toast';
 
 interface AuthContextProps {
   signedIn: boolean;
-  userLogged: MeResponse['user'];
+  userLogged: MeResponse;
   signIn: (token: string) => void;
   signOut: () => void;
 }
@@ -22,22 +22,24 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return !!storedToken;
   });
 
-  const [userLogged, serUserLogged] = useState<MeResponse['user']>({
-    id: '',
-    username: '',
-    name: '',
-    avatar: '',
-    email: '',
-    job: {
+  const [userLogged, serUserLogged] = useState<MeResponse>({
+    user: {
       id: '',
+      username: '',
       name: '',
+      avatar: '',
+      email: '',
+      job: {
+        id: '',
+        name: '',
+      },
+      role: {
+        name: '',
+      },
+      countryOfBirth: '',
+      joinedAt: '',
+      bio: '',
     },
-    role: {
-      name: '',
-    },
-    countryOfBirth: '',
-    joinedAt: '',
-    bio: '',
     savedPosts: [],
   });
 
@@ -68,7 +70,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     if (isSuccess && signedIn) {
-      serUserLogged(data.user);
+      serUserLogged(data);
     }
   }, [isSuccess, signedIn]);
 

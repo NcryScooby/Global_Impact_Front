@@ -5,15 +5,21 @@ import { PostShowcase } from '@components/posts/PostShowcase';
 import { usersService } from '@services/usersService';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { BsBookmarkFill } from 'react-icons/bs';
 import { Button } from '@components/ui/Button';
 import { CiLocationOn } from 'react-icons/ci';
 import { BsCalendar4 } from 'react-icons/bs';
+import { useTheme } from '@hooks/useTheme';
 import { NotFound } from '@pages/NotFound';
+import { useAuth } from '@hooks/useAuth';
 import { Avatar } from '@mui/material';
+import { ReactNode } from 'react';
 import { env } from '@config/env';
 
 export const Profile = () => {
   const { username } = useParams() as { username: string };
+  const { userLogged } = useAuth();
+  const { theme } = useTheme();
   const { data, isFetching, isError } = useQuery<GetUserByUsernameResponse>({
     queryKey: ['getUserByUsername', username],
     queryFn: () => usersService.getUserByUsername(username),
@@ -21,11 +27,11 @@ export const Profile = () => {
     staleTime: Infinity,
   });
 
-  const Wrapper = ({ children }: { children: React.ReactNode }) => (
-    <div className="sm:ml-64 overflow-hidden mt-32 lg:mt-0">{children}</div>
+  const Wrapper = ({ children }: { children: ReactNode }) => (
+    <div className="sm:ml-64 overflow-hidden h-full lg:mt-0">{children}</div>
   );
 
-  const InfoBlock = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
+  const InfoBlock = ({ icon, text }: { icon: ReactNode; text: string }) => (
     <div className="flex items-center justify-center gap-2">
       {icon}
       <p className="text-gray-600 font-light text-sm dark:text-gray-500">{text}</p>
@@ -48,7 +54,7 @@ export const Profile = () => {
     );
   }
 
-  const { user, latestPosts } = data;
+  const { user, latestPosts, savedPosts } = data;
 
   return (
     <div className="overflow-x-hidden">
@@ -100,6 +106,17 @@ export const Profile = () => {
               {user.bio}
             </h5>
           </div>
+          {userLogged.user.id === user.id ? (
+            <Link to="/profile/saved-posts">
+              <div className="flex flex-col items-center dark:text-white mt-4 cursor-pointer">
+                <div className="flex items-center gap-2">
+                  <BsBookmarkFill size={12} color={theme === 'light' ? '#2E77F4' : '#dbdbdb'} />
+                  <h6>{savedPosts.length}</h6>
+                </div>
+                <p className="text-gray-600 font-light text-sm dark:text-gray-500">Saved Posts</p>
+              </div>
+            </Link>
+          ) : null}
         </div>
       </div>
       <PostShowcase

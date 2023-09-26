@@ -19,10 +19,9 @@ export const useSavePost = (post: IPost) => {
   const [savedPostIcon, setSavedPostIcon] = useState<string>('BsBookmark');
   const [savedPostMessage, setSavedPostMessage] = useState<string>('Save');
 
-  const { data, isFetching: isFetchingMySavedPosts } = useQuery({
+  const { data, isFetching: isFetchingMySavedPosts } = useQuery<IMySavedPostData>({
     queryKey: ['mySavedPosts'],
-    queryFn: postsService.mySavedPost,
-    staleTime: Infinity,
+    queryFn: () => postsService.mySavedPost(),
   });
 
   const { mutateAsync } = useMutation({
@@ -30,6 +29,7 @@ export const useSavePost = (post: IPost) => {
       postsService.savedPost({ postId: postData.postId }),
 
     onMutate: () => {
+      queryClient.invalidateQueries(['getUserByUsername']);
       const currentData = queryClient.getQueryData<IMySavedPostData>(['mySavedPosts']);
 
       queryClient.setQueryData(['mySavedPosts'], (prevData: IMySavedPostData | undefined) => {

@@ -1,4 +1,3 @@
-import type { ISavedPost } from './ISavedPost';
 import type { IRole } from './IRole';
 import type { IJob } from './IJob';
 
@@ -13,5 +12,4 @@ export interface IUser {
   joinedAt: string;
   countryOfBirth: string;
   bio: string;
-  savedPosts: ISavedPost[];
 }

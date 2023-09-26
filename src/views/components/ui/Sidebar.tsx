@@ -144,17 +144,23 @@ export const Sidebar = () => {
             </li>
             <li className="flex-1 fixed bottom-16 flex w-[232px]">
               <Link
-                to={`/profile/${userLogged.username}`}
+                to={`/profile/${userLogged.user.username}`}
                 onClick={() => {
                   setIsOpen(false);
                 }}
                 className={`flex items-center p-2 w-full transition duration-75 rounded-lg hover:bg-gray-900 ${
-                  currentPath === `/profile/${userLogged.username}` ? 'bg-gray-900 text-white' : ''
+                  currentPath === `/profile/${userLogged.user.username}` ||
+                  currentPath === '/profile/saved-posts'
+                    ? 'bg-gray-900 text-white'
+                    : ''
                 }`}
               >
                 <AiOutlineUser
                   className={`flex-shrink-0 w-4 h-4 transition duration-75 hover:bg-gray-900 ${
-                    currentPath === `/settings/${userLogged.username}` ? 'text-white' : ''
+                    currentPath === `/profile/${userLogged.user.username}` ||
+                    currentPath === '/profile/saved-posts'
+                      ? 'text-white'
+                      : ''
                   }`}
                 />
                 <span className="ml-3">Profile</span>
