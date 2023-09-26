@@ -1,9 +1,6 @@
 export const PostDetailSkeleton = () => {
   return (
-    <div
-      role="status"
-      className="p-5 px-4 mx-auto animate-pulse lg:py-16 lg:px-64 dark:bg-black-600"
-    >
+    <div role="status" className="p-5 px-4 mx-auto animate-pulse py-20 lg:px-64">
       <div className="h-3.5 w-full bg-gray-300 dark:bg-black-500 rounded-sm mt-1" />
       <div className="mt-[3.25rem] h-[12.25rem] w-[336px] lg:h-80 lg:w-[672px] lg:mt-10 bg-gray-300 dark:bg-black-500" />
       <div className="flex items-center mt-6 space-x-3">

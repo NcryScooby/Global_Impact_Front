@@ -4,13 +4,15 @@ import { GetPostByIdResponse } from '@services/postsService/getById';
 import { usePostDetailController } from './userPostDetailController';
 import { DeleteAlertDialog } from '@components/ui/DeleteAlertDialog';
 import { TextAlertDialog } from '@components/ui/TextAlertDialog';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PostShowcase } from '@components/posts/PostShowcase';
 import { CommentLabel } from '@components/posts/CommentLabel';
 import { CommentList } from '@components/posts/CommentList';
 import { commentsService } from '@services/commentsService';
-import { useNavigate, useParams } from 'react-router-dom';
+import { usePreviousRoute } from '@hooks/usePreviousRoute';
 import { DetailCard } from '@components/posts/DetailCard';
 import { Breadcrumbs } from '@components/ui/Breadcrumbs';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { postsService } from '@services/postsService';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@hooks/useAuth';
@@ -37,6 +39,9 @@ export const PostDetail = () => {
   const [openCreateCommentDialog, setOpenCreateCommentDialog] = useState<boolean>(false);
   const [openDeletePostDialog, setOpenDeletePostDialog] = useState<boolean>(false);
   const [commentId, setCommentId] = useState<string>('');
+
+  const { previousRoute } = usePreviousRoute();
+  const clientUrl = window.location.origin;
 
   const {
     errors,
@@ -90,7 +95,7 @@ export const PostDetail = () => {
 
   const { likesCount, pulse, clicked, like, color, handleLike } = useLike({
     postId: postId,
-    user: userLogged,
+    user: userLogged.user,
     initialLikesCount: post?.likes.length || 0,
     postLikes: post?.likes || [],
   });
@@ -138,9 +143,9 @@ export const PostDetail = () => {
         setOpenDialog={setOpenCreateCommentDialog}
         open={openCreateCommentDialog}
         onConfirm={handleSubmit}
-        userAvatar={userLogged.avatar}
-        userName={userLogged.name}
-        jobName={userLogged.job.name}
+        userAvatar={userLogged.user.avatar}
+        userName={userLogged.user.name}
+        jobName={userLogged.user.job.name}
         isLoading={isLoadingCreateComment}
         error={errors.content?.message || ''}
         fieldName="content"
@@ -148,9 +153,16 @@ export const PostDetail = () => {
         reset={reset}
       />
       <div className="overflow-x-hidden">
-        <section
-          className={`${relatedPosts.length > 0 ? 'pt-16' : 'py-10'} h-full lg:px-56 sm:ml-64`}
-        >
+        <section className="py-20 h-full lg:px-56 sm:ml-64">
+          {previousRoute?.includes('/profile/saved-posts') ? (
+            <Link
+              to={`${clientUrl}/profile/saved-posts`}
+              className="absolute top-[75px] left-4 lg:top-10 lg:left-[510px] flex items-center gap-1.5"
+            >
+              <ArrowLeftIcon color="#757575" />
+              <p className="text-xs text-gray-600">Back to saved posts</p>
+            </Link>
+          ) : null}
           <div className="px-4 mx-auto sm:px-6 lg:px-8">
             <Breadcrumbs
               links={[
@@ -172,7 +184,7 @@ export const PostDetail = () => {
               clicked={clicked}
               like={like}
               handleLike={handleLike}
-              user={userLogged}
+              user={userLogged.user}
               setOpenDeletePostDialog={setOpenDeletePostDialog}
             />
           </div>
@@ -180,8 +192,8 @@ export const PostDetail = () => {
           <CommentLabel post={post} setOpenCreateCommentDialog={setOpenCreateCommentDialog} />
           <CommentList
             comments={post.comments}
-            userId={userLogged.id}
-            userRole={userLogged.role.name}
+            userId={userLogged.user.id}
+            userRole={userLogged.user.role.name}
             onDelete={(commentId) => {
               setCommentId(commentId);
               setOpenDeleteCommentDialog(true);

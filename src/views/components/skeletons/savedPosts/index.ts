@@ -1,0 +1,1 @@
+export { SavedPostsSkeleton } from './SavedPostsSkeleton';
