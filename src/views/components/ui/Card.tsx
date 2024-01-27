@@ -6,7 +6,6 @@ import type { IPost } from '@interfaces/posts/IPost';
 import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
-import { env } from '@config/env';
 
 interface CardProps {
   post: IPost;
@@ -22,7 +21,7 @@ const Card = ({ post }: CardProps) => {
             <img
               loading="lazy"
               className="object-cover object-top h-52 mx-auto w-full select-none"
-              src={`${env.apiUrl}/uploads/posts/${post.image}`}
+              src={`${post.image}`}
               alt={post.title}
             />
           </Link>
@@ -39,7 +38,7 @@ const Card = ({ post }: CardProps) => {
             <Link to={`/profile/${post.author.username}`}>
               <Avatar
                 alt="User avatar"
-                src={post.author.avatar ? `${env.apiUrl}/uploads/users/${post.author.avatar}` : ''}
+                src={post.author.avatar ? `${post.author.avatar}` : ''}
                 sx={{
                   width: 42,
                   height: 42,

@@ -14,7 +14,6 @@ import { NotFound } from '@pages/NotFound';
 import { useAuth } from '@hooks/useAuth';
 import { Avatar } from '@mui/material';
 import { ReactNode } from 'react';
-import { env } from '@config/env';
 
 export const Profile = () => {
   const { username } = useParams() as { username: string };
@@ -65,7 +64,7 @@ export const Profile = () => {
           </h1>
           <Avatar
             alt="user avatar"
-            src={user.avatar ? `${env.apiUrl}/uploads/users/${user.avatar}` : ''}
+            src={user.avatar ? `${user.avatar}` : ''}
             sx={{
               border: '0.5px solid #fff',
               width: 96,

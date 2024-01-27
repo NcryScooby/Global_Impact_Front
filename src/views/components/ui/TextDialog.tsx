@@ -6,7 +6,6 @@ import Dialog from '@mui/material/Dialog';
 import { SetStateAction } from 'react';
 import { Avatar } from '@mui/material';
 import { TextArea } from './TextArea';
-import { env } from '@config/env';
 
 interface TextDialogProps {
   openDialog: boolean;
@@ -57,7 +56,7 @@ export const TextDialog = ({
       <div className="flex items-center justify-start gap-4 mb-2">
         <Avatar
           alt="User avatar"
-          src={userAvatar ? `${env.apiUrl}/uploads/users/${userAvatar}` : ''}
+          src={userAvatar ? `${userAvatar}` : ''}
           sx={{
             border: '1px solid #fff',
             width: 64,

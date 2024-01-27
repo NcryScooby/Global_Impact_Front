@@ -5,7 +5,6 @@ import { Avatar, Divider } from '@mui/material';
 import { useTheme } from '@hooks/useTheme';
 import { USER_ROLES } from '@constants';
 import { Link } from 'react-router-dom';
-import { env } from '@config/env';
 
 interface CommentProps {
   comment: IComment;
@@ -36,7 +35,7 @@ export const Comment = ({ comment, userId, userRole, onDelete }: CommentProps) =
               <Avatar
                 className="select-none"
                 alt={comment.author.name}
-                src={`${env.apiUrl}/uploads/users/${comment.author.avatar}`}
+                src={`${comment.author.avatar}`}
                 sx={{
                   width: 80,
                   height: 80,

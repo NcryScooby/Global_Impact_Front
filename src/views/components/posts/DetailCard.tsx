@@ -14,7 +14,6 @@ import { useTheme } from '@hooks/useTheme';
 import { USER_ROLES } from '@constants';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
-import { env } from '@config/env';
 
 interface DetailCardProps {
   post: GetPostByIdResponse['post'];
@@ -61,7 +60,7 @@ export const DetailCard = ({
           <img
             loading="lazy"
             className="object-cover object-top lg:max-h-80 lg:w-full select-none"
-            src={`${env.apiUrl}/uploads/posts/${post.image}`}
+            src={`${post.image}`}
             alt={post.title}
           />
           <div className="mt-2 w-full flex justify-between items-start">
@@ -69,7 +68,7 @@ export const DetailCard = ({
               <Link to={`/profile/${post.author.username}`}>
                 <Avatar
                   alt="User avatar"
-                  src={`${env.apiUrl}/uploads/users/${post.author.avatar}`}
+                  src={`${post.author.avatar}`}
                   sx={{
                     width: 48,
                     height: 48,
