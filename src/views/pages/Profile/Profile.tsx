@@ -9,9 +9,9 @@ import { BsBookmarkFill } from 'react-icons/bs';
 import { Button } from '@components/ui/Button';
 import { CiLocationOn } from 'react-icons/ci';
 import { BsCalendar4 } from 'react-icons/bs';
-import { useTheme } from '@hooks/useTheme';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { NotFound } from '@pages/NotFound';
-import { useAuth } from '@hooks/useAuth';
+import { useAuth } from '../../../app/hooks/useAuth';
 import { Avatar } from '@mui/material';
 import { ReactNode } from 'react';
 

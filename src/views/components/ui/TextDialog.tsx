@@ -1,7 +1,7 @@
 import { UseFormRegister, UseFormReset } from 'react-hook-form';
 import DialogActions from '@mui/material/DialogActions';
 import { Button } from '@components/ui/Button';
-import { useTheme } from '@hooks/useTheme';
+import { useTheme } from '../../../app/hooks/useTheme';
 import Dialog from '@mui/material/Dialog';
 import { SetStateAction } from 'react';
 import { Avatar } from '@mui/material';

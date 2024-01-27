@@ -1,6 +1,6 @@
 import { getAllByAuthorIdPostsResponse } from '@services/postsService/getAllPostByAuthorId';
 import { postsService } from '@services/postsService';
-import { usePostsLogic } from '@hooks/usePostsLogic';
+import { usePostsLogic } from '../../../../app/hooks/usePostsLogic';
 import { useQuery } from '@tanstack/react-query';
 import { PostLayout } from '@layouts/PostLayout';
 import { useParams } from 'react-router-dom';

@@ -9,7 +9,7 @@ import { authService } from '@services/authService';
 import { ACCEPTED_IMAGE_TYPES } from '@constants';
 import { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '@hooks/useAuth';
+import { useAuth } from '../../../../app/hooks/useAuth';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 

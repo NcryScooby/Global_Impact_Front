@@ -1,8 +1,8 @@
 import theme_light from '@assets/images/theme_light.png';
 import theme_dark from '@assets/images/theme_dark.png';
-import { useTheme } from '@hooks/useTheme';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { Button } from '@components/ui/Button';
-import { useAuth } from '@hooks/useAuth';
+import { useAuth } from '../../../app/hooks/useAuth';
 
 export const Settings = () => {
   const { theme, singleTheme } = useTheme();

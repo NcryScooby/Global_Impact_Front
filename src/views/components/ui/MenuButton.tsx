@@ -1,6 +1,6 @@
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { MouseEvent, useState } from 'react';
-import { useTheme } from '@hooks/useTheme';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { MenuItem } from '@mui/material';
 import { cn } from '@utils/helpers/cn';
 import Menu from '@mui/material/Menu';

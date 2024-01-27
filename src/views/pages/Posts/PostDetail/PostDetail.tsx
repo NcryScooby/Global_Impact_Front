@@ -9,14 +9,14 @@ import { PostShowcase } from '@components/posts/PostShowcase';
 import { CommentLabel } from '@components/posts/CommentLabel';
 import { CommentList } from '@components/posts/CommentList';
 import { commentsService } from '@services/commentsService';
-import { usePreviousRoute } from '@hooks/usePreviousRoute';
+import { usePreviousRoute } from '../../../../app/hooks/usePreviousRoute';
 import { DetailCard } from '@components/posts/DetailCard';
 import { Breadcrumbs } from '@components/ui/Breadcrumbs';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 import { postsService } from '@services/postsService';
 import { useEffect, useState } from 'react';
-import { useAuth } from '@hooks/useAuth';
-import { useLike } from '@hooks/useLike';
+import { useAuth } from '../../../../app/hooks/useAuth';
+import { useLike } from '../../../../app/hooks/useLike';
 import { toast } from 'react-hot-toast';
 
 type MutateFunction<T> = {

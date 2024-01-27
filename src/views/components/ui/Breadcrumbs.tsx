@@ -1,6 +1,6 @@
 import { Breadcrumbs as MuiBreadcrumbs } from '@mui/material';
 import { addThreeDots } from '@utils/helpers/addThreeDots';
-import { useTheme } from '@hooks/useTheme';
+import { useTheme } from '../../../app/hooks/useTheme';
 import { Link } from 'react-router-dom';
 
 interface BreadcrumbsProps {
