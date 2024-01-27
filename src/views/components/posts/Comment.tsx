@@ -2,7 +2,7 @@ import type { IComment } from '@interfaces/posts/IComment';
 import { formatDate } from '@utils/helpers/formatDate';
 import { TrashIcon } from '@radix-ui/react-icons';
 import { Avatar, Divider } from '@mui/material';
-import { useTheme } from '../../../app/hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
 import { USER_ROLES } from '@constants';
 import { Link } from 'react-router-dom';
 

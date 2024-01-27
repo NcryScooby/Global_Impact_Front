@@ -11,7 +11,7 @@ import type { IPostPage } from '@interfaces/posts/IPostPage';
 import { Button } from '@components/ui/Button';
 import { Select } from '@components/ui/Select';
 import { Input } from '@components/ui/Input';
-import { useTheme } from '../../../app/hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
 import { Pagination } from '@mui/material';
 import { Link } from 'react-router-dom';
 

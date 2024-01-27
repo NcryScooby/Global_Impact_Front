@@ -1,12 +1,12 @@
 import { useLocation } from 'react-router-dom';
-import { useSidebar } from '../../../app/hooks/useSidebar';
+import { useSidebar } from '@hooks/useSidebar';
 import { IoIosSettings } from 'react-icons/io';
 import { AiOutlineUser } from 'react-icons/ai';
 import { HiNewspaper } from 'react-icons/hi2';
 import { AiFillHome } from 'react-icons/ai';
 import { IoCreate } from 'react-icons/io5';
 import { useEffect, useRef } from 'react';
-import { useAuth } from '../../../app/hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 export const Sidebar = () => {

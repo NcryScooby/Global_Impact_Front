@@ -3,7 +3,7 @@ import { addThreeDots } from '@utils/helpers/addThreeDots';
 import { formatViews } from '@utils/helpers/formatViews';
 import { formatDate } from '@utils/helpers/formatDate';
 import type { IPost } from '@interfaces/posts/IPost';
-import { useTheme } from '../../../app/hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
 import { Link } from 'react-router-dom';
 import { Avatar } from '@mui/material';
 

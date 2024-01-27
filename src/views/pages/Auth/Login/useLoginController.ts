@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { authService } from '@services/authService';
 import { useForm } from 'react-hook-form';
-import { useAuth } from '../../../../app/hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import { toast } from 'react-hot-toast';
 import { z } from 'zod';
 

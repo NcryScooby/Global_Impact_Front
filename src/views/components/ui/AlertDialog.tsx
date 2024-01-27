@@ -3,7 +3,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
 import { Button } from '@components/ui/Button';
-import { useTheme } from '../../../app/hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
 import Dialog from '@mui/material/Dialog';
 import { SetStateAction } from 'react';
 

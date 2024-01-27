@@ -1,5 +1,5 @@
 import type { ISocialMedia } from '@interfaces/posts/ISocialMedia';
-import { useTheme } from '../../../app/hooks/useTheme';
+import { useTheme } from '@hooks/useTheme';
 import { ComponentType } from 'react';
 
 interface SocialIconProps {

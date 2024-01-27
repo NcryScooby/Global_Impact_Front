@@ -5,7 +5,7 @@ import { postsService } from '@services/postsService';
 import { useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@components/ui/Button';
-import { useAuth } from '../../../app/hooks/useAuth';
+import { useAuth } from '@hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 export const SavedPosts = () => {
